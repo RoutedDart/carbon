@@ -4,7 +4,7 @@ import 'package:test/test.dart';
 void main() {
   group('Carbon PHP parity', () {
     test('Carbon exposes addCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturies,
         returnsNormally,
@@ -13,7 +13,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturiesNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturiesNoOverflow,
         returnsNormally,
@@ -22,7 +22,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturiesWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturiesWithNoOverflow,
         returnsNormally,
@@ -32,7 +32,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturiesWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturiesWithOverflow,
         returnsNormally,
@@ -42,7 +42,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturiesWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturiesWithoutOverflow,
         returnsNormally,
@@ -52,7 +52,7 @@ void main() {
     });
 
     test('Carbon exposes addCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCentury,
         returnsNormally,
@@ -61,7 +61,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturyNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturyNoOverflow,
         returnsNormally,
@@ -70,7 +70,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturyWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturyWithNoOverflow,
         returnsNormally,
@@ -80,7 +80,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturyWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturyWithOverflow,
         returnsNormally,
@@ -89,7 +89,7 @@ void main() {
     });
 
     test('Carbon exposes addCenturyWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addCenturyWithoutOverflow,
         returnsNormally,
@@ -99,7 +99,7 @@ void main() {
     });
 
     test('Carbon exposes addDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDay,
         returnsNormally,
@@ -108,7 +108,7 @@ void main() {
     });
 
     test('Carbon exposes addDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDays,
         returnsNormally,
@@ -117,7 +117,7 @@ void main() {
     });
 
     test('Carbon exposes addDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecade,
         returnsNormally,
@@ -126,7 +126,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadeNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadeNoOverflow,
         returnsNormally,
@@ -135,7 +135,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadeWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadeWithNoOverflow,
         returnsNormally,
@@ -144,7 +144,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadeWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadeWithOverflow,
         returnsNormally,
@@ -153,7 +153,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadeWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadeWithoutOverflow,
         returnsNormally,
@@ -163,7 +163,7 @@ void main() {
     });
 
     test('Carbon exposes addDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecades,
         returnsNormally,
@@ -172,7 +172,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadesNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadesNoOverflow,
         returnsNormally,
@@ -181,7 +181,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadesWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadesWithNoOverflow,
         returnsNormally,
@@ -191,7 +191,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadesWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadesWithOverflow,
         returnsNormally,
@@ -200,7 +200,7 @@ void main() {
     });
 
     test('Carbon exposes addDecadesWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addDecadesWithoutOverflow,
         returnsNormally,
@@ -210,7 +210,7 @@ void main() {
     });
 
     test('Carbon exposes addHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addHour,
         returnsNormally,
@@ -219,7 +219,7 @@ void main() {
     });
 
     test('Carbon exposes addHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addHours,
         returnsNormally,
@@ -228,7 +228,7 @@ void main() {
     });
 
     test('Carbon exposes addMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMicro,
         returnsNormally,
@@ -237,7 +237,7 @@ void main() {
     });
 
     test('Carbon exposes addMicros', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMicros,
         returnsNormally,
@@ -246,7 +246,7 @@ void main() {
     });
 
     test('Carbon exposes addMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMicrosecond,
         returnsNormally,
@@ -255,7 +255,7 @@ void main() {
     });
 
     test('Carbon exposes addMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMicroseconds,
         returnsNormally,
@@ -264,7 +264,7 @@ void main() {
     });
 
     test('Carbon exposes addMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillennia,
         returnsNormally,
@@ -273,7 +273,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniaNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniaNoOverflow,
         returnsNormally,
@@ -282,7 +282,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniaWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniaWithNoOverflow,
         returnsNormally,
@@ -292,7 +292,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniaWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniaWithOverflow,
         returnsNormally,
@@ -302,7 +302,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniaWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniaWithoutOverflow,
         returnsNormally,
@@ -312,7 +312,7 @@ void main() {
     });
 
     test('Carbon exposes addMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillennium,
         returnsNormally,
@@ -321,7 +321,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniumNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniumNoOverflow,
         returnsNormally,
@@ -330,7 +330,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniumWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniumWithNoOverflow,
         returnsNormally,
@@ -340,7 +340,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniumWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniumWithOverflow,
         returnsNormally,
@@ -350,7 +350,7 @@ void main() {
     });
 
     test('Carbon exposes addMillenniumWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillenniumWithoutOverflow,
         returnsNormally,
@@ -360,7 +360,7 @@ void main() {
     });
 
     test('Carbon exposes addMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMilli,
         returnsNormally,
@@ -369,7 +369,7 @@ void main() {
     });
 
     test('Carbon exposes addMillis', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillis,
         returnsNormally,
@@ -378,7 +378,7 @@ void main() {
     });
 
     test('Carbon exposes addMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMillisecond,
         returnsNormally,
@@ -387,7 +387,7 @@ void main() {
     });
 
     test('Carbon exposes addMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMilliseconds,
         returnsNormally,
@@ -396,7 +396,7 @@ void main() {
     });
 
     test('Carbon exposes addMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMinute,
         returnsNormally,
@@ -405,7 +405,7 @@ void main() {
     });
 
     test('Carbon exposes addMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMinutes,
         returnsNormally,
@@ -414,7 +414,7 @@ void main() {
     });
 
     test('Carbon exposes addMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonth,
         returnsNormally,
@@ -423,7 +423,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthNoOverflow,
         returnsNormally,
@@ -432,7 +432,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthWithNoOverflow,
         returnsNormally,
@@ -441,7 +441,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthWithOverflow,
         returnsNormally,
@@ -450,7 +450,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthWithoutOverflow,
         returnsNormally,
@@ -459,7 +459,7 @@ void main() {
     });
 
     test('Carbon exposes addMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonths,
         returnsNormally,
@@ -468,7 +468,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthsNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthsNoOverflow,
         returnsNormally,
@@ -477,7 +477,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthsWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthsWithNoOverflow,
         returnsNormally,
@@ -486,7 +486,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthsWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthsWithOverflow,
         returnsNormally,
@@ -495,7 +495,7 @@ void main() {
     });
 
     test('Carbon exposes addMonthsWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addMonthsWithoutOverflow,
         returnsNormally,
@@ -505,7 +505,7 @@ void main() {
     });
 
     test('Carbon exposes addQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuarter,
         returnsNormally,
@@ -514,7 +514,7 @@ void main() {
     });
 
     test('Carbon exposes addQuarterNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuarterNoOverflow,
         returnsNormally,
@@ -523,7 +523,7 @@ void main() {
     });
 
     test('Carbon exposes addQuarterWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuarterWithNoOverflow,
         returnsNormally,
@@ -533,7 +533,7 @@ void main() {
     });
 
     test('Carbon exposes addQuarterWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuarterWithOverflow,
         returnsNormally,
@@ -542,7 +542,7 @@ void main() {
     });
 
     test('Carbon exposes addQuarterWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuarterWithoutOverflow,
         returnsNormally,
@@ -552,7 +552,7 @@ void main() {
     });
 
     test('Carbon exposes addQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuarters,
         returnsNormally,
@@ -561,7 +561,7 @@ void main() {
     });
 
     test('Carbon exposes addQuartersNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuartersNoOverflow,
         returnsNormally,
@@ -570,7 +570,7 @@ void main() {
     });
 
     test('Carbon exposes addQuartersWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuartersWithNoOverflow,
         returnsNormally,
@@ -580,7 +580,7 @@ void main() {
     });
 
     test('Carbon exposes addQuartersWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuartersWithOverflow,
         returnsNormally,
@@ -589,7 +589,7 @@ void main() {
     });
 
     test('Carbon exposes addQuartersWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addQuartersWithoutOverflow,
         returnsNormally,
@@ -599,7 +599,7 @@ void main() {
     });
 
     test('Carbon exposes addSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addSecond,
         returnsNormally,
@@ -608,7 +608,7 @@ void main() {
     });
 
     test('Carbon exposes addSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addSeconds,
         returnsNormally,
@@ -617,7 +617,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCCenturies,
         returnsNormally,
@@ -626,7 +626,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCCentury,
         returnsNormally,
@@ -635,7 +635,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCDay,
         returnsNormally,
@@ -644,7 +644,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCDays,
         returnsNormally,
@@ -653,7 +653,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCDecade,
         returnsNormally,
@@ -662,7 +662,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCDecades,
         returnsNormally,
@@ -671,7 +671,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCHour,
         returnsNormally,
@@ -680,7 +680,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCHours,
         returnsNormally,
@@ -689,7 +689,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMicro,
         returnsNormally,
@@ -698,7 +698,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMicros', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMicros,
         returnsNormally,
@@ -707,7 +707,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMicrosecond,
         returnsNormally,
@@ -716,7 +716,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMicroseconds,
         returnsNormally,
@@ -725,7 +725,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMillennia,
         returnsNormally,
@@ -734,7 +734,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMillennium,
         returnsNormally,
@@ -743,7 +743,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMilli,
         returnsNormally,
@@ -752,7 +752,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMillis', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMillis,
         returnsNormally,
@@ -761,7 +761,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMillisecond,
         returnsNormally,
@@ -770,7 +770,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMilliseconds,
         returnsNormally,
@@ -779,7 +779,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMinute,
         returnsNormally,
@@ -788,7 +788,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMinutes,
         returnsNormally,
@@ -797,7 +797,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMonth,
         returnsNormally,
@@ -806,7 +806,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCMonths,
         returnsNormally,
@@ -815,7 +815,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCQuarter,
         returnsNormally,
@@ -824,7 +824,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCQuarters,
         returnsNormally,
@@ -833,7 +833,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCSecond,
         returnsNormally,
@@ -842,7 +842,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCSeconds,
         returnsNormally,
@@ -851,7 +851,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCWeek,
         returnsNormally,
@@ -860,7 +860,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCWeeks', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCWeeks,
         returnsNormally,
@@ -869,7 +869,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCYear,
         returnsNormally,
@@ -878,7 +878,7 @@ void main() {
     });
 
     test('Carbon exposes addUTCYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addUTCYears,
         returnsNormally,
@@ -887,7 +887,7 @@ void main() {
     });
 
     test('Carbon exposes addWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addWeek,
         returnsNormally,
@@ -896,7 +896,7 @@ void main() {
     });
 
     test('Carbon exposes addWeekday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addWeekday,
         returnsNormally,
@@ -905,7 +905,7 @@ void main() {
     });
 
     test('Carbon exposes addWeekdays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addWeekdays,
         returnsNormally,
@@ -914,7 +914,7 @@ void main() {
     });
 
     test('Carbon exposes addWeeks', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addWeeks,
         returnsNormally,
@@ -923,7 +923,7 @@ void main() {
     });
 
     test('Carbon exposes addYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYear,
         returnsNormally,
@@ -932,7 +932,7 @@ void main() {
     });
 
     test('Carbon exposes addYearNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearNoOverflow,
         returnsNormally,
@@ -941,7 +941,7 @@ void main() {
     });
 
     test('Carbon exposes addYearWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearWithNoOverflow,
         returnsNormally,
@@ -950,7 +950,7 @@ void main() {
     });
 
     test('Carbon exposes addYearWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearWithOverflow,
         returnsNormally,
@@ -959,7 +959,7 @@ void main() {
     });
 
     test('Carbon exposes addYearWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearWithoutOverflow,
         returnsNormally,
@@ -968,7 +968,7 @@ void main() {
     });
 
     test('Carbon exposes addYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYears,
         returnsNormally,
@@ -977,7 +977,7 @@ void main() {
     });
 
     test('Carbon exposes addYearsNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearsNoOverflow,
         returnsNormally,
@@ -986,7 +986,7 @@ void main() {
     });
 
     test('Carbon exposes addYearsWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearsWithNoOverflow,
         returnsNormally,
@@ -995,7 +995,7 @@ void main() {
     });
 
     test('Carbon exposes addYearsWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearsWithOverflow,
         returnsNormally,
@@ -1004,7 +1004,7 @@ void main() {
     });
 
     test('Carbon exposes addYearsWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.addYearsWithoutOverflow,
         returnsNormally,
@@ -1013,7 +1013,7 @@ void main() {
     });
 
     test('Carbon exposes ceilCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilCenturies,
         returnsNormally,
@@ -1022,7 +1022,7 @@ void main() {
     });
 
     test('Carbon exposes ceilCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilCentury,
         returnsNormally,
@@ -1031,7 +1031,7 @@ void main() {
     });
 
     test('Carbon exposes ceilDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilDay,
         returnsNormally,
@@ -1040,7 +1040,7 @@ void main() {
     });
 
     test('Carbon exposes ceilDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilDays,
         returnsNormally,
@@ -1049,7 +1049,7 @@ void main() {
     });
 
     test('Carbon exposes ceilDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilDecade,
         returnsNormally,
@@ -1058,7 +1058,7 @@ void main() {
     });
 
     test('Carbon exposes ceilDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilDecades,
         returnsNormally,
@@ -1067,7 +1067,7 @@ void main() {
     });
 
     test('Carbon exposes ceilHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilHour,
         returnsNormally,
@@ -1076,7 +1076,7 @@ void main() {
     });
 
     test('Carbon exposes ceilHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilHours,
         returnsNormally,
@@ -1085,7 +1085,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMicrosecond,
         returnsNormally,
@@ -1094,7 +1094,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMicroseconds,
         returnsNormally,
@@ -1103,7 +1103,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMillennia,
         returnsNormally,
@@ -1112,7 +1112,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMillennium,
         returnsNormally,
@@ -1121,7 +1121,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMillisecond,
         returnsNormally,
@@ -1130,7 +1130,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMilliseconds,
         returnsNormally,
@@ -1139,7 +1139,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMinute,
         returnsNormally,
@@ -1148,7 +1148,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMinutes,
         returnsNormally,
@@ -1157,7 +1157,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMonth,
         returnsNormally,
@@ -1166,7 +1166,7 @@ void main() {
     });
 
     test('Carbon exposes ceilMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilMonths,
         returnsNormally,
@@ -1175,7 +1175,7 @@ void main() {
     });
 
     test('Carbon exposes ceilQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilQuarter,
         returnsNormally,
@@ -1184,7 +1184,7 @@ void main() {
     });
 
     test('Carbon exposes ceilQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilQuarters,
         returnsNormally,
@@ -1193,7 +1193,7 @@ void main() {
     });
 
     test('Carbon exposes ceilSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilSecond,
         returnsNormally,
@@ -1202,7 +1202,7 @@ void main() {
     });
 
     test('Carbon exposes ceilSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilSeconds,
         returnsNormally,
@@ -1211,7 +1211,7 @@ void main() {
     });
 
     test('Carbon exposes ceilYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilYear,
         returnsNormally,
@@ -1220,7 +1220,7 @@ void main() {
     });
 
     test('Carbon exposes ceilYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.ceilYears,
         returnsNormally,
@@ -1229,7 +1229,7 @@ void main() {
     });
 
     test('Carbon exposes centuriesInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.centuriesInMillennium,
         returnsNormally,
@@ -1238,7 +1238,7 @@ void main() {
     });
 
     test('Carbon exposes centuriesUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.centuriesUntil,
         returnsNormally,
@@ -1247,7 +1247,7 @@ void main() {
     });
 
     test('Carbon exposes centuryOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.centuryOfMillennium,
         returnsNormally,
@@ -1256,7 +1256,7 @@ void main() {
     });
 
     test('Carbon exposes day', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.day,
         returnsNormally,
@@ -1265,7 +1265,7 @@ void main() {
     });
 
     test('Carbon exposes dayOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.dayOfCentury,
         returnsNormally,
@@ -1274,7 +1274,7 @@ void main() {
     });
 
     test('Carbon exposes dayOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.dayOfDecade,
         returnsNormally,
@@ -1283,7 +1283,7 @@ void main() {
     });
 
     test('Carbon exposes dayOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.dayOfMillennium,
         returnsNormally,
@@ -1292,7 +1292,7 @@ void main() {
     });
 
     test('Carbon exposes dayOfMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.dayOfMonth,
         returnsNormally,
@@ -1301,7 +1301,7 @@ void main() {
     });
 
     test('Carbon exposes dayOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.dayOfQuarter,
         returnsNormally,
@@ -1310,7 +1310,7 @@ void main() {
     });
 
     test('Carbon exposes dayOfWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.dayOfWeek,
         returnsNormally,
@@ -1319,7 +1319,7 @@ void main() {
     });
 
     test('Carbon exposes days', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.days,
         returnsNormally,
@@ -1328,7 +1328,7 @@ void main() {
     });
 
     test('Carbon exposes daysInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysInCentury,
         returnsNormally,
@@ -1337,7 +1337,7 @@ void main() {
     });
 
     test('Carbon exposes daysInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysInDecade,
         returnsNormally,
@@ -1346,7 +1346,7 @@ void main() {
     });
 
     test('Carbon exposes daysInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysInMillennium,
         returnsNormally,
@@ -1355,7 +1355,7 @@ void main() {
     });
 
     test('Carbon exposes daysInMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysInMonth,
         returnsNormally,
@@ -1364,7 +1364,7 @@ void main() {
     });
 
     test('Carbon exposes daysInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysInQuarter,
         returnsNormally,
@@ -1373,7 +1373,7 @@ void main() {
     });
 
     test('Carbon exposes daysInWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysInWeek,
         returnsNormally,
@@ -1382,7 +1382,7 @@ void main() {
     });
 
     test('Carbon exposes daysInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysInYear,
         returnsNormally,
@@ -1391,7 +1391,7 @@ void main() {
     });
 
     test('Carbon exposes daysUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.daysUntil,
         returnsNormally,
@@ -1400,7 +1400,7 @@ void main() {
     });
 
     test('Carbon exposes decadeOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.decadeOfCentury,
         returnsNormally,
@@ -1409,7 +1409,7 @@ void main() {
     });
 
     test('Carbon exposes decadeOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.decadeOfMillennium,
         returnsNormally,
@@ -1418,7 +1418,7 @@ void main() {
     });
 
     test('Carbon exposes decadesInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.decadesInCentury,
         returnsNormally,
@@ -1427,7 +1427,7 @@ void main() {
     });
 
     test('Carbon exposes decadesInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.decadesInMillennium,
         returnsNormally,
@@ -1436,7 +1436,7 @@ void main() {
     });
 
     test('Carbon exposes decadesUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.decadesUntil,
         returnsNormally,
@@ -1445,7 +1445,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCCenturies,
         returnsNormally,
@@ -1454,7 +1454,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCDays,
         returnsNormally,
@@ -1463,7 +1463,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCDecades,
         returnsNormally,
@@ -1472,7 +1472,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCHours,
         returnsNormally,
@@ -1481,7 +1481,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCMicros', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCMicros,
         returnsNormally,
@@ -1490,7 +1490,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCMicroseconds,
         returnsNormally,
@@ -1499,7 +1499,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCMillennia,
         returnsNormally,
@@ -1508,7 +1508,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCMillis', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCMillis,
         returnsNormally,
@@ -1517,7 +1517,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCMilliseconds,
         returnsNormally,
@@ -1526,7 +1526,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCMinutes,
         returnsNormally,
@@ -1535,7 +1535,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCMonths,
         returnsNormally,
@@ -1544,7 +1544,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCQuarters,
         returnsNormally,
@@ -1553,7 +1553,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCSeconds,
         returnsNormally,
@@ -1562,7 +1562,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCWeeks', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCWeeks,
         returnsNormally,
@@ -1571,7 +1571,7 @@ void main() {
     });
 
     test('Carbon exposes diffInUTCYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.diffInUTCYears,
         returnsNormally,
@@ -1580,7 +1580,7 @@ void main() {
     });
 
     test('Carbon exposes floorCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorCenturies,
         returnsNormally,
@@ -1589,7 +1589,7 @@ void main() {
     });
 
     test('Carbon exposes floorCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorCentury,
         returnsNormally,
@@ -1598,7 +1598,7 @@ void main() {
     });
 
     test('Carbon exposes floorDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorDay,
         returnsNormally,
@@ -1607,7 +1607,7 @@ void main() {
     });
 
     test('Carbon exposes floorDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorDays,
         returnsNormally,
@@ -1616,7 +1616,7 @@ void main() {
     });
 
     test('Carbon exposes floorDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorDecade,
         returnsNormally,
@@ -1625,7 +1625,7 @@ void main() {
     });
 
     test('Carbon exposes floorDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorDecades,
         returnsNormally,
@@ -1634,7 +1634,7 @@ void main() {
     });
 
     test('Carbon exposes floorHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorHour,
         returnsNormally,
@@ -1643,7 +1643,7 @@ void main() {
     });
 
     test('Carbon exposes floorHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorHours,
         returnsNormally,
@@ -1652,7 +1652,7 @@ void main() {
     });
 
     test('Carbon exposes floorMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMicrosecond,
         returnsNormally,
@@ -1661,7 +1661,7 @@ void main() {
     });
 
     test('Carbon exposes floorMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMicroseconds,
         returnsNormally,
@@ -1670,7 +1670,7 @@ void main() {
     });
 
     test('Carbon exposes floorMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMillennia,
         returnsNormally,
@@ -1679,7 +1679,7 @@ void main() {
     });
 
     test('Carbon exposes floorMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMillennium,
         returnsNormally,
@@ -1688,7 +1688,7 @@ void main() {
     });
 
     test('Carbon exposes floorMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMillisecond,
         returnsNormally,
@@ -1697,7 +1697,7 @@ void main() {
     });
 
     test('Carbon exposes floorMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMilliseconds,
         returnsNormally,
@@ -1706,7 +1706,7 @@ void main() {
     });
 
     test('Carbon exposes floorMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMinute,
         returnsNormally,
@@ -1715,7 +1715,7 @@ void main() {
     });
 
     test('Carbon exposes floorMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMinutes,
         returnsNormally,
@@ -1724,7 +1724,7 @@ void main() {
     });
 
     test('Carbon exposes floorMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMonth,
         returnsNormally,
@@ -1733,7 +1733,7 @@ void main() {
     });
 
     test('Carbon exposes floorMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorMonths,
         returnsNormally,
@@ -1742,7 +1742,7 @@ void main() {
     });
 
     test('Carbon exposes floorQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorQuarter,
         returnsNormally,
@@ -1751,7 +1751,7 @@ void main() {
     });
 
     test('Carbon exposes floorQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorQuarters,
         returnsNormally,
@@ -1760,7 +1760,7 @@ void main() {
     });
 
     test('Carbon exposes floorSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorSecond,
         returnsNormally,
@@ -1769,7 +1769,7 @@ void main() {
     });
 
     test('Carbon exposes floorSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorSeconds,
         returnsNormally,
@@ -1778,7 +1778,7 @@ void main() {
     });
 
     test('Carbon exposes floorYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorYear,
         returnsNormally,
@@ -1787,7 +1787,7 @@ void main() {
     });
 
     test('Carbon exposes floorYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.floorYears,
         returnsNormally,
@@ -1796,7 +1796,7 @@ void main() {
     });
 
     test('Carbon exposes hour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hour,
         returnsNormally,
@@ -1805,7 +1805,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfCentury,
         returnsNormally,
@@ -1814,7 +1814,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfDay,
         returnsNormally,
@@ -1823,7 +1823,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfDecade,
         returnsNormally,
@@ -1832,7 +1832,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfMillennium,
         returnsNormally,
@@ -1841,7 +1841,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfMonth,
         returnsNormally,
@@ -1850,7 +1850,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfQuarter,
         returnsNormally,
@@ -1859,7 +1859,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfWeek,
         returnsNormally,
@@ -1868,7 +1868,7 @@ void main() {
     });
 
     test('Carbon exposes hourOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hourOfYear,
         returnsNormally,
@@ -1877,7 +1877,7 @@ void main() {
     });
 
     test('Carbon exposes hours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hours,
         returnsNormally,
@@ -1886,7 +1886,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInCentury,
         returnsNormally,
@@ -1895,7 +1895,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInDay,
         returnsNormally,
@@ -1904,7 +1904,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInDecade,
         returnsNormally,
@@ -1913,7 +1913,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInMillennium,
         returnsNormally,
@@ -1922,7 +1922,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInMonth,
         returnsNormally,
@@ -1931,7 +1931,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInQuarter,
         returnsNormally,
@@ -1940,7 +1940,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInWeek,
         returnsNormally,
@@ -1949,7 +1949,7 @@ void main() {
     });
 
     test('Carbon exposes hoursInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursInYear,
         returnsNormally,
@@ -1958,7 +1958,7 @@ void main() {
     });
 
     test('Carbon exposes hoursUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.hoursUntil,
         returnsNormally,
@@ -1967,7 +1967,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentCentury,
         returnsNormally,
@@ -1976,7 +1976,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentDay,
         returnsNormally,
@@ -1985,7 +1985,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentDecade,
         returnsNormally,
@@ -1994,7 +1994,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentHour,
         returnsNormally,
@@ -2003,7 +2003,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentMicro,
         returnsNormally,
@@ -2012,7 +2012,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentMicrosecond,
         returnsNormally,
@@ -2021,7 +2021,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentMillennium,
         returnsNormally,
@@ -2030,7 +2030,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentMilli,
         returnsNormally,
@@ -2039,7 +2039,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentMillisecond,
         returnsNormally,
@@ -2048,7 +2048,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentMinute,
         returnsNormally,
@@ -2057,7 +2057,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentMonth,
         returnsNormally,
@@ -2066,7 +2066,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentQuarter,
         returnsNormally,
@@ -2075,7 +2075,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentSecond,
         returnsNormally,
@@ -2084,7 +2084,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentWeek,
         returnsNormally,
@@ -2093,7 +2093,7 @@ void main() {
     });
 
     test('Carbon exposes isCurrentYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isCurrentYear,
         returnsNormally,
@@ -2102,7 +2102,7 @@ void main() {
     });
 
     test('Carbon exposes isDST', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isDST,
         returnsNormally,
@@ -2111,7 +2111,7 @@ void main() {
     });
 
     test('Carbon exposes isFriday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isFriday,
         returnsNormally,
@@ -2120,7 +2120,7 @@ void main() {
     });
 
     test('Carbon exposes isLastCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastCentury,
         returnsNormally,
@@ -2129,7 +2129,7 @@ void main() {
     });
 
     test('Carbon exposes isLastDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastDay,
         returnsNormally,
@@ -2138,7 +2138,7 @@ void main() {
     });
 
     test('Carbon exposes isLastDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastDecade,
         returnsNormally,
@@ -2147,7 +2147,7 @@ void main() {
     });
 
     test('Carbon exposes isLastHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastHour,
         returnsNormally,
@@ -2156,7 +2156,7 @@ void main() {
     });
 
     test('Carbon exposes isLastMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastMicro,
         returnsNormally,
@@ -2165,7 +2165,7 @@ void main() {
     });
 
     test('Carbon exposes isLastMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastMicrosecond,
         returnsNormally,
@@ -2174,7 +2174,7 @@ void main() {
     });
 
     test('Carbon exposes isLastMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastMillennium,
         returnsNormally,
@@ -2183,7 +2183,7 @@ void main() {
     });
 
     test('Carbon exposes isLastMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastMilli,
         returnsNormally,
@@ -2192,7 +2192,7 @@ void main() {
     });
 
     test('Carbon exposes isLastMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastMillisecond,
         returnsNormally,
@@ -2201,7 +2201,7 @@ void main() {
     });
 
     test('Carbon exposes isLastMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastMinute,
         returnsNormally,
@@ -2210,7 +2210,7 @@ void main() {
     });
 
     test('Carbon exposes isLastMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastMonth,
         returnsNormally,
@@ -2219,7 +2219,7 @@ void main() {
     });
 
     test('Carbon exposes isLastQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastQuarter,
         returnsNormally,
@@ -2228,7 +2228,7 @@ void main() {
     });
 
     test('Carbon exposes isLastSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastSecond,
         returnsNormally,
@@ -2237,7 +2237,7 @@ void main() {
     });
 
     test('Carbon exposes isLastWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastWeek,
         returnsNormally,
@@ -2246,7 +2246,7 @@ void main() {
     });
 
     test('Carbon exposes isLastYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLastYear,
         returnsNormally,
@@ -2255,7 +2255,7 @@ void main() {
     });
 
     test('Carbon exposes isLocal', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isLocal,
         returnsNormally,
@@ -2264,7 +2264,7 @@ void main() {
     });
 
     test('Carbon exposes isMonday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isMonday,
         returnsNormally,
@@ -2273,7 +2273,7 @@ void main() {
     });
 
     test('Carbon exposes isMutable', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isMutable,
         returnsNormally,
@@ -2282,7 +2282,7 @@ void main() {
     });
 
     test('Carbon exposes isNextCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextCentury,
         returnsNormally,
@@ -2291,7 +2291,7 @@ void main() {
     });
 
     test('Carbon exposes isNextDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextDay,
         returnsNormally,
@@ -2300,7 +2300,7 @@ void main() {
     });
 
     test('Carbon exposes isNextDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextDecade,
         returnsNormally,
@@ -2309,7 +2309,7 @@ void main() {
     });
 
     test('Carbon exposes isNextHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextHour,
         returnsNormally,
@@ -2318,7 +2318,7 @@ void main() {
     });
 
     test('Carbon exposes isNextMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextMicro,
         returnsNormally,
@@ -2327,7 +2327,7 @@ void main() {
     });
 
     test('Carbon exposes isNextMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextMicrosecond,
         returnsNormally,
@@ -2336,7 +2336,7 @@ void main() {
     });
 
     test('Carbon exposes isNextMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextMillennium,
         returnsNormally,
@@ -2345,7 +2345,7 @@ void main() {
     });
 
     test('Carbon exposes isNextMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextMilli,
         returnsNormally,
@@ -2354,7 +2354,7 @@ void main() {
     });
 
     test('Carbon exposes isNextMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextMillisecond,
         returnsNormally,
@@ -2363,7 +2363,7 @@ void main() {
     });
 
     test('Carbon exposes isNextMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextMinute,
         returnsNormally,
@@ -2372,7 +2372,7 @@ void main() {
     });
 
     test('Carbon exposes isNextMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextMonth,
         returnsNormally,
@@ -2381,7 +2381,7 @@ void main() {
     });
 
     test('Carbon exposes isNextQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextQuarter,
         returnsNormally,
@@ -2390,7 +2390,7 @@ void main() {
     });
 
     test('Carbon exposes isNextSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextSecond,
         returnsNormally,
@@ -2399,7 +2399,7 @@ void main() {
     });
 
     test('Carbon exposes isNextWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextWeek,
         returnsNormally,
@@ -2408,7 +2408,7 @@ void main() {
     });
 
     test('Carbon exposes isNextYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isNextYear,
         returnsNormally,
@@ -2417,7 +2417,7 @@ void main() {
     });
 
     test('Carbon exposes isSameCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameCentury,
         returnsNormally,
@@ -2426,7 +2426,7 @@ void main() {
     });
 
     test('Carbon exposes isSameDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameDay,
         returnsNormally,
@@ -2435,7 +2435,7 @@ void main() {
     });
 
     test('Carbon exposes isSameDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameDecade,
         returnsNormally,
@@ -2444,7 +2444,7 @@ void main() {
     });
 
     test('Carbon exposes isSameHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameHour,
         returnsNormally,
@@ -2453,7 +2453,7 @@ void main() {
     });
 
     test('Carbon exposes isSameMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameMicro,
         returnsNormally,
@@ -2462,7 +2462,7 @@ void main() {
     });
 
     test('Carbon exposes isSameMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameMicrosecond,
         returnsNormally,
@@ -2471,7 +2471,7 @@ void main() {
     });
 
     test('Carbon exposes isSameMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameMillennium,
         returnsNormally,
@@ -2480,7 +2480,7 @@ void main() {
     });
 
     test('Carbon exposes isSameMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameMilli,
         returnsNormally,
@@ -2489,7 +2489,7 @@ void main() {
     });
 
     test('Carbon exposes isSameMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameMillisecond,
         returnsNormally,
@@ -2498,7 +2498,7 @@ void main() {
     });
 
     test('Carbon exposes isSameMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameMinute,
         returnsNormally,
@@ -2507,7 +2507,7 @@ void main() {
     });
 
     test('Carbon exposes isSameSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameSecond,
         returnsNormally,
@@ -2516,7 +2516,7 @@ void main() {
     });
 
     test('Carbon exposes isSameWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameWeek,
         returnsNormally,
@@ -2525,7 +2525,7 @@ void main() {
     });
 
     test('Carbon exposes isSameYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSameYear,
         returnsNormally,
@@ -2534,7 +2534,7 @@ void main() {
     });
 
     test('Carbon exposes isSaturday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSaturday,
         returnsNormally,
@@ -2543,7 +2543,7 @@ void main() {
     });
 
     test('Carbon exposes isSunday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isSunday,
         returnsNormally,
@@ -2552,7 +2552,7 @@ void main() {
     });
 
     test('Carbon exposes isThursday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isThursday,
         returnsNormally,
@@ -2561,7 +2561,7 @@ void main() {
     });
 
     test('Carbon exposes isTuesday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isTuesday,
         returnsNormally,
@@ -2570,7 +2570,7 @@ void main() {
     });
 
     test('Carbon exposes isUtc', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isUtc,
         returnsNormally,
@@ -2579,7 +2579,7 @@ void main() {
     });
 
     test('Carbon exposes isValid', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isValid,
         returnsNormally,
@@ -2588,7 +2588,7 @@ void main() {
     });
 
     test('Carbon exposes isWednesday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.isWednesday,
         returnsNormally,
@@ -2597,7 +2597,7 @@ void main() {
     });
 
     test('Carbon exposes longAbsoluteDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.longAbsoluteDiffForHumans,
         returnsNormally,
@@ -2607,7 +2607,7 @@ void main() {
     });
 
     test('Carbon exposes longRelativeDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.longRelativeDiffForHumans,
         returnsNormally,
@@ -2617,7 +2617,7 @@ void main() {
     });
 
     test('Carbon exposes longRelativeToNowDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.longRelativeToNowDiffForHumans,
         returnsNormally,
@@ -2627,7 +2627,7 @@ void main() {
     });
 
     test('Carbon exposes longRelativeToOtherDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.longRelativeToOtherDiffForHumans,
         returnsNormally,
@@ -2637,7 +2637,7 @@ void main() {
     });
 
     test('Carbon exposes micro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.micro,
         returnsNormally,
@@ -2646,7 +2646,7 @@ void main() {
     });
 
     test('Carbon exposes micros', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.micros,
         returnsNormally,
@@ -2655,7 +2655,7 @@ void main() {
     });
 
     test('Carbon exposes microsUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsUntil,
         returnsNormally,
@@ -2664,7 +2664,7 @@ void main() {
     });
 
     test('Carbon exposes microsecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecond,
         returnsNormally,
@@ -2673,7 +2673,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfCentury,
         returnsNormally,
@@ -2682,7 +2682,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfDay,
         returnsNormally,
@@ -2691,7 +2691,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfDecade,
         returnsNormally,
@@ -2700,7 +2700,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfHour,
         returnsNormally,
@@ -2709,7 +2709,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfMillennium,
         returnsNormally,
@@ -2718,7 +2718,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfMillisecond,
         returnsNormally,
@@ -2728,7 +2728,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfMinute,
         returnsNormally,
@@ -2737,7 +2737,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfMonth,
         returnsNormally,
@@ -2746,7 +2746,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfQuarter,
         returnsNormally,
@@ -2755,7 +2755,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfSecond,
         returnsNormally,
@@ -2764,7 +2764,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfWeek,
         returnsNormally,
@@ -2773,7 +2773,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondOfYear,
         returnsNormally,
@@ -2782,7 +2782,7 @@ void main() {
     });
 
     test('Carbon exposes microseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microseconds,
         returnsNormally,
@@ -2791,7 +2791,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInCentury,
         returnsNormally,
@@ -2800,7 +2800,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInDay,
         returnsNormally,
@@ -2809,7 +2809,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInDecade,
         returnsNormally,
@@ -2818,7 +2818,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInHour,
         returnsNormally,
@@ -2827,7 +2827,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInMillennium,
         returnsNormally,
@@ -2837,7 +2837,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInMillisecond,
         returnsNormally,
@@ -2847,7 +2847,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInMinute,
         returnsNormally,
@@ -2856,7 +2856,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInMonth,
         returnsNormally,
@@ -2865,7 +2865,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInQuarter,
         returnsNormally,
@@ -2874,7 +2874,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInSecond,
         returnsNormally,
@@ -2883,7 +2883,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInWeek,
         returnsNormally,
@@ -2892,7 +2892,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsInYear,
         returnsNormally,
@@ -2901,7 +2901,7 @@ void main() {
     });
 
     test('Carbon exposes microsecondsUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.microsecondsUntil,
         returnsNormally,
@@ -2910,7 +2910,7 @@ void main() {
     });
 
     test('Carbon exposes millenniaUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millenniaUntil,
         returnsNormally,
@@ -2919,7 +2919,7 @@ void main() {
     });
 
     test('Carbon exposes milli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.milli,
         returnsNormally,
@@ -2928,7 +2928,7 @@ void main() {
     });
 
     test('Carbon exposes millis', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millis,
         returnsNormally,
@@ -2937,7 +2937,7 @@ void main() {
     });
 
     test('Carbon exposes millisUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisUntil,
         returnsNormally,
@@ -2946,7 +2946,7 @@ void main() {
     });
 
     test('Carbon exposes millisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecond,
         returnsNormally,
@@ -2955,7 +2955,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfCentury,
         returnsNormally,
@@ -2964,7 +2964,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfDay,
         returnsNormally,
@@ -2973,7 +2973,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfDecade,
         returnsNormally,
@@ -2982,7 +2982,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfHour,
         returnsNormally,
@@ -2991,7 +2991,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfMillennium,
         returnsNormally,
@@ -3000,7 +3000,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfMinute,
         returnsNormally,
@@ -3009,7 +3009,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfMonth,
         returnsNormally,
@@ -3018,7 +3018,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfQuarter,
         returnsNormally,
@@ -3027,7 +3027,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfSecond,
         returnsNormally,
@@ -3036,7 +3036,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfWeek,
         returnsNormally,
@@ -3045,7 +3045,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondOfYear,
         returnsNormally,
@@ -3054,7 +3054,7 @@ void main() {
     });
 
     test('Carbon exposes milliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.milliseconds,
         returnsNormally,
@@ -3063,7 +3063,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInCentury,
         returnsNormally,
@@ -3072,7 +3072,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInDay,
         returnsNormally,
@@ -3081,7 +3081,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInDecade,
         returnsNormally,
@@ -3090,7 +3090,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInHour,
         returnsNormally,
@@ -3099,7 +3099,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInMillennium,
         returnsNormally,
@@ -3109,7 +3109,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInMinute,
         returnsNormally,
@@ -3118,7 +3118,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInMonth,
         returnsNormally,
@@ -3127,7 +3127,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInQuarter,
         returnsNormally,
@@ -3136,7 +3136,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInSecond,
         returnsNormally,
@@ -3145,7 +3145,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInWeek,
         returnsNormally,
@@ -3154,7 +3154,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsInYear,
         returnsNormally,
@@ -3163,7 +3163,7 @@ void main() {
     });
 
     test('Carbon exposes millisecondsUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.millisecondsUntil,
         returnsNormally,
@@ -3172,7 +3172,7 @@ void main() {
     });
 
     test('Carbon exposes minute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minute,
         returnsNormally,
@@ -3181,7 +3181,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfCentury,
         returnsNormally,
@@ -3190,7 +3190,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfDay,
         returnsNormally,
@@ -3199,7 +3199,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfDecade,
         returnsNormally,
@@ -3208,7 +3208,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfHour,
         returnsNormally,
@@ -3217,7 +3217,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfMillennium,
         returnsNormally,
@@ -3226,7 +3226,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfMonth,
         returnsNormally,
@@ -3235,7 +3235,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfQuarter,
         returnsNormally,
@@ -3244,7 +3244,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfWeek,
         returnsNormally,
@@ -3253,7 +3253,7 @@ void main() {
     });
 
     test('Carbon exposes minuteOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minuteOfYear,
         returnsNormally,
@@ -3262,7 +3262,7 @@ void main() {
     });
 
     test('Carbon exposes minutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutes,
         returnsNormally,
@@ -3271,7 +3271,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInCentury,
         returnsNormally,
@@ -3280,7 +3280,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInDay,
         returnsNormally,
@@ -3289,7 +3289,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInDecade,
         returnsNormally,
@@ -3298,7 +3298,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInHour,
         returnsNormally,
@@ -3307,7 +3307,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInMillennium,
         returnsNormally,
@@ -3316,7 +3316,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInMonth,
         returnsNormally,
@@ -3325,7 +3325,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInQuarter,
         returnsNormally,
@@ -3334,7 +3334,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInWeek,
         returnsNormally,
@@ -3343,7 +3343,7 @@ void main() {
     });
 
     test('Carbon exposes minutesInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesInYear,
         returnsNormally,
@@ -3352,7 +3352,7 @@ void main() {
     });
 
     test('Carbon exposes minutesUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.minutesUntil,
         returnsNormally,
@@ -3361,7 +3361,7 @@ void main() {
     });
 
     test('Carbon exposes month', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.month,
         returnsNormally,
@@ -3370,7 +3370,7 @@ void main() {
     });
 
     test('Carbon exposes monthOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthOfCentury,
         returnsNormally,
@@ -3379,7 +3379,7 @@ void main() {
     });
 
     test('Carbon exposes monthOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthOfDecade,
         returnsNormally,
@@ -3388,7 +3388,7 @@ void main() {
     });
 
     test('Carbon exposes monthOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthOfMillennium,
         returnsNormally,
@@ -3397,7 +3397,7 @@ void main() {
     });
 
     test('Carbon exposes monthOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthOfQuarter,
         returnsNormally,
@@ -3406,7 +3406,7 @@ void main() {
     });
 
     test('Carbon exposes monthOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthOfYear,
         returnsNormally,
@@ -3415,7 +3415,7 @@ void main() {
     });
 
     test('Carbon exposes months', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.months,
         returnsNormally,
@@ -3424,7 +3424,7 @@ void main() {
     });
 
     test('Carbon exposes monthsInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthsInCentury,
         returnsNormally,
@@ -3433,7 +3433,7 @@ void main() {
     });
 
     test('Carbon exposes monthsInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthsInDecade,
         returnsNormally,
@@ -3442,7 +3442,7 @@ void main() {
     });
 
     test('Carbon exposes monthsInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthsInMillennium,
         returnsNormally,
@@ -3451,7 +3451,7 @@ void main() {
     });
 
     test('Carbon exposes monthsInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthsInQuarter,
         returnsNormally,
@@ -3460,7 +3460,7 @@ void main() {
     });
 
     test('Carbon exposes monthsInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthsInYear,
         returnsNormally,
@@ -3469,7 +3469,7 @@ void main() {
     });
 
     test('Carbon exposes monthsUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.monthsUntil,
         returnsNormally,
@@ -3478,7 +3478,7 @@ void main() {
     });
 
     test('Carbon exposes quarterOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quarterOfCentury,
         returnsNormally,
@@ -3487,7 +3487,7 @@ void main() {
     });
 
     test('Carbon exposes quarterOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quarterOfDecade,
         returnsNormally,
@@ -3496,7 +3496,7 @@ void main() {
     });
 
     test('Carbon exposes quarterOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quarterOfMillennium,
         returnsNormally,
@@ -3505,7 +3505,7 @@ void main() {
     });
 
     test('Carbon exposes quarterOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quarterOfYear,
         returnsNormally,
@@ -3514,7 +3514,7 @@ void main() {
     });
 
     test('Carbon exposes quartersInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quartersInCentury,
         returnsNormally,
@@ -3523,7 +3523,7 @@ void main() {
     });
 
     test('Carbon exposes quartersInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quartersInDecade,
         returnsNormally,
@@ -3532,7 +3532,7 @@ void main() {
     });
 
     test('Carbon exposes quartersInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quartersInMillennium,
         returnsNormally,
@@ -3541,7 +3541,7 @@ void main() {
     });
 
     test('Carbon exposes quartersInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quartersInYear,
         returnsNormally,
@@ -3550,7 +3550,7 @@ void main() {
     });
 
     test('Carbon exposes quartersUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.quartersUntil,
         returnsNormally,
@@ -3559,7 +3559,7 @@ void main() {
     });
 
     test('Carbon exposes roundCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundCenturies,
         returnsNormally,
@@ -3568,7 +3568,7 @@ void main() {
     });
 
     test('Carbon exposes roundCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundCentury,
         returnsNormally,
@@ -3577,7 +3577,7 @@ void main() {
     });
 
     test('Carbon exposes roundDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundDay,
         returnsNormally,
@@ -3586,7 +3586,7 @@ void main() {
     });
 
     test('Carbon exposes roundDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundDays,
         returnsNormally,
@@ -3595,7 +3595,7 @@ void main() {
     });
 
     test('Carbon exposes roundDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundDecade,
         returnsNormally,
@@ -3604,7 +3604,7 @@ void main() {
     });
 
     test('Carbon exposes roundDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundDecades,
         returnsNormally,
@@ -3613,7 +3613,7 @@ void main() {
     });
 
     test('Carbon exposes roundHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundHour,
         returnsNormally,
@@ -3622,7 +3622,7 @@ void main() {
     });
 
     test('Carbon exposes roundHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundHours,
         returnsNormally,
@@ -3631,7 +3631,7 @@ void main() {
     });
 
     test('Carbon exposes roundMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMicrosecond,
         returnsNormally,
@@ -3640,7 +3640,7 @@ void main() {
     });
 
     test('Carbon exposes roundMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMicroseconds,
         returnsNormally,
@@ -3649,7 +3649,7 @@ void main() {
     });
 
     test('Carbon exposes roundMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMillennia,
         returnsNormally,
@@ -3658,7 +3658,7 @@ void main() {
     });
 
     test('Carbon exposes roundMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMillennium,
         returnsNormally,
@@ -3667,7 +3667,7 @@ void main() {
     });
 
     test('Carbon exposes roundMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMillisecond,
         returnsNormally,
@@ -3676,7 +3676,7 @@ void main() {
     });
 
     test('Carbon exposes roundMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMilliseconds,
         returnsNormally,
@@ -3685,7 +3685,7 @@ void main() {
     });
 
     test('Carbon exposes roundMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMinute,
         returnsNormally,
@@ -3694,7 +3694,7 @@ void main() {
     });
 
     test('Carbon exposes roundMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMinutes,
         returnsNormally,
@@ -3703,7 +3703,7 @@ void main() {
     });
 
     test('Carbon exposes roundMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMonth,
         returnsNormally,
@@ -3712,7 +3712,7 @@ void main() {
     });
 
     test('Carbon exposes roundMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundMonths,
         returnsNormally,
@@ -3721,7 +3721,7 @@ void main() {
     });
 
     test('Carbon exposes roundQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundQuarter,
         returnsNormally,
@@ -3730,7 +3730,7 @@ void main() {
     });
 
     test('Carbon exposes roundQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundQuarters,
         returnsNormally,
@@ -3739,7 +3739,7 @@ void main() {
     });
 
     test('Carbon exposes roundSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundSecond,
         returnsNormally,
@@ -3748,7 +3748,7 @@ void main() {
     });
 
     test('Carbon exposes roundSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundSeconds,
         returnsNormally,
@@ -3757,7 +3757,7 @@ void main() {
     });
 
     test('Carbon exposes roundYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundYear,
         returnsNormally,
@@ -3766,7 +3766,7 @@ void main() {
     });
 
     test('Carbon exposes roundYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.roundYears,
         returnsNormally,
@@ -3775,7 +3775,7 @@ void main() {
     });
 
     test('Carbon exposes second', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.second,
         returnsNormally,
@@ -3784,7 +3784,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfCentury,
         returnsNormally,
@@ -3793,7 +3793,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfDay,
         returnsNormally,
@@ -3802,7 +3802,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfDecade,
         returnsNormally,
@@ -3811,7 +3811,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfHour,
         returnsNormally,
@@ -3820,7 +3820,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfMillennium,
         returnsNormally,
@@ -3829,7 +3829,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfMinute,
         returnsNormally,
@@ -3838,7 +3838,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfMonth,
         returnsNormally,
@@ -3847,7 +3847,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfQuarter,
         returnsNormally,
@@ -3856,7 +3856,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfWeek,
         returnsNormally,
@@ -3865,7 +3865,7 @@ void main() {
     });
 
     test('Carbon exposes secondOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondOfYear,
         returnsNormally,
@@ -3874,7 +3874,7 @@ void main() {
     });
 
     test('Carbon exposes seconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.seconds,
         returnsNormally,
@@ -3883,7 +3883,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInCentury,
         returnsNormally,
@@ -3892,7 +3892,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInDay,
         returnsNormally,
@@ -3901,7 +3901,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInDecade,
         returnsNormally,
@@ -3910,7 +3910,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInHour,
         returnsNormally,
@@ -3919,7 +3919,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInMillennium,
         returnsNormally,
@@ -3928,7 +3928,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInMinute,
         returnsNormally,
@@ -3937,7 +3937,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInMonth,
         returnsNormally,
@@ -3946,7 +3946,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInQuarter,
         returnsNormally,
@@ -3955,7 +3955,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInWeek,
         returnsNormally,
@@ -3964,7 +3964,7 @@ void main() {
     });
 
     test('Carbon exposes secondsInYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsInYear,
         returnsNormally,
@@ -3973,7 +3973,7 @@ void main() {
     });
 
     test('Carbon exposes secondsUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.secondsUntil,
         returnsNormally,
@@ -3982,7 +3982,7 @@ void main() {
     });
 
     test('Carbon exposes setDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setDay,
         returnsNormally,
@@ -3991,7 +3991,7 @@ void main() {
     });
 
     test('Carbon exposes setDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setDays,
         returnsNormally,
@@ -4000,7 +4000,7 @@ void main() {
     });
 
     test('Carbon exposes setHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setHour,
         returnsNormally,
@@ -4009,7 +4009,7 @@ void main() {
     });
 
     test('Carbon exposes setHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setHours,
         returnsNormally,
@@ -4018,7 +4018,7 @@ void main() {
     });
 
     test('Carbon exposes setMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMicro,
         returnsNormally,
@@ -4027,7 +4027,7 @@ void main() {
     });
 
     test('Carbon exposes setMicros', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMicros,
         returnsNormally,
@@ -4036,7 +4036,7 @@ void main() {
     });
 
     test('Carbon exposes setMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMicrosecond,
         returnsNormally,
@@ -4045,7 +4045,7 @@ void main() {
     });
 
     test('Carbon exposes setMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMicroseconds,
         returnsNormally,
@@ -4054,7 +4054,7 @@ void main() {
     });
 
     test('Carbon exposes setMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMilli,
         returnsNormally,
@@ -4063,7 +4063,7 @@ void main() {
     });
 
     test('Carbon exposes setMillis', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMillis,
         returnsNormally,
@@ -4072,7 +4072,7 @@ void main() {
     });
 
     test('Carbon exposes setMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMillisecond,
         returnsNormally,
@@ -4081,7 +4081,7 @@ void main() {
     });
 
     test('Carbon exposes setMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMilliseconds,
         returnsNormally,
@@ -4090,7 +4090,7 @@ void main() {
     });
 
     test('Carbon exposes setMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMinute,
         returnsNormally,
@@ -4099,7 +4099,7 @@ void main() {
     });
 
     test('Carbon exposes setMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMinutes,
         returnsNormally,
@@ -4108,7 +4108,7 @@ void main() {
     });
 
     test('Carbon exposes setMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMonth,
         returnsNormally,
@@ -4117,7 +4117,7 @@ void main() {
     });
 
     test('Carbon exposes setMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setMonths,
         returnsNormally,
@@ -4126,7 +4126,7 @@ void main() {
     });
 
     test('Carbon exposes setSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setSecond,
         returnsNormally,
@@ -4135,7 +4135,7 @@ void main() {
     });
 
     test('Carbon exposes setSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setSeconds,
         returnsNormally,
@@ -4144,7 +4144,7 @@ void main() {
     });
 
     test('Carbon exposes setYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setYear,
         returnsNormally,
@@ -4153,7 +4153,7 @@ void main() {
     });
 
     test('Carbon exposes setYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.setYears,
         returnsNormally,
@@ -4162,7 +4162,7 @@ void main() {
     });
 
     test('Carbon exposes shortAbsoluteDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.shortAbsoluteDiffForHumans,
         returnsNormally,
@@ -4172,7 +4172,7 @@ void main() {
     });
 
     test('Carbon exposes shortRelativeDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.shortRelativeDiffForHumans,
         returnsNormally,
@@ -4182,7 +4182,7 @@ void main() {
     });
 
     test('Carbon exposes shortRelativeToNowDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.shortRelativeToNowDiffForHumans,
         returnsNormally,
@@ -4192,7 +4192,7 @@ void main() {
     });
 
     test('Carbon exposes shortRelativeToOtherDiffForHumans', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.shortRelativeToOtherDiffForHumans,
         returnsNormally,
@@ -4202,7 +4202,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturies,
         returnsNormally,
@@ -4211,7 +4211,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturiesNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturiesNoOverflow,
         returnsNormally,
@@ -4220,7 +4220,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturiesWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturiesWithNoOverflow,
         returnsNormally,
@@ -4230,7 +4230,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturiesWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturiesWithOverflow,
         returnsNormally,
@@ -4240,7 +4240,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturiesWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturiesWithoutOverflow,
         returnsNormally,
@@ -4250,7 +4250,7 @@ void main() {
     });
 
     test('Carbon exposes subCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCentury,
         returnsNormally,
@@ -4259,7 +4259,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturyNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturyNoOverflow,
         returnsNormally,
@@ -4268,7 +4268,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturyWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturyWithNoOverflow,
         returnsNormally,
@@ -4278,7 +4278,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturyWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturyWithOverflow,
         returnsNormally,
@@ -4287,7 +4287,7 @@ void main() {
     });
 
     test('Carbon exposes subCenturyWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subCenturyWithoutOverflow,
         returnsNormally,
@@ -4297,7 +4297,7 @@ void main() {
     });
 
     test('Carbon exposes subDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDay,
         returnsNormally,
@@ -4306,7 +4306,7 @@ void main() {
     });
 
     test('Carbon exposes subDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDays,
         returnsNormally,
@@ -4315,7 +4315,7 @@ void main() {
     });
 
     test('Carbon exposes subDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecade,
         returnsNormally,
@@ -4324,7 +4324,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadeNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadeNoOverflow,
         returnsNormally,
@@ -4333,7 +4333,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadeWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadeWithNoOverflow,
         returnsNormally,
@@ -4342,7 +4342,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadeWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadeWithOverflow,
         returnsNormally,
@@ -4351,7 +4351,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadeWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadeWithoutOverflow,
         returnsNormally,
@@ -4361,7 +4361,7 @@ void main() {
     });
 
     test('Carbon exposes subDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecades,
         returnsNormally,
@@ -4370,7 +4370,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadesNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadesNoOverflow,
         returnsNormally,
@@ -4379,7 +4379,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadesWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadesWithNoOverflow,
         returnsNormally,
@@ -4389,7 +4389,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadesWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadesWithOverflow,
         returnsNormally,
@@ -4398,7 +4398,7 @@ void main() {
     });
 
     test('Carbon exposes subDecadesWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subDecadesWithoutOverflow,
         returnsNormally,
@@ -4408,7 +4408,7 @@ void main() {
     });
 
     test('Carbon exposes subHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subHour,
         returnsNormally,
@@ -4417,7 +4417,7 @@ void main() {
     });
 
     test('Carbon exposes subHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subHours,
         returnsNormally,
@@ -4426,7 +4426,7 @@ void main() {
     });
 
     test('Carbon exposes subMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMicro,
         returnsNormally,
@@ -4435,7 +4435,7 @@ void main() {
     });
 
     test('Carbon exposes subMicros', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMicros,
         returnsNormally,
@@ -4444,7 +4444,7 @@ void main() {
     });
 
     test('Carbon exposes subMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMicrosecond,
         returnsNormally,
@@ -4453,7 +4453,7 @@ void main() {
     });
 
     test('Carbon exposes subMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMicroseconds,
         returnsNormally,
@@ -4462,7 +4462,7 @@ void main() {
     });
 
     test('Carbon exposes subMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillennia,
         returnsNormally,
@@ -4471,7 +4471,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniaNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniaNoOverflow,
         returnsNormally,
@@ -4480,7 +4480,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniaWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniaWithNoOverflow,
         returnsNormally,
@@ -4490,7 +4490,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniaWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniaWithOverflow,
         returnsNormally,
@@ -4500,7 +4500,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniaWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniaWithoutOverflow,
         returnsNormally,
@@ -4510,7 +4510,7 @@ void main() {
     });
 
     test('Carbon exposes subMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillennium,
         returnsNormally,
@@ -4519,7 +4519,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniumNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniumNoOverflow,
         returnsNormally,
@@ -4528,7 +4528,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniumWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniumWithNoOverflow,
         returnsNormally,
@@ -4538,7 +4538,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniumWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniumWithOverflow,
         returnsNormally,
@@ -4548,7 +4548,7 @@ void main() {
     });
 
     test('Carbon exposes subMillenniumWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillenniumWithoutOverflow,
         returnsNormally,
@@ -4558,7 +4558,7 @@ void main() {
     });
 
     test('Carbon exposes subMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMilli,
         returnsNormally,
@@ -4567,7 +4567,7 @@ void main() {
     });
 
     test('Carbon exposes subMillis', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillis,
         returnsNormally,
@@ -4576,7 +4576,7 @@ void main() {
     });
 
     test('Carbon exposes subMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMillisecond,
         returnsNormally,
@@ -4585,7 +4585,7 @@ void main() {
     });
 
     test('Carbon exposes subMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMilliseconds,
         returnsNormally,
@@ -4594,7 +4594,7 @@ void main() {
     });
 
     test('Carbon exposes subMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMinute,
         returnsNormally,
@@ -4603,7 +4603,7 @@ void main() {
     });
 
     test('Carbon exposes subMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMinutes,
         returnsNormally,
@@ -4612,7 +4612,7 @@ void main() {
     });
 
     test('Carbon exposes subMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonth,
         returnsNormally,
@@ -4621,7 +4621,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthNoOverflow,
         returnsNormally,
@@ -4630,7 +4630,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthWithNoOverflow,
         returnsNormally,
@@ -4639,7 +4639,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthWithOverflow,
         returnsNormally,
@@ -4648,7 +4648,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthWithoutOverflow,
         returnsNormally,
@@ -4657,7 +4657,7 @@ void main() {
     });
 
     test('Carbon exposes subMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonths,
         returnsNormally,
@@ -4666,7 +4666,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthsNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthsNoOverflow,
         returnsNormally,
@@ -4675,7 +4675,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthsWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthsWithNoOverflow,
         returnsNormally,
@@ -4684,7 +4684,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthsWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthsWithOverflow,
         returnsNormally,
@@ -4693,7 +4693,7 @@ void main() {
     });
 
     test('Carbon exposes subMonthsWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subMonthsWithoutOverflow,
         returnsNormally,
@@ -4703,7 +4703,7 @@ void main() {
     });
 
     test('Carbon exposes subQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuarter,
         returnsNormally,
@@ -4712,7 +4712,7 @@ void main() {
     });
 
     test('Carbon exposes subQuarterNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuarterNoOverflow,
         returnsNormally,
@@ -4721,7 +4721,7 @@ void main() {
     });
 
     test('Carbon exposes subQuarterWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuarterWithNoOverflow,
         returnsNormally,
@@ -4731,7 +4731,7 @@ void main() {
     });
 
     test('Carbon exposes subQuarterWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuarterWithOverflow,
         returnsNormally,
@@ -4740,7 +4740,7 @@ void main() {
     });
 
     test('Carbon exposes subQuarterWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuarterWithoutOverflow,
         returnsNormally,
@@ -4750,7 +4750,7 @@ void main() {
     });
 
     test('Carbon exposes subQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuarters,
         returnsNormally,
@@ -4759,7 +4759,7 @@ void main() {
     });
 
     test('Carbon exposes subQuartersNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuartersNoOverflow,
         returnsNormally,
@@ -4768,7 +4768,7 @@ void main() {
     });
 
     test('Carbon exposes subQuartersWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuartersWithNoOverflow,
         returnsNormally,
@@ -4778,7 +4778,7 @@ void main() {
     });
 
     test('Carbon exposes subQuartersWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuartersWithOverflow,
         returnsNormally,
@@ -4787,7 +4787,7 @@ void main() {
     });
 
     test('Carbon exposes subQuartersWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subQuartersWithoutOverflow,
         returnsNormally,
@@ -4797,7 +4797,7 @@ void main() {
     });
 
     test('Carbon exposes subSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subSecond,
         returnsNormally,
@@ -4806,7 +4806,7 @@ void main() {
     });
 
     test('Carbon exposes subSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subSeconds,
         returnsNormally,
@@ -4815,7 +4815,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCCenturies', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCCenturies,
         returnsNormally,
@@ -4824,7 +4824,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCCentury,
         returnsNormally,
@@ -4833,7 +4833,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCDay', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCDay,
         returnsNormally,
@@ -4842,7 +4842,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCDays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCDays,
         returnsNormally,
@@ -4851,7 +4851,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCDecade,
         returnsNormally,
@@ -4860,7 +4860,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCDecades', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCDecades,
         returnsNormally,
@@ -4869,7 +4869,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCHour', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCHour,
         returnsNormally,
@@ -4878,7 +4878,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCHours', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCHours,
         returnsNormally,
@@ -4887,7 +4887,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMicro', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMicro,
         returnsNormally,
@@ -4896,7 +4896,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMicros', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMicros,
         returnsNormally,
@@ -4905,7 +4905,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMicrosecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMicrosecond,
         returnsNormally,
@@ -4914,7 +4914,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMicroseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMicroseconds,
         returnsNormally,
@@ -4923,7 +4923,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMillennia', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMillennia,
         returnsNormally,
@@ -4932,7 +4932,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMillennium,
         returnsNormally,
@@ -4941,7 +4941,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMilli', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMilli,
         returnsNormally,
@@ -4950,7 +4950,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMillis', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMillis,
         returnsNormally,
@@ -4959,7 +4959,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMillisecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMillisecond,
         returnsNormally,
@@ -4968,7 +4968,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMilliseconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMilliseconds,
         returnsNormally,
@@ -4977,7 +4977,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMinute', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMinute,
         returnsNormally,
@@ -4986,7 +4986,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMinutes', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMinutes,
         returnsNormally,
@@ -4995,7 +4995,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMonth,
         returnsNormally,
@@ -5004,7 +5004,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCMonths', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCMonths,
         returnsNormally,
@@ -5013,7 +5013,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCQuarter,
         returnsNormally,
@@ -5022,7 +5022,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCQuarters', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCQuarters,
         returnsNormally,
@@ -5031,7 +5031,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCSecond', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCSecond,
         returnsNormally,
@@ -5040,7 +5040,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCSeconds', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCSeconds,
         returnsNormally,
@@ -5049,7 +5049,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCWeek,
         returnsNormally,
@@ -5058,7 +5058,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCWeeks', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCWeeks,
         returnsNormally,
@@ -5067,7 +5067,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCYear,
         returnsNormally,
@@ -5076,7 +5076,7 @@ void main() {
     });
 
     test('Carbon exposes subUTCYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subUTCYears,
         returnsNormally,
@@ -5085,7 +5085,7 @@ void main() {
     });
 
     test('Carbon exposes subWeek', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subWeek,
         returnsNormally,
@@ -5094,7 +5094,7 @@ void main() {
     });
 
     test('Carbon exposes subWeekday', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subWeekday,
         returnsNormally,
@@ -5103,7 +5103,7 @@ void main() {
     });
 
     test('Carbon exposes subWeekdays', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subWeekdays,
         returnsNormally,
@@ -5112,7 +5112,7 @@ void main() {
     });
 
     test('Carbon exposes subWeeks', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subWeeks,
         returnsNormally,
@@ -5121,7 +5121,7 @@ void main() {
     });
 
     test('Carbon exposes subYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYear,
         returnsNormally,
@@ -5130,7 +5130,7 @@ void main() {
     });
 
     test('Carbon exposes subYearNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearNoOverflow,
         returnsNormally,
@@ -5139,7 +5139,7 @@ void main() {
     });
 
     test('Carbon exposes subYearWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearWithNoOverflow,
         returnsNormally,
@@ -5148,7 +5148,7 @@ void main() {
     });
 
     test('Carbon exposes subYearWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearWithOverflow,
         returnsNormally,
@@ -5157,7 +5157,7 @@ void main() {
     });
 
     test('Carbon exposes subYearWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearWithoutOverflow,
         returnsNormally,
@@ -5166,7 +5166,7 @@ void main() {
     });
 
     test('Carbon exposes subYears', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYears,
         returnsNormally,
@@ -5175,7 +5175,7 @@ void main() {
     });
 
     test('Carbon exposes subYearsNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearsNoOverflow,
         returnsNormally,
@@ -5184,7 +5184,7 @@ void main() {
     });
 
     test('Carbon exposes subYearsWithNoOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearsWithNoOverflow,
         returnsNormally,
@@ -5193,7 +5193,7 @@ void main() {
     });
 
     test('Carbon exposes subYearsWithOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearsWithOverflow,
         returnsNormally,
@@ -5202,7 +5202,7 @@ void main() {
     });
 
     test('Carbon exposes subYearsWithoutOverflow', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.subYearsWithoutOverflow,
         returnsNormally,
@@ -5211,7 +5211,7 @@ void main() {
     });
 
     test('Carbon exposes weekOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weekOfCentury,
         returnsNormally,
@@ -5220,7 +5220,7 @@ void main() {
     });
 
     test('Carbon exposes weekOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weekOfDecade,
         returnsNormally,
@@ -5229,7 +5229,7 @@ void main() {
     });
 
     test('Carbon exposes weekOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weekOfMillennium,
         returnsNormally,
@@ -5238,7 +5238,7 @@ void main() {
     });
 
     test('Carbon exposes weekOfMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weekOfMonth,
         returnsNormally,
@@ -5247,7 +5247,7 @@ void main() {
     });
 
     test('Carbon exposes weekOfQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weekOfQuarter,
         returnsNormally,
@@ -5256,7 +5256,7 @@ void main() {
     });
 
     test('Carbon exposes weekOfYear', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weekOfYear,
         returnsNormally,
@@ -5265,7 +5265,7 @@ void main() {
     });
 
     test('Carbon exposes weeksInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weeksInCentury,
         returnsNormally,
@@ -5274,7 +5274,7 @@ void main() {
     });
 
     test('Carbon exposes weeksInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weeksInDecade,
         returnsNormally,
@@ -5283,7 +5283,7 @@ void main() {
     });
 
     test('Carbon exposes weeksInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weeksInMillennium,
         returnsNormally,
@@ -5292,7 +5292,7 @@ void main() {
     });
 
     test('Carbon exposes weeksInMonth', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weeksInMonth,
         returnsNormally,
@@ -5301,7 +5301,7 @@ void main() {
     });
 
     test('Carbon exposes weeksInQuarter', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weeksInQuarter,
         returnsNormally,
@@ -5310,7 +5310,7 @@ void main() {
     });
 
     test('Carbon exposes weeksUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.weeksUntil,
         returnsNormally,
@@ -5319,7 +5319,7 @@ void main() {
     });
 
     test('Carbon exposes year', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.year,
         returnsNormally,
@@ -5328,7 +5328,7 @@ void main() {
     });
 
     test('Carbon exposes yearOfCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.yearOfCentury,
         returnsNormally,
@@ -5337,7 +5337,7 @@ void main() {
     });
 
     test('Carbon exposes yearOfDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.yearOfDecade,
         returnsNormally,
@@ -5346,7 +5346,7 @@ void main() {
     });
 
     test('Carbon exposes yearOfMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.yearOfMillennium,
         returnsNormally,
@@ -5355,7 +5355,7 @@ void main() {
     });
 
     test('Carbon exposes years', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.years,
         returnsNormally,
@@ -5364,7 +5364,7 @@ void main() {
     });
 
     test('Carbon exposes yearsInCentury', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.yearsInCentury,
         returnsNormally,
@@ -5373,7 +5373,7 @@ void main() {
     });
 
     test('Carbon exposes yearsInDecade', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.yearsInDecade,
         returnsNormally,
@@ -5382,7 +5382,7 @@ void main() {
     });
 
     test('Carbon exposes yearsInMillennium', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.yearsInMillennium,
         returnsNormally,
@@ -5391,7 +5391,7 @@ void main() {
     });
 
     test('Carbon exposes yearsUntil', () {
-      final dynamic carbon = Carbon.now();
+      final CarbonInterface carbon = Carbon.now();
       expect(
         () => carbon.yearsUntil,
         returnsNormally,

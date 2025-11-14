@@ -149,9 +149,11 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface addMonths(int months) => _wrap(_addMonths(_dateTime, months));
 
   @override
-  CarbonInterface addYears(int years) => addMonths(years * 12);
+  CarbonInterface addYears(int years) =>
+      _wrap(_addMonths(_dateTime, years * 12));
 
-  DateTime _addMonths(DateTime value, int months) {
+  DateTime _addMonths(DateTime value, int months, {bool? monthOverflow}) {
+    final overflow = monthOverflow ?? _settings.monthOverflow;
     final monthIndex = value.month - 1 + months;
     var targetYear = value.year + monthIndex ~/ 12;
     var targetMonth = monthIndex % 12;
@@ -161,7 +163,7 @@ abstract class CarbonBase implements CarbonInterface {
     }
     targetMonth += 1;
 
-    if (_settings.monthOverflow) {
+    if (overflow) {
       return DateTime.utc(
         targetYear,
         targetMonth,
@@ -177,7 +179,7 @@ abstract class CarbonBase implements CarbonInterface {
     final lastDayOfTarget = DateTime.utc(targetYear, targetMonth + 1, 0).day;
     final clampedDay = value.day > lastDayOfTarget
         ? lastDayOfTarget
-        : value.day;
+        : value.day.clamp(1, lastDayOfTarget);
     return DateTime.utc(
       targetYear,
       targetMonth,
@@ -351,6 +353,19 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   int get hashCode => dateTime.hashCode;
 
+  CarbonInterface _applyTemporalUnit(
+    _TemporalUnit unit,
+    int amount,
+    bool? overflow,
+  ) {
+    if (unit.months != null) {
+      final months = amount * unit.months!;
+      return _wrap(_addMonths(_dateTime, months, monthOverflow: overflow));
+    }
+    final micros = amount * unit.microseconds!;
+    return _wrap(_dateTime.add(Duration(microseconds: micros)));
+  }
+
   CarbonTimeZoneSnapshot? _zoneSnapshot() {
     final zoneName = _timeZone;
     if (zoneName == null) {
@@ -436,6 +451,10 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   dynamic noSuchMethod(Invocation invocation) {
     final name = _symbolToName(invocation.memberName);
+    final aliasResult = _invokeAlias(this, name, invocation);
+    if (!identical(aliasResult, _aliasNotHandled)) {
+      return aliasResult;
+    }
     final macro = _macros[name];
     if (macro != null) {
       return macro(

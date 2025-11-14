@@ -11,6 +11,7 @@ part 'core/carbon_macro.dart';
 part 'core/carbon_settings.dart';
 part 'core/carbon_interface.dart';
 part 'core/carbon_base.dart';
+part 'core/carbon_aliases.dart';
 part 'core/carbon_mutable.dart';
 part 'core/carbon_immutable.dart';
 part 'core/timezone_snapshot.dart';

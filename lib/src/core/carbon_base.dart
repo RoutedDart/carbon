@@ -252,6 +252,113 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface years(int year) => setYear(year);
 
   @override
+  CarbonInterface setYears(int year) => setYear(year);
+
+  @override
+  CarbonPeriod monthsUntil([dynamic endDate, num factor = 1]) {
+    final target = _coerceToDateTime(endDate);
+    final step = (factor == 0 ? 1 : factor.abs()).ceil();
+    return _buildPeriod(target, monthStep: step);
+  }
+
+  @override
+  int get months => _dateTime.month;
+
+  @override
+  int get month => _dateTime.month;
+
+  @override
+  int get monthOfYear => _dateTime.month;
+
+  @override
+  int get monthOfQuarter => ((_dateTime.month - 1) % 3) + 1;
+
+  @override
+  int get monthOfDecade =>
+      (_dateTime.year - _decadeStart(_dateTime).year) * 12 + _dateTime.month;
+
+  @override
+  int get monthOfCentury =>
+      (_dateTime.year - _centuryStart(_dateTime).year) * 12 + _dateTime.month;
+
+  @override
+  int get monthOfMillennium =>
+      (_dateTime.year - _millenniumStart(_dateTime).year) * 12 +
+      _dateTime.month;
+
+  @override
+  int get monthsInYear => 12;
+
+  @override
+  int get monthsInDecade => 120;
+
+  @override
+  int get monthsInCentury => 1200;
+
+  @override
+  int get monthsInMillennium => 12000;
+
+  @override
+  CarbonInterface setMonth(int month) =>
+      _duplicate(dateTime: _copyWith(month: month));
+
+  @override
+  CarbonInterface setMonths(int month) => setMonth(month);
+
+  @override
+  CarbonInterface setDay(int day) => _duplicate(dateTime: _copyWith(day: day));
+
+  @override
+  CarbonInterface setDays(int day) => setDay(day);
+
+  @override
+  CarbonInterface setMinute(int minute) =>
+      _duplicate(dateTime: _copyWith(minute: minute));
+
+  @override
+  CarbonInterface setMinutes(int minute) => setMinute(minute);
+
+  @override
+  CarbonInterface setSecond(int second) =>
+      _duplicate(dateTime: _copyWith(second: second));
+
+  @override
+  CarbonInterface setSeconds(int second) => setSecond(second);
+
+  @override
+  CarbonInterface setHour(int hour) =>
+      _duplicate(dateTime: _copyWith(hour: hour));
+
+  @override
+  CarbonInterface setHours(int hour) => setHour(hour);
+
+  @override
+  CarbonInterface setMilli(int millisecond) =>
+      _duplicate(dateTime: _copyWith(millisecond: millisecond));
+
+  @override
+  CarbonInterface setMillis(int millisecond) => setMilli(millisecond);
+
+  @override
+  CarbonInterface setMillisecond(int millisecond) => setMilli(millisecond);
+
+  @override
+  CarbonInterface setMilliseconds(int millisecond) => setMilli(millisecond);
+
+  @override
+  CarbonInterface setMicro(int microsecond) =>
+      _duplicate(dateTime: _copyWith(microsecond: microsecond));
+
+  @override
+  CarbonInterface setMicros(int microsecond) => setMicro(microsecond);
+
+  @override
+  CarbonInterface setMicrosecond(int microsecond) => setMicro(microsecond);
+
+  @override
+  CarbonInterface setMicroseconds(int microsecond) => setMicro(microsecond);
+
+  @override
   int get yearOfCentury => _wrapModulo(_dateTime.year - 1, 100) + 1;
 
   @override
@@ -268,6 +375,369 @@ abstract class CarbonBase implements CarbonInterface {
 
   @override
   int get yearsInMillennium => 1000;
+
+  @override
+  CarbonPeriod yearsUntil([dynamic endDate, num factor = 1]) {
+    final target = _coerceToDateTime(endDate);
+    final stepMonths = (factor == 0 ? 1 : factor.abs()).ceil() * 12;
+    return _buildPeriod(target, monthStep: stepMonths);
+  }
+
+  @override
+  int get weekOfYear =>
+      _weekIndex(DateTime.utc(_dateTime.year, 1, 1), _dateTime);
+
+  @override
+  int get weekOfMonth =>
+      _weekIndex(DateTime.utc(_dateTime.year, _dateTime.month, 1), _dateTime);
+
+  @override
+  int get weekOfQuarter => _weekIndex(_quarterStart(_dateTime), _dateTime);
+
+  @override
+  int get weekOfDecade => _weekIndex(_decadeStart(_dateTime), _dateTime);
+
+  @override
+  int get weekOfCentury => _weekIndex(_centuryStart(_dateTime), _dateTime);
+
+  @override
+  int get weekOfMillennium =>
+      _weekIndex(_millenniumStart(_dateTime), _dateTime);
+
+  @override
+  int get weeksInMonth => _weeksBetween(
+    DateTime.utc(_dateTime.year, _dateTime.month, 1),
+    DateTime.utc(_dateTime.year, _dateTime.month + 1, 1),
+  );
+
+  @override
+  int get weeksInQuarter => _weeksBetween(
+    _quarterStart(_dateTime),
+    DateTime.utc(
+      _quarterStart(_dateTime).year,
+      _quarterStart(_dateTime).month + 3,
+      1,
+    ),
+  );
+
+  @override
+  int get weeksInYear => _weeksBetween(
+    DateTime.utc(_dateTime.year, 1, 1),
+    DateTime.utc(_dateTime.year + 1, 1, 1),
+  );
+
+  @override
+  int get weeksInDecade => _weeksBetween(
+    _decadeStart(_dateTime),
+    DateTime.utc(_decadeStart(_dateTime).year + 10, 1, 1),
+  );
+
+  @override
+  int get weeksInCentury => _weeksBetween(
+    _centuryStart(_dateTime),
+    DateTime.utc(_centuryStart(_dateTime).year + 100, 1, 1),
+  );
+
+  @override
+  int get weeksInMillennium => _weeksBetween(
+    _millenniumStart(_dateTime),
+    DateTime.utc(_millenniumStart(_dateTime).year + 1000, 1, 1),
+  );
+
+  @override
+  CarbonPeriod weeksUntil([dynamic endDate, num factor = 1]) {
+    final target = _coerceToDateTime(endDate);
+    final stepWeeks = (factor == 0 ? 1 : factor.abs()).ceil();
+    return _buildPeriod(target, durationStep: Duration(days: stepWeeks * 7));
+  }
+
+  @override
+  int get quarterOfYear => ((_dateTime.month - 1) ~/ 3) + 1;
+
+  @override
+  int get quarterOfDecade =>
+      (_dateTime.year - _decadeStart(_dateTime).year) * 4 + quarterOfYear;
+
+  @override
+  int get quarterOfCentury =>
+      (_dateTime.year - _centuryStart(_dateTime).year) * 4 + quarterOfYear;
+
+  @override
+  int get quarterOfMillennium =>
+      (_dateTime.year - _millenniumStart(_dateTime).year) * 4 + quarterOfYear;
+
+  @override
+  int get quartersInYear => 4;
+
+  @override
+  int get quartersInDecade => 40;
+
+  @override
+  int get quartersInCentury => 400;
+
+  @override
+  int get quartersInMillennium => 4000;
+
+  @override
+  CarbonPeriod quartersUntil([dynamic endDate, num factor = 1]) {
+    final target = _coerceToDateTime(endDate);
+    final step = (factor == 0 ? 1 : factor.abs()).ceil() * 3;
+    return _buildPeriod(target, monthStep: step);
+  }
+
+  @override
+  int get secondsInMinute => 60;
+
+  @override
+  int get secondsInHour => secondsInMinute * 60;
+
+  @override
+  int get secondsInDay => secondsInHour * 24;
+
+  @override
+  int get secondsInWeek => secondsInDay * 7;
+
+  @override
+  int get secondsInMonth => _secondsBetween(
+    DateTime.utc(_dateTime.year, _dateTime.month, 1),
+    DateTime.utc(_dateTime.year, _dateTime.month + 1, 1),
+  );
+
+  @override
+  int get secondsInQuarter => _secondsBetween(
+    _quarterStart(_dateTime),
+    DateTime.utc(
+      _quarterStart(_dateTime).year,
+      _quarterStart(_dateTime).month + 3,
+      1,
+    ),
+  );
+
+  @override
+  int get secondsInYear => _secondsBetween(
+    DateTime.utc(_dateTime.year, 1, 1),
+    DateTime.utc(_dateTime.year + 1, 1, 1),
+  );
+
+  @override
+  int get secondsInDecade => secondsInYear * 10;
+
+  @override
+  int get secondsInCentury => secondsInYear * 100;
+
+  @override
+  int get secondsInMillennium => secondsInYear * 1000;
+
+  @override
+  CarbonPeriod secondsUntil([dynamic endDate, num factor = 1]) {
+    final target = _coerceToDateTime(endDate);
+    final stepSeconds = (factor == 0 ? 1 : factor.abs()).ceil();
+    return _buildPeriod(target, durationStep: Duration(seconds: stepSeconds));
+  }
+
+  @override
+  int get minutesInWeek => secondsInWeek ~/ 60;
+
+  @override
+  int get minutesInYear => secondsInYear ~/ 60;
+
+  @override
+  CarbonPeriod minutesUntil([dynamic endDate, num factor = 1]) {
+    final target = _coerceToDateTime(endDate);
+    final stepMinutes = (factor == 0 ? 1 : factor.abs()).ceil();
+    return _buildPeriod(target, durationStep: Duration(minutes: stepMinutes));
+  }
+
+  @override
+  int get seconds => _dateTime.second;
+
+  @override
+  int get second => seconds;
+
+  @override
+  int get secondOfMinute => _dateTime.second + 1;
+
+  @override
+  int get secondOfHour => _dateTime.minute * secondsInMinute + secondOfMinute;
+
+  @override
+  int get secondOfDay =>
+      _secondsSince(
+        DateTime.utc(_dateTime.year, _dateTime.month, _dateTime.day),
+      ) +
+      1;
+
+  @override
+  int get secondOfWeek =>
+      _secondsSince(
+        DateTime.utc(
+          _dateTime.year,
+          _dateTime.month,
+          _dateTime.day,
+        ).subtract(Duration(days: _dateTime.weekday - 1)),
+      ) +
+      1;
+
+  @override
+  int get secondOfMonth =>
+      _secondsSince(DateTime.utc(_dateTime.year, _dateTime.month, 1)) + 1;
+
+  @override
+  int get secondOfQuarter => _secondsSince(_quarterStart(_dateTime)) + 1;
+
+  @override
+  int get secondOfYear => _secondsSince(DateTime.utc(_dateTime.year, 1, 1)) + 1;
+
+  @override
+  int get secondOfDecade => _secondsSince(_decadeStart(_dateTime)) + 1;
+
+  @override
+  int get secondOfCentury => _secondsSince(_centuryStart(_dateTime)) + 1;
+
+  @override
+  int get secondOfMillennium => _secondsSince(_millenniumStart(_dateTime)) + 1;
+
+  @override
+  CarbonInterface roundSeconds({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundSecond({
+    double precision = 1,
+    String function = 'round',
+  }) => roundSeconds(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundMinutes({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundMinute({
+    double precision = 1,
+    String function = 'round',
+  }) => roundMinutes(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundMonths({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundMonth({
+    double precision = 1,
+    String function = 'round',
+  }) => roundMonths(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundQuarters({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundQuarter({
+    double precision = 1,
+    String function = 'round',
+  }) => roundQuarters(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundYears({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundYear({
+    double precision = 1,
+    String function = 'round',
+  }) => roundYears(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundHours({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundHour({
+    double precision = 1,
+    String function = 'round',
+  }) => roundHours(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundDecades({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundDecade({
+    double precision = 1,
+    String function = 'round',
+  }) => roundDecades(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundMillennia({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundMillennium({
+    double precision = 1,
+    String function = 'round',
+  }) => roundMillennia(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundMilliseconds({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundMillisecond({
+    double precision = 1,
+    String function = 'round',
+  }) => roundMilliseconds(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundMicroseconds({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundMicrosecond({
+    double precision = 1,
+    String function = 'round',
+  }) => roundMicroseconds(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundDays({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundDay({double precision = 1, String function = 'round'}) =>
+      roundDays(precision: precision, function: function);
+
+  @override
+  CarbonInterface roundCenturies({
+    double precision = 1,
+    String function = 'round',
+  }) => this;
+
+  @override
+  CarbonInterface roundCentury({
+    double precision = 1,
+    String function = 'round',
+  }) => roundCenturies(precision: precision, function: function);
 
   @override
   bool isBefore(CarbonInterface other) => _dateTime.isBefore(other.dateTime);
@@ -339,6 +809,21 @@ abstract class CarbonBase implements CarbonInterface {
       clock: base,
     );
   }
+
+  @override
+  String shortAbsoluteDiffForHumans([CarbonInterface? other]) =>
+      diffForHumans(reference: other);
+
+  @override
+  String shortRelativeDiffForHumans([CarbonInterface? other]) =>
+      diffForHumans(reference: other);
+
+  @override
+  String shortRelativeToNowDiffForHumans() => diffForHumans();
+
+  @override
+  String shortRelativeToOtherDiffForHumans(CarbonInterface other) =>
+      diffForHumans(reference: other);
 
   @override
   int toEpochMilliseconds() => _dateTime.toUtc().millisecondsSinceEpoch;
@@ -526,5 +1011,89 @@ abstract class CarbonBase implements CarbonInterface {
   int _wrapModulo(int value, int modulus) {
     final result = value % modulus;
     return result < 0 ? result + modulus : result;
+  }
+
+  DateTime _coerceToDateTime(dynamic input) {
+    if (input == null) {
+      return clock.now().toUtc();
+    }
+    if (input is CarbonInterface) {
+      return input.dateTime;
+    }
+    if (input is DateTime) {
+      return input.isUtc ? input : input.toUtc();
+    }
+    if (input is String || input is num) {
+      return Carbon.parse(input).dateTime;
+    }
+    throw ArgumentError('Unsupported endDate type: ${input.runtimeType}');
+  }
+
+  CarbonPeriod _buildPeriod(
+    DateTime target, {
+    int? monthStep,
+    Duration? durationStep,
+  }) {
+    assert((monthStep != null) ^ (durationStep != null));
+    final forward = !target.isBefore(_dateTime);
+    final items = <Carbon>[];
+    var cursor = _dateTime;
+    const maxIterations = 10000;
+    for (var i = 0; i < maxIterations; i++) {
+      if (forward ? cursor.isAfter(target) : cursor.isBefore(target)) {
+        break;
+      }
+      items.add(
+        Carbon.fromDateTime(cursor, locale: _locale, settings: _settings),
+      );
+      DateTime next;
+      if (monthStep != null) {
+        next = _addMonths(cursor, forward ? monthStep : -monthStep);
+      } else {
+        final delta = durationStep!;
+        final micro = delta.inMicroseconds * (forward ? 1 : -1);
+        next = cursor.add(Duration(microseconds: micro));
+      }
+      if (next.isAtSameMomentAs(cursor)) {
+        break;
+      }
+      cursor = next;
+    }
+    return CarbonPeriod._(items);
+  }
+
+  int _weekIndex(DateTime origin, DateTime current) {
+    final days = current.difference(origin).inDays;
+    return (days ~/ 7) + 1;
+  }
+
+  int _weeksBetween(DateTime start, DateTime endExclusive) {
+    final days = endExclusive.difference(start).inDays;
+    return (days / 7).ceil();
+  }
+
+  int _secondsBetween(DateTime start, DateTime endExclusive) =>
+      endExclusive.difference(start).inSeconds;
+
+  int _secondsSince(DateTime anchor) => _dateTime.difference(anchor).inSeconds;
+
+  DateTime _quarterStart(DateTime dateTime) {
+    final quarter = ((dateTime.month - 1) ~/ 3) * 3 + 1;
+    return DateTime.utc(dateTime.year, quarter, 1);
+  }
+
+  DateTime _decadeStart(DateTime dateTime) {
+    final decade = (dateTime.year ~/ 10) * 10;
+    return DateTime.utc(decade, 1, 1);
+  }
+
+  DateTime _centuryStart(DateTime dateTime) {
+    final century = ((dateTime.year - 1) ~/ 100) * 100 + 1;
+    return DateTime.utc(century, 1, 1);
+  }
+
+  DateTime _millenniumStart(DateTime dateTime) {
+    final millennium = ((dateTime.year - 1) ~/ 1000) * 1000 + 1;
+    return DateTime.utc(millennium, 1, 1);
   }
 }

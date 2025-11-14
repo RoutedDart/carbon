@@ -42,6 +42,8 @@ const Map<String, _TemporalUnit> _temporalUnits = <String, _TemporalUnit>{
   'days': _TemporalUnit.microseconds(Duration.microsecondsPerDay),
   'week': _TemporalUnit.microseconds(Duration.microsecondsPerDay * 7),
   'weeks': _TemporalUnit.microseconds(Duration.microsecondsPerDay * 7),
+  'weekday': _TemporalUnit.microseconds(Duration.microsecondsPerDay),
+  'weekdays': _TemporalUnit.microseconds(Duration.microsecondsPerDay),
   'month': _TemporalUnit.months(1),
   'months': _TemporalUnit.months(1),
   'quarter': _TemporalUnit.months(3),
@@ -126,6 +128,10 @@ class _AliasDescriptor {
   static _AliasDescriptor? parse(String raw) {
     var body = raw;
     var lowered = raw.toLowerCase();
+    if (lowered.startsWith('utc')) {
+      body = body.substring(3);
+      lowered = lowered.substring(3);
+    }
     bool? overflow;
     for (final token in _overflowTokens) {
       if (lowered.endsWith(token.token)) {

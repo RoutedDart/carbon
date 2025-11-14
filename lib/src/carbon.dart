@@ -1,5 +1,3 @@
-library carbon_internal;
-
 import 'dart:convert';
 
 import 'package:clock/clock.dart';
@@ -16,3 +14,4 @@ part 'core/carbon_period.dart';
 part 'core/carbon_mutable.dart';
 part 'core/carbon_immutable.dart';
 part 'core/timezone_snapshot.dart';
+part 'core/carbon_alias_shims.dart';

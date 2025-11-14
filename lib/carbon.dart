@@ -7,4 +7,5 @@ export 'src/carbon.dart'
         CarbonInterface,
         CarbonMacro,
         CarbonSettings,
-        CarbonUnit;
+        CarbonUnit,
+        CarbonAliasShims;

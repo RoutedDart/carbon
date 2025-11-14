@@ -146,6 +146,23 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface addWeeks(int weeks) => add(Duration(days: weeks * 7));
 
   @override
+  CarbonInterface addWeekdays(int weekdays) {
+    if (weekdays == 0) {
+      return this;
+    }
+    return _wrap(_shiftWeekdays(_dateTime, weekdays));
+  }
+
+  @override
+  CarbonInterface addWeekday([int amount = 1]) => addWeekdays(amount);
+
+  @override
+  CarbonInterface subWeekdays(int weekdays) => addWeekdays(-weekdays);
+
+  @override
+  CarbonInterface subWeekday([int amount = 1]) => addWeekdays(-amount);
+
+  @override
   CarbonInterface addMonths(int months) => _wrap(_addMonths(_dateTime, months));
 
   @override
@@ -187,6 +204,23 @@ abstract class CarbonBase implements CarbonInterface {
       value.microsecond,
     );
   }
+
+  DateTime _shiftWeekdays(DateTime value, int weekdays) {
+    var remaining = weekdays;
+    var current = value;
+    while (remaining != 0) {
+      final step = remaining > 0 ? 1 : -1;
+      current = current.add(Duration(days: step));
+      if (_isWeekend(current)) {
+        continue;
+      }
+      remaining -= step;
+    }
+    return current;
+  }
+
+  bool _isWeekend(DateTime value) =>
+      value.weekday == DateTime.saturday || value.weekday == DateTime.sunday;
 
   int _floorDiv(int a, int b) {
     final q = a ~/ b;

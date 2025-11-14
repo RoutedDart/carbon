@@ -59,11 +59,15 @@ extension CarbonAliasShims on CarbonInterface {
 
   CarbonInterface addHour([int amount = 1]) => add(Duration(hours: amount));
 
+  CarbonInterface addHours(int amount) => add(Duration(hours: amount));
+
   CarbonInterface subHour([int amount = 1]) => add(Duration(hours: -amount));
 
   CarbonInterface subHours(int amount) => add(Duration(hours: -amount));
 
   CarbonInterface addMinute([int amount = 1]) => add(Duration(minutes: amount));
+
+  CarbonInterface addMinutes(int amount) => add(Duration(minutes: amount));
 
   CarbonInterface subMinute([int amount = 1]) => add(Duration(minutes: -amount));
 
@@ -71,11 +75,16 @@ extension CarbonAliasShims on CarbonInterface {
 
   CarbonInterface addSecond([int amount = 1]) => add(Duration(seconds: amount));
 
+  CarbonInterface addSeconds(int amount) => add(Duration(seconds: amount));
+
   CarbonInterface subSecond([int amount = 1]) => add(Duration(seconds: -amount));
 
   CarbonInterface subSeconds(int amount) => add(Duration(seconds: -amount));
 
   CarbonInterface addMillisecond([int amount = 1]) =>
+      add(Duration(milliseconds: amount));
+
+  CarbonInterface addMilliseconds(int amount) =>
       add(Duration(milliseconds: amount));
 
   CarbonInterface subMillisecond([int amount = 1]) =>
@@ -85,6 +94,9 @@ extension CarbonAliasShims on CarbonInterface {
       add(Duration(milliseconds: -amount));
 
   CarbonInterface addMicrosecond([int amount = 1]) =>
+      add(Duration(microseconds: amount));
+
+  CarbonInterface addMicroseconds(int amount) =>
       add(Duration(microseconds: amount));
 
   CarbonInterface subMicrosecond([int amount = 1]) =>
@@ -165,13 +177,4 @@ extension CarbonAliasShims on CarbonInterface {
   CarbonInterface addMillenniumWithOverflow([int amount = 1]) =>
       (this as dynamic).addMillenniumWithOverflow(amount);
 
-  CarbonInterface addWeekday() => (this as dynamic).addWeekday();
-
-  CarbonInterface addWeekdays(int amount) =>
-      (this as dynamic).addWeekdays(amount);
-
-  CarbonInterface subWeekday() => (this as dynamic).subWeekday();
-
-  CarbonInterface subWeekdays(int amount) =>
-      (this as dynamic).subWeekdays(amount);
 }

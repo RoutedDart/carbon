@@ -22,8 +22,12 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   CarbonInterface subtract(Duration duration);
   CarbonInterface addDays(int days);
   CarbonInterface addWeeks(int weeks);
+  CarbonInterface addWeekdays(int weekdays);
+  CarbonInterface addWeekday([int amount = 1]);
   CarbonInterface addMonths(int months);
   CarbonInterface addYears(int years);
+  CarbonInterface subWeekdays(int weekdays);
+  CarbonInterface subWeekday([int amount = 1]);
 
   CarbonInterface startOfDay();
   CarbonInterface endOfDay();

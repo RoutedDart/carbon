@@ -68,12 +68,12 @@ There are **29 missing test files** that represent unimplemented features.
 - ~~**SetDateAndTimeFromTest.php** - `setDateFrom()`, `setTimeFrom()` methods.~~ ✅ Covered via `test/set_date_time_from_test.dart`.
 
 #### Settings & Global State (3 tests)
-- **SettingsTest.php** - Global settings for locale, start of week, etc.
-- **NowAndOtherStaticHelpersTest.php** - Static methods: `now()`, `today()`, `yesterday()`, etc.
-- **NowDerivativesTest.php** - Derivatives of now: `tomorrow()`, `parse()`, etc.
+- ~~**SettingsTest.php** - Global settings for locale, start of week, etc.~~ ✅ Covered via `test/settings_management_test.dart` (week start + weekend settings + locale influence).
+- ~~**NowAndOtherStaticHelpersTest.php** - Static methods: `now()`, `today()`, `yesterday()`, etc.~~ ✅ Extended `test/static_helpers_test.dart` to cover locale/timezone propagation and derivatives.
+- ~~**NowDerivativesTest.php** - Derivatives of now: `tomorrow()`, `yesterday()`, etc.~~ ✅ Same suite now checks `yesterday`/`tomorrow` under mocked clocks.
 
 #### Specialized (4 tests)
-- **LocalizationTest.php** - i18n/localization support
+- ~~**LocalizationTest.php** - i18n/localization support~~ ✅ `test/localization_test.dart` verifies global and per-instance locale behavior.
 - **TestingAidsTest.php** - Testing helpers like `setTestNow()`, `getTestNow()`
 - **LastErrorTest.php** - Error handling and reporting
 - **StrictModeTest.php** - Strict mode validation

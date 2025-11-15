@@ -414,6 +414,11 @@ class Carbon extends CarbonBase {
 
   static bool isStrictModeEnabled() => CarbonBase.strictMode;
 
+  static void setToStringFormat(dynamic formatter) =>
+      CarbonBase.setToStringFormat(formatter);
+
+  static void resetToStringFormat() => CarbonBase.resetToStringFormat();
+
   static void setLocale(String locale) => CarbonBase.setDefaultLocale(locale);
 
   static String getLocale() => CarbonBase.defaultLocale;

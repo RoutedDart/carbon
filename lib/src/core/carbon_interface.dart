@@ -239,7 +239,26 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   double diffInUTCMillennia([dynamic date, bool absolute = true]);
 
   String format(String pattern, {String? locale});
-  String toIso8601String();
+  String toIso8601String({bool keepOffset = false});
+  String toIso8601ZuluString();
+  String toDateString();
+  String toTimeString();
+  String toDateTimeString();
+  String toDateTimeLocalString([String precision = 'second']);
+  String toFormattedDateString();
+  String toDayDateTimeString();
+  String toFormattedDayDateString();
+  String toAtomString();
+  String toCookieString();
+  String toRfc822String();
+  String toRfc850String();
+  String toRfc1036String();
+  String toRfc1123String();
+  String toRfc2822String();
+  String toRfc3339String({bool extended = false});
+  String toRssString();
+  String toW3cString();
+  String toRfc7231String();
   String diffForHumans({CarbonInterface? reference, String? locale});
   String longAbsoluteDiffForHumans([CarbonInterface? other]);
   String longRelativeDiffForHumans([CarbonInterface? other]);

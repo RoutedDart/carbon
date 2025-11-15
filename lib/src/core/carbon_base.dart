@@ -3,6 +3,41 @@ part of '../carbon.dart';
 typedef CarbonTestNowGenerator =
     CarbonInterface Function(CarbonInterface current);
 
+const List<String> _weekdayShortNames = <String>[
+  'Mon',
+  'Tue',
+  'Wed',
+  'Thu',
+  'Fri',
+  'Sat',
+  'Sun',
+];
+
+const List<String> _weekdayLongNames = <String>[
+  'Monday',
+  'Tuesday',
+  'Wednesday',
+  'Thursday',
+  'Friday',
+  'Saturday',
+  'Sunday',
+];
+
+const List<String> _monthShortNames = <String>[
+  'Jan',
+  'Feb',
+  'Mar',
+  'Apr',
+  'May',
+  'Jun',
+  'Jul',
+  'Aug',
+  'Sep',
+  'Oct',
+  'Nov',
+  'Dec',
+];
+
 abstract class CarbonBase implements CarbonInterface {
   CarbonBase({
     required DateTime dateTime,
@@ -32,6 +67,7 @@ abstract class CarbonBase implements CarbonInterface {
   static CarbonInterface? _testNow;
   static List<int> _weekendDays = <int>[DateTime.saturday, DateTime.sunday];
   static CarbonTestNowGenerator? _testNowGenerator;
+  static String Function(CarbonInterface)? _customToStringFormat;
 
   bool get _isMutable => this is Carbon;
 
@@ -114,6 +150,56 @@ abstract class CarbonBase implements CarbonInterface {
 
   static bool _weekendOverridden = false;
   static bool _startOfWeekOverridden = false;
+
+  static void setToStringFormat(dynamic formatter) {
+    if (formatter == null) {
+      _customToStringFormat = null;
+      return;
+    }
+    if (formatter is String) {
+      _customToStringFormat = (carbon) => carbon.format(formatter);
+      return;
+    }
+    if (formatter is String Function(CarbonInterface)) {
+      _customToStringFormat = formatter;
+      return;
+    }
+    if (formatter is String Function(Carbon)) {
+      _customToStringFormat = (value) =>
+          formatter(value is Carbon ? value : value.toMutable());
+      return;
+    }
+    if (formatter is String Function(CarbonImmutable)) {
+      _customToStringFormat = (value) =>
+          formatter(value is CarbonImmutable ? value : value.toImmutable());
+      return;
+    }
+    if (formatter is String Function()) {
+      _customToStringFormat = (_) => formatter();
+      return;
+    }
+    if (formatter is String Function(Object?)) {
+      _customToStringFormat = (value) => formatter(value);
+      return;
+    }
+    if (formatter is Function) {
+      _customToStringFormat = (value) {
+        final result = Function.apply(formatter, [value]);
+        if (result is! String) {
+          throw ArgumentError(
+            'setToStringFormat callbacks must return a String.',
+          );
+        }
+        return result;
+      };
+      return;
+    }
+    throw ArgumentError(
+      'setToStringFormat expects a String or a CarbonInterface -> String callback.',
+    );
+  }
+
+  static void resetToStringFormat() => _customToStringFormat = null;
 
   static bool hasTestNow() => _testNow != null || _testNowGenerator != null;
 
@@ -336,6 +422,45 @@ abstract class CarbonBase implements CarbonInterface {
     return result;
   }
 
+  DateTime _localDateTimeForFormatting() {
+    final zone = _timeZone;
+    if (zone == null || zone == 'UTC') {
+      return _dateTime.toUtc();
+    }
+    return _utcToLocal(_dateTime, zone);
+  }
+
+  Duration _currentOffset() {
+    final zone = _timeZone;
+    if (zone == null || zone == 'UTC') {
+      return Duration.zero;
+    }
+    final fixed = _parseFixedOffset(zone);
+    if (fixed != null) {
+      return fixed;
+    }
+    final snapshot = _zoneSnapshot();
+    if (snapshot != null) {
+      return snapshot.offset;
+    }
+    return Duration.zero;
+  }
+
+  String _formatIso(DateTime value, {Duration? offset, bool suffix = true}) {
+    final date = _formatDatePart(value);
+    final time = _formatTimePart(value);
+    final micros = _fractionalMicroseconds(value, reference: _dateTime);
+    final fraction = _formatIsoFraction(micros);
+    final suffixText = suffix ? 'Z' : _formatOffset(offset ?? Duration.zero);
+    final buffer = StringBuffer()
+      ..write(date)
+      ..write('T')
+      ..write(time)
+      ..write(fraction)
+      ..write(suffixText);
+    return buffer.toString();
+  }
+
   static DateTime _utcToLocal(DateTime utc, String zoneName) {
     final fixed = _parseFixedOffset(zoneName);
     if (fixed != null) {
@@ -456,6 +581,21 @@ abstract class CarbonBase implements CarbonInterface {
       timeZone: _timeZone,
       settings: _settings,
     );
+  }
+
+  @override
+  String toString() {
+    final custom = _customToStringFormat;
+    if (custom != null) {
+      return custom(this);
+    }
+    final local = _localDateTimeForFormatting();
+    final weekday = _weekdayShortNames[(local.weekday + 6) % 7];
+    final month = _monthShortNames[local.month - 1];
+    final day = _twoDigits(local.day);
+    final time = _formatTimePart(local);
+    final offset = _formatOffset(_currentOffset(), compact: true);
+    return '$weekday $month $day ${_padYear(local.year)} $time GMT$offset';
   }
 
   CarbonInterface _duplicate({
@@ -3086,7 +3226,149 @@ abstract class CarbonBase implements CarbonInterface {
   }
 
   @override
-  String toIso8601String() => _dateTime.toUtc().toIso8601String();
+  String toIso8601String({bool keepOffset = false}) {
+    if (keepOffset && _timeZone != null && _timeZone != 'UTC') {
+      final local = _localDateTimeForFormatting();
+      return _formatIso(local, offset: _currentOffset(), suffix: false);
+    }
+    return _formatIso(_dateTime.toUtc(), suffix: true);
+  }
+
+  @override
+  String toIso8601ZuluString() => _formatIso(_dateTime.toUtc(), suffix: true);
+
+  @override
+  String toDateString() => _formatDatePart(_localDateTimeForFormatting());
+
+  @override
+  String toTimeString() => _formatTimePart(_localDateTimeForFormatting());
+
+  @override
+  String toDateTimeString() {
+    final local = _localDateTimeForFormatting();
+    return '${_formatDatePart(local)} ${_formatTimePart(local)}';
+  }
+
+  @override
+  String toDateTimeLocalString([String precision = 'second']) {
+    final local = _localDateTimeForFormatting();
+    final normalized = precision.toLowerCase();
+    final mode = switch (normalized) {
+      'minute' => _LocalPrecision.minute,
+      'second' => _LocalPrecision.second,
+      'millisecond' => _LocalPrecision.millisecond,
+      'microsecond' || 'µs' => _LocalPrecision.microsecond,
+      _ => throw ArgumentError(
+        'Precision unit expected among: minute, second, millisecond and microsecond.',
+      ),
+    };
+    return _formatLocalDateTime(local, mode, reference: _dateTime);
+  }
+
+  @override
+  String toFormattedDateString() {
+    final local = _localDateTimeForFormatting();
+    final month = _localizedMonthShortName(_locale, local.month);
+    return '$month ${local.day}, ${_padYear(local.year)}';
+  }
+
+  @override
+  String toDayDateTimeString() {
+    final local = _localDateTimeForFormatting();
+    final weekday = _localizedWeekdayShortName(_locale, local.weekday);
+    final month = _localizedMonthShortName(_locale, local.month);
+    return '$weekday, $month ${local.day}, ${_padYear(local.year)} ${_formatTwelveHour(local)}';
+  }
+
+  @override
+  String toFormattedDayDateString() {
+    final local = _localDateTimeForFormatting();
+    final weekday = _localizedWeekdayShortName(_locale, local.weekday);
+    final month = _localizedMonthShortName(_locale, local.month);
+    return '$weekday, $month ${local.day}, ${_padYear(local.year)}';
+  }
+
+  @override
+  String toAtomString() {
+    final local = _localDateTimeForFormatting();
+    return '${_formatDatePart(local)}T${_formatTimePart(local)}${_formatOffset(_currentOffset())}';
+  }
+
+  @override
+  String toCookieString() {
+    final local = _localDateTimeForFormatting();
+    final weekday = _weekdayLongNames[(local.weekday + 6) % 7];
+    final month = _monthShortNames[local.month - 1];
+    final day = _twoDigits(local.day);
+    final base =
+        '$weekday, $day-$month-${_padYear(local.year)} ${_formatTimePart(local)}';
+    return '$base GMT${_formatOffset(_currentOffset())}';
+  }
+
+  @override
+  String toRfc822String() => _formatRfcFamily(shortYear: true);
+
+  @override
+  String toRfc1036String() => _formatRfcFamily(shortYear: true);
+
+  @override
+  String toRfc1123String() => _formatRfcFamily(shortYear: false);
+
+  @override
+  String toRfc2822String() => _formatRfcFamily(shortYear: false);
+
+  @override
+  String toRssString() => _formatRfcFamily(shortYear: false);
+
+  @override
+  String toRfc850String() {
+    final local = _localDateTimeForFormatting();
+    final snapshot = _zoneSnapshot();
+    final offset = snapshot?.offset ?? _currentOffset();
+    final zone = _zoneAbbreviationFromSnapshot(snapshot, offset);
+    final weekday = _weekdayLongNames[(local.weekday + 6) % 7];
+    final month = _monthShortNames[local.month - 1];
+    return '$weekday, ${_twoDigits(local.day)}-$month-${_twoDigitYear(local)} ${_formatTimePart(local)} $zone';
+  }
+
+  @override
+  String toRfc3339String({bool extended = false}) {
+    final local = _localDateTimeForFormatting();
+    final buffer = StringBuffer()
+      ..write(_formatDatePart(local))
+      ..write('T')
+      ..write(_formatTimePart(local));
+    if (extended) {
+      final millis =
+          (_fractionalMicroseconds(local, reference: _dateTime) ~/ 1000)
+              .toString()
+              .padLeft(3, '0');
+      buffer
+        ..write('.')
+        ..write(millis);
+    }
+    buffer.write(_formatOffset(_currentOffset()));
+    return buffer.toString();
+  }
+
+  @override
+  String toW3cString() => toRfc3339String();
+
+  @override
+  String toRfc7231String() {
+    final utc = _dateTime.toUtc();
+    final weekday = _weekdayShortNames[(utc.weekday + 6) % 7];
+    final month = _monthShortNames[utc.month - 1];
+    return '$weekday, ${_twoDigits(utc.day)} $month ${_padYear(utc.year)} ${_formatTimePart(utc)} GMT';
+  }
+
+  String _formatRfcFamily({required bool shortYear}) {
+    final local = _localDateTimeForFormatting();
+    final weekday = _weekdayShortNames[(local.weekday + 6) % 7];
+    final month = _monthShortNames[local.month - 1];
+    final year = shortYear ? _twoDigitYear(local) : _padYear(local.year);
+    return '$weekday, ${_twoDigits(local.day)} $month $year ${_formatTimePart(local)} ${_formatOffset(_currentOffset(), compact: true)}';
+  }
 
   @override
   String diffForHumans({CarbonInterface? reference, String? locale}) {
@@ -3296,13 +3578,18 @@ abstract class CarbonBase implements CarbonInterface {
     return result;
   }
 
-  String _formatOffset(Duration offset, {bool includePrefix = false}) {
+  String _formatOffset(
+    Duration offset, {
+    bool includePrefix = false,
+    bool compact = false,
+  }) {
     final totalMinutes = offset.inMinutes;
     final sign = totalMinutes >= 0 ? '+' : '-';
     final absMinutes = totalMinutes.abs();
     final hours = (absMinutes ~/ 60).toString().padLeft(2, '0');
     final minutes = (absMinutes % 60).toString().padLeft(2, '0');
-    final core = '$sign$hours:$minutes';
+    final separator = compact ? '' : ':';
+    final core = '$sign$hours$separator$minutes';
     return includePrefix ? 'GMT$core' : core;
   }
 
@@ -3667,7 +3954,10 @@ abstract class CarbonBase implements CarbonInterface {
   }) {
     final zone = _timeZone;
     final isUtcContext = zone == null || zone == 'UTC';
-    final localBase = isUtcContext ? _dateTime : _utcToLocal(_dateTime, zone!);
+    final String? resolvedZone = isUtcContext ? null : zone;
+    final localBase = resolvedZone == null
+        ? _dateTime
+        : _utcToLocal(_dateTime, resolvedZone);
     var candidate = isUtcContext
         ? DateTime.utc(
             localBase.year,
@@ -3714,7 +4004,10 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface _setToTimeOfDay(_ParsedTimeOfDay token) {
     final zone = _timeZone;
     final isUtcContext = zone == null || zone == 'UTC';
-    final localBase = isUtcContext ? _dateTime : _utcToLocal(_dateTime, zone!);
+    final String? resolvedZone = isUtcContext ? null : zone;
+    final localBase = resolvedZone == null
+        ? _dateTime
+        : _utcToLocal(_dateTime, resolvedZone);
     final candidate = isUtcContext
         ? DateTime.utc(
             localBase.year,
@@ -4426,6 +4719,148 @@ abstract class CarbonBase implements CarbonInterface {
   }
 }
 
+String _zoneAbbreviationFromSnapshot(
+  CarbonTimeZoneSnapshot? snapshot,
+  Duration offset,
+) {
+  if (snapshot != null && snapshot.abbreviation.isNotEmpty) {
+    return snapshot.abbreviation;
+  }
+  if (offset == Duration.zero) {
+    return 'GMT';
+  }
+  final totalMinutes = offset.inMinutes;
+  final sign = totalMinutes >= 0 ? '+' : '-';
+  final absMinutes = totalMinutes.abs();
+  final hours = (absMinutes ~/ 60).toString().padLeft(2, '0');
+  final minutes = (absMinutes % 60).toString().padLeft(2, '0');
+  return 'GMT$sign$hours$minutes';
+}
+
+String _padYear(int year) {
+  if (year >= 0 && year <= 9999) {
+    return year.toString().padLeft(4, '0');
+  }
+  final sign = year >= 0 ? '+' : '-';
+  return '$sign${year.abs().toString().padLeft(6, '0')}';
+}
+
+String _twoDigitYear(DateTime value) {
+  var normalized = value.year % 100;
+  if (normalized < 0) {
+    normalized += 100;
+  }
+  return normalized.toString().padLeft(2, '0');
+}
+
+String _twoDigits(int value) => value.abs().toString().padLeft(2, '0');
+
+String _localizedMonthShortName(String locale, int month) => _localizedToken(
+  locale: locale,
+  pattern: 'MMM',
+  sample: DateTime.utc(2000, month, 1),
+  fallback: _monthShortNames[month - 1],
+);
+
+String _localizedWeekdayShortName(String locale, int weekday) =>
+    _localizedToken(
+      locale: locale,
+      pattern: 'EEE',
+      sample: DateTime.utc(2000, 1, 3 + ((weekday - 1) % 7)),
+      fallback: _weekdayShortNames[(weekday + 6) % 7],
+    );
+
+String _localizedToken({
+  required String locale,
+  required String pattern,
+  required DateTime sample,
+  required String fallback,
+}) {
+  try {
+    return DateFormat(pattern, locale).format(sample);
+  } catch (_) {
+    return fallback;
+  }
+}
+
+String _formatDatePart(DateTime value) =>
+    '${_padYear(value.year)}-${_twoDigits(value.month)}-${_twoDigits(value.day)}';
+
+String _formatTimePart(DateTime value) =>
+    '${_twoDigits(value.hour)}:${_twoDigits(value.minute)}:${_twoDigits(value.second)}';
+
+String _formatLocalDateTime(
+  DateTime value,
+  _LocalPrecision precision, {
+  DateTime? reference,
+}) {
+  var effectiveMicros = _fractionalMicroseconds(value, reference: reference);
+  final buffer = StringBuffer()
+    ..write(_formatDatePart(value))
+    ..write('T')
+    ..write(_twoDigits(value.hour))
+    ..write(':')
+    ..write(_twoDigits(value.minute));
+  if (precision == _LocalPrecision.minute) {
+    return buffer.toString();
+  }
+  buffer
+    ..write(':')
+    ..write(_twoDigits(value.second));
+  if (precision == _LocalPrecision.second) {
+    return buffer.toString();
+  }
+  if (precision == _LocalPrecision.millisecond) {
+    final millis = (effectiveMicros ~/ 1000).toString().padLeft(3, '0');
+    buffer
+      ..write('.')
+      ..write(millis);
+    return buffer.toString();
+  }
+  buffer
+    ..write('.')
+    ..write(effectiveMicros.toString().padLeft(6, '0'));
+  return buffer.toString();
+}
+
+int _fractionalMicroseconds(DateTime value, {DateTime? reference}) {
+  final micros = value.millisecond * 1000 + value.microsecond;
+  if (micros != 0 || reference == null) {
+    return micros;
+  }
+  final fallback = reference.millisecond * 1000 + reference.microsecond;
+  if (fallback != 0) {
+    return fallback;
+  }
+  final remainder =
+      reference.microsecondsSinceEpoch.abs() % Duration.microsecondsPerSecond;
+  return remainder;
+}
+
+String _formatIsoFraction(int micros) {
+  if (micros == 0) {
+    return '.000';
+  }
+  if (micros % 1000 == 0) {
+    final millis = (micros ~/ 1000).toString().padLeft(3, '0');
+    return '.$millis';
+  }
+  var text = micros.toString().padLeft(6, '0');
+  while (text.endsWith('0')) {
+    text = text.substring(0, text.length - 1);
+  }
+  return '.$text';
+}
+
+String _formatTwelveHour(DateTime value) {
+  var hour = value.hour % 12;
+  if (hour == 0) {
+    hour = 12;
+  }
+  final suffix = value.hour >= 12 ? 'PM' : 'AM';
+  return '$hour:${_twoDigits(value.minute)} $suffix';
+}
+
 enum _ComparisonUnit {
   microsecond,
   millisecond,
@@ -4471,6 +4906,8 @@ enum _RealUnit {
   century,
   millennium,
 }
+
+enum _LocalPrecision { minute, second, millisecond, microsecond }
 
 class _ParsedTimeOfDay {
   const _ParsedTimeOfDay(this.hour, this.minute, this.second, this.microsecond);

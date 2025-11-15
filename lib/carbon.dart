@@ -1,3 +1,6 @@
+/// Carbon for Dart re-exports the fluent date/time API modeled after the PHP
+/// Carbon package. Import this library to access the `Carbon` classes,
+/// intervals, periods, macros, and supporting settings.
 library;
 
 export 'src/carbon.dart'
@@ -12,4 +15,5 @@ export 'src/carbon.dart'
         CarbonInterval,
         CarbonUnit,
         CarbonAliasShims,
-        CarbonInvalidDateException;
+        CarbonInvalidDateException,
+        CarbonFactory;

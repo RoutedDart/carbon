@@ -1,3 +1,8 @@
+/// Internal Carbon core that stitches together the shared part files.
+///
+/// This library exposes the implementation imported by `package:carbon/carbon.dart`.
+library;
+
 import 'dart:convert';
 import 'dart:math' as math;
 
@@ -20,4 +25,7 @@ part 'core/timezone_snapshot.dart';
 part 'core/carbon_alias_shims.dart';
 part 'core/carbon_exceptions.dart';
 part 'core/locale_defaults.dart';
+part 'core/locale_first_week_min_days.dart';
+part 'core/locale_genitive_months.dart';
+part 'core/carbon_factory.dart';
 part 'core/iso_format.dart';

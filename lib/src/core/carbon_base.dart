@@ -1,5 +1,15 @@
+/// Shared implementation for [Carbon] and [CarbonImmutable], covering
+/// calendar math, timezone helpers, and macro registration.
+///
+/// ```dart
+/// CarbonBase.setDefaultLocale('es');
+/// ```
 part of '../carbon.dart';
 
+/// Callback to generate a test "now" value dynamically.
+///
+/// Used by [Carbon.setTestNow] when testing code that depends on the current time.
+/// Signature used for custom "now" generators during tests.
 typedef CarbonTestNowGenerator =
     CarbonInterface Function(CarbonInterface current);
 
@@ -38,7 +48,12 @@ const List<String> _monthShortNames = <String>[
   'Dec',
 ];
 
+/// Abstract foundation shared by [Carbon] and [CarbonImmutable].
+///
+/// Provides all common logic for calendar math, comparisons, and formatting.
+/// Subclasses implement mutability semantics (in-place vs. new objects).
 abstract class CarbonBase implements CarbonInterface {
+  /// Creates a Carbon base instance with UTC conversion and defaults.
   CarbonBase({
     required DateTime dateTime,
     String? locale,
@@ -59,6 +74,8 @@ abstract class CarbonBase implements CarbonInterface {
       <String, tm.DateTimeZone>{};
   static bool _timeMachineInitialized = false;
   static bool _strictMode = true;
+  static final Map<String, String Function(CarbonInterface)>
+  _isoFormatOverrides = <String, String Function(CarbonInterface)>{};
   static final RegExp _fixedOffsetPattern = RegExp(
     r'^[+-](\d{2})(?::?(\d{2}))?$',
   );
@@ -68,6 +85,23 @@ abstract class CarbonBase implements CarbonInterface {
   static List<int> _weekendDays = <int>[DateTime.saturday, DateTime.sunday];
   static CarbonTestNowGenerator? _testNowGenerator;
   static String Function(CarbonInterface)? _customToStringFormat;
+  String Function(CarbonInterface)? _instanceToStringFormat;
+
+  void _copyInstanceFormatterTo(CarbonBase target) {
+    target._instanceToStringFormat = _instanceToStringFormat;
+  }
+
+  static String? _runIsoFormatOverride(String token, CarbonBase carbon) {
+    final formatter = _isoFormatOverrides[token];
+    if (formatter == null) {
+      return null;
+    }
+    try {
+      return formatter(carbon);
+    } catch (_) {
+      return '';
+    }
+  }
 
   bool get _isMutable => this is Carbon;
 
@@ -83,10 +117,14 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   CarbonSettings get settings => _settings;
 
+  /// Registers a PHP-style macro callable that can be invoked dynamically.
   static void registerMacro(String name, CarbonMacro macro) =>
       _macros[name] = macro;
+
+  /// Removes a previously registered macro.
   static void unregisterMacro(String name) => _macros.remove(name);
 
+  /// Resets global locale/start-of-week/test-now defaults.
   static void resetDefaults() {
     _defaultLocale = 'en';
     _defaultSettings = const CarbonSettings();
@@ -97,6 +135,10 @@ abstract class CarbonBase implements CarbonInterface {
     _applyLocaleDefaults(_defaultLocale);
   }
 
+  /// Enables named timezone support via [time_machine](https://pub.dev).
+  ///
+  /// Must be called before using `.tz('America/New_York')` with real zone
+  /// identifiers. Pass a custom [provider] to override the TZ database.
   static Future<void> configureTimeMachine({
     tm.DateTimeZoneProvider? provider,
     bool testing = true,
@@ -109,15 +151,19 @@ abstract class CarbonBase implements CarbonInterface {
     _zoneCache.clear();
   }
 
+  /// Clears the timezone provider/cache configured via [configureTimeMachine].
   static void resetTimeMachine() {
     _zoneProvider = null;
     _zoneCache.clear();
   }
 
+  /// Enables PHP-style strict mode (throws on invalid operations).
   static void useStrictMode(bool enabled) => _strictMode = enabled;
 
+  /// Current strictness flag.
   static bool get strictMode => _strictMode;
 
+  /// Updates the process-wide default locale.
   static void setDefaultLocale(String locale) {
     _defaultLocale = locale;
     _applyLocaleDefaults(locale);
@@ -125,16 +171,20 @@ abstract class CarbonBase implements CarbonInterface {
 
   static String get defaultLocale => _defaultLocale;
 
+  /// Overrides the global start-of-week for new instances.
   static void setWeekStartsAt(int day) {
     _startOfWeekOverridden = true;
     final normalized = _normalizeWeekday(day);
     _defaultSettings = _defaultSettings.copyWith(startOfWeek: normalized);
   }
 
+  /// Settings applied to factories that omit an explicit [CarbonSettings].
   static CarbonSettings get defaultSettings => _defaultSettings;
 
+  /// Current weekend definition.
   static List<int> get weekendDays => List.unmodifiable(_weekendDays);
 
+  /// Overrides which weekdays count as the weekend.
   static void setWeekendDays(List<int> days) {
     if (days.isEmpty) {
       throw ArgumentError('Weekend days cannot be empty');
@@ -143,6 +193,7 @@ abstract class CarbonBase implements CarbonInterface {
     _weekendOverridden = true;
   }
 
+  /// Resets weekend defaults back to the locale-provided values.
   static void resetWeekendDays() {
     _weekendOverridden = false;
     _applyLocaleDefaults(_defaultLocale);
@@ -152,38 +203,38 @@ abstract class CarbonBase implements CarbonInterface {
   static bool _startOfWeekOverridden = false;
 
   static void setToStringFormat(dynamic formatter) {
+    _customToStringFormat = _normalizeToStringFormatter(formatter);
+  }
+
+  static void resetToStringFormat() => _customToStringFormat = null;
+
+  static String Function(CarbonInterface)? _normalizeToStringFormatter(
+    dynamic formatter,
+  ) {
     if (formatter == null) {
-      _customToStringFormat = null;
-      return;
+      return null;
     }
     if (formatter is String) {
-      _customToStringFormat = (carbon) => carbon.format(formatter);
-      return;
+      return (carbon) => carbon.format(formatter);
     }
     if (formatter is String Function(CarbonInterface)) {
-      _customToStringFormat = formatter;
-      return;
+      return formatter;
     }
     if (formatter is String Function(Carbon)) {
-      _customToStringFormat = (value) =>
-          formatter(value is Carbon ? value : value.toMutable());
-      return;
+      return (value) => formatter(value is Carbon ? value : value.toMutable());
     }
     if (formatter is String Function(CarbonImmutable)) {
-      _customToStringFormat = (value) =>
+      return (value) =>
           formatter(value is CarbonImmutable ? value : value.toImmutable());
-      return;
     }
     if (formatter is String Function()) {
-      _customToStringFormat = (_) => formatter();
-      return;
+      return (_) => formatter();
     }
     if (formatter is String Function(Object?)) {
-      _customToStringFormat = (value) => formatter(value);
-      return;
+      return (value) => formatter(value);
     }
     if (formatter is Function) {
-      _customToStringFormat = (value) {
+      return (value) {
         final result = Function.apply(formatter, [value]);
         if (result is! String) {
           throw ArgumentError(
@@ -192,14 +243,11 @@ abstract class CarbonBase implements CarbonInterface {
         }
         return result;
       };
-      return;
     }
     throw ArgumentError(
       'setToStringFormat expects a String or a CarbonInterface -> String callback.',
     );
   }
-
-  static void resetToStringFormat() => _customToStringFormat = null;
 
   static bool hasTestNow() => _testNow != null || _testNowGenerator != null;
 
@@ -229,6 +277,24 @@ abstract class CarbonBase implements CarbonInterface {
     _testNowGenerator = null;
     _testNow = _coerceTestNow(value).toImmutable();
   }
+
+  /// Registers a custom isoFormat token formatter (mirrors PHP's getIsoUnits overrides).
+  static void registerIsoFormatToken(
+    String token,
+    String Function(CarbonInterface) formatter,
+  ) {
+    if (token.isEmpty) {
+      throw ArgumentError('Token cannot be empty.');
+    }
+    _isoFormatOverrides[token] = formatter;
+  }
+
+  /// Removes a previously registered isoFormat token formatter.
+  static bool unregisterIsoFormatToken(String token) =>
+      _isoFormatOverrides.remove(token) != null;
+
+  /// Clears every registered isoFormat override.
+  static void resetIsoFormatTokens() => _isoFormatOverrides.clear();
 
   static void setTestNowAndTimezone(dynamic value, {String? timeZone}) {
     if (value == null || value == false) {
@@ -317,6 +383,57 @@ abstract class CarbonBase implements CarbonInterface {
       return false;
     }
     return !parsedA.dateTime.isAtSameMomentAs(parsedB.dateTime);
+  }
+
+  static bool hasIsoRelativeKeywords(String? pattern, {String? locale}) {
+    if (pattern == null || pattern.isEmpty) {
+      return false;
+    }
+    final trimmed = pattern.trim();
+    if (trimmed.startsWith('[') && trimmed.endsWith(']')) {
+      final inner = trimmed.substring(1, trimmed.length - 1);
+      if (!inner.contains(']')) {
+        return false;
+      }
+    }
+    final expanded = _expandIsoPresetTokens(pattern, locale ?? _defaultLocale);
+    var i = 0;
+    var escaped = false;
+    var inLiteral = false;
+    while (i < expanded.length) {
+      final char = expanded[i];
+      if (escaped) {
+        escaped = false;
+        i++;
+        continue;
+      }
+      if (char == '\\') {
+        escaped = true;
+        i++;
+        continue;
+      }
+      if (char == '[' && !inLiteral) {
+        inLiteral = true;
+        i++;
+        continue;
+      }
+      if (char == ']' && inLiteral) {
+        inLiteral = false;
+        i++;
+        continue;
+      }
+      if (inLiteral) {
+        i++;
+        continue;
+      }
+      final remaining = expanded.substring(i);
+      final match = _isoTokenRegex.firstMatch(remaining);
+      if (match != null && match.start == 0) {
+        return true;
+      }
+      i++;
+    }
+    return false;
   }
 
   static Duration? _parseFixedOffset(String zone) {
@@ -575,20 +692,31 @@ abstract class CarbonBase implements CarbonInterface {
       _dateTime = normalized;
       return this;
     }
-    return CarbonImmutable._internal(
+    final clone = CarbonImmutable._internal(
       dateTime: normalized,
       locale: _locale,
       timeZone: _timeZone,
       settings: _settings,
     );
+    _copyInstanceFormatterTo(clone);
+    return clone;
   }
 
   @override
   String toString() {
+    final instanceFormatter = _instanceToStringFormat;
+    if (instanceFormatter != null) {
+      return instanceFormatter(this);
+    }
     final custom = _customToStringFormat;
     if (custom != null) {
       return custom(this);
     }
+    return toDateTimeString();
+  }
+
+  @override
+  String toLegacyString() {
     final local = _localDateTimeForFormatting();
     final weekday = _weekdayShortNames[(local.weekday + 6) % 7];
     final month = _monthShortNames[local.month - 1];
@@ -619,12 +747,14 @@ abstract class CarbonBase implements CarbonInterface {
       }
       return this;
     }
-    return CarbonImmutable._internal(
+    final clone = CarbonImmutable._internal(
       dateTime: (dateTime ?? _dateTime).toUtc(),
       locale: locale ?? _locale,
       timeZone: timeZone ?? _timeZone,
       settings: settings ?? _settings,
     );
+    _copyInstanceFormatterTo(clone);
+    return clone;
   }
 
   @override
@@ -644,6 +774,18 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface locale(String locale) {
     _applyLocaleDefaults(locale);
     return _duplicate(locale: locale);
+  }
+
+  @override
+  CarbonInterface withToStringFormat(dynamic format) {
+    final normalized = _normalizeToStringFormatter(format);
+    if (_isMutable) {
+      _instanceToStringFormat = normalized;
+      return this;
+    }
+    final clone = _duplicate() as CarbonBase;
+    clone._instanceToStringFormat = normalized;
+    return clone;
   }
 
   @override
@@ -3245,6 +3387,9 @@ abstract class CarbonBase implements CarbonInterface {
   String toJsonString() => toIso8601String();
 
   @override
+  String toJSON() => toJsonString();
+
+  @override
   String toDateString() => _formatDatePart(_localDateTimeForFormatting());
 
   @override
@@ -3494,17 +3639,36 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   CarbonComponents toObject() => CarbonComponents.fromMap(_componentSnapshot());
 
+  /// Returns a structured snapshot similar to PHP Carbon's `__debugInfo`.
+  ///
+  /// The payload includes the formatted local date/time, timezone metadata,
+  /// and translator details when the locale differs from [_defaultLocale].
   @override
   Map<String, Object?> toDebugMap() {
+    final snapshot = _zoneSnapshot();
+    final offset = snapshot?.offset ?? _currentOffset();
+    final timezoneName = _timeZone ?? snapshot?.abbreviation ?? 'UTC';
+    final abbreviation = snapshot?.abbreviation ?? timezoneName;
     final map = <String, Object?>{
       'date': DateFormat(
         'yyyy-MM-dd HH:mm:ss.SSSSSS',
       ).format(_localDateTimeForFormatting()),
-      'timezone': _timeZone ?? 'UTC',
+      'timezone': {
+        'name': timezoneName,
+        'abbreviation': abbreviation,
+        'offset': _formatOffset(offset),
+        'offsetSeconds': offset.inSeconds,
+        'isDst': snapshot?.isDst ?? false,
+      },
+      'timezoneType': 3,
     };
     if (_locale != _defaultLocale) {
       map['locale'] = _locale;
-      map['translator'] = _locale;
+      map['translator'] = {
+        'type': 'CarbonTranslator',
+        'locale': _locale,
+        'fallbackLocale': _defaultLocale,
+      };
     }
     return map;
   }
@@ -4845,6 +5009,27 @@ String _localizedMonthShortName(String locale, int month) => _localizedToken(
   fallback: _monthShortNames[month - 1],
 );
 
+String _localizedMonthLongName(
+  String locale,
+  DateTime sample, {
+  bool genitive = false,
+}) {
+  if (genitive) {
+    for (final candidate in CarbonBase._localeCandidates(locale)) {
+      final overrides = kLocaleGenitiveMonths[candidate];
+      if (overrides != null) {
+        return overrides[sample.month - 1];
+      }
+    }
+  }
+  return _localizedToken(
+    locale: locale,
+    pattern: 'MMMM',
+    sample: sample,
+    fallback: _monthShortNames[sample.month - 1],
+  );
+}
+
 String _localizedWeekdayShortName(String locale, int weekday) =>
     _localizedToken(
       locale: locale,
@@ -4944,6 +5129,7 @@ String _formatTwelveHour(DateTime value) {
   return '$hour:${_twoDigits(value.minute)} $suffix';
 }
 
+/// Time unit used for same-unit comparisons.
 enum _ComparisonUnit {
   microsecond,
   millisecond,
@@ -4960,6 +5146,7 @@ enum _ComparisonUnit {
   millennium,
 }
 
+/// Time unit used for start/end-of-unit calculations.
 enum _StartEndUnit {
   second,
   minute,
@@ -4974,6 +5161,7 @@ enum _StartEndUnit {
   millennium,
 }
 
+/// Time unit used for real-time interval calculations.
 enum _RealUnit {
   microsecond,
   millisecond,
@@ -4990,13 +5178,23 @@ enum _RealUnit {
   millennium,
 }
 
+/// Precision level for local time formatting.
 enum _LocalPrecision { minute, second, millisecond, microsecond }
 
+/// Parsed representation of a time-of-day component.
 class _ParsedTimeOfDay {
+  /// Creates a parsed time-of-day with the given components.
   const _ParsedTimeOfDay(this.hour, this.minute, this.second, this.microsecond);
 
+  /// Hour component (0-23).
   final int hour;
+
+  /// Minute component (0-59).
   final int minute;
+
+  /// Second component (0-59).
   final int second;
+
+  /// Microsecond component (0-999999).
   final int microsecond;
 }

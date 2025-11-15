@@ -1,5 +1,20 @@
+/// Implements the mutable [Carbon] variant and all factory constructors.
+///
+/// Use this part when importing `package:carbon/carbon.dart`; it wires up
+/// parsing, relative strings, timezone helpers, and fluent mutation.
 part of '../carbon.dart';
 
+/// Mutable Carbon implementation that mirrors the PHP Carbon API.
+///
+/// Create instances with [Carbon.now], [Carbon.parse], or one of the convenience
+/// factories, then chain fluent helpers:
+///
+/// ```dart
+/// final nextRelease = Carbon.now().addWeeks(2).endOfWeek();
+/// ```
+///
+/// All mutation methods operate in place, so chaining continues to modify the
+/// same object. Use [Carbon.toImmutable] when you need an immutable snapshot.
 class Carbon extends CarbonBase {
   Carbon._internal({
     required super.dateTime,
@@ -7,6 +22,19 @@ class Carbon extends CarbonBase {
     super.timeZone,
     super.settings,
   });
+
+  /// Registers a custom isoFormat token formatter (mirrors PHP `Factory`).
+  static void registerIsoFormatToken(
+    String token,
+    String Function(CarbonInterface) formatter,
+  ) => CarbonBase.registerIsoFormatToken(token, formatter);
+
+  /// Removes a previously registered isoFormat formatter.
+  static bool unregisterIsoFormatToken(String token) =>
+      CarbonBase.unregisterIsoFormatToken(token);
+
+  /// Clears all registered isoFormat overrides.
+  static void resetIsoFormatTokens() => CarbonBase.resetIsoFormatTokens();
 
   factory Carbon([dynamic input, String? timeZone]) {
     final resolved = _resolveTokenInput(input: input, timeZone: timeZone);
@@ -395,8 +423,17 @@ class Carbon extends CarbonBase {
     return false;
   }
 
+  /// Returns whether [input] contains PHP-style relative keywords such as
+  /// "tomorrow" or "next week".
   static bool hasRelativeKeywords(String? input) =>
       CarbonBase.hasRelativeKeywords(input);
+
+  /// Returns whether the ISO-style [pattern] contains any formatting tokens.
+  ///
+  /// Use this to decide if `createFromIsoFormat` should attempt parsing a
+  /// string or treat it as a literal.
+  static bool hasIsoRelativeKeywords(String? pattern, {String? locale}) =>
+      CarbonBase.hasIsoRelativeKeywords(pattern, locale: locale);
 
   static void registerMacro(String name, CarbonMacro macro) =>
       CarbonBase.registerMacro(name, macro);
@@ -771,6 +808,51 @@ class Carbon extends CarbonBase {
       CarbonBase.useStrictMode(previous);
     }
   }
+
+  /// Parses [input] using a Moment/Carbon-style [format] string.
+  ///
+  /// The parser honors literal brackets, preset tokens such as `LL`, and the
+  /// same semantics as PHP `createFromIsoFormat()`.
+  ///
+  /// ```dart
+  /// final date = Carbon.createFromIsoFormat(
+  ///   'MMMM D, YYYY h:mm A',
+  ///   'April 4, 2019 2:45 PM',
+  /// );
+  /// print(date.toIso8601String());
+  /// ```
+  static CarbonInterface createFromIsoFormat(
+    String format,
+    String input, {
+    String? locale,
+    String? timeZone,
+  }) {
+    final parser = _IsoInputParser(
+      format: format,
+      locale: locale ?? CarbonBase.defaultLocale,
+    );
+    final components = parser.parse(input);
+    final resolvedZone = timeZone ?? components.timeZone;
+    final utc = components.toUtc(resolvedZone);
+    return Carbon._internal(
+      dateTime: utc,
+      locale: locale ?? CarbonBase.defaultLocale,
+      timeZone: resolvedZone,
+      settings: CarbonBase.defaultSettings,
+    );
+  }
+
+  /// Parses localized [input] by translating month/day names from [locale]
+  /// before delegating to [createFromIsoFormat].
+  ///
+  /// This mirrors PHP `createFromLocaleIsoFormat()` and allows strings such
+  /// as `2019 四月 4 12,04,21` to be parsed when the locale is `zh_TW`.
+  static CarbonInterface createFromLocaleIsoFormat(
+    String format,
+    String locale,
+    String input, {
+    String? timeZone,
+  }) => createFromIsoFormat(format, input, locale: locale, timeZone: timeZone);
 
   static DateTime _buildSafeDate({
     int? year,

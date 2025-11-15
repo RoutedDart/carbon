@@ -8,6 +8,7 @@ void main() {
     await initializeDateFormatting('fr');
     await initializeDateFormatting('fr_FR');
     await initializeDateFormatting('ru');
+    await initializeDateFormatting('es');
   });
 
   setUp(() {
@@ -16,6 +17,34 @@ void main() {
   });
 
   group('String formatting helpers', () {
+    test('CarbonFactory applies scoped toString format', () {
+      final factory = CarbonFactory(
+        toStringFormat: (CarbonInterface value) => value.isoFormat('dddd'),
+      );
+      final created = factory.create(1976, 12, 25, 14, 15, 16);
+      expect(created.toString(), 'Saturday');
+      final normal = Carbon.parse('1975-12-25T14:15:16Z');
+      expect(normal.toString(), normal.toDateTimeString());
+    });
+
+    test('isoFormat token overrides mirror PHP getIsoUnits', () {
+      Carbon.registerIsoFormatToken('MMM', (_) => '');
+      addTearDown(Carbon.resetIsoFormatTokens);
+      expect(Carbon.parse('2017-01-01T00:00:00Z').isoFormat('MMM'), '');
+    });
+
+    test('toString defaults to toDateTimeString', () {
+      final value = Carbon.parse('1975-12-25T14:15:16Z');
+      expect(value.toString(), value.toDateTimeString());
+    });
+
+    test('toLegacyString matches PHP DateTime style', () {
+      final value = Carbon.parse('1975-12-25T14:15:16Z');
+      expect(value.toLegacyString(), 'Thu Dec 25 1975 14:15:16 GMT+0000');
+      final offset = value.tz('-05:00');
+      expect(offset.toLegacyString(), 'Thu Dec 25 1975 09:15:16 GMT-0500');
+    });
+
     test('toDateString/toTimeString/toDateTimeString', () {
       final value = Carbon.parse('2025-11-14T08:30:45Z');
       expect(value.toDateString(), '2025-11-14');
@@ -98,6 +127,14 @@ void main() {
       );
       final isoWeekSample = Carbon.parse('2017-01-01T00:00:00Z');
       expect(isoWeekSample.isoFormat('WW GGGG'), '52 2016');
+      expect(isoWeekSample.isoFormat('g G'), '2017 2016');
+      expect(isoWeekSample.locale('fr').isoFormat('g G'), '2016 2016');
+      final previousWeekSample = Carbon.parse('2015-12-31T00:00:00Z');
+      expect(previousWeekSample.isoFormat('g G'), '2016 2015');
+      expect(previousWeekSample.locale('fr').isoFormat('g G'), '2015 2015');
+      final spanish = Carbon.parse('2017-01-01T00:00:00Z').locale('es');
+      expect(spanish.isoFormat('LL'), '1 de enero de 2017');
+      expect(spanish.isoFormat('ll'), '1 de ene. de 2017');
     });
 
     test('translatedFormat mirrors PHP semantics', () {
@@ -113,8 +150,60 @@ void main() {
       Carbon.setLocale('ru');
       final russian = Carbon.parse('2019-05-15T12:00:00Z');
       expect(russian.translatedFormat('jS'), '15th');
-      expect(russian.translatedFormat('t F'), '31 май');
+      expect(russian.translatedFormat('t F'), '31 мая');
       expect(russian.translatedFormat('n F'), '5 май');
+    });
+
+    test('setToStringFormat supports conditional closures', () {
+      Carbon.setToStringFormat((CarbonInterface carbon) {
+        return carbon.year == 1976
+            ? carbon.translatedFormat('jS \\o\\f F g:i:s a')
+            : carbon.translatedFormat('jS \\o\\f F, Y g:i:s a');
+      });
+      final leap = Carbon.parse('1976-12-25T14:15:16');
+      final normal = Carbon.parse('1975-12-25T14:15:16');
+      expect(leap.toString(), '25th of December 7:15:16 pm');
+      expect(normal.toString(), '25th of December, 1975 7:15:16 pm');
+      Carbon.resetToStringFormat();
+    });
+
+    test('translatedFormat renders weekday/timezone tokens', () {
+      final value = Carbon.parse('1975-12-25T00:00:00Z');
+      expect(
+        value.translatedFormat('l D T e O P'),
+        'Thursday Thu UTC UTC +0000 +00:00',
+      );
+      expect(
+        value.locale('fr').translatedFormat('l D T e O P'),
+        'jeudi jeu. UTC UTC +0000 +00:00',
+      );
+    });
+
+    test('isoFormat handles escaped tokens', () {
+      final value = Carbon.parse('2017-01-01T00:00:00Z');
+      expect(value.isoFormat('\\MMM'), 'M01');
+    });
+
+    test('isoFormat covers full fractional precision range', () {
+      final value = Carbon.parse('2017-01-01T22:25:24.182937Z');
+      expect(
+        value.isoFormat(
+          'S SS SSS SSSS SSSSS SSSSSS SSSSSSS SSSSSSSS SSSSSSSSS',
+        ),
+        '1 18 182 1829 18293 182937 1829370 18293700 182937000',
+      );
+    });
+
+    test('isoFormat exposes timezone names via zz', () {
+      final value = Carbon.parse('2024-01-05T15:00:00Z').tz('-05:00');
+      expect(value.isoFormat('zz'), '-05:00');
+      expect(value.isoFormat('ZZZ'), '-18000');
+    });
+
+    test('hasIsoRelativeKeywords detects tokens and presets', () {
+      expect(Carbon.hasIsoRelativeKeywords('YYYY-MM-DD'), isTrue);
+      expect(Carbon.hasIsoRelativeKeywords('[literal]'), isFalse);
+      expect(Carbon.hasIsoRelativeKeywords('LL'), isTrue);
     });
 
     test('toDebugMap surfaces date/timezone metadata', () {
@@ -122,7 +211,12 @@ void main() {
       final value = Carbon.parse('2019-04-09T11:10:10.667Z').tz('-04:00');
       final debug = value.toDebugMap();
       expect(debug['date'], '2019-04-09 07:10:10.667000');
-      expect(debug['timezone'], '-04:00');
+      final timezone = debug['timezone'] as Map<String, Object?>;
+      expect(timezone['name'], '-04:00');
+      expect(timezone['offset'], '-04:00');
+      expect(timezone['offsetSeconds'], -4 * Duration.secondsPerHour);
+      expect(timezone['isDst'], isFalse);
+      expect(debug['timezoneType'], 3);
     });
 
     test('toDebugMap includes locale hint when non-default', () {
@@ -130,7 +224,11 @@ void main() {
       final value = Carbon.parse('2000-01-01T00:00:00Z').locale('fr');
       final debug = value.toDebugMap();
       expect(debug['locale'], 'fr');
-      expect(debug['translator'], 'fr');
+      expect(debug['translator'], {
+        'type': 'CarbonTranslator',
+        'locale': 'fr',
+        'fallbackLocale': 'en',
+      });
     });
 
     test('formatted helpers support region-specific locales', () {
@@ -214,9 +312,9 @@ void main() {
       expect(named.toRfc850String(), 'Thursday, 25-Dec-75 14:15:16 EST');
     });
 
-    test('default toString mirrors PHP Carbon format', () {
+    test('toLegacyString mirrors PHP Carbon format', () {
       final value = Carbon.parse('1975-12-25T14:15:16', timeZone: '-05:00');
-      expect(value.toString(), 'Thu Dec 25 1975 14:15:16 GMT-0500');
+      expect(value.toLegacyString(), 'Thu Dec 25 1975 14:15:16 GMT-0500');
     });
 
     test('setToStringFormat accepts format strings', () {
@@ -224,7 +322,7 @@ void main() {
       Carbon.setToStringFormat('yyyy');
       expect(value.toString(), '1975');
       Carbon.resetToStringFormat();
-      expect(value.toString(), contains('Dec'));
+      expect(value.toString(), value.toDateTimeString());
     });
 
     test('setToStringFormat accepts callbacks', () {

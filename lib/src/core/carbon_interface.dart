@@ -34,6 +34,21 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
     CarbonSettings? settings,
   });
 
+  /// Creates a detached clone with the exact same state.
+  ///
+  /// Use this when you need to experiment on a snapshot without mutating the
+  /// original value:
+  ///
+  /// ```dart
+  /// final original = Carbon.parse('2024-02-01');
+  /// final copy = original.copy()..addMonth();
+  /// print(original.month); // 2 — untouched
+  /// ```
+  CarbonInterface copy();
+
+  /// Alias for [copy] to mirror PHP's `$carbon->clone()` helper.
+  CarbonInterface clone();
+
   /// Applies a locale code used by formatting helpers.
   CarbonInterface locale(String locale);
 
@@ -731,6 +746,13 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// JSON string representation.
   String toJsonString();
+
+  /// Serializes the instance into a structured string for persistence.
+  ///
+  /// The payload can be passed back to [Carbon.fromSerialized] (or
+  /// [CarbonImmutable.fromSerialized]) to rebuild the same instance with the
+  /// original timezone, locale, and settings.
+  String serialize();
 
   /// Alias for [toJsonString] to mirror PHP's `toJSON()` helper.
   String toJSON();

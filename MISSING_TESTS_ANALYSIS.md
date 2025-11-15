@@ -1,8 +1,8 @@
 # Missing Test Coverage Analysis
 
 ## Summary
-Out of 48 PHP Carbon tests, the Dart Carbon implementation has **19 test files** covering partial functionality.
-There are **29 missing test files** that represent unimplemented features.
+Out of 48 PHP Carbon tests, the Dart Carbon implementation has **21 test files** covering partial functionality.
+There are **25 missing test files** that represent unimplemented features.
 
 ## Test Coverage Status
 
@@ -51,7 +51,7 @@ There are **29 missing test files** that represent unimplemented features.
 
 #### Querying & Comparison (2 tests)
 - **ExpressiveComparisonTest.php** - Methods like `isSameAs()`, `isAfter()`, `isBefore()`
-- **CopyTest.php** - `copy()` method
+- ~~**CopyTest.php** - `copy()` method~~ ✅ Covered by `test/copy_methods_test.dart`.
 
 #### Formatting & Conversion (0 open tests)
 - ~~**StringsTest.php** - String formatting: `format()`, `toDateString()`, `toTimeString()`, etc.~~ ✅ Covered by `test/string_methods_test.dart` + `test/string_wrapper_formats_test.dart`.
@@ -63,7 +63,7 @@ There are **29 missing test files** that represent unimplemented features.
 - ~~**GenericMacroTest.php** - Generic macro support~~ ✅ Same coverage as above (macros accept positional/named arguments and closures).
 - ~~**InstanceTest.php** - Instance type checking~~ ✅ Covered by `test/instance_methods_test.dart`.
 - ~~**JsonSerializationTest.php** - JSON serialization methods~~ ✅ Exercised via `test/serialization_test.dart`.
-- **SerializationTest.php** - PHP serialization support (still pending; Dart lacks `__set_state` equivalent).
+- ~~**SerializationTest.php** - PHP serialization support~~ ✅ `CarbonInterface.serialize` + `test/serialization_test.dart` now exercise round-trips via `Carbon.fromSerialized()`.
 - ~~**WeekTest.php** - Week-related queries and operations~~ ✅ `test/week_math_test.dart` covers ISO + locale week numbers and week-year calculations.
 - ~~**SetDateAndTimeFromTest.php** - `setDateFrom()`, `setTimeFrom()` methods.~~ ✅ Covered via `test/set_date_time_from_test.dart`.
 
@@ -74,9 +74,9 @@ There are **29 missing test files** that represent unimplemented features.
 
 #### Specialized (4 tests)
 - ~~**LocalizationTest.php** - i18n/localization support~~ ✅ `test/localization_test.dart` verifies global and per-instance locale behavior.
-- **TestingAidsTest.php** - Testing helpers like `setTestNow()`, `getTestNow()`
+- ~~**TestingAidsTest.php** - Testing helpers like `setTestNow()`, `getTestNow()`~~ ✅ `test/testing_aids_test.dart` now covers closure resets and immutable propagation.
 - **LastErrorTest.php** - Error handling and reporting
-- **StrictModeTest.php** - Strict mode validation
+- ~~**StrictModeTest.php** - Strict mode validation~~ ✅ `test/strict_mode_test.dart` exercises getter/setter/method fallbacks and strict-mode toggles.
 - **ModifyNearDSTChangeTest.php** - DST (Daylight Saving Time) edge cases
 - **PhpBug72338Test.php** - PHP-specific regression test
 
@@ -98,15 +98,16 @@ There are **29 missing test files** that represent unimplemented features.
 9. **Macros** - MacroTest
 
 ### Phase 4: Polish & Utilities (Lower Priority)
-11. Serialization tests
-12. Localization tests  
-13. Testing utilities
-14. Settings management
+11. ~~Serialization tests~~
+12. ~~Localization tests~~  
+13. ~~Testing utilities~~
+14. ~~Settings management~~
 
 ## Analysis Notes
 
 - Constructor and parsing helpers remain the biggest parity gaps; the math/comparison surface is now mostly covered.
-- Macro/serialization suites are untouched and will require additional scaffolding beyond the current UTC-only implementation.
+- Macro coverage is complete and serialization now round-trips locale/timezone data; the outstanding scaffolding work lives in creation/parsing helpers and DST bug reproductions.
+- Serialization, copy semantics, and testing aids now mirror PHP coverage thanks to `test/serialization_test.dart`, `test/copy_methods_test.dart`, and `test/testing_aids_test.dart`, so the remaining focus shifts to creation/parsing helpers and DST regressions.
 
 ## Next Steps
 

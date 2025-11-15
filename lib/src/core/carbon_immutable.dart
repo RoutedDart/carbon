@@ -21,6 +21,15 @@ class CarbonImmutable extends CarbonBase {
   factory CarbonImmutable.now({String? locale}) =>
       Carbon.now(locale: locale).toImmutable();
 
+  /// Restores an immutable snapshot from [CarbonInterface.serialize].
+  ///
+  /// ```dart
+  /// final frozen = CarbonImmutable.now();
+  /// final roundTrip = CarbonImmutable.fromSerialized(frozen.serialize());
+  /// ```
+  static CarbonImmutable fromSerialized(dynamic payload) =>
+      CarbonBase.deserializeSerialized(payload).toImmutable();
+
   static void setToStringFormat(dynamic formatter) =>
       Carbon.setToStringFormat(formatter);
 

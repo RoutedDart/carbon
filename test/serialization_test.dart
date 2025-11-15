@@ -40,5 +40,44 @@ void main() {
         throwsArgumentError,
       );
     });
+
+    test('serialize + fromSerialized round trips locale/timezone/settings', () {
+      final source = Carbon.parse('2016-02-01T13:20:25Z')
+        ..tz('-05:00')
+        ..locale('fr')
+        ..copyWith(
+          settings: const CarbonSettings(
+            monthOverflow: false,
+            startOfWeek: DateTime.sunday,
+          ),
+        );
+      final restored = Carbon.fromSerialized(source.serialize());
+      expect(
+        restored.toIso8601String(keepOffset: true),
+        source.toIso8601String(keepOffset: true),
+      );
+      expect(restored.localeCode, 'fr');
+      expect(restored.timeZoneName, '-05:00');
+      expect(restored.settings.monthOverflow, isFalse);
+      expect(restored.settings.startOfWeek, DateTime.sunday);
+    });
+
+    test('serialize preserves immutable subtype metadata', () {
+      final frozen = CarbonImmutable.parse(
+        '2020-12-01 08:30:45.654321',
+      ).locale('ru');
+      final restored = CarbonImmutable.fromSerialized(frozen.serialize());
+      expect(restored, isA<CarbonImmutable>());
+      expect(restored.toIso8601String(), frozen.toIso8601String());
+      expect(restored.localeCode, 'ru');
+    });
+
+    test('fromSerialized rejects unsupported payload structures', () {
+      expect(
+        () => Carbon.fromSerialized('"2024-01-01T00:00:00Z"'),
+        throwsArgumentError,
+      );
+      expect(() => Carbon.fromSerialized({'iso': 42}), throwsArgumentError);
+    });
   });
 }

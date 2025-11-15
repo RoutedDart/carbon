@@ -502,6 +502,15 @@ class Carbon extends CarbonBase {
     throw ArgumentError('Unsupported JSON payload for Carbon.fromJson');
   }
 
+  /// Restores an instance created via [CarbonInterface.serialize].
+  ///
+  /// ```dart
+  /// final saved = original.serialize();
+  /// final roundTrip = Carbon.fromSerialized(saved);
+  /// ```
+  static CarbonInterface fromSerialized(dynamic payload) =>
+      CarbonBase.deserializeSerialized(payload);
+
   static CarbonInterface createFromDate([
     int? year,
     int? month,

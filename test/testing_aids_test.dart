@@ -171,4 +171,25 @@ void main() {
       '2013-09-30T05:15:05.000Z',
     );
   });
+
+  test('withTestNow restores mock clock after exceptions', () {
+    expect(
+      () => Carbon.withTestNow('2020-09-16 10:20:00', () {
+        expect(Carbon.hasTestNow(), isTrue);
+        throw StateError('boom');
+      }),
+      throwsStateError,
+    );
+    expect(Carbon.hasTestNow(), isFalse);
+  });
+
+  test('setTestNow propagates to immutable variants', () {
+    final reference = Carbon.parse('2018-05-06 05:10:15.123456');
+    Carbon.setTestNow(reference);
+    expect(
+      CarbonImmutable.now().toIso8601String(),
+      reference.toIso8601String(),
+    );
+    expect(Carbon.now().toIso8601String(), reference.toIso8601String());
+  });
 }

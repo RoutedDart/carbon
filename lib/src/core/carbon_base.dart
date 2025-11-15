@@ -88,6 +88,10 @@ abstract class CarbonBase implements CarbonInterface {
   static CarbonTestNowGenerator? _testNowGenerator;
   static String Function(CarbonInterface)? _customToStringFormat;
   String Function(CarbonInterface)? _instanceToStringFormat;
+  static const int _serializationVersion = 1;
+  static const String _serializationTypeMutable = 'carbon';
+  static const String _serializationTypeImmutable = 'carbon_immutable';
+  Map<String, dynamic>? _dynamicProperties;
 
   void _copyInstanceFormatterTo(CarbonBase target) {
     target._instanceToStringFormat = _instanceToStringFormat;
@@ -772,6 +776,9 @@ abstract class CarbonBase implements CarbonInterface {
       settings: settings ?? _settings,
     );
     _copyInstanceFormatterTo(clone);
+    if (_dynamicProperties != null && _dynamicProperties!.isNotEmpty) {
+      clone._dynamicProperties = Map<String, dynamic>.from(_dynamicProperties!);
+    }
     return clone;
   }
 
@@ -787,6 +794,38 @@ abstract class CarbonBase implements CarbonInterface {
     timeZone: timeZone,
     settings: settings,
   );
+
+  CarbonBase _replicateInstance({
+    DateTime? dateTime,
+    String? locale,
+    String? timeZone,
+    CarbonSettings? settings,
+  }) {
+    final clone = _isMutable
+        ? Carbon._internal(
+            dateTime: (dateTime ?? _dateTime).toUtc(),
+            locale: locale ?? _locale,
+            timeZone: timeZone ?? _timeZone,
+            settings: settings ?? _settings,
+          )
+        : CarbonImmutable._internal(
+            dateTime: (dateTime ?? _dateTime).toUtc(),
+            locale: locale ?? _locale,
+            timeZone: timeZone ?? _timeZone,
+            settings: settings ?? _settings,
+          );
+    _copyInstanceFormatterTo(clone);
+    if (_dynamicProperties != null && _dynamicProperties!.isNotEmpty) {
+      clone._dynamicProperties = Map<String, dynamic>.from(_dynamicProperties!);
+    }
+    return clone;
+  }
+
+  @override
+  CarbonInterface copy() => _replicateInstance();
+
+  @override
+  CarbonInterface clone() => copy();
 
   @override
   CarbonInterface locale(String locale) {
@@ -3495,6 +3534,23 @@ abstract class CarbonBase implements CarbonInterface {
   String toJSON() => toJsonString();
 
   @override
+  String serialize() => jsonEncode(_serializationPayload());
+
+  Map<String, Object?> _serializationPayload() => <String, Object?>{
+    'version': _serializationVersion,
+    'type': _isMutable
+        ? _serializationTypeMutable
+        : _serializationTypeImmutable,
+    'iso': toIso8601String(keepOffset: true),
+    'locale': _locale,
+    if (_timeZone != null) 'timeZone': _timeZone,
+    'settings': {
+      'monthOverflow': _settings.monthOverflow,
+      'startOfWeek': _settings.startOfWeek,
+    },
+  };
+
+  @override
   String toDateString() => _formatDatePart(_localDateTimeForFormatting());
 
   @override
@@ -3730,11 +3786,7 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface setDateFrom(CarbonInterface source) {
     final other = source.dateTime;
     return _duplicate(
-      dateTime: _copyWith(
-        year: other.year,
-        month: other.month,
-        day: other.day,
-      ),
+      dateTime: _copyWith(year: other.year, month: other.month, day: other.day),
     );
   }
 
@@ -3840,6 +3892,83 @@ abstract class CarbonBase implements CarbonInterface {
     'timezone': _timeZone ?? 'UTC',
     'formatted': toDateTimeString(),
   };
+
+  static CarbonInterface deserializeSerialized(dynamic payload) =>
+      _deserializeSerialized(payload);
+
+  static CarbonInterface _deserializeSerialized(dynamic payload) {
+    final map = _coerceSerializedMap(payload);
+    final iso = map['iso'];
+    if (iso is! String || iso.isEmpty) {
+      _throwInvalidSerialized(payload);
+    }
+    CarbonInterface instance = Carbon.parse(iso);
+    final timeZone = map['timeZone'];
+    if (timeZone is String && timeZone.isNotEmpty) {
+      instance = instance.tz(timeZone);
+    }
+    final locale = map['locale'];
+    if (locale is String && locale.isNotEmpty) {
+      instance = instance.locale(locale);
+    }
+    final settings = _settingsFromSerialized(map['settings']);
+    instance = instance.copyWith(settings: settings);
+    final type = (map['type'] as String?) ?? _serializationTypeMutable;
+    return type == _serializationTypeImmutable
+        ? instance.toImmutable()
+        : instance;
+  }
+
+  static Map<String, dynamic> _coerceSerializedMap(dynamic input) {
+    dynamic raw = input;
+    if (input is String) {
+      try {
+        raw = jsonDecode(input);
+      } catch (_) {
+        _throwInvalidSerialized(input);
+      }
+    } else if (input is Map<String, dynamic>) {
+      raw = input;
+    } else if (input is Map) {
+      raw = input.map((key, value) => MapEntry(key.toString(), value));
+    } else {
+      _throwInvalidSerialized(input);
+    }
+    if (raw is! Map<String, dynamic>) {
+      _throwInvalidSerialized(input);
+    }
+    final Object? version = raw['version'];
+    if (version != null && version != _serializationVersion) {
+      throw ArgumentError('Unsupported serialized value version: $version');
+    }
+    return raw;
+  }
+
+  static CarbonSettings _settingsFromSerialized(dynamic raw) {
+    if (raw is Map<String, dynamic>) {
+      final overflow = raw['monthOverflow'];
+      final start = raw['startOfWeek'];
+      return CarbonSettings(
+        monthOverflow: overflow is bool ? overflow : true,
+        startOfWeek: start is int ? _normalizeWeekday(start) : DateTime.monday,
+      );
+    }
+    if (raw is Map) {
+      final normalized = raw.map(
+        (key, value) => MapEntry(key.toString(), value),
+      );
+      final overflow = normalized['monthOverflow'];
+      final start = normalized['startOfWeek'];
+      return CarbonSettings(
+        monthOverflow: overflow is bool ? overflow : true,
+        startOfWeek: start is int ? _normalizeWeekday(start) : DateTime.monday,
+      );
+    }
+    return const CarbonSettings();
+  }
+
+  static Never _throwInvalidSerialized(dynamic value) =>
+      throw ArgumentError('Invalid serialized value: $value');
 
   DateTime _localSnapshot() {
     final local = _localDateTimeForFormatting();
@@ -4014,6 +4143,10 @@ abstract class CarbonBase implements CarbonInterface {
         invocation.namedArguments,
       );
     }
+    final fallback = _handleUnknownInvocation(name, invocation);
+    if (!identical(fallback, _aliasNotHandled)) {
+      return fallback;
+    }
     return super.noSuchMethod(invocation);
   }
 
@@ -4028,9 +4161,7 @@ abstract class CarbonBase implements CarbonInterface {
 
   Object _invokePropertyMacro(String name, Invocation invocation) {
     final isSetter = name.endsWith('=');
-    final trimmed = isSetter
-        ? name.substring(0, name.length - 1)
-        : name;
+    final trimmed = isSetter ? name.substring(0, name.length - 1) : name;
     if (trimmed.isEmpty) {
       return _aliasNotHandled;
     }
@@ -4044,13 +4175,43 @@ abstract class CarbonBase implements CarbonInterface {
     if (isSetter) {
       final setter = _macros['set$pascal'];
       if (setter != null) {
-        setter(
-          this,
-          invocation.positionalArguments,
-          invocation.namedArguments,
-        );
+        setter(this, invocation.positionalArguments, invocation.namedArguments);
         return _handledPropertyMacro;
       }
+    }
+    return _aliasNotHandled;
+  }
+
+  Object? _handleUnknownInvocation(String name, Invocation invocation) {
+    final isSetter = invocation.isSetter;
+    final trimmed = isSetter && name.isNotEmpty
+        ? name.substring(0, name.length - 1)
+        : name;
+    if (trimmed.isEmpty) {
+      return _aliasNotHandled;
+    }
+    if (invocation.isGetter) {
+      if (_strictMode) {
+        throw ArgumentError("Unknown getter '$trimmed'");
+      }
+      return _dynamicProperties?[trimmed];
+    }
+    if (isSetter) {
+      if (_strictMode) {
+        throw ArgumentError("Unknown setter '$trimmed'");
+      }
+      final value = invocation.positionalArguments.isEmpty
+          ? null
+          : invocation.positionalArguments.first;
+      final target = _dynamicProperties ??= <String, dynamic>{};
+      target[trimmed] = value;
+      return value;
+    }
+    if (invocation.isMethod) {
+      if (_strictMode) {
+        throw StateError('Method $trimmed does not exist.');
+      }
+      return null;
     }
     return _aliasNotHandled;
   }

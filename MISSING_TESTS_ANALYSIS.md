@@ -1,12 +1,12 @@
 # Missing Test Coverage Analysis
 
 ## Summary
-Out of 48 PHP Carbon tests, the Dart Carbon implementation has **21 test files** covering partial functionality.
-There are **25 missing test files** that represent unimplemented features.
+Out of 48 PHP Carbon tests, the Dart Carbon implementation has **24 test files** covering partial functionality.
+There are **24 missing test files** that represent unimplemented features.
 
 ## Test Coverage Status
 
-### ✓ Implemented Tests (19)
+### ✓ Implemented Tests (24)
 - `add_methods_years_test.dart` - Year addition
 - `add_methods_months_test.dart` - Month addition  
 - `add_methods_days_weeks_test.dart` - Day/week addition
@@ -26,14 +26,19 @@ There are **25 missing test files** that represent unimplemented features.
 - `create_timezones_test.dart` - Timezone-aware creation (fixed offsets, named zones, DST gaps)
 - `modify_methods_test.dart` - `modify` DSL + `addReal*` DST coverage
 - `relative_methods_test.dart` - `relative`, `next`, and `previous` helpers
+- `copy_methods_test.dart` - Copy/clone/macro parity checks
+- `strict_mode_test.dart` - Strict-mode getters/setters/methods coverage
+- `create_from_date_test.dart` - Parity for `CreateFromDateTest.php`
+- `create_from_time_test.dart` - Parity for `CreateFromTimeTest.php`
+- `create_from_timestamp_test.dart` - Parity for `CreateFromTimestampTest.php`
 
 ### ✗ Missing Test Categories (29)
 
 #### Critical Core Functionality (5 tests)
-- **CreateFromDateTest.php** - `createFromDate()` constructor variant
+- ~~**CreateFromDateTest.php** - `createFromDate()` constructor variant~~ ✅ Covered by `test/create_from_date_test.dart`.
 - **CreateFromFormatTest.php** - `createFromFormat()` for parsing strings
-- **CreateFromTimeTest.php** - `createFromTime(hour, minute, second)` constructor
-- **CreateFromTimestampTest.php** - `createFromTimestamp()` from Unix timestamps
+- ~~**CreateFromTimeTest.php** - `createFromTime(hour, minute, second)` constructor~~ ✅ Covered by `test/create_from_time_test.dart`.
+- ~~**CreateFromTimestampTest.php** - `createFromTimestamp()` from Unix timestamps~~ ✅ Covered by `test/create_from_timestamp_test.dart`.
 - **IssetTest.php** - Magic method `__isset()` support
 
 #### String Parsing & Construction (6 tests)
@@ -83,9 +88,9 @@ There are **25 missing test files** that represent unimplemented features.
 ## Priority Implementation Order
 
 ### Phase 1: Core Functionality (Essential)
-1. **CreateFromDateTest** - Common constructor pattern
+1. ~~**CreateFromDateTest** - Common constructor pattern~~ ✅ Covered by `test/create_from_date_test.dart`.
 2. **CreateFromFormatTest** - Parsing via explicit formats
-3. **CreateFromTimeTest / CreateFromTimestampTest** - Time-focused constructors
+3. ~~**CreateFromTimeTest / CreateFromTimestampTest** - Time-focused constructors~~ ✅ Covered by `test/create_from_time_test.dart` + `test/create_from_timestamp_test.dart`.
 4. **IssetTest** - Magic property access for core getters
 
 ### Phase 2: String Parsing (High Value)
@@ -106,7 +111,8 @@ There are **25 missing test files** that represent unimplemented features.
 ## Analysis Notes
 
 - Constructor and parsing helpers remain the biggest parity gaps; the math/comparison surface is now mostly covered.
-- Macro coverage is complete and serialization now round-trips locale/timezone data; the outstanding scaffolding work lives in creation/parsing helpers and DST bug reproductions.
+- Macro coverage is complete and serialization now round-trips locale/timezone data; the outstanding scaffolding work lives in `createFromFormat`, `Isset`, and DST bug reproductions.
+- `create_from_date_test.dart`, `create_from_time_test.dart`, and `create_from_timestamp_test.dart` now mirror PHP coverage, so the remaining blockers in this bucket are `CreateFromFormatTest.php` and `IssetTest.php`.
 - Serialization, copy semantics, and testing aids now mirror PHP coverage thanks to `test/serialization_test.dart`, `test/copy_methods_test.dart`, and `test/testing_aids_test.dart`, so the remaining focus shifts to creation/parsing helpers and DST regressions.
 
 ## Next Steps

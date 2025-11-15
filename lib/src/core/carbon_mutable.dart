@@ -511,6 +511,22 @@ class Carbon extends CarbonBase {
   static CarbonInterface fromSerialized(dynamic payload) =>
       CarbonBase.deserializeSerialized(payload);
 
+  static ({DateTime localBase, String? zoneName, String? locale})
+  _resolveCreationBase({String? timeZone, String? locale}) {
+    final reference = CarbonBase._resolveTestNow(timeZone: timeZone);
+    final resolvedZone = timeZone ?? reference?.timeZoneName;
+    final resolvedLocale = locale ?? reference?.localeCode;
+    final baseUtc = reference?.dateTime ?? clock.now().toUtc();
+    final localBase = resolvedZone == null
+        ? baseUtc
+        : CarbonBase._utcToLocal(baseUtc, resolvedZone);
+    return (
+      localBase: localBase,
+      zoneName: resolvedZone,
+      locale: resolvedLocale,
+    );
+  }
+
   static CarbonInterface createFromDate([
     int? year,
     int? month,
@@ -519,7 +535,10 @@ class Carbon extends CarbonBase {
     String? locale,
     CarbonSettings settings = const CarbonSettings(),
   ]) {
-    final base = clock.now().toUtc();
+    final context = _resolveCreationBase(timeZone: timeZone, locale: locale);
+    final base = context.localBase;
+    final zone = context.zoneName;
+    final resolvedLocale = context.locale;
     final resolvedYear = year ?? base.year;
     final resolvedMonth = month ?? base.month;
     final resolvedDay = day ?? base.day;
@@ -531,12 +550,12 @@ class Carbon extends CarbonBase {
       minute: 0,
       second: 0,
       microsecond: 0,
-      timeZone: timeZone,
+      timeZone: zone,
     );
     return _fromUtc(
       utcDate,
-      locale: locale,
-      timeZone: timeZone,
+      locale: resolvedLocale,
+      timeZone: zone,
       settings: settings,
     );
   }
@@ -550,7 +569,10 @@ class Carbon extends CarbonBase {
     String? locale,
     CarbonSettings settings = const CarbonSettings(),
   ]) {
-    final base = clock.now().toUtc();
+    final context = _resolveCreationBase(timeZone: timeZone, locale: locale);
+    final base = context.localBase;
+    final zone = context.zoneName;
+    final resolvedLocale = context.locale;
     void validateRange(int value, int max, String label) {
       if (value < 0 || value > max) {
         throw RangeError.range(value, 0, max, label);
@@ -562,7 +584,7 @@ class Carbon extends CarbonBase {
     final resolvedSecond = second ?? base.second;
     validateRange(resolvedHour, 23, 'hour');
     validateRange(resolvedMinute, 59, 'minute');
-    validateRange(resolvedSecond, 59, 'second');
+    validateRange(resolvedSecond, 99, 'second');
     validateRange(microsecond, 999999, 'microsecond');
     final utcDate = CarbonBase._localToUtc(
       year: base.year,
@@ -572,12 +594,12 @@ class Carbon extends CarbonBase {
       minute: resolvedMinute,
       second: resolvedSecond,
       microsecond: microsecond,
-      timeZone: timeZone,
+      timeZone: zone,
     );
     return _fromUtc(
       utcDate,
-      locale: locale,
-      timeZone: timeZone,
+      locale: resolvedLocale,
+      timeZone: zone,
       settings: settings,
     );
   }
@@ -588,6 +610,10 @@ class Carbon extends CarbonBase {
     String? locale,
     CarbonSettings settings = const CarbonSettings(),
   }) {
+    final context = _resolveCreationBase(timeZone: timeZone, locale: locale);
+    final base = context.localBase;
+    final zone = context.zoneName;
+    final resolvedLocale = context.locale;
     final match = RegExp(
       r'^(\d{1,2})(?::(\d{1,2}))?(?::(\d{1,2}))?(?:\.(\d{1,6}))?$',
     ).firstMatch(time.trim());
@@ -603,10 +629,9 @@ class Carbon extends CarbonBase {
       return parsed;
     }
 
-    final base = clock.now().toUtc();
     final hours = parsePart(match.group(1), 23);
     final minutes = parsePart(match.group(2), 59);
-    final seconds = parsePart(match.group(3), 59);
+    final seconds = parsePart(match.group(3), 99);
     final micro = (() {
       final raw = match.group(4);
       if (raw == null) return 0;
@@ -620,12 +645,12 @@ class Carbon extends CarbonBase {
       minute: minutes,
       second: seconds,
       microsecond: micro,
-      timeZone: timeZone,
+      timeZone: zone,
     );
     return _fromUtc(
       utcDate,
-      locale: locale,
-      timeZone: timeZone,
+      locale: resolvedLocale,
+      timeZone: zone,
       settings: settings,
     );
   }

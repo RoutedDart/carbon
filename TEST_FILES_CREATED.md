@@ -33,7 +33,8 @@ Created **17 new test files** with a total of **2,511 lines of test code**, orga
 | `create_from_time_test.dart` | 37 | Parity coverage for `CreateFromTimeTest.php` scenarios |
 | `create_from_timestamp_test.dart` | 47 | Timestamp factories + DST regression coverage |
 | `create_from_format_test.dart` | 60 | PHP `createFromFormat` translation (bang/pipe/timezone) |
-| **Total** | **2,782** | Complete behavioral coverage |
+| `isset_test.dart` | 65 | Typed getter coverage mirroring `IssetTest.php` properties |
+| **Total** | **2,847** | Complete behavioral coverage |
 
 ## Organizational Principles
 

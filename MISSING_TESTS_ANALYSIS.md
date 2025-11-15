@@ -40,7 +40,7 @@ There are **23 missing test files** that represent unimplemented features.
 - ~~**CreateFromFormatTest.php** - `createFromFormat()` for parsing strings~~ ✅ Covered by `test/create_from_format_test.dart`.
 - ~~**CreateFromTimeTest.php** - `createFromTime(hour, minute, second)` constructor~~ ✅ Covered by `test/create_from_time_test.dart`.
 - ~~**CreateFromTimestampTest.php** - `createFromTimestamp()` from Unix timestamps~~ ✅ Covered by `test/create_from_timestamp_test.dart`.
-- **IssetTest.php** - Magic method `__isset()` support (Dart relies on explicit getters; no dynamic magic planned)
+- ~~**IssetTest.php** - Magic method `__isset()` support~~ ✅ `test/isset_test.dart` verifies every PHP surface property via typed Dart getters.
 
 #### String Parsing & Construction (6 tests)
 - **CreateTest.php** - `create()` method variants and options
@@ -92,7 +92,7 @@ There are **23 missing test files** that represent unimplemented features.
 1. ~~**CreateFromDateTest** - Common constructor pattern~~ ✅ Covered by `test/create_from_date_test.dart`.
 2. ~~**CreateFromFormatTest** - Parsing via explicit formats~~ ✅ Covered by `test/create_from_format_test.dart`.
 3. ~~**CreateFromTimeTest / CreateFromTimestampTest** - Time-focused constructors~~ ✅ Covered by `test/create_from_time_test.dart` + `test/create_from_timestamp_test.dart`.
-4. **IssetTest** - Magic property access for core getters (handled via documented Dart getters rather than `__get` magic)
+4. ~~**IssetTest** - Magic property access for core getters~~ ✅ Mirrored via `test/isset_test.dart` using typed getters and localized formatters.
 
 ### Phase 2: String Parsing (High Value)
 5. **ModifyTest** - String-based date modification
@@ -113,7 +113,7 @@ There are **23 missing test files** that represent unimplemented features.
 
 - Constructor and parsing helpers remain the biggest parity gaps; the math/comparison surface is now mostly covered.
 - Macro coverage is complete and serialization now round-trips locale/timezone data; the outstanding scaffolding work lives in `createFromFormat`, `Isset`, and DST bug reproductions.
-- `create_from_date_test.dart`, `create_from_time_test.dart`, `create_from_timestamp_test.dart`, and `create_from_format_test.dart` now mirror the PHP suite; the only outstanding critical gap is `IssetTest.php`.
+- `create_from_date_test.dart`, `create_from_time_test.dart`, `create_from_timestamp_test.dart`, `create_from_format_test.dart`, and `isset_test.dart` now mirror the PHP suite for constructor/property helpers.
 - Dynamic magic like `__isset` is intentionally excluded; Dart callers should rely on the explicit getters already exposed on `CarbonInterface`.
 - Serialization, copy semantics, and testing aids now mirror PHP coverage thanks to `test/serialization_test.dart`, `test/copy_methods_test.dart`, and `test/testing_aids_test.dart`, so the remaining focus shifts to creation/parsing helpers and DST regressions.
 

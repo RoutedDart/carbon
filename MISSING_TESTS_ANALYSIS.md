@@ -58,14 +58,14 @@ There are **29 missing test files** that represent unimplemented features.
 - ~~**ArraysTest.php** - Array conversion: `toArray()`~~ ✅ Covered by `test/string_methods_test.dart` (`toArray`/`toObject` group).
 - ~~**ObjectsTest.php** - Object conversion methods~~ ✅ Same as above.
 
-#### Utilities & Advanced (6 tests)
-- **MacroTest.php** - Macro registration and calling
-- **GenericMacroTest.php** - Generic macro support
-- ~~**InstanceTest.php** - Instance type checking~~ ✅ Covered by new `test/instance_methods_test.dart` (conversions between DateTime/Carbon/CarbonImmutable).
-- **JsonSerializationTest.php** - JSON serialization methods
-- **SerializationTest.php** - PHP serialization support
-- **SetDateAndTimeFromTest.php** - `setDateFrom()`, `setTimeFrom()` methods
-- **WeekTest.php** - Week-related queries and operations
+#### Utilities & Advanced (3 tests)
+- ~~**MacroTest.php** - Macro registration and calling~~ ✅ `test/macro_methods_test.dart` now exercises macro registration/unregistration and property-style macros.
+- ~~**GenericMacroTest.php** - Generic macro support~~ ✅ Same coverage as above (macros accept positional/named arguments and closures).
+- ~~**InstanceTest.php** - Instance type checking~~ ✅ Covered by `test/instance_methods_test.dart`.
+- ~~**JsonSerializationTest.php** - JSON serialization methods~~ ✅ Exercised via `test/serialization_test.dart`.
+- **SerializationTest.php** - PHP serialization support (still pending; Dart lacks `__set_state` equivalent).
+- ~~**WeekTest.php** - Week-related queries and operations~~ ✅ `test/week_math_test.dart` covers ISO + locale week numbers and week-year calculations.
+- **SetDateAndTimeFromTest.php** - `setDateFrom()`, `setTimeFrom()` methods.
 
 #### Settings & Global State (3 tests)
 - **SettingsTest.php** - Global settings for locale, start of week, etc.

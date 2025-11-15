@@ -6,6 +6,8 @@
 /// ```
 part of '../carbon.dart';
 
+const Object _handledPropertyMacro = Object();
+
 /// Callback to generate a test "now" value dynamically.
 ///
 /// Used by [Carbon.setTestNow] when testing code that depends on the current time.
@@ -123,6 +125,12 @@ abstract class CarbonBase implements CarbonInterface {
 
   /// Removes a previously registered macro.
   static void unregisterMacro(String name) => _macros.remove(name);
+
+  /// Returns true when a macro has been registered.
+  static bool hasMacro(String name) => _macros.containsKey(name);
+
+  /// Clears all registered macros (primarily for tests).
+  static void resetMacros() => _macros.clear();
 
   /// Resets global locale/start-of-week/test-now defaults.
   static void resetDefaults() {
@@ -497,12 +505,9 @@ abstract class CarbonBase implements CarbonInterface {
     }
 
     if (!_startOfWeekOverridden) {
-      for (final key in segments) {
-        final start = kLocaleWeekStartDefaults[key];
-        if (start != null) {
-          _defaultSettings = _defaultSettings.copyWith(startOfWeek: start);
-          break;
-        }
+      final start = _weekStartForLocale(locale);
+      if (start != null) {
+        _defaultSettings = _defaultSettings.copyWith(startOfWeek: start);
       }
     }
   }
@@ -537,6 +542,19 @@ abstract class CarbonBase implements CarbonInterface {
       }
     }
     return result;
+  }
+
+  static int? _weekStartForLocale(String? locale) {
+    if (locale == null) {
+      return null;
+    }
+    for (final candidate in _localeCandidates(locale)) {
+      final start = kLocaleWeekStartDefaults[candidate];
+      if (start != null) {
+        return start;
+      }
+    }
+    return null;
   }
 
   DateTime _localDateTimeForFormatting() {
@@ -773,7 +791,11 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   CarbonInterface locale(String locale) {
     _applyLocaleDefaults(locale);
-    return _duplicate(locale: locale);
+    final localeStart = _weekStartForLocale(locale);
+    final nextSettings = localeStart == null
+        ? _settings
+        : _settings.copyWith(startOfWeek: localeStart);
+    return _duplicate(locale: locale, settings: nextSettings);
   }
 
   @override
@@ -2238,6 +2260,89 @@ abstract class CarbonBase implements CarbonInterface {
     DateTime.utc(_millenniumStart(_dateTime).year + 1000, 1, 1),
   );
 
+  (int, int) get _isoWeekSnapshot =>
+      _isoWeekData(_localDateTimeForFormatting());
+
+  (int, int) get _localeWeekSnapshot =>
+      _localeWeekData(_localDateTimeForFormatting());
+
+  (int, int) _isoWeekData(DateTime current) {
+    final weekday = _isoWeekday(current);
+    final dayOfYear =
+        current.difference(DateTime.utc(current.year, 1, 1)).inDays + 1;
+    var week = ((dayOfYear - weekday + 10) / 7).floor();
+    var year = current.year;
+    if (week < 1) {
+      year -= 1;
+      week = _isoWeeksInYearInternal(year);
+    } else {
+      final weeksInYear = _isoWeeksInYearInternal(year);
+      if (week > weeksInYear) {
+        year += 1;
+        week = 1;
+      }
+    }
+    return (week, year);
+  }
+
+  int _isoWeeksInYearInternal(int year) {
+    final dec28 = DateTime.utc(year, 12, 28);
+    final dayOfYear = dec28.difference(DateTime.utc(year, 1, 1)).inDays + 1;
+    final weekday = _isoWeekday(dec28);
+    return ((dayOfYear - weekday + 10) / 7).floor();
+  }
+
+  int _isoWeekday(DateTime value) {
+    final weekday = value.weekday;
+    return weekday == DateTime.sunday ? 7 : weekday;
+  }
+
+  (int, int) _localeWeekData(DateTime current) {
+    final startOfWeek = _settings.startOfWeek;
+    final firstWeekDay = _lookupLocaleFirstWeekDay();
+    var weekYear = current.year;
+    var start = _firstWeekStart(weekYear, startOfWeek, firstWeekDay);
+    if (start.year == weekYear && current.isBefore(start)) {
+      weekYear -= 1;
+      start = _firstWeekStart(weekYear, startOfWeek, firstWeekDay);
+    } else {
+      final nextStart = _firstWeekStart(
+        weekYear + 1,
+        startOfWeek,
+        firstWeekDay,
+      );
+      if (!current.isBefore(nextStart) && nextStart.year == weekYear + 1) {
+        weekYear += 1;
+        start = nextStart;
+      }
+    }
+    final diffDays = current.difference(start).inDays;
+    final weekNumber = (diffDays ~/ 7) + 1;
+    return (weekNumber, weekYear);
+  }
+
+  int _lookupLocaleFirstWeekDay() {
+    for (final candidate in _localeCandidates(_locale)) {
+      final value = kLocaleFirstWeekMinDays[candidate];
+      if (value != null) {
+        return value;
+      }
+    }
+    return 1;
+  }
+
+  DateTime _firstWeekStart(int year, int startOfWeek, int firstWeekDay) {
+    final base = DateTime.utc(year, 1, firstWeekDay);
+    return _alignToWeekStart(base, startOfWeek);
+  }
+
+  DateTime _alignToWeekStart(DateTime date, int startOfWeek) {
+    final normalizedStart = startOfWeek == DateTime.sunday ? 7 : startOfWeek;
+    final weekday = date.weekday == DateTime.sunday ? 7 : date.weekday;
+    final diff = ((weekday - normalizedStart) + 7) % 7;
+    return date.subtract(Duration(days: diff));
+  }
+
   @override
   CarbonPeriod weeksUntil([dynamic endDate, num factor = 1]) {
     final target = _coerceToDateTime(endDate);
@@ -3622,6 +3727,21 @@ abstract class CarbonBase implements CarbonInterface {
   bool isSunday() => _dateTime.weekday == DateTime.sunday;
 
   @override
+  int get isoWeek => _isoWeekSnapshot.$1;
+
+  @override
+  int get isoWeekYear => _isoWeekSnapshot.$2;
+
+  @override
+  int get isoWeeksInYear => _isoWeeksInYearInternal(_dateTime.year);
+
+  @override
+  int get localeWeek => _localeWeekSnapshot.$1;
+
+  @override
+  int get localeWeekYear => _localeWeekSnapshot.$2;
+
+  @override
   int toEpochMilliseconds() => _dateTime.toUtc().millisecondsSinceEpoch;
 
   @override
@@ -3843,6 +3963,13 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   dynamic noSuchMethod(Invocation invocation) {
     final name = _symbolToName(invocation.memberName);
+    final propertyMacroResult = _invokePropertyMacro(name, invocation);
+    if (!identical(propertyMacroResult, _aliasNotHandled)) {
+      if (identical(propertyMacroResult, _handledPropertyMacro)) {
+        return null;
+      }
+      return propertyMacroResult;
+    }
     final aliasResult = _invokeAlias(this, name, invocation);
     if (!identical(aliasResult, _aliasNotHandled)) {
       return aliasResult;
@@ -3865,6 +3992,35 @@ abstract class CarbonBase implements CarbonInterface {
         .replaceAll('Symbol(\'', '')
         .replaceAll('")', '')
         .replaceAll("')", '');
+  }
+
+  Object _invokePropertyMacro(String name, Invocation invocation) {
+    final isSetter = name.endsWith('=');
+    final trimmed = isSetter
+        ? name.substring(0, name.length - 1)
+        : name;
+    if (trimmed.isEmpty) {
+      return _aliasNotHandled;
+    }
+    final pascal = trimmed[0].toUpperCase() + trimmed.substring(1);
+    if (invocation.isGetter && !isSetter) {
+      final getter = _macros['get$pascal'];
+      if (getter != null) {
+        return getter(this, const [], const {});
+      }
+    }
+    if (isSetter) {
+      final setter = _macros['set$pascal'];
+      if (setter != null) {
+        setter(
+          this,
+          invocation.positionalArguments,
+          invocation.namedArguments,
+        );
+        return _handledPropertyMacro;
+      }
+    }
+    return _aliasNotHandled;
   }
 
   DateTime _copyWith({

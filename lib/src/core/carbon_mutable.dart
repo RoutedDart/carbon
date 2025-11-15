@@ -440,6 +440,10 @@ class Carbon extends CarbonBase {
 
   static void unregisterMacro(String name) => CarbonBase.unregisterMacro(name);
 
+  static bool hasMacro(String name) => CarbonBase.hasMacro(name);
+
+  static void resetMacros() => CarbonBase.resetMacros();
+
   static Future<void> configureTimeMachine({
     tm.DateTimeZoneProvider? provider,
     bool testing = true,

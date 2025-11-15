@@ -594,6 +594,21 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Checks if this is a Sunday.
   bool isSunday();
 
+  /// ISO 8601 week number (1-53).
+  int get isoWeek;
+
+  /// ISO 8601 week-based year.
+  int get isoWeekYear;
+
+  /// Number of ISO weeks in the current year (52 or 53).
+  int get isoWeeksInYear;
+
+  /// Locale-sensitive week number based on current settings/locale.
+  int get localeWeek;
+
+  /// Locale-sensitive week-based year.
+  int get localeWeekYear;
+
   /// Checks if daylight saving time is in effect.
   bool isDST();
 

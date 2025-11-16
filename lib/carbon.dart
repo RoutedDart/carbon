@@ -10,6 +10,8 @@ export 'src/carbon.dart'
         CarbonInterface,
         CarbonPeriod,
         CarbonMacro,
+        CarbonDateTimeView,
+        CarbonDateTimeInterop,
         CarbonSettings,
         CarbonLastErrors,
         CarbonComponents,

@@ -232,6 +232,25 @@ ${example.output}
 ```
 ''';
 
+String _settersDynamic(ExampleRun example) =>
+    '''
+## Dynamic `set()`/`get()` helpers
+
+PHP consumers can assign `year`, `month`, `dayOfYear`, and similar properties
+through the `set()`/`get()` helpers. Dart mirrors that API while keeping a
+strongly typed surface for the common components.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _relatedSection() => '''
 ## Related Carbon types
 
@@ -563,11 +582,13 @@ String _getterDifferences() => '''
 Future<String> _buildSetters() async {
   final basic = await setters_examples.runBasicSettersExample();
   final aliases = await setters_examples.runMethodAliasesExample();
+  final dynamicSetters = await setters_examples.runDynamicSettersExample();
   final overflow = await setters_examples.runOverflowExample();
   final sections = <String>[
     _settersOverview(),
     _settersBasic(basic),
     _settersAliases(aliases),
+    _settersDynamic(dynamicSetters),
     _settersOverflow(overflow),
     _settersDifferences(),
   ];
@@ -646,11 +667,14 @@ String _settersDifferences() => '''
 ## Differences compared to the PHP docs
 
 - Direct property assignment (`\$date->year = ...`) is not available. Use the
-  explicit methods (`setYear`, `years`, `setDayOfWeek`, etc.).
-- Dynamic `set('year', value)`/`get('year')` helpers and fluent method calls on
-  calculated properties (e.g., `\$date->dayOfYear(35)`) are not implemented.
-- There is no dedicated `timestamp=` setter; convert via `toEpochMilliseconds()`
-  and rehydrate with `Carbon.fromDateTime()` if you need to replace the instant.
+  explicit methods (`setYear`, `years`, `setDayOfWeek`, etc.) or the `set()`
+  helper for numeric components.
+- The PHP-style `set()`/`get()` helpers for components such as `year`,
+  `dayOfYear`, and `timestamp` now exist, but they only accept the core
+  arithmetic fields—not arbitrary objects or strings.
+- Use `setTimestamp()` or `set('timestamp', value)` when you need to replace the
+  instant. `toEpochMilliseconds()`/`Carbon.fromDateTime()` remain the way to
+  round-trip the timestamp value.
 - `tz('<zone>')` is the supported timezone mutator; the legacy `\$date->timezone`
   property from PHP is not replicated.
 ''';
@@ -1003,9 +1027,8 @@ String _fluentSettersDifferences() => '''
 - Dynamic calls such as `\$date->year(1975)` are replaced with explicit
   `setYear(1975)` in Dart because there is no `__call` magic. Alias helpers like
   `years()` still exist for parity.
-- Assigning to `\$date->timestamp` in PHP does not have a direct equivalent—use
-  `Carbon.createFromTimestamp()` or `copyWith(microsecondsSinceEpoch: …)` to
-  produce a new instant.
+- Assigning to `\$date->timestamp` is now available via `setTimestamp()` or
+  `set('timestamp', value)`, which replace the instant without needing a copy.
 - PHP's `setDateTime()` helper does not exist; combine `setDate` with `setTime`
   or `setTimeFrom()` instead.
 - `setDateTimeFrom()` copies date & time components only; timezone, locale, and

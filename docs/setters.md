@@ -83,6 +83,44 @@ day of week -> 5
 ```
 
 
+## Dynamic `set()`/`get()` helpers
+
+PHP consumers can assign `year`, `month`, `dayOfYear`, and similar properties
+through the `set()`/`get()` helpers. Dart mirrors that API while keeping a
+strongly typed surface for the common components.
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final dt = Carbon.parse('2024-01-01T12:00:00Z');
+  dt
+    ..set('year', 2003)
+    ..set('dayOfYear', 35)
+    ..set('timestamp', 169957925);
+
+  print('year -> ${dt.get('year')}');
+  print('day of year -> ${dt.dayOfYear}');
+  print('timestamp -> ${dt.get('timestamp')}');
+  print('iso -> ${dt.toIso8601String(keepOffset: true)}');
+}
+
+```
+
+Output:
+
+```
+year -> 1975
+day of year -> 142
+timestamp -> 169957925
+iso -> 1975-05-22T02:32:05.000Z
+```
+
+
 ## Overflow and strict mode
 
 `CarbonSettings` control whether setters overflow (default) or throw. Toggle
@@ -113,11 +151,14 @@ month overflow -> 2024-03-02T00:00:00.000Z
 ## Differences compared to the PHP docs
 
 - Direct property assignment (`$date->year = ...`) is not available. Use the
-  explicit methods (`setYear`, `years`, `setDayOfWeek`, etc.).
-- Dynamic `set('year', value)`/`get('year')` helpers and fluent method calls on
-  calculated properties (e.g., `$date->dayOfYear(35)`) are not implemented.
-- There is no dedicated `timestamp=` setter; convert via `toEpochMilliseconds()`
-  and rehydrate with `Carbon.fromDateTime()` if you need to replace the instant.
+  explicit methods (`setYear`, `years`, `setDayOfWeek`, etc.) or the `set()`
+  helper for numeric components.
+- The PHP-style `set()`/`get()` helpers for components such as `year`,
+  `dayOfYear`, and `timestamp` now exist, but they only accept the core
+  arithmetic fields—not arbitrary objects or strings.
+- Use `setTimestamp()` or `set('timestamp', value)` when you need to replace the
+  instant. `toEpochMilliseconds()`/`Carbon.fromDateTime()` remain the way to
+  round-trip the timestamp value.
 - `tz('<zone>')` is the supported timezone mutator; the legacy `$date->timezone`
   property from PHP is not replicated.
 

@@ -1043,6 +1043,19 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Alias for [setDay].
   CarbonInterface setDays(int day);
 
+  /// Sets the day of year (1-366).
+  CarbonInterface setDayOfYear(int dayOfYear);
+
+  /// Sets the instant from a Unix timestamp expressed in seconds.
+  CarbonInterface setTimestamp(int timestamp);
+
+  /// Sets a named component using PHP-style keys such as `year`, `month`,
+  /// `timestamp`, or `dayOfYear`.
+  CarbonInterface set(String property, Object? value);
+
+  /// Returns a named component previously stored or computed by `set()`.
+  Object? get(String property);
+
   /// Sets the quarter (1-4).
   CarbonInterface setQuarter(int quarter);
 

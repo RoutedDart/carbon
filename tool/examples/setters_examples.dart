@@ -98,6 +98,47 @@ Future<ExampleRun> runMethodAliasesExample() async {
   );
 }
 
+const _dynamicSettersSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final dt = Carbon.parse('2024-01-01T12:00:00Z');
+  dt
+    ..set('year', 2003)
+    ..set('dayOfYear', 35)
+    ..set('timestamp', 169957925);
+
+  print('year -> ${dt.get('year')}');
+  print('day of year -> ${dt.dayOfYear}');
+  print('timestamp -> ${dt.get('timestamp')}');
+  print('iso -> ${dt.toIso8601String(keepOffset: true)}');
+}
+''';
+
+/// Demonstrates the PHP-style `set()`/`get()` helpers plus `dayOfYear`.
+Future<ExampleRun> runDynamicSettersExample() async {
+  await _bootstrap();
+  final dt = Carbon.parse('2024-01-01T12:00:00Z');
+  dt
+    ..set('year', 2003)
+    ..set('dayOfYear', 35)
+    ..set('timestamp', 169957925);
+
+  final buffer = StringBuffer()
+    ..writeln('year -> ${dt.get('year')}')
+    ..writeln('day of year -> ${dt.dayOfYear}')
+    ..writeln('timestamp -> ${dt.get('timestamp')}')
+    ..writeln('iso -> ${dt.toIso8601String(keepOffset: true)}');
+  return ExampleRun(
+    code: _dynamicSettersSource,
+    output: buffer.toString().trimRight(),
+  );
+}
+
 const _overflowSource = r'''
 import 'package:carbon/carbon.dart';
 import 'package:intl/date_symbol_data_local.dart';

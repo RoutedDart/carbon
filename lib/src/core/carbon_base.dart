@@ -2130,6 +2130,151 @@ abstract class CarbonBase implements CarbonInterface {
   }
 
   @override
+  CarbonInterface setDayOfYear(int dayOfYear) {
+    final normalized = DateTime.utc(
+      _dateTime.year,
+      1,
+      1,
+    ).add(Duration(days: dayOfYear - 1));
+    return _duplicate(
+      dateTime: _copyWith(
+        year: normalized.year,
+        month: normalized.month,
+        day: normalized.day,
+      ),
+    );
+  }
+
+  @override
+  CarbonInterface setTimestamp(int timestamp) {
+    final updated = DateTime.fromMillisecondsSinceEpoch(
+      timestamp * 1000,
+      isUtc: true,
+    );
+    return _duplicate(dateTime: updated);
+  }
+
+  @override
+  CarbonInterface set(String property, Object? value) {
+    final key = _normalizePropertyKey(property);
+    switch (key) {
+      case 'year':
+      case 'years':
+        return setYear(_parseInt(property, value));
+      case 'month':
+      case 'months':
+        return setMonth(_parseInt(property, value));
+      case 'day':
+      case 'days':
+      case 'dayofmonth':
+        return setDay(_parseInt(property, value));
+      case 'dayofyear':
+        return setDayOfYear(_parseInt(property, value));
+      case 'hour':
+      case 'hours':
+        return setHour(_parseInt(property, value));
+      case 'minute':
+      case 'minutes':
+        return setMinute(_parseInt(property, value));
+      case 'second':
+      case 'seconds':
+        return setSecond(_parseInt(property, value));
+      case 'millisecond':
+      case 'milliseconds':
+      case 'milli':
+      case 'millis':
+        return setMillisecond(_parseInt(property, value));
+      case 'microsecond':
+      case 'microseconds':
+      case 'micro':
+      case 'micros':
+        return setMicro(_parseInt(property, value));
+      case 'timestamp':
+        return setTimestamp(_parseInt(property, value));
+      default:
+        if (_strictMode) {
+          throw CarbonUnknownSetterException(property);
+        }
+        final target = _dynamicProperties ??= <String, dynamic>{};
+        target[key] = value;
+        return this;
+    }
+  }
+
+  @override
+  Object? get(String property) {
+    final key = _normalizePropertyKey(property);
+    switch (key) {
+      case 'year':
+      case 'years':
+        return year;
+      case 'month':
+      case 'months':
+        return month;
+      case 'day':
+      case 'days':
+      case 'dayofmonth':
+        return day;
+      case 'dayofyear':
+        return dayOfYear;
+      case 'hour':
+      case 'hours':
+        return hour;
+      case 'minute':
+      case 'minutes':
+        return minute;
+      case 'second':
+      case 'seconds':
+        return second;
+      case 'millisecond':
+      case 'milliseconds':
+      case 'milli':
+      case 'millis':
+        return millisecond;
+      case 'microsecond':
+      case 'microseconds':
+      case 'micro':
+      case 'micros':
+        return micro;
+      case 'timestamp':
+        return toEpochMilliseconds() ~/ 1000;
+      default:
+        final dynamicProperties = _dynamicProperties;
+        if (dynamicProperties != null && dynamicProperties.containsKey(key)) {
+          return dynamicProperties[key];
+        }
+        if (_strictMode) {
+          throw CarbonUnknownGetterException(property);
+        }
+        return null;
+    }
+  }
+
+  static int _parseInt(String property, Object? value) {
+    if (value is int) {
+      return value;
+    }
+    if (value is num) {
+      return value.toInt();
+    }
+    if (value is String) {
+      final parsed = int.tryParse(value);
+      if (parsed != null) {
+        return parsed;
+      }
+    }
+    throw ArgumentError.value(value, property, 'Expected an integer');
+  }
+
+  static String _normalizePropertyKey(String property) {
+    final trimmed = property.trim();
+    if (trimmed.isEmpty) {
+      throw ArgumentError.value(property, 'property', 'Property name.');
+    }
+    return trimmed.toLowerCase();
+  }
+
+  @override
   CarbonInterface setTime(
     int hour, [
     int? minute,

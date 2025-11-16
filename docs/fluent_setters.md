@@ -121,9 +121,8 @@ setDateTimeFrom -> 2010-05-16T22:40:10.100Z
 - Dynamic calls such as `$date->year(1975)` are replaced with explicit
   `setYear(1975)` in Dart because there is no `__call` magic. Alias helpers like
   `years()` still exist for parity.
-- Assigning to `$date->timestamp` in PHP does not have a direct equivalent—use
-  `Carbon.createFromTimestamp()` or `copyWith(microsecondsSinceEpoch: …)` to
-  produce a new instant.
+- Assigning to `$date->timestamp` is now available via `setTimestamp()` or
+  `set('timestamp', value)`, which replace the instant without needing a copy.
 - PHP's `setDateTime()` helper does not exist; combine `setDate` with `setTime`
   or `setTimeFrom()` instead.
 - `setDateTimeFrom()` copies date & time components only; timezone, locale, and

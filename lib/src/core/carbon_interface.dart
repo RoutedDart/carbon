@@ -23,8 +23,8 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Global settings controlling calendar math and week boundaries.
   CarbonSettings get settings;
 
-  /// Snapshot of the last parsing/creation attempt, or null when nothing has
-  /// executed yet.
+  /// Snapshot of the most recent parsing or creation attempt, or `null` when
+  /// no operation has run yet.
   CarbonLastErrors? getLastErrors();
 
   /// Creates a clone with optional overrides.
@@ -740,24 +740,46 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   double diffInUTCMillennia([dynamic date, bool absolute = true]);
 
   /// Difference in real seconds (fractional) ignoring calendar math quirks.
+  /// Difference in wall-clock seconds between `this` and [other].
+  ///
+  /// Set [absolute] to `false` to preserve the sign.
   double diffInRealSeconds(CarbonInterface other, {bool absolute = true});
 
   /// Difference in real minutes (fractional).
+  /// Difference in wall-clock minutes between `this` and [other].
+  ///
+  /// Set [absolute] to `false` to preserve the sign.
   double diffInRealMinutes(CarbonInterface other, {bool absolute = true});
 
   /// Difference in real hours (fractional).
+  /// Difference in wall-clock hours between `this` and [other] with fractional
+  /// precision.
+  ///
+  /// Set [absolute] to `false` to preserve the sign.
   double diffInRealHours(CarbonInterface other, {bool absolute = true});
 
   /// Difference in real days (fractional).
+  /// Difference in wall-clock days between `this` and [other].
+  ///
+  /// Set [absolute] to `false` to preserve the sign.
   double diffInRealDays(CarbonInterface other, {bool absolute = true});
 
   /// Difference in real weeks (fractional).
+  /// Difference in wall-clock weeks between `this` and [other].
+  ///
+  /// Set [absolute] to `false` to preserve the sign.
   double diffInRealWeeks(CarbonInterface other, {bool absolute = true});
 
   /// Difference in real milliseconds.
+  /// Difference in wall-clock milliseconds between `this` and [other].
+  ///
+  /// Set [absolute] to `false` to preserve the sign.
   double diffInRealMilliseconds(CarbonInterface other, {bool absolute = true});
 
   /// Difference in real microseconds.
+  /// Difference in wall-clock microseconds between `this` and [other].
+  ///
+  /// Set [absolute] to `false` to preserve the sign.
   double diffInRealMicroseconds(CarbonInterface other, {bool absolute = true});
 
   /// Formats using a pattern string and optional locale.

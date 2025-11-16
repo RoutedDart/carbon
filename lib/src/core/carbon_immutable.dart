@@ -57,6 +57,8 @@ class CarbonImmutable extends CarbonBase {
     timeZone: timeZone,
   ).toImmutable();
 
+  /// Parses [input] expressed in [locale], applying optional [timeZone], and
+  /// returns an immutable snapshot.
   static CarbonImmutable parseFromLocale(
     String input, [
     String? locale,
@@ -175,6 +177,8 @@ class CarbonImmutable extends CarbonBase {
     settings: settings,
   ).toImmutable();
 
+  /// Parses [input] using localized [format] metadata and returns an immutable
+  /// instance. Mirrors PHP `CarbonImmutable::createFromLocaleFormat()`.
   static CarbonImmutable createFromLocaleFormat(
     String format,
     String locale,

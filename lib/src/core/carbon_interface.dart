@@ -53,6 +53,13 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Alias for [copy] to mirror PHP's `$carbon->clone()` helper.
   CarbonInterface clone();
 
+  /// Converts [input] into a Carbon instance relative to this value.
+  ///
+  /// Strings are parsed using the current timezone; [Duration] and
+  /// [CarbonInterval] inputs add to a clone of the current instance; passing
+  /// `null` yields `now()` in the same timezone.
+  CarbonInterface carbonize([dynamic input]);
+
   /// Applies a locale code used by formatting helpers.
   CarbonInterface locale(String locale);
 
@@ -61,6 +68,13 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Projects the date/time into a timezone (IANA name or fixed offset).
   CarbonInterface tz(String zoneName);
+
+  /// Reinterprets the current local time in [zoneName], shifting the instant.
+  ///
+  /// Equivalent to PHP Carbon's `shiftTimezone()`: wall clock values stay the
+  /// same, but the stored moment is adjusted so the new timezone reports the
+  /// same local date/time.
+  CarbonInterface shiftTimezone(String zoneName);
 
   /// Projects into the UTC timezone.
   CarbonInterface toUtc();
@@ -124,6 +138,38 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Moves to the end of the week.
   CarbonInterface endOfWeek();
+
+  /// Returns the number of days since the start of the current week.
+  int getDaysFromStartOfWeek([dynamic weekStartsAt]);
+
+  /// Sets the current date to `startOfWeek + numberOfDays`.
+  CarbonInterface setDaysFromStartOfWeek(
+    int numberOfDays, [
+    dynamic weekStartsAt,
+  ]);
+
+  /// Reads the locale-driven week number using optional overrides.
+  int weekNumber([dynamic dayOfWeek, int? dayOfYear]);
+
+  /// Moves to a specific locale week number.
+  CarbonInterface setWeekNumber(
+    int weekNumber, [
+    dynamic dayOfWeek,
+    int? dayOfYear,
+  ]);
+
+  /// Reads the ISO week number with optional overrides.
+  int isoWeekNumber([dynamic dayOfWeek, int? dayOfYear]);
+
+  /// Moves to a specific ISO week number.
+  CarbonInterface setIsoWeekNumber(
+    int weekNumber, [
+    dynamic dayOfWeek,
+    int? dayOfYear,
+  ]);
+
+  /// Mirrors PHP Carbon's `is('Sunday')`/`is('2019-06')` matcher.
+  bool matches(String tester);
 
   /// Moves to the first day of the month at 00:00:00.
   CarbonInterface startOfMonth();

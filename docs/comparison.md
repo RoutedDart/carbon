@@ -118,11 +118,42 @@ isWeekend -> false
 ```
 
 
+## String matcher (PHP `is()` equivalent)
+
+Use `matches()` with the same inputs PHP's `is()` accepts (`'Sunday'`,
+`'2019-06'`, `3pm`, etc.).
+
+```dart
+import 'package:carbon/carbon.dart';
+
+Future<void> main() async {
+  final dt = Carbon.parse('2019-06-02T12:23:45Z');
+
+  print("matches('2019') -> ${dt.matches('2019')}");
+  print("matches('Sunday') -> ${dt.matches('Sunday')}");
+  print("matches('2019-06') -> ${dt.matches('2019-06')}");
+  print("matches('12:23') -> ${dt.matches('12:23')}");
+  print("matches('3pm') -> ${dt.matches('3pm')}");
+}
+
+```
+
+Output:
+
+```
+matches('2019') -> true
+matches('Sunday') -> true
+matches('2019-06') -> true
+matches('12:23') -> true
+matches('3pm') -> false
+```
+
+
 ## Differences compared to the PHP docs
 
-- `isSameAs('<format>', other)` and the string-based `is('Sunday')`/
-  `is('June')` helpers are not implemented. Compose predicates using the typed
-  helpers (`isSameDay`, `isSameMonth`, `isWeekend`, etc.) instead.
+- PHP's dynamic `is('<string>')` matcher maps to the strongly typed
+  `matches('<string>')` method in Dart. It accepts the same patterns but uses a
+  Dart-friendly name because `is` is a reserved keyword.
 - `equalTo()`/`min()`/`max()` currently accept `CarbonInterface`/`DateTime`
   inputs. Comparisons against `CarbonInterval`/`CarbonPeriod` will be added in a
   later pass.

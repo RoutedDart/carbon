@@ -763,11 +763,15 @@ Future<String> _buildWeeks() async {
   final localeExample = await weeks_examples.runLocaleWeekExample();
   final numbersExample = await weeks_examples.runWeekNumbersExample();
   final weekdayExample = await weeks_examples.runWeekdayAdjustExample();
+  final daysExample = await weeks_examples.runDaysFromStartExample();
+  final setterExample = await weeks_examples.runWeekSetterExample();
   final sections = <String>[
     _weeksOverview(),
     _weeksLocaleBoundaries(localeExample),
     _weeksWeekNumbers(numbersExample),
+    _weeksWeekSetters(setterExample),
     _weeksWeekdayAdjustments(weekdayExample),
+    _weeksDaysFromStart(daysExample),
     _weeksDifferences(),
   ];
   return sections.join('\n\n');
@@ -823,6 +827,25 @@ ${example.output}
 ```
 ''';
 
+String _weeksWeekSetters(ExampleRun example) =>
+    '''
+## Moving between weeks
+
+`setWeekNumber()` and `setIsoWeekNumber()` mirror PHP's setter-style helpers.
+Use them to move relative to locale or ISO weeks while keeping the day/time
+intact.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _weeksWeekdayAdjustments(ExampleRun example) =>
     '''
 ## Jumping to another weekday
@@ -843,17 +866,34 @@ ${example.output}
 ```
 ''';
 
+String _weeksDaysFromStart(ExampleRun example) =>
+    '''
+## Days since start of week
+
+`getDaysFromStartOfWeek()`/`setDaysFromStartOfWeek()` mirror the PHP helpers.
+You can query how many days have elapsed since the locale-defined start and
+jump to another offset using either locale defaults or custom weekday inputs.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _weeksDifferences() => '''
 ## Differences compared to the PHP docs
 
 - Dart Carbon does not expose the magic properties `firstWeekDay`,
   `lastWeekDay`, or `weekendDays`. Inspect `Carbon.defaultSettings.startOfWeek`
   and `Carbon.getWeekendDays()` instead.
-- Helpers such as `week()`/`isoWeek()` that accept setter-style arguments are
-  not implemented. Use `localeWeek`/`isoWeek` getters plus `setWeekStartsAt()`
-  or arithmetic helpers to move across weeks.
-- `getDaysFromStartOfWeek()` and `setDaysFromStartOfWeek()` have not been
-  ported yet. Call `startOfWeek()` and add days manually for now.
+- PHP's `week()`/`isoWeek()` setter-style helpers map to
+  `setWeekNumber()`/`setIsoWeekNumber()` in Dart so the API stays strongly
+  typed.
 - Passing overrides (like custom first weekday) directly to
   `weeksInYear()`/`weekYear()` methods is not supported; configure the global
   defaults via `Carbon.setWeekStartsAt()` before calling the getters.
@@ -959,11 +999,13 @@ String _fluentSettersDifferences() => '''
 Future<String> _buildStringFormatting() async {
   final basic = await string_formatting_examples.runBasicFormattingExample();
   final iso = await string_formatting_examples.runIsoFormatExample();
+  final probes = await string_formatting_examples.runFormatProbeExample();
   final overrides = await string_formatting_examples.runCustomToStringExample();
   final sections = <String>[
     _stringFormattingOverview(),
     _stringFormattingBasics(basic),
     _stringFormattingIso(iso),
+    _stringFormattingFormatProbe(probes),
     _stringFormattingOverrides(overrides),
     _stringFormattingDifferences(),
   ];
@@ -1018,6 +1060,25 @@ ${example.output}
 ```
 ''';
 
+String _stringFormattingFormatProbe(ExampleRun example) =>
+    '''
+## Format probing helpers
+
+`hasFormat()` and `hasFormatWithModifiers()` let you check whether a string
+matches a PHP-style format before attempting to parse it. Combine them with
+`canBeCreatedFromFormat()` to mirror the guard clauses shown on the PHP site.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _stringFormattingOverrides(ExampleRun example) =>
     '''
 ## Customizing `toString()`
@@ -1043,9 +1104,6 @@ String _stringFormattingDifferences() => '''
 - `format()` accepts ICU/Intl tokens (the same syntax used by `DateFormat`), not
   PHP's `DateTime::format()` letters. Use `isoFormat()` when you want Carbon's
   PHP-style tokens (`Do`, `LLLL`, etc.).
-- `Carbon::hasFormat()` and `hasFormatWithModifiers()` are not implemented yet.
-  Attempting to probe arbitrary strings requires a try/catch around
-  `Carbon.createFromFormat()` for now.
 - HTML helpers such as `toHtmlString()`/`toHtmlDiffString()` have not been
   ported. Compose them manually using `format()`/`diffForHumans()`.
 ''';
@@ -1100,10 +1158,12 @@ String _commonFormatsDifferences() => '''
 Future<String> _buildConversion() async {
   final snapshot = await conversion_examples.runConversionSnapshotExample();
   final dateTimes = await conversion_examples.runDateTimeConversionExample();
+  final carbonize = await conversion_examples.runCarbonizeExample();
   final sections = <String>[
     _conversionOverview(),
     _conversionSnapshots(snapshot),
     _conversionDateTime(dateTimes),
+    _conversionCarbonize(carbonize),
     _conversionDifferences(),
   ];
   return sections.join('\n\n');
@@ -1148,12 +1208,27 @@ ${example.output}
 ```
 ''';
 
+String _conversionCarbonize(ExampleRun example) =>
+    '''
+## `carbonize()` helpers
+
+`carbonize()` mirrors the PHP helper: strings reuse the current timezone,
+intervals/durations add to a clone, and periods return their starting date.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _conversionDifferences() => '''
 ## Differences compared to the PHP docs
 
-- `carbonize()` is not implemented. Use `Carbon.parse()`,
-  `Carbon.fromDateTime()`, or manual math when you need to coerce other inputs
-  relative to an existing instance.
 - `cast()` is not available. Instead, call `.toMutable()` / `.toImmutable()` or
   construct your subclass manually with `MyCarbon.from(CarbonInterface source)`.
 - `toDate()` maps to `toDateTime()` and `toDateTimeImmutable()` in Dart.
@@ -1165,11 +1240,13 @@ Future<String> _buildComparison() async {
   final ordering = await comparison_examples.runOrderingExample();
   final ranges = await comparison_examples.runRangeExample();
   final predicates = await comparison_examples.runPredicateExample();
+  final matcher = await comparison_examples.runStringMatcherExample();
   final sections = <String>[
     _comparisonOverview(),
     _comparisonOrdering(ordering),
     _comparisonRanges(ranges),
     _comparisonPredicates(predicates),
+    _comparisonStringMatcher(matcher),
     _comparisonDifferences(),
   ];
   return sections.join('\n\n');
@@ -1232,12 +1309,30 @@ ${example.output}
 ```
 ''';
 
+String _comparisonStringMatcher(ExampleRun example) =>
+    '''
+## String matcher (PHP `is()` equivalent)
+
+Use `matches()` with the same inputs PHP's `is()` accepts (`'Sunday'`,
+`'2019-06'`, `3pm`, etc.).
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _comparisonDifferences() => '''
 ## Differences compared to the PHP docs
 
-- `isSameAs('<format>', other)` and the string-based `is('Sunday')`/
-  `is('June')` helpers are not implemented. Compose predicates using the typed
-  helpers (`isSameDay`, `isSameMonth`, `isWeekend`, etc.) instead.
+- PHP's dynamic `is('<string>')` matcher maps to the strongly typed
+  `matches('<string>')` method in Dart. It accepts the same patterns but uses a
+  Dart-friendly name because `is` is a reserved keyword.
 - `equalTo()`/`min()`/`max()` currently accept `CarbonInterface`/`DateTime`
   inputs. Comparisons against `CarbonInterval`/`CarbonPeriod` will be added in a
   later pass.
@@ -1248,10 +1343,12 @@ String _comparisonDifferences() => '''
 Future<String> _buildAdditionAndSubtraction() async {
   final increments = await addition_examples.runIncrementExample();
   final generic = await addition_examples.runGenericAddExample();
+  final shift = await addition_examples.runShiftTimezoneExample();
   final sections = <String>[
     _additionOverview(),
     _additionTypedHelpers(increments),
     _additionGeneric(generic),
+    _additionShiftTimezone(shift),
     _additionDifferences(),
   ];
   return sections.join('\n\n');
@@ -1296,6 +1393,24 @@ ${example.output}
 ```
 ''';
 
+String _additionShiftTimezone(ExampleRun example) =>
+    '''
+## `shiftTimezone()` (vs `tz()`)
+
+`shiftTimezone()` reinterprets the current wall time in a different timezone,
+while `tz()` keeps the instant intact and merely changes the projection.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _additionDifferences() => '''
 ## Differences compared to the PHP docs
 
@@ -1305,9 +1420,6 @@ String _additionDifferences() => '''
   fully supported.
 - `rawAdd()`/`rawSub()` helpers from PHP are not exposed; use `add()` with a
   `Duration` instead when you want to bypass locale-aware tweaks.
-- `carbonize()` and `shiftTimezone()` setters documented under addition/sub
-  are not implemented yet, so ported examples should stick to the provided
-  helper methods.
 ''';
 
 Future<String> _buildDifference() async {

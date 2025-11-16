@@ -97,6 +97,33 @@ abstract class CarbonBase implements CarbonInterface {
   );
   static const String _invalidDateWarningMessage =
       'The parsed date was invalid';
+  static final RegExp _explicitTimezonePattern = RegExp(
+    r'(Z|[+-]\d{2}:?\d{2}|\b(?:UTC|GMT)\b|[A-Za-z]+/[A-Za-z_]+)',
+    caseSensitive: false,
+  );
+  static final RegExp _hourLiteralPattern = RegExp(
+    r'(\d)h$',
+    caseSensitive: false,
+  );
+  static final RegExp _yearMonthPattern = RegExp(r'^(\d{3,})-(\d{1,2})$');
+  static final RegExp _fullDatePattern = RegExp(
+    r'^(\d{4})-(\d{1,2})-(\d{1,2})$',
+  );
+  static final RegExp _monthDayPattern = RegExp(r'^(\d{1,2})-(\d{1,2})$');
+  static final RegExp _timeWithSecondsPattern = RegExp(
+    r'^(\d{1,2}):(\d{1,2}):(\d{1,2})$',
+  );
+  static final RegExp _timeWithMinutesPattern = RegExp(
+    r'^(\d{1,2}):(\d{1,2})$',
+  );
+  static final RegExp _timeHourPattern = RegExp(
+    r'^(\d{1,2})(?:h|am|pm)$',
+    caseSensitive: false,
+  );
+  static final RegExp _monthNamePattern = RegExp(
+    r'^(jan(?:uary)?|feb(?:ruary)?|mar(?:ch)?|apr(?:il)?|may|jun(?:e)?|jul(?:y)?|aug(?:ust)?|sep(?:tember)?|oct(?:ober)?|nov(?:ember)?|dec(?:ember)?)(?:\s+\d+)?$',
+    caseSensitive: false,
+  );
   Map<String, dynamic>? _dynamicProperties;
 
   void _copyInstanceFormatterTo(CarbonBase target) {
@@ -607,6 +634,18 @@ abstract class CarbonBase implements CarbonInterface {
     return Duration.zero;
   }
 
+  Duration _offsetForZone(String zoneName, DateTime referenceUtc) {
+    final fixed = _parseFixedOffset(zoneName);
+    if (fixed != null) {
+      return fixed;
+    }
+    _ensureZoneProvider(zoneName);
+    final zone = _getZoneOrThrow(zoneName);
+    final instant = tm.Instant.dateTime(referenceUtc);
+    final zoned = instant.inZone(zone);
+    return Duration(seconds: zoned.offset.inSeconds);
+  }
+
   String _formatIso(DateTime value, {Duration? offset, bool suffix = true}) {
     final date = _formatDatePart(value);
     final time = _formatTimePart(value);
@@ -746,6 +785,9 @@ abstract class CarbonBase implements CarbonInterface {
     return clone;
   }
 
+  CarbonInterface _matchMutability(CarbonInterface candidate) =>
+      _isMutable ? candidate.toMutable() : candidate.toImmutable();
+
   @override
   String toString() {
     final instanceFormatter = _instanceToStringFormat;
@@ -850,6 +892,100 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface clone() => copy();
 
   @override
+  CarbonInterface carbonize([dynamic input]) {
+    if (input == null) {
+      final now = Carbon.now(
+        locale: _locale,
+        timeZone: _timeZone,
+      ).copyWith(settings: _settings);
+      return _matchMutability(now);
+    }
+    if (input is CarbonPeriod) {
+      return _matchMutability(input.start.copy());
+    }
+    if (input is CarbonInterval) {
+      final clone = _replicateInstance();
+      return clone._applyCarbonInterval(input, true);
+    }
+    if (input is Duration) {
+      final clone = _replicateInstance();
+      return clone.add(input);
+    }
+    if (input is CarbonInterface) {
+      return _matchMutability(input.copy());
+    }
+    if (input is DateTime) {
+      return _matchMutability(
+        Carbon.fromDateTime(input).copyWith(settings: _settings),
+      );
+    }
+    if (input is num) {
+      final parsed = Carbon.createFromTimestamp(
+        input,
+        timeZone: _timeZone,
+        locale: _locale,
+        settings: _settings,
+      );
+      return _matchMutability(parsed);
+    }
+    if (input is String) {
+      final parsed = _carbonizeString(input);
+      return _matchMutability(parsed);
+    }
+    throw ArgumentError(
+      'Unsupported input for carbonize: ${input.runtimeType}',
+    );
+  }
+
+  CarbonInterface _carbonizeString(String raw) {
+    final trimmed = raw.trim();
+    final desiredZone = _timeZone;
+    if (trimmed.isEmpty) {
+      final parsed = Carbon.parse(
+        trimmed,
+        locale: _locale,
+        timeZone: desiredZone,
+      ).copyWith(settings: _settings);
+      return parsed;
+    }
+    if (_explicitTimezonePattern.hasMatch(trimmed)) {
+      final parsed = Carbon.parse(
+        trimmed,
+        locale: _locale,
+        timeZone: desiredZone,
+      ).copyWith(settings: _settings);
+      return parsed;
+    }
+    final conversionZone = desiredZone ?? 'UTC';
+    try {
+      final parsed = DateTime.parse(trimmed);
+      final utc = _localToUtc(
+        year: parsed.year,
+        month: parsed.month,
+        day: parsed.day,
+        hour: parsed.hour,
+        minute: parsed.minute,
+        second: parsed.second,
+        microsecond: parsed.microsecond + parsed.millisecond * 1000,
+        timeZone: conversionZone,
+      );
+      return Carbon._internal(
+        dateTime: utc,
+        locale: _locale,
+        timeZone: desiredZone,
+        settings: _settings,
+      );
+    } catch (_) {
+      final parsed = Carbon.parse(
+        trimmed,
+        locale: _locale,
+        timeZone: desiredZone,
+      ).copyWith(settings: _settings);
+      return parsed;
+    }
+  }
+
+  @override
   CarbonInterface locale(String locale) {
     _applyLocaleDefaults(locale);
     final localeStart = _weekStartForLocale(locale);
@@ -885,6 +1021,19 @@ abstract class CarbonBase implements CarbonInterface {
     }
     _getZoneOrThrow(zoneName);
     return _duplicate(timeZone: zoneName);
+  }
+
+  @override
+  CarbonInterface shiftTimezone(String zoneName) {
+    if (zoneName.isEmpty) {
+      throw ArgumentError('Timezone name cannot be empty');
+    }
+    _requireZoneAvailability(zoneName);
+    final currentOffset = _currentOffset();
+    final targetOffset = _offsetForZone(zoneName, _dateTime);
+    final delta = currentOffset - targetOffset;
+    final shifted = _dateTime.add(delta);
+    return _duplicate(dateTime: shifted, timeZone: zoneName);
   }
 
   @override
@@ -1164,6 +1313,76 @@ abstract class CarbonBase implements CarbonInterface {
         .subtract(const Duration(microseconds: 1));
     final utc = _localDateTimeUtc(localEnd, timeZone: zone);
     return _wrap(utc);
+  }
+
+  int _startOfWeekIndex([dynamic weekStartsAt]) {
+    if (weekStartsAt != null) {
+      return _resolveWeekdayInput(weekStartsAt);
+    }
+    return _normalizeWeekday(_settings.startOfWeek) % 7;
+  }
+
+  @override
+  int getDaysFromStartOfWeek([dynamic weekStartsAt]) {
+    final start = _startOfWeekIndex(weekStartsAt);
+    final current = _dateTime.weekday % 7;
+    return (current + 7 - start) % 7;
+  }
+
+  @override
+  CarbonInterface setDaysFromStartOfWeek(
+    int numberOfDays, [
+    dynamic weekStartsAt,
+  ]) {
+    final delta = numberOfDays - getDaysFromStartOfWeek(weekStartsAt);
+    if (delta == 0) {
+      return this;
+    }
+    return addDays(delta);
+  }
+
+  @override
+  int weekNumber([dynamic dayOfWeek, int? dayOfYear]) {
+    final spec = _resolveWeekSpec(dayOfWeek, dayOfYear);
+    final (currentWeek, _) = _weekData(
+      _localDateTimeForFormatting(),
+      spec.startOfWeek,
+      spec.firstWeekDay,
+    );
+    return currentWeek;
+  }
+
+  @override
+  CarbonInterface setWeekNumber(
+    int targetWeek, [
+    dynamic dayOfWeek,
+    int? dayOfYear,
+  ]) {
+    final current = weekNumber(dayOfWeek, dayOfYear);
+    final delta = targetWeek.round() - current;
+    return delta == 0 ? this : addWeeks(delta);
+  }
+
+  @override
+  int isoWeekNumber([dynamic dayOfWeek, int? dayOfYear]) {
+    final spec = _resolveWeekSpec(dayOfWeek, dayOfYear, isoDefaults: true);
+    final (currentWeek, _) = _weekData(
+      _localDateTimeForFormatting(),
+      spec.startOfWeek,
+      spec.firstWeekDay,
+    );
+    return currentWeek;
+  }
+
+  @override
+  CarbonInterface setIsoWeekNumber(
+    int targetWeek, [
+    dynamic dayOfWeek,
+    int? dayOfYear,
+  ]) {
+    final current = isoWeekNumber(dayOfWeek, dayOfYear);
+    final delta = targetWeek.round() - current;
+    return delta == 0 ? this : addWeeks(delta);
   }
 
   @override
@@ -2358,9 +2577,10 @@ abstract class CarbonBase implements CarbonInterface {
     return weekday == DateTime.sunday ? 7 : weekday;
   }
 
-  (int, int) _localeWeekData(DateTime current) {
-    final startOfWeek = _settings.startOfWeek;
-    final firstWeekDay = _lookupLocaleFirstWeekDay();
+  (int, int) _localeWeekData(DateTime current) =>
+      _weekData(current, _settings.startOfWeek, _lookupLocaleFirstWeekDay());
+
+  (int, int) _weekData(DateTime current, int startOfWeek, int firstWeekDay) {
     var weekYear = current.year;
     var start = _firstWeekStart(weekYear, startOfWeek, firstWeekDay);
     if (start.year == weekYear && current.isBefore(start)) {
@@ -2372,15 +2592,45 @@ abstract class CarbonBase implements CarbonInterface {
         startOfWeek,
         firstWeekDay,
       );
-      if (!current.isBefore(nextStart) && nextStart.year == weekYear + 1) {
+      if (!current.isBefore(nextStart)) {
         weekYear += 1;
         start = nextStart;
       }
     }
-    final diffDays = current.difference(start).inDays;
-    final weekNumber = (diffDays ~/ 7) + 1;
+    final alignedCurrent = _alignToWeekStart(current, startOfWeek);
+    var weekNumber = (alignedCurrent.difference(start).inDays ~/ 7) + 1;
+    final weeksInYear = _weeksInCustomYear(weekYear, startOfWeek, firstWeekDay);
+    if (weekNumber > weeksInYear) {
+      weekNumber = 1;
+      weekYear += 1;
+    }
     return (weekNumber, weekYear);
   }
+
+  int _weeksInCustomYear(int year, int startOfWeek, int firstWeekDay) {
+    final start = _firstWeekStart(year, startOfWeek, firstWeekDay);
+    final end = _firstWeekStart(year + 1, startOfWeek, firstWeekDay);
+    return (end.difference(start).inDays ~/ 7);
+  }
+
+  _WeekSpec _resolveWeekSpec(
+    dynamic dayOfWeek,
+    int? dayOfYear, {
+    bool isoDefaults = false,
+  }) {
+    final start = dayOfWeek == null
+        ? (isoDefaults ? DateTime.monday : _settings.startOfWeek)
+        : _phpWeekdayToDateTime(_resolveWeekdayInput(dayOfWeek));
+    final defaultDayOfYear = isoDefaults ? 4 : _lookupLocaleFirstWeekDay();
+    final firstWeekDay = ((dayOfYear ?? defaultDayOfYear).clamp(
+      1,
+      366,
+    )).toInt();
+    return _WeekSpec(startOfWeek: start, firstWeekDay: firstWeekDay);
+  }
+
+  int _phpWeekdayToDateTime(int phpWeekday) =>
+      phpWeekday == 0 ? DateTime.sunday : phpWeekday + 1;
 
   int _lookupLocaleFirstWeekDay() {
     for (final candidate in _localeCandidates(_locale)) {
@@ -3053,6 +3303,92 @@ abstract class CarbonBase implements CarbonInterface {
       _dateTime.year == other.dateTime.year &&
       _dateTime.month == other.dateTime.month &&
       _dateTime.day == other.dateTime.day;
+
+  @override
+  bool matches(String tester) {
+    final value = tester.trim();
+    if (value.isEmpty) {
+      return false;
+    }
+    final local = _localDateTimeForFormatting();
+    final numeric = int.tryParse(value);
+    if (numeric != null) {
+      return local.year == numeric;
+    }
+    final matchYearMonth = _yearMonthPattern.firstMatch(value);
+    if (matchYearMonth != null) {
+      final year = int.parse(matchYearMonth.group(1)!);
+      final month = int.parse(matchYearMonth.group(2)!);
+      return local.year == year && local.month == month;
+    }
+    final matchFullDate = _fullDatePattern.firstMatch(value);
+    if (matchFullDate != null) {
+      final year = int.parse(matchFullDate.group(1)!);
+      final month = int.parse(matchFullDate.group(2)!);
+      final day = int.parse(matchFullDate.group(3)!);
+      return local.year == year && local.month == month && local.day == day;
+    }
+    final matchMonthDay = _monthDayPattern.firstMatch(value);
+    if (matchMonthDay != null) {
+      final month = int.parse(matchMonthDay.group(1)!);
+      final day = int.parse(matchMonthDay.group(2)!);
+      return local.month == month && local.day == day;
+    }
+    final lower = value.toLowerCase();
+    if (_monthNamePattern.hasMatch(lower)) {
+      final monthIndex = _monthIndex(lower.split(' ').first) ?? -1;
+      return monthIndex == local.month;
+    }
+    if (_matchesWeekdayName(lower)) {
+      final weekday = _weekdayIndex(lower);
+      return (local.weekday % 7) == weekday;
+    }
+    final timeSeconds = _timeWithSecondsPattern.firstMatch(value);
+    if (timeSeconds != null &&
+        _compareTime(local, timeSeconds, includeSeconds: true)) {
+      return true;
+    }
+    final timeMinutes = _timeWithMinutesPattern.firstMatch(value);
+    if (timeMinutes != null &&
+        _compareTime(local, timeMinutes, includeSeconds: false)) {
+      return true;
+    }
+    final timeHour = _timeHourPattern.firstMatch(value);
+    if (timeHour != null && _compareHour(local, timeHour)) {
+      return true;
+    }
+    final normalized = _normalizeMatcherExpression(value);
+    try {
+      final candidate = copy().modify(normalized);
+      if (eq(candidate)) {
+        return true;
+      }
+      final lowered = lower;
+      if (_timeWithSecondsPattern.hasMatch(lowered)) {
+        final current = copy()..startOfSecond();
+        final modified = candidate.copy()..startOfSecond();
+        return current.eq(modified);
+      }
+      if (_timeWithMinutesPattern.hasMatch(lowered)) {
+        final current = copy()..startOfMinute();
+        final modified = candidate.copy()..startOfMinute();
+        return current.eq(modified);
+      }
+      if (_timeHourPattern.hasMatch(lowered)) {
+        final current = copy()..startOfHour();
+        final modified = candidate.copy()..startOfHour();
+        return current.eq(modified);
+      }
+      if (_monthNamePattern.hasMatch(lowered)) {
+        final current = copy()..startOfMonth();
+        final modified = candidate.copy()..startOfMonth();
+        return current.eq(modified);
+      }
+    } catch (_) {
+      // Ignore parsing failures; fall through to false.
+    }
+    return false;
+  }
 
   @override
   bool isBetween(
@@ -4801,6 +5137,63 @@ abstract class CarbonBase implements CarbonInterface {
     return null;
   }
 
+  bool _matchesWeekdayName(String value) {
+    try {
+      _weekdayIndex(value);
+      return true;
+    } catch (_) {
+      return false;
+    }
+  }
+
+  bool _compareTime(
+    DateTime local,
+    RegExpMatch match, {
+    required bool includeSeconds,
+  }) {
+    final hour = int.parse(match.group(1)!);
+    final minute = int.parse(match.group(2)!);
+    if (!_isValidHour(hour) || !_isValidMinute(minute)) {
+      return false;
+    }
+    if (includeSeconds) {
+      final second = int.parse(match.group(3)!);
+      if (!_isValidMinute(second)) {
+        return false;
+      }
+      return local.hour == hour &&
+          local.minute == minute &&
+          local.second == second;
+    }
+    return local.hour == hour && local.minute == minute;
+  }
+
+  bool _compareHour(DateTime local, RegExpMatch match) {
+    final token = match.group(0)!;
+    final suffix = token.replaceAll(RegExp(r'\d'), '').toLowerCase();
+    var hour = int.parse(match.group(1)!);
+    if (suffix.endsWith('am')) {
+      hour = hour == 12 ? 0 : hour % 12;
+    } else if (suffix.endsWith('pm')) {
+      hour = hour % 12 + 12;
+    } else if (suffix.endsWith('h')) {
+      hour = hour % 24;
+    }
+    if (!_isValidHour(hour)) {
+      return false;
+    }
+    return local.hour == hour;
+  }
+
+  bool _isValidHour(int value) => value >= 0 && value < 24;
+
+  bool _isValidMinute(int value) => value >= 0 && value < 60;
+
+  String _normalizeMatcherExpression(String input) => input.replaceAllMapped(
+    _hourLiteralPattern,
+    (match) => '${match.group(1)}:00',
+  );
+
   static int _daysInMonthCount(int year, int month) =>
       DateTime.utc(year, month + 1, 0).day;
 
@@ -5626,6 +6019,13 @@ enum _StartEndUnit {
   decade,
   century,
   millennium,
+}
+
+class _WeekSpec {
+  const _WeekSpec({required this.startOfWeek, required this.firstWeekDay});
+
+  final int startOfWeek;
+  final int firstWeekDay;
 }
 
 /// Time unit used for real-time interval calculations.

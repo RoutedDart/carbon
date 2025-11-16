@@ -141,3 +141,33 @@ Future<ExampleRun> runPredicateExample() async {
     output: buffer.toString().trimRight(),
   );
 }
+
+const _stringMatcherSource = r'''
+import 'package:carbon/carbon.dart';
+
+Future<void> main() async {
+  final dt = Carbon.parse('2019-06-02T12:23:45Z');
+
+  print("matches('2019') -> ${dt.matches('2019')}");
+  print("matches('Sunday') -> ${dt.matches('Sunday')}");
+  print("matches('2019-06') -> ${dt.matches('2019-06')}");
+  print("matches('12:23') -> ${dt.matches('12:23')}");
+  print("matches('3pm') -> ${dt.matches('3pm')}");
+}
+''';
+
+/// Demonstrates the Dart replacement for PHP's `is()` helper.
+Future<ExampleRun> runStringMatcherExample() async {
+  await _bootstrap();
+  final dt = Carbon.parse('2019-06-02T12:23:45Z');
+  final buffer = StringBuffer()
+    ..writeln("matches('2019') -> ${dt.matches('2019')}")
+    ..writeln("matches('Sunday') -> ${dt.matches('Sunday')}")
+    ..writeln("matches('2019-06') -> ${dt.matches('2019-06')}")
+    ..writeln("matches('12:23') -> ${dt.matches('12:23')}")
+    ..writeln("matches('3pm') -> ${dt.matches('3pm')}");
+  return ExampleRun(
+    code: _stringMatcherSource,
+    output: buffer.toString().trimRight(),
+  );
+}

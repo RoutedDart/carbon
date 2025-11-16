@@ -6,6 +6,7 @@ import 'dart:async';
 import 'package:carbon/carbon.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'example_runner.dart';
 
@@ -148,4 +149,81 @@ String _describeWeekend(List<int> days) {
     DateTime.sunday: 'Sun',
   };
   return days.map((day) => labels[day] ?? day.toString()).join(', ');
+}
+
+const _translatorSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
+Future<void> main() async {
+  await initializeDateFormatting('fr');
+
+  CarbonTranslator.registerLocale(
+    'fr',
+    CarbonTranslation(
+      numbers: {
+        '1': 'un ',
+        '2': 'deux ',
+        '3': 'trois ',
+        '4': 'quatre ',
+      },
+      timeStrings: {
+        'ago': 'il y a',
+        'from now': "d'ici",
+        'minutes': 'minutes',
+        'hours': 'heures',
+        'days': 'jours',
+        'just now': "à l'instant",
+        'now': "à l'instant",
+        'in ': 'dans ',
+      },
+      timeagoMessages: timeago.FrMessages(),
+    ),
+  );
+
+  final now = Carbon.parse('2024-06-05T12:00:00Z');
+  final delta = now.copy()..subMinutes(2);
+
+  print('French diff -> ${delta.diffForHumans(locale: 'fr')}');
+  print('French digits -> ${Carbon.translateNumber('123', locale: 'fr')}');
+  print('French snippet -> ${Carbon.translateTimeString('minutes ago', locale: 'fr')}');
+}
+''';
+
+Future<ExampleRun> runTranslatorExample() async {
+  await _ensureLocales(const ['fr']);
+
+  CarbonTranslator.registerLocale(
+    'fr',
+    CarbonTranslation(
+      numbers: {'1': 'un ', '2': 'deux ', '3': 'trois ', '4': 'quatre '},
+      timeStrings: {
+        'ago': 'il y a',
+        'from now': "d'ici",
+        'minutes': 'minutes',
+        'hours': 'heures',
+        'days': 'jours',
+        'just now': "à l'instant",
+        'now': "à l'instant",
+        'in ': 'dans ',
+      },
+      timeagoMessages: timeago.FrMessages(),
+    ),
+  );
+
+  final now = Carbon.parse('2024-06-05T12:00:00Z');
+  final delta = now.copy()..subMinutes(2);
+
+  final buffer = StringBuffer()
+    ..writeln('French diff -> ${delta.diffForHumans(locale: 'fr')}')
+    ..writeln('French digits -> ${Carbon.translateNumber('123', locale: 'fr')}')
+    ..writeln(
+      'French snippet -> ${Carbon.translateTimeString('minutes ago', locale: 'fr')}',
+    );
+
+  return ExampleRun(
+    code: _translatorSource,
+    output: buffer.toString().trimRight(),
+  );
 }

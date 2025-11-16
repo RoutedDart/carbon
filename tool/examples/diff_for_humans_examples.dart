@@ -5,6 +5,7 @@ import 'dart:async';
 
 import 'package:carbon/carbon.dart';
 import 'package:intl/date_symbol_data_local.dart';
+import 'package:timeago/timeago.dart' as timeago;
 
 import 'example_runner.dart';
 
@@ -84,6 +85,57 @@ Future<ExampleRun> runHumanReadableDetailExample() async {
     ..writeln('just now -> ${now.diffForHumans(reference: now)}');
   return ExampleRun(
     code: _humanReadableDetailSource,
+    output: buffer.toString().trimRight(),
+  );
+}
+
+const _localizedHumanReadableSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
+Future<void> main() async {
+  await initializeDateFormatting('fr');
+
+  CarbonTranslator.registerLocale(
+    'fr',
+    CarbonTranslation(
+      timeStrings: {
+        'ago': 'il y a',
+        'from now': "d'ici",
+        'in ': 'dans ',
+      },
+      timeagoMessages: timeago.FrMessages(),
+    ),
+  );
+
+  final past = Carbon.parse('2024-06-05T12:00:00Z')..subMinutes(2);
+  final future = Carbon.parse('2024-06-05T12:00:00Z')..addDays(3);
+
+  print('French past -> ${past.diffForHumans(locale: 'fr')}');
+  print('French future -> ${future.diffForHumans(locale: 'fr')}');
+}
+''';
+
+Future<ExampleRun> runLocalizedHumanReadableExample() async {
+  await initializeDateFormatting('fr');
+
+  CarbonTranslator.registerLocale(
+    'fr',
+    CarbonTranslation(
+      timeStrings: {'ago': 'il y a', 'from now': "d'ici", 'in ': 'dans '},
+      timeagoMessages: timeago.FrMessages(),
+    ),
+  );
+
+  final past = Carbon.parse('2024-06-05T12:00:00Z')..subMinutes(2);
+  final future = Carbon.parse('2024-06-05T12:00:00Z')..addDays(3);
+  final buffer = StringBuffer()
+    ..writeln('French past -> ${past.diffForHumans(locale: 'fr')}')
+    ..writeln('French future -> ${future.diffForHumans(locale: 'fr')}');
+
+  return ExampleRun(
+    code: _localizedHumanReadableSource,
     output: buffer.toString().trimRight(),
   );
 }

@@ -402,10 +402,12 @@ String _instantiationDifferences() => '''
 Future<String> _buildLocalization() async {
   final formatting = await localization_examples.runLocaleFormattingExample();
   final weeks = await localization_examples.runLocaleWeekSettingsExample();
+  final translator = await localization_examples.runTranslatorExample();
   final sections = <String>[
     _localizationOverview(),
     _localizationFormatting(formatting),
     _localizationWeekSettings(weeks),
+    _localizationTranslator(translator),
     _localizationDifferences(),
   ];
   return sections.join('\n\n');
@@ -460,25 +462,43 @@ ${example.output}
 ```
 ''';
 
+String _localizationTranslator(ExampleRun example) =>
+    '''
+## Translator overrides
+
+`CarbonTranslator` exposes the same hooks as PHP's `Translator` class, so you
+can register localized digits, time string replacements, and `timeago`
+messages that automatically power `diffForHumans()`.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _localizationDifferences() => '''
 ## Differences compared to the PHP docs
 
-- Dart Carbon does not expose the `Carbon\\Translator` API yet. Helpers such as
-  `Translator::get()`, `setTranslations()`, or `setMessages()` from the PHP docs
-  are not implemented, so per-locale overrides currently require editing the
-  generated locale tables.
+- Dart Carbon exposes `CarbonTranslator.registerLocale()`/`setFallbackLocales()`
+  so you can override month names, number formatting, and `timeago` messages
+  without touching the generated tables.
+- `translateNumber()`, `getAltNumber()`, and `translateTimeString()` now mirror
+  the PHP helpers that translate digits or free-form fragments before logging
+  them in localized output.
 - Passing multiple fallback locales to `.locale()` is not supported—the method
   accepts a single locale code. Chain `.locale()` calls manually if you need a
   fallback strategy.
-- `translateNumber()`, `getAltNumber()`, and `translateTimeString()` are not
-  available. Formatting localized digits and free-form strings relies on
-  `isoFormat()` today.
 - Directory scanning helpers such as `Translator::getLocalesFiles()` are not
   available because Dart packages ship locale data directly in source. Use the
   lists in `locale_defaults.dart` if you need to inspect what's bundled.
-- `diffForHumans()` relies on the `timeago` package and currently ships only
-  English strings. Register additional `timeago` locale messages manually if
-  you need translated humanized diffs.
+- `diffForHumans()` automatically registers `timeago` messages for every
+  locale that is registered through `CarbonTranslator`, so localized strings
+  such as French `il y a 2 minutes` work out of the box.
 ''';
 
 Future<String> _buildGetters() async {
@@ -1582,10 +1602,13 @@ Future<String> _buildDiffForHumans() async {
   final humans = await diff_for_humans_examples.runHumanReadableExample();
   final detailed = await diff_for_humans_examples
       .runHumanReadableDetailExample();
+  final localized = await diff_for_humans_examples
+      .runLocalizedHumanReadableExample();
   final sections = <String>[
     _diffHumansOverview(),
     _diffHumansBasic(humans),
     _diffHumansAdvanced(detailed),
+    _diffHumansLocalized(localized),
     _diffHumansDifferences(),
   ];
   return sections.join('\n\n');
@@ -1629,6 +1652,25 @@ ${example.output}
 ```
 ''';
 
+String _diffHumansLocalized(ExampleRun example) =>
+    '''
+## Multi-language output
+
+`CarbonTranslator` wires up the `timeago` locale messages so you can call
+`diffForHumans(locale: 'fr')` and immediately return localized strings such as
+`il y a 2 minutes` or `dans 3 jours`.
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _diffHumansDifferences() => '''
 ## Differences compared to the PHP docs
 
@@ -1636,9 +1678,9 @@ String _diffHumansDifferences() => '''
 can build repeatable multi-unit strings. The underlying computation approximates
 months (30 days) and years (365 days) to keep the helper fast, so very long
 intervals may deviate slightly from PHP's calendar-aware math.
-- Only locales registered with `timeago.setLocaleMessages()` are supported. The
-  package ships with English by default, so additional languages require manual
-  registration.
+- `CarbonTranslator` automatically registers `timeago` messages for every locale
+  that has been registered through the translator registry, so localized strings
+  such as `il y a 2 minutes` work without manual `timeago` wiring.
 - Flags such as `Carbon::JUST_NOW`, `ONE_DAY_WORDS`, and `SEQUENTIAL_PARTS_ONLY`
   are not available. Compose custom strings yourself when you need those
   behaviors.

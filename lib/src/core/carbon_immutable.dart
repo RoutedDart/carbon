@@ -35,6 +35,30 @@ class CarbonImmutable extends CarbonBase {
 
   static void resetToStringFormat() => Carbon.resetToStringFormat();
 
+  static void registerTranslatorLocale(
+    String locale,
+    CarbonTranslation translation, {
+    List<String>? fallbackLocales,
+  }) => Carbon.registerTranslatorLocale(
+    locale,
+    translation,
+    fallbackLocales: fallbackLocales,
+  );
+
+  static void setTranslatorFallbackLocales(
+    String locale,
+    List<String> fallbackLocales,
+  ) => Carbon.setTranslatorFallbackLocales(locale, fallbackLocales);
+
+  static String translateNumber(String value, {String? locale}) =>
+      Carbon.translateNumber(value, locale: locale);
+
+  static String getAltNumber(String value, {String? locale}) =>
+      Carbon.getAltNumber(value, locale: locale);
+
+  static String translateTimeString(String value, {String? locale}) =>
+      Carbon.translateTimeString(value, locale: locale);
+
   /// Returns the most recent parsing/creation report tracked by Carbon.
   static CarbonLastErrors? lastErrorsSnapshot() => Carbon.lastErrorsSnapshot();
 

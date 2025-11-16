@@ -49,4 +49,6 @@ export 'src/carbon.dart'
         CarbonInvalidTypeException,
         CarbonUnreachableException,
         CarbonFactory,
+        CarbonTranslator,
+        CarbonTranslation,
         CarbonTestSubclass;

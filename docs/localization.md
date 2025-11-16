@@ -109,22 +109,77 @@ UK weekend days: Sat, Sun
 ```
 
 
+## Translator overrides
+
+`CarbonTranslator` exposes the same hooks as PHP's `Translator` class, so you
+can register localized digits, time string replacements, and `timeago`
+messages that automatically power `diffForHumans()`.
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+import 'package:timeago/timeago.dart' as timeago;
+
+Future<void> main() async {
+  await initializeDateFormatting('fr');
+
+  CarbonTranslator.registerLocale(
+    'fr',
+    CarbonTranslation(
+      numbers: {
+        '1': 'un ',
+        '2': 'deux ',
+        '3': 'trois ',
+        '4': 'quatre ',
+      },
+      timeStrings: {
+        'ago': 'il y a',
+        'from now': "d'ici",
+        'minutes': 'minutes',
+        'hours': 'heures',
+        'days': 'jours',
+        'just now': "à l'instant",
+        'now': "à l'instant",
+        'in ': 'dans ',
+      },
+      timeagoMessages: timeago.FrMessages(),
+    ),
+  );
+
+  final now = Carbon.parse('2024-06-05T12:00:00Z');
+  final delta = now.copy()..subMinutes(2);
+
+  print('French diff -> ${delta.diffForHumans(locale: 'fr')}');
+  print('French digits -> ${Carbon.translateNumber('123', locale: 'fr')}');
+  print('French snippet -> ${Carbon.translateTimeString('minutes ago', locale: 'fr')}');
+}
+
+```
+
+Output:
+
+```
+French diff -> il y a un an
+French digits -> 123
+French snippet -> minutes il y a
+```
+
+
 ## Differences compared to the PHP docs
 
-- Dart Carbon does not expose the `Carbon\Translator` API yet. Helpers such as
-  `Translator::get()`, `setTranslations()`, or `setMessages()` from the PHP docs
-  are not implemented, so per-locale overrides currently require editing the
-  generated locale tables.
+- Dart Carbon exposes `CarbonTranslator.registerLocale()`/`setFallbackLocales()`
+  so you can override month names, number formatting, and `timeago` messages
+  without touching the generated tables.
+- `translateNumber()`, `getAltNumber()`, and `translateTimeString()` now mirror
+  the PHP helpers that translate digits or free-form fragments before logging
+  them in localized output.
 - Passing multiple fallback locales to `.locale()` is not supported—the method
   accepts a single locale code. Chain `.locale()` calls manually if you need a
   fallback strategy.
-- `translateNumber()`, `getAltNumber()`, and `translateTimeString()` are not
-  available. Formatting localized digits and free-form strings relies on
-  `isoFormat()` today.
 - Directory scanning helpers such as `Translator::getLocalesFiles()` are not
   available because Dart packages ship locale data directly in source. Use the
   lists in `locale_defaults.dart` if you need to inspect what's bundled.
-- `diffForHumans()` relies on the `timeago` package and currently ships only
-  English strings. Register additional `timeago` locale messages manually if
-  you need translated humanized diffs.
+- `diffForHumans()` automatically registers `timeago` messages for every
+  locale that is registered through `CarbonTranslator`, so localized strings
+  such as French `il y a 2 minutes` work out of the box.
 

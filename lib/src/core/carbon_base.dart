@@ -4429,14 +4429,18 @@ abstract class CarbonBase implements CarbonInterface {
     bool short = false,
     String joiner = ' ',
   }) {
+    final localeMatch = CarbonTranslator.matchLocale(locale ?? _locale);
+    final humanLocale = localeMatch.locale;
+    CarbonTranslator.ensureTimeagoLocale(humanLocale);
     final base = (reference?.dateTime ?? clock.now()).toUtc();
     if (parts <= 1) {
-      return timeago.format(
+      final result = timeago.format(
         _dateTime,
-        locale: locale ?? _locale,
+        locale: humanLocale,
         allowFromNow: true,
         clock: base,
       );
+      return CarbonTranslator.translateTimeString(result, locale: humanLocale);
     }
 
     final diff = _dateTime.difference(base);
@@ -4449,10 +4453,19 @@ abstract class CarbonBase implements CarbonInterface {
       short: short,
       limit: parts,
     );
-    final joined = segments.join(joiner);
+    final translatedSegments = segments
+        .map(
+          (segment) => CarbonTranslator.translateTimeString(
+            segment,
+            locale: humanLocale,
+          ),
+        )
+        .toList();
+    final joined = translatedSegments.join(joiner);
     final prefix = future ? 'in ' : '';
     final suffix = future ? 'from now' : 'ago';
-    return '$prefix$joined $suffix'.trim();
+    final text = '$prefix$joined $suffix'.trim();
+    return CarbonTranslator.translateTimeString(text, locale: humanLocale);
   }
 
   @override

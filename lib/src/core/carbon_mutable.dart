@@ -48,6 +48,40 @@ class Carbon extends CarbonBase {
     CarbonBase.resetSerializationFormat();
   }
 
+  /// Registers translator data for the specified [locale].
+  static void registerTranslatorLocale(
+    String locale,
+    CarbonTranslation translation, {
+    List<String>? fallbackLocales,
+  }) {
+    CarbonTranslator.registerLocale(
+      locale,
+      translation,
+      fallbackLocales: fallbackLocales,
+    );
+  }
+
+  /// Updates the fallback locales that are consulted when a translation is
+  /// missing for [locale].
+  static void setTranslatorFallbackLocales(
+    String locale,
+    List<String> fallbackLocales,
+  ) {
+    CarbonTranslator.setFallbackLocales(locale, fallbackLocales);
+  }
+
+  /// Converts [value] using the translator metadata for [locale].
+  static String translateNumber(String value, {String? locale}) =>
+      CarbonTranslator.translateNumber(value, locale: locale);
+
+  /// Returns the alternate numeric translation for [value].
+  static String getAltNumber(String value, {String? locale}) =>
+      CarbonTranslator.getAltNumber(value, locale: locale);
+
+  /// Replaces tokens inside [value] using translator-provided snippets.
+  static String translateTimeString(String value, {String? locale}) =>
+      CarbonTranslator.translateTimeString(value, locale: locale);
+
   factory Carbon([dynamic input, String? timeZone]) {
     final resolved = _resolveTokenInput(input: input, timeZone: timeZone);
     if (resolved != null) {

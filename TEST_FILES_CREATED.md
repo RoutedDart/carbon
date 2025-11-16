@@ -31,10 +31,16 @@ Created **17 new test files** with a total of **2,511 lines of test code**, orga
 | `strict_mode_test.dart` | 45 | Dynamic getter/setter/method strict-mode parity |
 | `create_from_date_test.dart` | 32 | Parity coverage for `CreateFromDateTest.php` scenarios |
 | `create_from_time_test.dart` | 37 | Parity coverage for `CreateFromTimeTest.php` scenarios |
+| `create_from_time_string_test.dart` | 56 | Parity coverage for `CreateFromTimeStringTest.php` (HH:MM, seconds, micros, timezone) |
+| `create_test.dart` | 92 | PHP `Carbon::create` and `Carbon::make` translation layer |
+| `create_locale_test.dart` | 198 | Locale-aware parsing and `createFromLocaleFormat` parity |
 | `create_from_timestamp_test.dart` | 47 | Timestamp factories + DST regression coverage |
 | `create_from_format_test.dart` | 60 | PHP `createFromFormat` translation (bang/pipe/timezone) |
 | `isset_test.dart` | 65 | Typed getter coverage mirroring `IssetTest.php` properties |
-| **Total** | **2,847** | Complete behavioral coverage |
+| `last_error_test.dart` | 48 | `getLastErrors` parity plus initialization semantics |
+| `modify_near_dst_change_test.dart` | 32 | DST additions across spring-forward/fall-back transitions |
+| `php_bug_72338_test.dart` | 41 | Timestamp stability when toggling timezone offsets and using `modify()` |
+| **Total** | **3,314** | Complete behavioral coverage |
 
 ## Organizational Principles
 

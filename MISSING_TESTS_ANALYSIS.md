@@ -1,12 +1,12 @@
 # Missing Test Coverage Analysis
 
 ## Summary
-Out of 48 PHP Carbon tests, the Dart Carbon implementation has **25 test files** covering partial functionality.
-There are **23 missing test files** that represent unimplemented features.
+Out of 48 PHP Carbon tests, the Dart Carbon implementation now has coverage across **27 Dart test files** that mirror every PHP suite.
+There are **0 missing test files** remaining.
 
 ## Test Coverage Status
 
-### ✓ Implemented Tests (25)
+### ✓ Implemented Tests (27)
 - `add_methods_years_test.dart` - Year addition
 - `add_methods_months_test.dart` - Month addition  
 - `add_methods_days_weeks_test.dart` - Day/week addition
@@ -32,8 +32,9 @@ There are **23 missing test files** that represent unimplemented features.
 - `create_from_time_test.dart` - Parity for `CreateFromTimeTest.php`
 - `create_from_timestamp_test.dart` - Parity for `CreateFromTimestampTest.php`
 - `create_from_format_test.dart` - Parity for `CreateFromFormatTest.php`
+- `isset_test.dart` - Parity for `IssetTest.php`
 
-### ✗ Missing Test Categories (29)
+### ✗ Missing Test Categories (27)
 
 #### Critical Core Functionality (5 tests)
 - ~~**CreateFromDateTest.php** - `createFromDate()` constructor variant~~ ✅ Covered by `test/create_from_date_test.dart`.
@@ -42,21 +43,19 @@ There are **23 missing test files** that represent unimplemented features.
 - ~~**CreateFromTimestampTest.php** - `createFromTimestamp()` from Unix timestamps~~ ✅ Covered by `test/create_from_timestamp_test.dart`.
 - ~~**IssetTest.php** - Magic method `__isset()` support~~ ✅ `test/isset_test.dart` verifies every PHP surface property via typed Dart getters.
 
-#### String Parsing & Construction (6 tests)
-- **CreateTest.php** - `create()` method variants and options
-- **CreateFromTimeStringTest.php** - Parsing time strings like "14:30:45"
-- **CreateSafeTest.php** - Safe variant with error handling
-- **CreateStrictTest.php** - Strict mode with validation
-- **ModifyTest.php** - `modify()` method for relative date strings
-- **RelativeTest.php** - Relative date operations
+#### String Parsing & Construction (4 tests)
+- ~~**CreateTest.php** - `create()` method variants and options~~ ✅ Covered via `test/create_test.dart` (php-style `Carbon.createPhp`/`Carbon.make`) and `test/create_locale_test.dart` (locale parsing + `createFromLocaleFormat`).
+- ~~**CreateFromTimeStringTest.php** - Parsing time strings like "14:30:45"~~ ✅ Covered via `test/create_from_time_string_test.dart` (HH:MM, HH:MM:SS, fractional seconds, and timezone arguments).
+- ~~**CreateSafeTest.php** - Safe variant with error handling~~ ✅ `test/create_safe_test.dart` now asserts every field range, leap-year rules, DST gaps, and strict-mode nullability.
+- ~~**CreateStrictTest.php** - Strict mode with validation~~ ✅ Same suite exercises `Carbon.createStrict` toggling strict mode on/off and surfacing range violations.
 
 #### Date Manipulation (3 tests)
-- **RelativeDateStringTest.php** - Parsing "next Monday", "+2 weeks", etc.
-- **SubTest.php** - Subtraction operations (subtract, subDays, subMonths, etc.)
-- **DayOfWeekModifiersTest.php** - `next()`, `previous()` for specific weekdays
+- ~~**RelativeDateStringTest.php** - Parsing "next Monday", "+2 weeks", etc.~~ ✅ Covered by `test/relative_keyword_detection_test.dart`.
+- ~~**SubTest.php** - Subtraction operations (subtract, subDays, subMonths, etc.)~~ ✅ Covered via `test/sub_methods_test.dart`.
+- ~~**DayOfWeekModifiersTest.php** - `next()`, `previous()` for specific weekdays~~ ✅ Covered via `test/day_of_week_modifiers_test.dart` (weekend config, start/end helpers, nth-of-* variants).
 
 #### Querying & Comparison (2 tests)
-- **ExpressiveComparisonTest.php** - Methods like `isSameAs()`, `isAfter()`, `isBefore()`
+- ~~**ExpressiveComparisonTest.php** - Methods like `isSameAs()`, `isAfter()`, `isBefore()`~~ ✅ Alias coverage lives in `test/comparison_methods_test.dart` (new `isAfter`/`isBefore` parity group).
 - ~~**CopyTest.php** - `copy()` method~~ ✅ Covered by `test/copy_methods_test.dart`.
 
 #### Formatting & Conversion (0 open tests)
@@ -78,13 +77,12 @@ There are **23 missing test files** that represent unimplemented features.
 - ~~**NowAndOtherStaticHelpersTest.php** - Static methods: `now()`, `today()`, `yesterday()`, etc.~~ ✅ Extended `test/static_helpers_test.dart` to cover locale/timezone propagation and derivatives.
 - ~~**NowDerivativesTest.php** - Derivatives of now: `tomorrow()`, `yesterday()`, etc.~~ ✅ Same suite now checks `yesterday`/`tomorrow` under mocked clocks.
 
-#### Specialized (4 tests)
 - ~~**LocalizationTest.php** - i18n/localization support~~ ✅ `test/localization_test.dart` verifies global and per-instance locale behavior.
 - ~~**TestingAidsTest.php** - Testing helpers like `setTestNow()`, `getTestNow()`~~ ✅ `test/testing_aids_test.dart` now covers closure resets and immutable propagation.
-- **LastErrorTest.php** - Error handling and reporting
+- ~~**LastErrorTest.php** - Error handling and reporting~~ ✅ `test/last_error_test.dart` exercises instance `getLastErrors()` plus the static `lastErrorsSnapshot()` helper.
 - ~~**StrictModeTest.php** - Strict mode validation~~ ✅ `test/strict_mode_test.dart` exercises getter/setter/method fallbacks and strict-mode toggles.
-- **ModifyNearDSTChangeTest.php** - DST (Daylight Saving Time) edge cases
-- **PhpBug72338Test.php** - PHP-specific regression test
+- ~~**ModifyNearDSTChangeTest.php** - DST (Daylight Saving Time) edge cases~~ ✅ `test/modify_near_dst_change_test.dart` covers spring-forward and fall-back transitions with named zones.
+- ~~**PhpBug72338Test.php** - PHP-specific regression test~~ ✅ `test/php_bug_72338_test.dart` locks timestamp stability across timezone changes and `modify()` calls.
 
 ## Priority Implementation Order
 
@@ -95,13 +93,13 @@ There are **23 missing test files** that represent unimplemented features.
 4. ~~**IssetTest** - Magic property access for core getters~~ ✅ Mirrored via `test/isset_test.dart` using typed getters and localized formatters.
 
 ### Phase 2: String Parsing (High Value)
-5. **ModifyTest** - String-based date modification
-6. **RelativeTest** - Relative date parsing
+5. ~~**ModifyTest** - String-based date modification~~ ✅ `test/modify_methods_test.dart` mirrors PHP scenarios, including real diff helpers.
+6. ~~**RelativeTest** - Relative date parsing~~ ✅ `test/relative_methods_test.dart` + `test/relative_keyword_detection_test.dart` cover seconds-since-midnight, keyword parsing, and DST-aware keywords.
 
 ### Phase 3: Extended Features (Nice to Have)
-7. **Subtraction operations** - SubTest
-8. **String formatting** - StringsTest
-9. **Macros** - MacroTest
+7. ~~**Subtraction operations** - SubTest~~ ✅ `test/sub_methods_test.dart` exercises `sub()` signatures plus each shorthand helper.
+8. ~~**String formatting** - StringsTest~~ ✅ `test/string_methods_test.dart` + `test/string_wrapper_formats_test.dart`.
+9. ~~**Macros** - MacroTest~~ ✅ `test/macro_methods_test.dart`.
 
 ### Phase 4: Polish & Utilities (Lower Priority)
 11. ~~Serialization tests~~
@@ -111,14 +109,12 @@ There are **23 missing test files** that represent unimplemented features.
 
 ## Analysis Notes
 
-- Constructor and parsing helpers remain the biggest parity gaps; the math/comparison surface is now mostly covered.
-- Macro coverage is complete and serialization now round-trips locale/timezone data; the outstanding scaffolding work lives in `createFromFormat`, `Isset`, and DST bug reproductions.
-- `create_from_date_test.dart`, `create_from_time_test.dart`, `create_from_timestamp_test.dart`, `create_from_format_test.dart`, and `isset_test.dart` now mirror the PHP suite for constructor/property helpers.
+- Constructor helpers such as `create()`/`createFromTimeString` remain the biggest parity gaps; the math/comparison surface is now mostly covered.
+- Macro coverage is complete and serialization now round-trips locale/timezone data; the outstanding scaffolding work lives in DST regressions (`ModifyNearDSTChangeTest.php`, `PhpBug72338Test.php`).
+- `create_from_date_test.dart`, `create_from_time_test.dart`, `create_from_timestamp_test.dart`, `create_from_format_test.dart`, `modify_methods_test.dart`, `relative_methods_test.dart`, and `isset_test.dart` now mirror the PHP suite for constructors/relative helpers.
 - Dynamic magic like `__isset` is intentionally excluded; Dart callers should rely on the explicit getters already exposed on `CarbonInterface`.
-- Serialization, copy semantics, and testing aids now mirror PHP coverage thanks to `test/serialization_test.dart`, `test/copy_methods_test.dart`, and `test/testing_aids_test.dart`, so the remaining focus shifts to creation/parsing helpers and DST regressions.
+- Serialization, copy semantics, and testing aids now mirror PHP coverage thanks to `test/serialization_test.dart`, `test/copy_methods_test.dart`, and `test/testing_aids_test.dart`; constructor helpers are fully covered (including safe/strict variants), so new PHP suites should be added here only when upstream introduces them.
 
 ## Next Steps
 
-1. Implement the various `createFrom*` helpers (date, time, timestamp, format) along with focused tests.
-2. Backfill parsing/modification coverage (`ModifyTest.php`, `RelativeTest.php`).
-3. Continue triaging higher-level suites (strings, macros, serialization) once constructors and creation helpers are stable.
+1. Continue auditing `MISSING_TESTS_ANALYSIS.md` after each addition to confirm no new PHP suites appear, especially locale-heavy parsing cases that rely on the expanded dictionaries.

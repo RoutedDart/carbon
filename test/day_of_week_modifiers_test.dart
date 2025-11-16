@@ -2,12 +2,28 @@ import 'package:carbon/carbon.dart';
 import 'package:test/test.dart';
 
 void main() {
+  setUpAll(() async {
+    await Carbon.configureTimeMachine();
+  });
+
   setUp(() {
     Carbon.setLocale('en');
     Carbon.resetWeekendDays();
   });
 
   group('day-of-week helpers', () {
+    test('default weekend days can be read and overridden', () {
+      expect(Carbon.getWeekendDays(), [DateTime.saturday, DateTime.sunday]);
+
+      Carbon.setWeekendDays([DateTime.thursday, DateTime.friday]);
+      expect(Carbon.getWeekendDays(), [DateTime.thursday, DateTime.friday]);
+      expect(Carbon.parse('2018-02-16').isWeekend(), isTrue);
+
+      Carbon.resetWeekendDays();
+      expect(Carbon.parse('2018-02-16').isWeekend(), isFalse);
+      expect(Carbon.getWeekendDays(), [DateTime.saturday, DateTime.sunday]);
+    });
+
     test('next with no argument defaults to current weekday', () {
       final result = Carbon.parse('1975-05-21').next();
       expect(result.toIso8601String().substring(0, 10), '1975-05-28');
@@ -86,6 +102,26 @@ void main() {
     test('firstOfYear with weekday', () {
       final result = Carbon.parse('1975-11-21').firstOfYear('wednesday');
       expect(result.toIso8601String().substring(0, 10), '1975-01-01');
+    });
+
+    test('startOfWeek handles same-week and cross-year boundaries', () {
+      final sameWeek = Carbon.parse('1980-08-07T12:11:09');
+      final start = sameWeek.startOfWeek();
+      expect(start.toIso8601String().substring(0, 10), '1980-08-04');
+
+      final crossYear = Carbon.parse('2013-12-31T00:00:00Z');
+      final crossStart = crossYear.startOfWeek();
+      expect(crossStart.toIso8601String().substring(0, 10), '2013-12-30');
+    });
+
+    test('endOfWeek handles same-week and cross-year boundaries', () {
+      final sameWeek = Carbon.parse('1980-08-07T11:12:13');
+      final end = sameWeek.endOfWeek();
+      expect(end.toIso8601String().substring(0, 10), '1980-08-10');
+
+      final crossYear = Carbon.parse('2013-12-31T00:00:00Z');
+      final crossEnd = crossYear.endOfWeek();
+      expect(crossEnd.toIso8601String().substring(0, 10), '2014-01-05');
     });
 
     test('lastOfYear with weekday', () {
@@ -174,6 +210,14 @@ void main() {
       final arWeekStart = Carbon.parse('2019-06-05').startOfWeek();
       expect(arWeekStart.dateTime.weekday, DateTime.saturday);
 
+      Carbon.setLocale('es_US');
+      final esWeekStart = Carbon.parse('2019-06-05').startOfWeek();
+      expect(esWeekStart.dateTime.weekday, DateTime.sunday);
+
+      Carbon.setLocale('en_GB');
+      final gbWeekStart = Carbon.parse('2019-06-05').startOfWeek();
+      expect(gbWeekStart.dateTime.weekday, DateTime.monday);
+
       Carbon.setLocale('en');
       final defaultWeek = Carbon.parse('2019-06-05').startOfWeek();
       expect(defaultWeek.dateTime.weekday, DateTime.monday);
@@ -183,6 +227,14 @@ void main() {
       Carbon.setLocale('en_US');
       final usEnd = Carbon.parse('2019-06-05').endOfWeek();
       expect(usEnd.dateTime.weekday, DateTime.saturday);
+
+      Carbon.setLocale('es_US');
+      final esEnd = Carbon.parse('2019-06-05').endOfWeek();
+      expect(esEnd.dateTime.weekday, DateTime.saturday);
+
+      Carbon.setLocale('en_GB');
+      final gbEnd = Carbon.parse('2019-06-05').endOfWeek();
+      expect(gbEnd.dateTime.weekday, DateTime.sunday);
 
       Carbon.setLocale('en');
       final defaultEnd = Carbon.parse('2019-06-05').endOfWeek();

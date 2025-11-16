@@ -14,6 +14,7 @@ import 'package:time_machine/time_machine.dart' as tm;
 part 'core/carbon_macro.dart';
 part 'core/carbon_settings.dart';
 part 'core/carbon_interface.dart';
+part 'core/carbon_last_errors.dart';
 part 'core/carbon_base.dart';
 part 'core/carbon_aliases.dart';
 part 'core/carbon_interval.dart';

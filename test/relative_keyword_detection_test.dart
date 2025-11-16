@@ -1,40 +1,41 @@
 import 'package:carbon/carbon.dart';
 import 'package:test/test.dart';
 
+const _relativeScenarios = <String, Map<String, Object>>{
+  '2018-01-02 03:04:05': {'date': '2018-01-02', 'isRelative': false},
+  '1500-01-02 12:00:00': {'date': '1500-01-02', 'isRelative': false},
+  '1985-12-10': {'date': '1985-12-10', 'isRelative': false},
+  'Dec 2017': {'date': '2017-12-01', 'isRelative': false},
+  '25-Dec-2017': {'date': '2017-12-25', 'isRelative': false},
+  '25 December 2017': {'date': '2017-12-25', 'isRelative': false},
+  '25 Dec 2017': {'date': '2017-12-25', 'isRelative': false},
+  'Dec 25 2017': {'date': '2017-12-25', 'isRelative': false},
+  'first day of January 2008': {'date': '2008-01-01', 'isRelative': false},
+  'first day of January 1999': {'date': '1999-01-01', 'isRelative': false},
+  'last day of January 1999': {'date': '1999-01-31', 'isRelative': false},
+  'last monday of January 1999': {'date': '1999-01-25', 'isRelative': false},
+  'first day of January 0001': {'date': '0001-01-01', 'isRelative': false},
+  'monday december 1750': {'date': '1750-12-07', 'isRelative': false},
+  'december 1750': {'date': '1750-12-01', 'isRelative': false},
+  'last sunday of January 2005': {'date': '2005-01-30', 'isRelative': false},
+  'January 2008': {'date': '2008-01-01', 'isRelative': false},
+  'first day of next month': {'date': '2017-02-01', 'isRelative': true},
+  'sunday noon': {'date': '2017-01-01', 'isRelative': true},
+  'sunday midnight': {'date': '2017-01-01', 'isRelative': true},
+  'monday december': {'date': '2017-12-04', 'isRelative': true},
+  'next saturday': {'date': '2017-01-07', 'isRelative': true},
+  'april': {'date': '2017-04-01', 'isRelative': true},
+};
+
 void main() {
   group('hasRelativeKeywords', () {
-    final scenarios = <String, bool>{
-      '2018-01-02 03:04:05': false,
-      '1500-01-02 12:00:00': false,
-      '1985-12-10': false,
-      'Dec 2017': false,
-      '25-Dec-2017': false,
-      '25 December 2017': false,
-      '25 Dec 2017': false,
-      'Dec 25 2017': false,
-      'first day of January 2008': false,
-      'first day of January 1999': false,
-      'last day of January 1999': false,
-      'last monday of January 1999': false,
-      'first day of January 0001': false,
-      'monday december 1750': false,
-      'december 1750': false,
-      'last sunday of January 2005': false,
-      'January 2008': false,
-      'first day of next month': true,
-      'sunday noon': true,
-      'sunday midnight': true,
-      'monday december': true,
-      'next saturday': true,
-      'april': true,
-    };
-
-    test('matches expectations', () {
-      scenarios.forEach((input, expected) {
+    test('matches PHP RelativeDateStringTest expectations', () {
+      _relativeScenarios.forEach((input, metadata) {
+        final isRelative = metadata['isRelative'] as bool;
         expect(
           Carbon.hasRelativeKeywords(input),
-          expected,
-          reason: 'mismatch for "$input"',
+          isRelative,
+          reason: 'hasRelativeKeywords mismatch for "$input"',
         );
       });
     });
@@ -49,23 +50,10 @@ void main() {
       Carbon.setTestNow(null);
     });
 
-    final expectations = <String, String>{
-      'first day of next month': '2017-02-01',
-      'sunday noon': '2017-01-01',
-      'sunday midnight': '2017-01-01',
-      'monday december': '2017-12-04',
-      'next saturday': '2017-01-07',
-      'april': '2017-04-01',
-      'first day of January 2008': '2008-01-01',
-      'last day of January 1999': '1999-01-31',
-      'last sunday of January 2005': '2005-01-30',
-      'Dec 2017': '2017-12-01',
-      '25 December 2017': '2017-12-25',
-    };
-
     test('parses relative strings to expected dates', () {
-      expectations.forEach((input, expectedDate) {
+      _relativeScenarios.forEach((input, metadata) {
         final parsed = Carbon.parse(input);
+        final expectedDate = metadata['date'] as String;
         expect(
           parsed.toIso8601String().substring(0, 10),
           expectedDate,

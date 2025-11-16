@@ -54,23 +54,6 @@ void main() {
       expect(() => Carbon.createFromTime(0, 0, 60), throwsRangeError);
     });
 
-    test('createFromTimeString parses partial components', () {
-      withClock(Clock.fixed(DateTime.utc(2040, 2, 1)), () {
-        final result = Carbon.createFromTimeString('08:30');
-        expect(result.hour, 8);
-        expect(result.minute, 30);
-        expect(result.second, 0);
-        expect(result.microsecond, 0);
-      });
-    });
-
-    test('createFromTimeString parses microseconds', () {
-      withClock(Clock.fixed(DateTime.utc(2040, 2, 1)), () {
-        final result = Carbon.createFromTimeString('08:30:15.123');
-        expect(result.microsecond, 123000);
-      });
-    });
-
     test('createFromFormat parses numeric input with PHP tokens', () {
       final result = Carbon.createFromFormat(
         'Y-m-d H:i',
@@ -125,13 +108,6 @@ void main() {
       final result = Carbon.createFromTimestampMsUTC(1.25);
       expect(result.timeZoneName, 'UTC');
       expect(result.microsecond, 1250);
-    });
-
-    test('createFromTimeString throws on invalid input', () {
-      expect(
-        () => Carbon.createFromTimeString('invalid'),
-        throwsFormatException,
-      );
     });
   });
 }

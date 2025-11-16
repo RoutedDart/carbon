@@ -15,6 +15,8 @@ part of '../carbon.dart';
 ///
 /// All mutation methods operate in place, so chaining continues to modify the
 /// same object. Use [Carbon.toImmutable] when you need an immutable snapshot.
+const Object _phpCreateMissing = Object();
+
 class Carbon extends CarbonBase {
   Carbon._internal({
     required super.dateTime,
@@ -49,6 +51,177 @@ class Carbon extends CarbonBase {
       return clone;
     }
     return Carbon.parse(input, timeZone: timeZone);
+  }
+
+  /// Mirrors PHP `Carbon::create()` with positional arguments.
+  ///
+  /// Arguments default to `0000-01-01 00:00:00` unless explicitly `null`, in
+  /// which case the current `now()` component is used. When [year] is a string
+  /// or [DateTime], the optional [month] parameter doubles as a timezone label
+  /// just like PHP's signature.
+  static CarbonInterface? createPhp([
+    Object? year = _phpCreateMissing,
+    Object? month = _phpCreateMissing,
+    Object? day = _phpCreateMissing,
+    Object? hour = _phpCreateMissing,
+    Object? minute = _phpCreateMissing,
+    Object? second = _phpCreateMissing,
+    Object? timeZone = _phpCreateMissing,
+  ]) {
+    final explicitZone = _normalizePhpTimezone(timeZone);
+    final bool monthLooksLikeZone =
+        explicitZone == null && _looksLikeZone(month);
+    final derivedZone =
+        explicitZone ??
+        (monthLooksLikeZone ? _normalizePhpTimezone(month) : null);
+    if (!_isPhpMissing(year) &&
+        (year is String || year is DateTime || year is CarbonInterface)) {
+      return _createFromPhpInput(year as Object, derivedZone);
+    }
+    final Object? monthArg = monthLooksLikeZone ? _phpCreateMissing : month;
+    final context = _resolveCreationBase(timeZone: derivedZone);
+    final base = context.localBase;
+    var invalid = false;
+
+    int resolveIntUnit(
+      Object? value, {
+      required int fallback,
+      required int nowValue,
+      required int min,
+      required int max,
+      required String label,
+    }) {
+      final resolved = _coerceNumeric(
+        value,
+        fallback,
+        nowValue,
+        label,
+      )?.round();
+      if (resolved == null) {
+        invalid = true;
+        return fallback;
+      }
+      if (resolved < min || resolved > max) {
+        if (CarbonBase.strictMode) {
+          throw RangeError.range(resolved, min, max, label);
+        }
+        invalid = true;
+      }
+      return resolved;
+    }
+
+    double resolveSecondDouble(
+      Object? value, {
+      required int fallback,
+      required int nowValue,
+    }) {
+      final resolved = _coerceNumeric(value, fallback, nowValue, 'second');
+      if (resolved == null) {
+        invalid = true;
+        return fallback.toDouble();
+      }
+      final double doubleValue = resolved.toDouble();
+      final intPart = doubleValue.floor();
+      if (intPart < 0 || intPart > 99) {
+        if (CarbonBase.strictMode) {
+          throw RangeError.range(intPart, 0, 99, 'second');
+        }
+        invalid = true;
+      }
+      return doubleValue;
+    }
+
+    final yearValue = resolveIntUnit(
+      year,
+      fallback: 0,
+      nowValue: base.year,
+      min: -9999,
+      max: 9999,
+      label: 'year',
+    );
+    final monthValue = resolveIntUnit(
+      monthArg,
+      fallback: 1,
+      nowValue: base.month,
+      min: 0,
+      max: 99,
+      label: 'month',
+    );
+    final dayValue = resolveIntUnit(
+      day,
+      fallback: 1,
+      nowValue: base.day,
+      min: 0,
+      max: 99,
+      label: 'day',
+    );
+    final hourValue = resolveIntUnit(
+      hour,
+      fallback: 0,
+      nowValue: base.hour,
+      min: 0,
+      max: 99,
+      label: 'hour',
+    );
+    final minuteValue = resolveIntUnit(
+      minute,
+      fallback: 0,
+      nowValue: base.minute,
+      min: 0,
+      max: 99,
+      label: 'minute',
+    );
+    final secondDouble = resolveSecondDouble(
+      second,
+      fallback: 0,
+      nowValue: base.second,
+    );
+    final secondValue = secondDouble.floor();
+    final microFromSeconds = ((secondDouble - secondValue) * 1000000).round();
+    if (invalid) {
+      return null;
+    }
+    final utcDate = CarbonBase._localToUtc(
+      year: yearValue,
+      month: monthValue,
+      day: dayValue,
+      hour: hourValue,
+      minute: minuteValue,
+      second: secondValue,
+      microsecond: microFromSeconds,
+      timeZone: derivedZone,
+    );
+    return _fromUtc(utcDate, locale: context.locale, timeZone: derivedZone);
+  }
+
+  /// PHP-style helper which returns `null` when the input cannot be parsed.
+  /// Mirrors PHP `Carbon::make()` by attempting to convert [input] into a
+  /// Carbon instance or returning `null` when the value cannot be parsed.
+  static CarbonInterface? make(dynamic input, {String? timeZone}) {
+    if (input == null) {
+      return null;
+    }
+    if (input is CarbonInterface) {
+      return timeZone == null
+          ? input.toMutable()
+          : input.tz(timeZone).toMutable();
+    }
+    if (input is DateTime) {
+      final result = Carbon.fromDateTime(input);
+      return timeZone == null ? result : result.tz(timeZone);
+    }
+    if (input is String) {
+      final trimmed = input.trim();
+      if (trimmed.isEmpty) {
+        return null;
+      }
+      try {
+        return Carbon.parse(trimmed, timeZone: timeZone);
+      } on FormatException {
+        return null;
+      }
+    }
+    return null;
   }
 
   factory Carbon.now({String? locale, String? timeZone}) {
@@ -178,6 +351,7 @@ class Carbon extends CarbonBase {
       timeZone: timeZone,
     );
     if (special != null) {
+      CarbonBase.setLastErrors();
       return special;
     }
 
@@ -186,8 +360,10 @@ class Carbon extends CarbonBase {
       final isSeconds = input.abs() < 1000000000000;
       final millis = isSeconds ? input * 1000 : input;
       resolved = DateTime.fromMillisecondsSinceEpoch(millis, isUtc: true);
+      CarbonBase.setLastErrors();
     } else if (input is DateTime) {
       resolved = input.isUtc ? input : input.toUtc();
+      CarbonBase.setLastErrors();
     } else if (input is String) {
       final relative = _parseRelativeString(
         input,
@@ -195,18 +371,42 @@ class Carbon extends CarbonBase {
         timeZone: timeZone,
       );
       if (relative != null) {
+        CarbonBase.setLastErrors();
         return relative;
       }
-      if (format != null && format.isNotEmpty) {
-        final formatter = DateFormat(format, locale);
-        resolved = formatter.parseUtc(input);
-      } else {
-        final parsed = DateTime.parse(input);
-        resolved = parsed.isUtc ? parsed : parsed.toUtc();
+      final pendingWarning = CarbonBase._calendarWarningForIsoString(input);
+      try {
+        if (format != null && format.isNotEmpty) {
+          final formatter = DateFormat(format, locale);
+          resolved = formatter.parseUtc(input);
+        } else {
+          final parsed = DateTime.parse(input);
+          resolved = parsed.isUtc ? parsed : parsed.toUtc();
+        }
+      } on FormatException catch (error) {
+        CarbonBase.setLastErrors(
+          CarbonLastErrors(
+            errorCount: 1,
+            errors: <String, String>{'input': error.message},
+          ),
+        );
+        rethrow;
       }
+      CarbonBase.setLastErrors(
+        pendingWarning ?? const CarbonLastErrors.empty(),
+      );
     } else if (input is CarbonInterface) {
       resolved = input.dateTime;
+      CarbonBase.setLastErrors();
     } else {
+      CarbonBase.setLastErrors(
+        CarbonLastErrors(
+          errorCount: 1,
+          errors: <String, String>{
+            'type': 'Unsupported input ${input.runtimeType}',
+          },
+        ),
+      );
       throw ArgumentError(
         'Unsupported input for Carbon.parse: ${input.runtimeType}',
       );
@@ -486,6 +686,17 @@ class Carbon extends CarbonBase {
   static T withTestNow<T>(dynamic value, T Function() callback) =>
       CarbonBase.withTestNow(value, callback);
 
+  /// Returns the most recent parsing/creation report, if any.
+  static CarbonLastErrors? lastErrorsSnapshot() =>
+      CarbonBase.lastErrorsSnapshot();
+
+  /// Overrides the stored parsing/creation report (mainly for tests).
+  static void setLastErrors([CarbonLastErrors? errors]) =>
+      CarbonBase.setLastErrors(errors);
+
+  /// Clears the stored parsing/creation report so the next call returns null.
+  static void resetLastErrors() => CarbonBase.resetLastErrors();
+
   static CarbonInterface fromJson(String source, {String? locale}) {
     final decoded = jsonDecode(source);
     if (decoded is String || decoded is int) {
@@ -598,11 +809,14 @@ class Carbon extends CarbonBase {
     'r': 'ddd, DD MMM YYYY HH:mm:ss ZZ',
   };
 
+  static final RegExp _clockGlyphPattern = RegExp(r'[HhGgmsSavuaA]');
+
   static _PhpFormatTranslation _translatePhpFormat(String format) {
     final buffer = StringBuffer();
     var escape = false;
     var resetClock = false;
     var capturesFraction = false;
+    var containsClockToken = false;
     for (var i = 0; i < format.length; i++) {
       final char = format[i];
       if (escape) {
@@ -630,6 +844,10 @@ class Carbon extends CarbonBase {
         if (char == 'u' || char == 'v') {
           capturesFraction = true;
         }
+        if ('HhGgisauvA'.contains(char) ||
+            _clockGlyphPattern.hasMatch(replacement)) {
+          containsClockToken = true;
+        }
         buffer.write(replacement);
         continue;
       }
@@ -645,10 +863,14 @@ class Carbon extends CarbonBase {
     if (escape) {
       buffer.write('[\\]');
     }
+    if (!containsClockToken) {
+      resetClock = true;
+    }
     return _PhpFormatTranslation(
       buffer.toString(),
       resetClock: resetClock,
       capturesFraction: capturesFraction,
+      hasTimeTokens: containsClockToken,
     );
   }
 
@@ -853,7 +1075,7 @@ class Carbon extends CarbonBase {
       base: baseUtc,
       defaultTimeZone: context.zoneName,
     );
-    final sanitized = translation.capturesFraction
+    final CarbonInterface normalized = translation.capturesFraction
         ? parsed
         : parsed.copyWith(
             dateTime: parsed.dateTime.subtract(
@@ -864,7 +1086,10 @@ class Carbon extends CarbonBase {
               ),
             ),
           );
-    return sanitized.copyWith(settings: settings);
+    final CarbonInterface adjusted = translation.hasTimeTokens
+        ? normalized
+        : _coerceToStartOfDay(normalized);
+    return adjusted.copyWith(settings: settings);
   }
 
   static CarbonInterface _fromUtc(
@@ -906,6 +1131,7 @@ class Carbon extends CarbonBase {
     String? locale,
     CarbonSettings settings = const CarbonSettings(),
   ]) {
+    late int invalidHour;
     try {
       final resolved = _buildSafeDate(
         year: year,
@@ -916,6 +1142,7 @@ class Carbon extends CarbonBase {
         second: second,
         microsecond: microsecond,
       );
+      invalidHour = resolved.hour;
       final totalMicro = _microsecondsOf(resolved);
       final utcDate = CarbonBase._localToUtc(
         year: resolved.year,
@@ -936,6 +1163,15 @@ class Carbon extends CarbonBase {
     } on CarbonInvalidDateException {
       if (CarbonBase.strictMode) rethrow;
       return null;
+    } on StateError catch (error) {
+      if (_isInvalidLocalTimeError(error)) {
+        final exception = CarbonInvalidDateException('hour', invalidHour);
+        if (CarbonBase.strictMode) {
+          throw exception;
+        }
+        return null;
+      }
+      rethrow;
     }
   }
 
@@ -1032,6 +1268,241 @@ class Carbon extends CarbonBase {
     defaultTimeZone: defaultTimeZone,
   );
 
+  /// Parses [input] expressed in [locale], translating localized phrases to
+  /// English before delegating to [Carbon.parse].
+  static CarbonInterface parseFromLocale(
+    String input, [
+    String? locale,
+    String? timeZone,
+  ]) {
+    final resolvedLocale = locale ?? CarbonBase.defaultLocale;
+    final translated = _translateLocaleTimeString(input, resolvedLocale);
+    final custom = _tryParseTranslatedLocaleString(
+      translated,
+      locale: resolvedLocale,
+      timeZone: timeZone,
+    );
+    if (custom != null) {
+      return custom;
+    }
+    CarbonInterface parsed = Carbon.parse(translated, locale: resolvedLocale);
+    if (timeZone != null && timeZone.isNotEmpty) {
+      parsed = _assignLocalTimezone(parsed, timeZone);
+    }
+    return parsed;
+  }
+
+  /// PHP-style helper that parses formatted [input] with localized tokens.
+  static CarbonInterface createFromLocaleFormat(
+    String format,
+    String locale,
+    String input, {
+    String? timeZone,
+    CarbonSettings settings = const CarbonSettings(),
+  }) {
+    final translation = _translatePhpFormat(format);
+    final context = _resolveCreationBase(timeZone: timeZone, locale: locale);
+    final baseUtc = _contextBaseToUtc(
+      context,
+      resetClock: translation.resetClock,
+    );
+    var isoPattern = translation.pattern;
+    if (_localeShortMonthUsesDigits(locale)) {
+      isoPattern = isoPattern.replaceAll('MMM', 'MMMM');
+    }
+    final parsed = createFromLocaleIsoFormat(
+      isoPattern,
+      locale,
+      input,
+      timeZone: timeZone,
+      base: baseUtc,
+      defaultTimeZone: context.zoneName,
+    );
+    final CarbonInterface normalized = translation.capturesFraction
+        ? parsed
+        : parsed.copyWith(
+            dateTime: parsed.dateTime.subtract(
+              Duration(
+                microseconds:
+                    parsed.dateTime.microsecond +
+                    parsed.dateTime.millisecond * 1000,
+              ),
+            ),
+          );
+    final CarbonInterface adjusted = translation.hasTimeTokens
+        ? normalized
+        : _coerceToStartOfDay(normalized);
+    return adjusted.copyWith(settings: settings);
+  }
+
+  static bool _isPhpMissing(Object? value) =>
+      identical(value, _phpCreateMissing);
+
+  static String? _normalizePhpTimezone(Object? input) {
+    if (_isPhpMissing(input) || input == null) {
+      return null;
+    }
+    if (input is String) {
+      final trimmed = input.trim();
+      return trimmed.isEmpty ? null : trimmed;
+    }
+    if (input is CarbonInterface) {
+      return input.timeZoneName;
+    }
+    return null;
+  }
+
+  static bool _looksLikeZone(Object? candidate) {
+    if (candidate is String) {
+      return int.tryParse(candidate.trim()) == null;
+    }
+    return false;
+  }
+
+  static num? _coerceNumeric(
+    Object? value,
+    int fallback,
+    int nowValue,
+    String label,
+  ) {
+    if (_isPhpMissing(value)) {
+      return fallback;
+    }
+    if (value == null) {
+      return nowValue;
+    }
+    if (value is num) {
+      return value;
+    }
+    if (value is String) {
+      return num.tryParse(value.trim());
+    }
+    throw ArgumentError('Unsupported $label value: $value');
+  }
+
+  static String _translateLocaleTimeString(String input, String locale) {
+    var result = input.toLowerCase();
+    for (final candidate in CarbonBase._localeCandidates(locale)) {
+      final rules = _localeTranslationRules[candidate];
+      if (rules == null) {
+        continue;
+      }
+      for (final rule in rules) {
+        result = result.replaceAllMapped(rule.pattern, rule.replacement);
+      }
+    }
+    return result;
+  }
+
+  static CarbonInterface? _tryParseTranslatedLocaleString(
+    String translated, {
+    String? locale,
+    String? timeZone,
+  }) {
+    final trimmed = translated.trim();
+    final timeMatch = _localeRelativeTimePattern.firstMatch(trimmed);
+    if (timeMatch != null) {
+      final base = _relativeKeywordBase(
+        timeMatch.group(1)!,
+        locale: locale,
+        timeZone: timeZone,
+      );
+      final token = CarbonBase._parseTimeToken(timeMatch.group(2)!);
+      if (token == null) {
+        return null;
+      }
+      return _applyTimeOfDay(base, token);
+    }
+    if (_localeRelativeKeywords.contains(trimmed)) {
+      return _relativeKeywordBase(trimmed, locale: locale, timeZone: timeZone);
+    }
+    final weekdayMatch = _localeWeekdayPattern.firstMatch(trimmed);
+    if (weekdayMatch != null) {
+      final now = Carbon.today(locale: locale, timeZone: timeZone);
+      final current = now.dateTime.weekday % 7;
+      final target = CarbonBase._weekdayIndex(weekdayMatch.group(1)!);
+      final delta = (target - current + 7) % 7;
+      return now.addDays(delta);
+    }
+    return null;
+  }
+
+  static CarbonInterface _relativeKeywordBase(
+    String keyword, {
+    String? locale,
+    String? timeZone,
+  }) {
+    switch (keyword) {
+      case 'today':
+        return Carbon.today(locale: locale, timeZone: timeZone);
+      case 'tomorrow':
+        return Carbon.tomorrow(locale: locale, timeZone: timeZone);
+      case 'yesterday':
+        return Carbon.yesterday(locale: locale, timeZone: timeZone);
+      case 'after tomorrow':
+        return Carbon.tomorrow(locale: locale, timeZone: timeZone).addDays(1);
+      case 'before yesterday':
+        return Carbon.yesterday(locale: locale, timeZone: timeZone).subDays(1);
+    }
+    return Carbon.today(locale: locale, timeZone: timeZone);
+  }
+
+  static CarbonInterface _applyTimeOfDay(
+    CarbonInterface base,
+    _ParsedTimeOfDay token,
+  ) => base
+      .startOfDay()
+      .setHour(token.hour)
+      .setMinute(token.minute)
+      .setSecond(token.second)
+      .setMicrosecond(token.microsecond);
+
+  static CarbonInterface _assignLocalTimezone(
+    CarbonInterface value,
+    String timeZone,
+  ) {
+    final utc = CarbonBase._localToUtc(
+      year: value.year,
+      month: value.month,
+      day: value.day,
+      hour: value.hour,
+      minute: value.minute,
+      second: value.second,
+      microsecond:
+          value.microsecond +
+          value.millisecond * Duration.microsecondsPerMillisecond,
+      timeZone: timeZone,
+    );
+    return _fromUtc(
+      utc,
+      locale: value.localeCode,
+      timeZone: timeZone,
+      settings: value.settings,
+    );
+  }
+
+  static CarbonInterface _coerceToStartOfDay(CarbonInterface value) {
+    final start = CarbonBase._startOfDayUtcForZone(
+      value.dateTime,
+      timeZone: value.timeZoneName,
+    );
+    return value.copyWith(dateTime: start);
+  }
+
+  static CarbonInterface _createFromPhpInput(Object input, String? timeZone) {
+    if (input is String) {
+      return Carbon.parse(input, timeZone: timeZone);
+    }
+    if (input is DateTime) {
+      final result = Carbon.fromDateTime(input);
+      return timeZone == null ? result : result.tz(timeZone);
+    }
+    final source = input as CarbonInterface;
+    return timeZone == null
+        ? source.toMutable()
+        : source.tz(timeZone).toMutable();
+  }
+
   static DateTime _buildSafeDate({
     int? year,
     int? month,
@@ -1074,6 +1545,9 @@ class Carbon extends CarbonBase {
     }
   }
 
+  static bool _isInvalidLocalTimeError(StateError error) =>
+      error.message.contains('not valid in timezone');
+
   static int _microsecondsOf(DateTime value) =>
       value.millisecond * 1000 + value.microsecond;
 }
@@ -1083,11 +1557,13 @@ class _PhpFormatTranslation {
     this.pattern, {
     this.resetClock = false,
     this.capturesFraction = false,
+    this.hasTimeTokens = true,
   });
 
   final String pattern;
   final bool resetClock;
   final bool capturesFraction;
+  final bool hasTimeTokens;
 }
 
 bool _isAsciiLetter(String value) {
@@ -1097,3 +1573,271 @@ bool _isAsciiLetter(String value) {
   final code = value.codeUnitAt(0);
   return (code >= 65 && code <= 90) || (code >= 97 && code <= 122);
 }
+
+class _LocaleTranslationRule {
+  const _LocaleTranslationRule(this.pattern, this.replacement);
+
+  final RegExp pattern;
+  final String Function(Match match) replacement;
+}
+
+String Function(Match match) _literalLocaleReplacement(String value) =>
+    (_) => value;
+
+final RegExp _localeRelativeTimePattern = RegExp(
+  r'^(today|tomorrow|yesterday|after tomorrow|before yesterday)\s+(?:at\s+)?(\d{1,2}:\d{2}(?::\d{2})?)$',
+);
+
+final RegExp _localeWeekdayPattern = RegExp(
+  r'^(sunday|monday|tuesday|wednesday|thursday|friday|saturday)$',
+);
+
+const Set<String> _localeRelativeKeywords = <String>{
+  'today',
+  'tomorrow',
+  'yesterday',
+  'after tomorrow',
+  'before yesterday',
+};
+
+final List<_LocaleTranslationRule> _frLocaleRules = <_LocaleTranslationRule>[
+  _LocaleTranslationRule(
+    RegExp(r"après[- ]demain", unicode: true),
+    _literalLocaleReplacement('after tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r"avant[- ]hier", unicode: true),
+    _literalLocaleReplacement('before yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r"à l['’]instant", unicode: true),
+    _literalLocaleReplacement('now'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r"aujourd['’]hui", unicode: true),
+    _literalLocaleReplacement('today'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bdemain\b', unicode: true),
+    _literalLocaleReplacement('tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bhier\b', unicode: true),
+    _literalLocaleReplacement('yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\s+à\s+(?=\d)', unicode: true),
+    _literalLocaleReplacement(' at '),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bdimanche\b', unicode: true),
+    _literalLocaleReplacement('sunday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\blundi\b', unicode: true),
+    _literalLocaleReplacement('monday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bmardi\b', unicode: true),
+    _literalLocaleReplacement('tuesday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bmercredi\b', unicode: true),
+    _literalLocaleReplacement('wednesday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bjeudi\b', unicode: true),
+    _literalLocaleReplacement('thursday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bvendredi\b', unicode: true),
+    _literalLocaleReplacement('friday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bsamedi\b', unicode: true),
+    _literalLocaleReplacement('saturday'),
+  ),
+];
+
+final List<_LocaleTranslationRule> _deLocaleRules = <_LocaleTranslationRule>[
+  _LocaleTranslationRule(
+    RegExp(r'\bheute\b', unicode: true),
+    _literalLocaleReplacement('today'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bmorgen\b', unicode: true),
+    _literalLocaleReplacement('tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bübermorgen\b', unicode: true),
+    _literalLocaleReplacement('after tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bgestern\b', unicode: true),
+    _literalLocaleReplacement('yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bvorgestern\b', unicode: true),
+    _literalLocaleReplacement('before yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\s+um\s+(?=\d)', unicode: true),
+    _literalLocaleReplacement(' at '),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\boktober\b', unicode: true),
+    _literalLocaleReplacement('october'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bokt\b', unicode: true),
+    _literalLocaleReplacement('oct'),
+  ),
+];
+
+final List<_LocaleTranslationRule> _csLocaleRules = <_LocaleTranslationRule>[
+  _LocaleTranslationRule(
+    RegExp(r'červenec', unicode: true),
+    _literalLocaleReplacement('july'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'červen', unicode: true),
+    _literalLocaleReplacement('june'),
+  ),
+];
+
+final List<_LocaleTranslationRule> _ruLocaleRules = <_LocaleTranslationRule>[
+  _LocaleTranslationRule(
+    RegExp(r'послезавтра', unicode: true),
+    _literalLocaleReplacement('after tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'позавчера', unicode: true),
+    _literalLocaleReplacement('before yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'завтра', unicode: true),
+    _literalLocaleReplacement('tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'вчера', unicode: true),
+    _literalLocaleReplacement('yesterday'),
+  ),
+];
+
+final List<_LocaleTranslationRule> _esLocaleRules = <_LocaleTranslationRule>[
+  _LocaleTranslationRule(
+    RegExp(r'pasado\s+mañana', unicode: true),
+    _literalLocaleReplacement('after tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'antes\s+de\s+ayer', unicode: true),
+    _literalLocaleReplacement('before yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'anteayer', unicode: true),
+    _literalLocaleReplacement('before yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bahora\b', unicode: true),
+    _literalLocaleReplacement('now'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bhoy\b', unicode: true),
+    _literalLocaleReplacement('today'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bmañana\b', unicode: true),
+    _literalLocaleReplacement('tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bayer\b', unicode: true),
+    _literalLocaleReplacement('yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\sa las\s+(?=\d)', unicode: true),
+    _literalLocaleReplacement(' at '),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\sa la\s+(?=\d)', unicode: true),
+    _literalLocaleReplacement(' at '),
+  ),
+];
+
+final List<_LocaleTranslationRule> _itLocaleRules = <_LocaleTranslationRule>[
+  _LocaleTranslationRule(
+    RegExp(r'dopodomani', unicode: true),
+    _literalLocaleReplacement('after tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r"l['’]altro\s+ieri", unicode: true),
+    _literalLocaleReplacement('before yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bavantieri\b', unicode: true),
+    _literalLocaleReplacement('before yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\badesso\b', unicode: true),
+    _literalLocaleReplacement('now'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bora\b', unicode: true),
+    _literalLocaleReplacement('now'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\boggi\b', unicode: true),
+    _literalLocaleReplacement('today'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bdomani\b', unicode: true),
+    _literalLocaleReplacement('tomorrow'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\bieri\b', unicode: true),
+    _literalLocaleReplacement('yesterday'),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r'\s+alle\s+(?=\d)', unicode: true),
+    _literalLocaleReplacement(' at '),
+  ),
+  _LocaleTranslationRule(
+    RegExp(r"\s+all['’]e?\s+(?=\d)", unicode: true),
+    _literalLocaleReplacement(' at '),
+  ),
+];
+
+final Map<String, List<_LocaleTranslationRule>> _localeTranslationRules =
+    <String, List<_LocaleTranslationRule>>{
+      'fr': _frLocaleRules,
+      'fr_fr': _frLocaleRules,
+      'de': _deLocaleRules,
+      'de_de': _deLocaleRules,
+      'cs': _csLocaleRules,
+      'cs_cz': _csLocaleRules,
+      'ru': _ruLocaleRules,
+      'ru_ru': _ruLocaleRules,
+      'es': _esLocaleRules,
+      'es_es': _esLocaleRules,
+      'es_mx': _esLocaleRules,
+      'es_419': _esLocaleRules,
+      'it': _itLocaleRules,
+      'it_it': _itLocaleRules,
+      'it_ch': _itLocaleRules,
+    };
+
+bool _localeShortMonthUsesDigits(String locale) {
+  final sample = DateTime.utc(2000, 4, 1);
+  for (final candidate in CarbonBase._localeCandidates(locale)) {
+    try {
+      final formatted = DateFormat('MMM', candidate).format(sample);
+      if (_digitMatcher.hasMatch(formatted)) {
+        return true;
+      }
+    } catch (_) {
+      continue;
+    }
+  }
+  return false;
+}
+
+final RegExp _digitMatcher = RegExp(r'\d');

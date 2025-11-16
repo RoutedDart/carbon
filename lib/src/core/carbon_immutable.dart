@@ -35,6 +35,16 @@ class CarbonImmutable extends CarbonBase {
 
   static void resetToStringFormat() => Carbon.resetToStringFormat();
 
+  /// Returns the most recent parsing/creation report tracked by Carbon.
+  static CarbonLastErrors? lastErrorsSnapshot() => Carbon.lastErrorsSnapshot();
+
+  /// Overrides the stored parsing/creation report (mainly for tests).
+  static void setLastErrors([CarbonLastErrors? errors]) =>
+      Carbon.setLastErrors(errors);
+
+  /// Clears the stored parsing/creation report.
+  static void resetLastErrors() => Carbon.resetLastErrors();
+
   factory CarbonImmutable.parse(
     dynamic input, {
     String? format,
@@ -46,6 +56,12 @@ class CarbonImmutable extends CarbonBase {
     locale: locale,
     timeZone: timeZone,
   ).toImmutable();
+
+  static CarbonImmutable parseFromLocale(
+    String input, [
+    String? locale,
+    String? timeZone,
+  ]) => Carbon.parseFromLocale(input, locale, timeZone).toImmutable();
 
   factory CarbonImmutable.from(CarbonInterface other) =>
       CarbonImmutable._internal(
@@ -155,6 +171,20 @@ class CarbonImmutable extends CarbonBase {
     format,
     input,
     locale: locale,
+    timeZone: timeZone,
+    settings: settings,
+  ).toImmutable();
+
+  static CarbonImmutable createFromLocaleFormat(
+    String format,
+    String locale,
+    String input, {
+    String? timeZone,
+    CarbonSettings settings = const CarbonSettings(),
+  }) => Carbon.createFromLocaleFormat(
+    format,
+    locale,
+    input,
     timeZone: timeZone,
     settings: settings,
   ).toImmutable();

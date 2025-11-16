@@ -10,6 +10,9 @@ the original PHP library so feature work can be validated quickly.
 - Fluent creation helpers (`now`, `today`, `create`, `parse`).
 - Calendar math with overflow options, rounding, and comparison helpers.
 - Locale-aware formatting, human-readable differences, and timezone support.
+- Moment-style ISO parsing helpers (`createFromIsoFormat`) plus locale-aware
+  weekend defaults and translator metadata.
+- `modify` / `relative` DSL plus `addReal*` helpers for DST-aware adjustments.
 - Macro system for user-defined helpers plus mutable/immutable variants.
 
 ## Getting started
@@ -52,7 +55,22 @@ import 'package:carbon/carbon.dart';
 void main() {
   final payday = Carbon.now().addWeeks(2).endOfWeek();
   print(payday.format('yyyy-MM-dd HH:mm'));
+
+  final birthday = Carbon.createFromIsoFormat('LL', 'April 4, 2019')
+      .locale('fr_FR');
+  print(birthday.translatedFormat('l D T e O P'));
 }
+```
+
+### ISO parsing helpers
+
+```dart
+final madrid = Carbon.createFromLocaleIsoFormat(
+  'YYYY MMMM D HH:mm',
+  'es_ES',
+  '2024 diciembre 05 18:30',
+).tz('Europe/Madrid');
+print(madrid.toIso8601String(keepOffset: true));
 ```
 
 ## Additional information

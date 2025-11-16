@@ -23,6 +23,10 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Global settings controlling calendar math and week boundaries.
   CarbonSettings get settings;
 
+  /// Snapshot of the last parsing/creation attempt, or null when nothing has
+  /// executed yet.
+  CarbonLastErrors? getLastErrors();
+
   /// Creates a clone with optional overrides.
   ///
   /// Mutating implementations may update `this`, while immutable ones return a
@@ -221,6 +225,9 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Applies a PHP-style modification string (e.g., "+1 day").
   CarbonInterface modify(String expression);
+
+  /// Alias for [modify]; mirrors PHP Carbon's `change()` helper.
+  CarbonInterface change(String expression);
 
   /// Applies relative string such as "next week" or "tomorrow".
   CarbonInterface relative(String expression);
@@ -731,6 +738,27 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Difference in UTC millennia (with fractional part).
   double diffInUTCMillennia([dynamic date, bool absolute = true]);
+
+  /// Difference in real seconds (fractional) ignoring calendar math quirks.
+  double diffInRealSeconds(CarbonInterface other, {bool absolute = true});
+
+  /// Difference in real minutes (fractional).
+  double diffInRealMinutes(CarbonInterface other, {bool absolute = true});
+
+  /// Difference in real hours (fractional).
+  double diffInRealHours(CarbonInterface other, {bool absolute = true});
+
+  /// Difference in real days (fractional).
+  double diffInRealDays(CarbonInterface other, {bool absolute = true});
+
+  /// Difference in real weeks (fractional).
+  double diffInRealWeeks(CarbonInterface other, {bool absolute = true});
+
+  /// Difference in real milliseconds.
+  double diffInRealMilliseconds(CarbonInterface other, {bool absolute = true});
+
+  /// Difference in real microseconds.
+  double diffInRealMicroseconds(CarbonInterface other, {bool absolute = true});
 
   /// Formats using a pattern string and optional locale.
   String format(String pattern, {String? locale});

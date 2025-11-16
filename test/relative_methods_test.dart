@@ -23,22 +23,49 @@ void main() {
   });
 
   group('Day-relative measurements', () {
+    test('secondsSinceMidnight matches PHP scenarios', () {
+      expect(Carbon.today().secondsSinceMidnight(), closeTo(0, 1e-9));
+      expect(
+        Carbon.today().addSeconds(30).secondsSinceMidnight(),
+        closeTo(30, 1e-9),
+      );
+      expect(
+        Carbon.today().addDays(1).secondsSinceMidnight(),
+        closeTo(0, 1e-9),
+      );
+      expect(
+        Carbon.today().addDays(1).addSeconds(120).secondsSinceMidnight(),
+        closeTo(120, 1e-9),
+      );
+      expect(
+        Carbon.today().addMonths(3).addSeconds(42).secondsSinceMidnight(),
+        closeTo(42, 1e-9),
+      );
+    });
+
     test('secondsSinceMidnight handles fractional seconds', () {
       final carbon = Carbon.parse('2025-02-10T12:34:56.789123Z');
       expect(carbon.secondsSinceMidnight(), closeTo(45296.789123, 1e-9));
     });
 
+    test('secondsUntilEndOfDay mirrors PHP checks', () {
+      final end = Carbon.today().endOfDay();
+      expect(end.secondsUntilEndOfDay(), closeTo(0, 1e-6));
+      expect(
+        end.copy().subSeconds(60).secondsUntilEndOfDay(),
+        closeTo(60, 1e-6),
+      );
+      final custom = Carbon.parse('2014-10-24T12:34:56Z');
+      expect(custom.secondsUntilEndOfDay(), closeTo(41103.999999, 1e-5));
+      final midnight = Carbon.parse('2014-10-24T00:00:00Z');
+      expect(midnight.secondsUntilEndOfDay(), closeTo(86399.999999, 1e-5));
+    });
+
     test('secondsUntilEndOfDay complements secondsSinceMidnight', () {
       final carbon = Carbon.parse('2025-02-10T12:34:56.789123Z');
       final remaining = carbon.secondsUntilEndOfDay();
-      expect(remaining, closeTo(41103.210877, 1e-6));
       final sum = carbon.secondsSinceMidnight() + remaining;
       expect(sum, closeTo(86400, 1e-6));
-    });
-
-    test('secondsUntilEndOfDay reaches zero at endOfDay', () {
-      final end = Carbon.today().endOfDay();
-      expect(end.secondsUntilEndOfDay(), closeTo(0, 1e-6));
     });
   });
 

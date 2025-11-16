@@ -97,6 +97,32 @@ void main() {
       });
     });
 
+    group('expressive alias coverage', () {
+      test('isAfter matches greaterThan semantics across offsets', () {
+        final CarbonInterface left = Carbon.parse(
+          '2000-01-01T12:00:00Z',
+        ).tz('+02:00');
+        final CarbonInterface right = Carbon.parse(
+          '2000-01-01T09:00:01Z',
+        ).tz('-03:00');
+
+        expect(left.isAfter(right), isTrue);
+        expect(left.greaterThan(right), isTrue);
+        expect(right.isAfter(left), isFalse);
+      });
+
+      test('isBefore mirrors lessThan semantics', () {
+        final CarbonInterface base = Carbon.parse(
+          '2000-01-01T12:00:00Z',
+        ).tz('+02:00');
+        final CarbonInterface later = Carbon.parse('2000-01-01T13:00:00Z');
+
+        expect(base.isBefore(later), isTrue);
+        expect(base.lessThan(later), isTrue);
+        expect(later.isBefore(base), isFalse);
+      });
+    });
+
     group('between helpers', () {
       test('between inclusive defaults to true when inside range', () {
         final CarbonInterface target = Carbon.create(

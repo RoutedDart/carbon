@@ -1747,9 +1747,11 @@ String _constantsDifferences() => '''
 
 Future<String> _buildSerialization() async {
   final example = await serialization_examples.runSerializationExample();
+  final custom = await serialization_examples.runCustomSerializationExample();
   final sections = <String>[
     _serializationOverview(),
     _serializationRoundTrip(example),
+    _serializationCustom(custom),
     _serializationDifferences(),
   ];
   return sections.join('\n\n');
@@ -1778,14 +1780,30 @@ ${example.output}
 ```
 ''';
 
+String _serializationCustom(ExampleRun example) =>
+    '''
+## Custom serialization
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _serializationDifferences() => '''
 ## Differences compared to the PHP docs
 
-- Dart Carbon serializes to JSON rather than PHP's binary `serialize()` output.
+-- Dart Carbon serializes to JSON rather than PHP's binary `serialize()` output.
   Use `Carbon.fromSerialized()` for round-trips instead of `unserialize()`.
-- Advanced PHP options (`allowed_classes` in `unserialize`, `serializeUsing`)
-  are not exposed. Custom serialization requires wrapping the `serialize()`
-  result yourself.
+- PHP's `serializeUsing()` customization hook is now mirrored via
+  `Carbon.serializeUsing()`/`Carbon.resetSerializationFormat()` so you can
+  replace the payload with any string (the bundled default payload still
+  preserves ISO text + timezone/settings).
 ''';
 
 Future<String> _buildJson() async {

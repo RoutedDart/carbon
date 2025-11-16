@@ -35,11 +35,38 @@ roundTrip zone -> Europe/Moscow
 ```
 
 
+## Custom serialization
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  Carbon.serializeUsing((date) => 'CUSTOM:' + date.toIso8601String());
+
+  final dt = Carbon.parse('2024-01-01T00:00:00Z');
+  print('custom serialization -> ${dt.serialize()}');
+  Carbon.resetSerializationFormat();
+}
+
+```
+
+Output:
+
+```
+custom serialization -> CUSTOM:2024-01-01T00:00:00.000Z
+```
+
+
 ## Differences compared to the PHP docs
 
-- Dart Carbon serializes to JSON rather than PHP's binary `serialize()` output.
+-- Dart Carbon serializes to JSON rather than PHP's binary `serialize()` output.
   Use `Carbon.fromSerialized()` for round-trips instead of `unserialize()`.
-- Advanced PHP options (`allowed_classes` in `unserialize`, `serializeUsing`)
-  are not exposed. Custom serialization requires wrapping the `serialize()`
-  result yourself.
+- PHP's `serializeUsing()` customization hook is now mirrored via
+  `Carbon.serializeUsing()`/`Carbon.resetSerializationFormat()` so you can
+  replace the payload with any string (the bundled default payload still
+  preserves ISO text + timezone/settings).
 

@@ -4096,8 +4096,19 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   String toJSON() => toJsonString();
 
+  static String Function(CarbonInterface)? _serializationOverride;
+
+  static void serializeUsing(String Function(CarbonInterface) exporter) {
+    _serializationOverride = exporter;
+  }
+
+  static void resetSerializationFormat() {
+    _serializationOverride = null;
+  }
+
   @override
-  String serialize() => jsonEncode(_serializationPayload());
+  String serialize() =>
+      _serializationOverride?.call(this) ?? jsonEncode(_serializationPayload());
 
   Map<String, Object?> _serializationPayload() => <String, Object?>{
     'version': _serializationVersion,

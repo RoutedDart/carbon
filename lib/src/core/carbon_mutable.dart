@@ -38,6 +38,16 @@ class Carbon extends CarbonBase {
   /// Clears all registered isoFormat overrides.
   static void resetIsoFormatTokens() => CarbonBase.resetIsoFormatTokens();
 
+  /// Sets a global serialization formatter (mirrors PHP's `serializeUsing`).
+  static void serializeUsing(String Function(CarbonInterface) exporter) {
+    CarbonBase.serializeUsing(exporter);
+  }
+
+  /// Resets the custom serialization formatter to the default JSON payload.
+  static void resetSerializationFormat() {
+    CarbonBase.resetSerializationFormat();
+  }
+
   factory Carbon([dynamic input, String? timeZone]) {
     final resolved = _resolveTokenInput(input: input, timeZone: timeZone);
     if (resolved != null) {

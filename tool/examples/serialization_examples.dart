@@ -46,3 +46,32 @@ Future<ExampleRun> runSerializationExample() async {
     output: buffer.toString().trimRight(),
   );
 }
+
+const _customSerializeSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  Carbon.serializeUsing((date) => 'CUSTOM:' + date.toIso8601String());
+
+  final dt = Carbon.parse('2024-01-01T00:00:00Z');
+  print('custom serialization -> ${dt.serialize()}');
+  Carbon.resetSerializationFormat();
+}
+''';
+
+Future<ExampleRun> runCustomSerializationExample() async {
+  await _bootstrap();
+  Carbon.serializeUsing((date) => 'CUSTOM:' + date.toIso8601String());
+  final dt = Carbon.parse('2024-01-01T00:00:00Z');
+  final buffer = StringBuffer()
+    ..writeln('custom serialization -> ${dt.serialize()}');
+  Carbon.resetSerializationFormat();
+  return ExampleRun(
+    code: _customSerializeSource,
+    output: buffer.toString().trimRight(),
+  );
+}

@@ -98,7 +98,10 @@ void main() {
   group('Time zones', () {
     test('throws when timezone backend not configured', () {
       final date = Carbon.parse('2025-03-09T06:30:00Z');
-      expect(() => date.tz('America/New_York'), throwsStateError);
+      expect(
+        () => date.tz('America/New_York'),
+        throwsA(isA<CarbonInvalidTimeZoneException>()),
+      );
     });
 
     test('time machine backend converts zones with DST awareness', () async {
@@ -163,7 +166,10 @@ void main() {
       expect(dynamicCarbon.daysUntilWeekend(), 3);
 
       Carbon.unregisterMacro('daysUntilWeekend');
-      expect(() => dynamicCarbon.daysUntilWeekend(), throwsStateError);
+      expect(
+        () => dynamicCarbon.daysUntilWeekend(),
+        throwsA(isA<CarbonUnknownMethodException>()),
+      );
     });
   });
 }

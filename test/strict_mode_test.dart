@@ -18,7 +18,7 @@ void main() {
       expect(
         () => carbon.foobar,
         throwsA(
-          isA<ArgumentError>().having(
+          isA<CarbonUnknownGetterException>().having(
             (error) => error.toString(),
             'message',
             contains("Unknown getter 'foobar'"),
@@ -39,7 +39,7 @@ void main() {
       expect(
         () => carbon.foobar = 'biz',
         throwsA(
-          isA<ArgumentError>().having(
+          isA<CarbonUnknownSetterException>().having(
             (error) => error.toString(),
             'message',
             contains("Unknown setter 'foobar'"),
@@ -53,7 +53,7 @@ void main() {
       expect(
         () => carbon.foobar(),
         throwsA(
-          isA<StateError>().having(
+          isA<CarbonUnknownMethodException>().having(
             (error) => error.toString(),
             'message',
             contains('Method foobar does not exist.'),

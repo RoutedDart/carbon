@@ -147,7 +147,10 @@ void main() {
       expect(enumEnd.dayOfWeek, DateTime.sunday % 7);
       expect(enumEnd.microsecond, 999999);
 
-      expect(() => date.copyWith().startOf('microsecond'), throwsArgumentError);
+      expect(
+        () => date.copyWith().startOf('microsecond'),
+        throwsA(isA<CarbonUnknownUnitException>()),
+      );
     });
 
     test('average finds the midpoint between two instants', () {

@@ -91,6 +91,12 @@ abstract class CarbonBase implements CarbonInterface {
   static const int _serializationVersion = 1;
   static const String _serializationTypeMutable = 'carbon';
   static const String _serializationTypeImmutable = 'carbon_immutable';
+  static CarbonLastErrors? _lastErrors;
+  static final RegExp _isoCalendarPrefixPattern = RegExp(
+    r'^\s*([+-]?\d{1,6})-(\d{2})-(\d{2})',
+  );
+  static const String _invalidDateWarningMessage =
+      'The parsed date was invalid';
   Map<String, dynamic>? _dynamicProperties;
 
   void _copyInstanceFormatterTo(CarbonBase target) {
@@ -123,6 +129,9 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   CarbonSettings get settings => _settings;
 
+  @override
+  CarbonLastErrors? getLastErrors() => CarbonBase.lastErrorsSnapshot();
+
   /// Registers a PHP-style macro callable that can be invoked dynamically.
   static void registerMacro(String name, CarbonMacro macro) =>
       _macros[name] = macro;
@@ -145,6 +154,19 @@ abstract class CarbonBase implements CarbonInterface {
     _weekendOverridden = false;
     _startOfWeekOverridden = false;
     _applyLocaleDefaults(_defaultLocale);
+  }
+
+  /// Most recent parsing/creation report, or null when nothing executed yet.
+  static CarbonLastErrors? lastErrorsSnapshot() => _lastErrors;
+
+  /// Records the latest parsing/creation outcome.
+  static void setLastErrors([CarbonLastErrors? errors]) {
+    _lastErrors = errors ?? const CarbonLastErrors.empty();
+  }
+
+  /// Clears the last error snapshot so subsequent calls return null.
+  static void resetLastErrors() {
+    _lastErrors = null;
   }
 
   /// Enables named timezone support via [time_machine](https://pub.dev).
@@ -1558,7 +1580,7 @@ abstract class CarbonBase implements CarbonInterface {
           return _StartEndUnit.millennium;
       }
     }
-    throw ArgumentError("Unknown unit '$value'");
+    throw CarbonUnknownUnitException(value.toString());
   }
 
   @override
@@ -3501,6 +3523,67 @@ abstract class CarbonBase implements CarbonInterface {
   double diffInUTCMillennia([dynamic date, bool absolute = true]) =>
       _diffInUTCByMonths(date, monthsPerUnit: 12000, absolute: absolute);
 
+  double _diffInRealUnit(
+    CarbonInterface other,
+    int unitMicros, {
+    bool absolute = true,
+  }) {
+    final delta =
+        (_dateTime.microsecondsSinceEpoch -
+                other.dateTime.microsecondsSinceEpoch)
+            .toDouble() /
+        unitMicros;
+    return absolute ? delta.abs() : delta;
+  }
+
+  @override
+  double diffInRealSeconds(CarbonInterface other, {bool absolute = true}) =>
+      _diffInRealUnit(
+        other,
+        Duration.microsecondsPerSecond,
+        absolute: absolute,
+      );
+
+  @override
+  double diffInRealMinutes(CarbonInterface other, {bool absolute = true}) =>
+      _diffInRealUnit(
+        other,
+        Duration.microsecondsPerMinute,
+        absolute: absolute,
+      );
+
+  @override
+  double diffInRealHours(CarbonInterface other, {bool absolute = true}) =>
+      _diffInRealUnit(other, Duration.microsecondsPerHour, absolute: absolute);
+
+  @override
+  double diffInRealDays(CarbonInterface other, {bool absolute = true}) =>
+      _diffInRealUnit(other, Duration.microsecondsPerDay, absolute: absolute);
+
+  @override
+  double diffInRealWeeks(CarbonInterface other, {bool absolute = true}) =>
+      _diffInRealUnit(
+        other,
+        Duration.microsecondsPerDay * 7,
+        absolute: absolute,
+      );
+
+  @override
+  double diffInRealMilliseconds(
+    CarbonInterface other, {
+    bool absolute = true,
+  }) => _diffInRealUnit(
+    other,
+    Duration.microsecondsPerMillisecond,
+    absolute: absolute,
+  );
+
+  @override
+  double diffInRealMicroseconds(
+    CarbonInterface other, {
+    bool absolute = true,
+  }) => _diffInRealUnit(other, 1, absolute: absolute);
+
   @override
   String format(String pattern, {String? locale}) {
     final snapshot = _zoneSnapshot();
@@ -4063,15 +4146,17 @@ abstract class CarbonBase implements CarbonInterface {
   static tm.DateTimeZone _getZoneOrThrow(String zoneName) {
     final provider = _zoneProvider;
     if (provider == null) {
-      throw StateError(
-        'Named timezone "$zoneName" requires calling Carbon.configureTimeMachine() first.',
+      throw CarbonInvalidTimeZoneException(
+        zoneName,
+        reason:
+            'Named timezone "$zoneName" requires calling Carbon.configureTimeMachine() first.',
       );
     }
     return _zoneCache.putIfAbsent(zoneName, () {
       try {
         return provider.getDateTimeZoneSync(zoneName);
       } on Object {
-        throw StateError('Unknown timezone "$zoneName".');
+        throw CarbonInvalidTimeZoneException(zoneName);
       }
     });
   }
@@ -4192,13 +4277,13 @@ abstract class CarbonBase implements CarbonInterface {
     }
     if (invocation.isGetter) {
       if (_strictMode) {
-        throw ArgumentError("Unknown getter '$trimmed'");
+        throw CarbonUnknownGetterException(trimmed);
       }
       return _dynamicProperties?[trimmed];
     }
     if (isSetter) {
       if (_strictMode) {
-        throw ArgumentError("Unknown setter '$trimmed'");
+        throw CarbonUnknownSetterException(trimmed);
       }
       final value = invocation.positionalArguments.isEmpty
           ? null
@@ -4209,7 +4294,7 @@ abstract class CarbonBase implements CarbonInterface {
     }
     if (invocation.isMethod) {
       if (_strictMode) {
-        throw StateError('Method $trimmed does not exist.');
+        throw CarbonUnknownMethodException(trimmed);
       }
       return null;
     }
@@ -4424,6 +4509,9 @@ abstract class CarbonBase implements CarbonInterface {
     }
     throw ArgumentError('Unsupported modify expression "$expression"');
   }
+
+  @override
+  CarbonInterface change(String expression) => modify(expression);
 
   @override
   CarbonInterface relative(String expression) => CarbonImmutable._internal(
@@ -4709,6 +4797,36 @@ abstract class CarbonBase implements CarbonInterface {
     final shortIndex = short.indexOf(value);
     if (shortIndex != -1) {
       return shortIndex + 1;
+    }
+    return null;
+  }
+
+  static int _daysInMonthCount(int year, int month) =>
+      DateTime.utc(year, month + 1, 0).day;
+
+  static CarbonLastErrors? _calendarWarningForIsoString(String input) {
+    final match = _isoCalendarPrefixPattern.firstMatch(input.trim());
+    if (match == null) {
+      return null;
+    }
+    final year = int.tryParse(match.group(1)!);
+    final month = int.tryParse(match.group(2)!);
+    final day = int.tryParse(match.group(3)!);
+    if (year == null || month == null || day == null) {
+      return null;
+    }
+    if (month < 1 || month > 12) {
+      return CarbonLastErrors(
+        warningCount: 1,
+        warnings: const <String, String>{'month': _invalidDateWarningMessage},
+      );
+    }
+    final lastDay = _daysInMonthCount(year, month);
+    if (day < 1 || day > lastDay) {
+      return CarbonLastErrors(
+        warningCount: 1,
+        warnings: const <String, String>{'day': _invalidDateWarningMessage},
+      );
     }
     return null;
   }

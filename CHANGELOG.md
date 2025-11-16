@@ -14,5 +14,8 @@
   detached snapshots without mutating the original instance.
 - Tighten strict-mode behavior for unknown getters/setters/methods and cover
   the behavior through dedicated `test/strict_mode_test.dart` cases.
+- Introduce PHP-style exception classes (e.g. `CarbonUnknownGetterException`,
+  `CarbonUnknownUnitException`, `CarbonInvalidTimeZoneException`) and throw
+  them when strict-mode accessors, unit lookups, or timezone resolution fail.
 - Extend `test/serialization_test.dart`, `test/copy_methods_test.dart`, and
   `test/testing_aids_test.dart` with parity scenarios from the PHP suite.

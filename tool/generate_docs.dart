@@ -1424,12 +1424,16 @@ String _additionDifferences() => '''
 
 Future<String> _buildDifference() async {
   final diffUnits = await difference_examples.runDiffUnitsExample();
+  final diffIntervals = await difference_examples.runDiffIntervalExample();
   final floatDiffs = await difference_examples.runFloatDiffExample();
+  final diffInUnit = await difference_examples.runDiffInUnitExample();
   final durations = await difference_examples.runDurationDiffExample();
   final sections = <String>[
     _differenceOverview(),
     _differenceUnits(diffUnits),
+    _differenceCarbonInterval(diffIntervals),
     _differenceFloat(floatDiffs),
+    _differenceInUnit(diffInUnit),
     _differenceDuration(durations),
     _differenceDifferences(),
   ];
@@ -1460,9 +1464,39 @@ ${example.output}
 ```
 ''';
 
+String _differenceCarbonInterval(ExampleRun example) =>
+    '''
+## `diffAsCarbonInterval`
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _differenceFloat(ExampleRun example) =>
     '''
 ## `floatDiffIn*` helpers
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
+String _differenceInUnit(ExampleRun example) =>
+    '''
+## `diffInUnit()`
 
 ```dart
 ${example.code}
@@ -1493,14 +1527,15 @@ ${example.output}
 String _differenceDifferences() => '''
 ## Differences compared to the PHP docs
 
-- `diff()`/`diffAsCarbonInterval()` return `CarbonInterval` in PHP. Dart's
-  `diff()` exposes the platform `Duration` instead, so you access `inDays`
-  / `inHours` rather than `years`, `months`, etc.
-- `diffAsCarbonInterval()`, `diffAsDateInterval()`, and `diffInUnit()` are not
-  implemented yet. Convert `diff()` into a `CarbonInterval` manually when you
-  need structured units.
-- Carbon's PHP-specific `invert` flag is not exposed since Dart relies on the
-  sign of the returned `Duration`.
+- `diff()`/`diffAsDateInterval()` return `Duration` instances rather than a
+  PHP `DateInterval`. Use `diffAsCarbonInterval()` when you need explicit month
+  plus microsecond components.
+- `diffInUnit()` accepts the same keywords as the other add/subtract helpers.
+  Strings such as `'hours'` and the `CarbonUnit` enum are supported, but PHP's
+  `Unit` class is not mirrored.
+- CarbonInterval itself intentionally stays slim (only months + microseconds),
+  so advanced APIs like `cascade()` or `forHumans()` still rely on the PHP
+  implementation.
 ''';
 
 Future<String> _buildDiffForHumans() async {

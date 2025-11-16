@@ -3729,6 +3729,39 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   Duration diff(CarbonInterface other) => _dateTime.difference(other.dateTime);
 
+  @override
+  CarbonInterval diffAsCarbonInterval(
+    CarbonInterface other, {
+    bool absolute = true,
+  }) {
+    final ascending = !_dateTime.isAfter(other.dateTime);
+    var start = ascending ? _dateTime : other.dateTime;
+    var end = ascending ? other.dateTime : _dateTime;
+    var months = _adjustedMonthDelta(start, end);
+    if (months < 0) {
+      months = -months;
+    }
+    final anchor = _addMonths(start, months, monthOverflow: true);
+    final remainderMicros = end.difference(anchor).inMicroseconds;
+    var monthSpan = ascending ? months : -months;
+    var micros = ascending ? remainderMicros : -remainderMicros;
+    if (absolute) {
+      monthSpan = monthSpan.abs();
+      micros = micros.abs();
+    }
+    return CarbonInterval._(monthSpan: monthSpan, microseconds: micros);
+  }
+
+  @override
+  Duration diffAsDateInterval(CarbonInterface other, {bool absolute = false}) {
+    final delta = diff(other);
+    if (!absolute) {
+      return delta;
+    }
+    final micros = delta.inMicroseconds;
+    return Duration(microseconds: micros.abs());
+  }
+
   int _diffIn(Duration portion, CarbonInterface other, {bool absolute = true}) {
     final value = diff(other).inMicroseconds / portion.inMicroseconds;
     final truncated = value.truncate();
@@ -3778,6 +3811,46 @@ abstract class CarbonBase implements CarbonInterface {
   @override
   int diffInMillennia(CarbonInterface other, {bool absolute = true}) =>
       _diffInMonthsUnit(other, monthsPerUnit: 12000, absolute: absolute);
+
+  @override
+  double diffInUnit(
+    dynamic unitInput,
+    CarbonInterface other, {
+    bool absolute = false,
+  }) {
+    final resolved = _carbonUnitFromInput(unitInput);
+    if (resolved == null) {
+      throw ArgumentError('Unknown diff unit "$unitInput"');
+    }
+    switch (resolved) {
+      case CarbonUnit.microsecond:
+        return floatDiffInMicroseconds(other, absolute: absolute);
+      case CarbonUnit.millisecond:
+        return floatDiffInMilliseconds(other, absolute: absolute);
+      case CarbonUnit.second:
+        return floatDiffInSeconds(other, absolute: absolute);
+      case CarbonUnit.minute:
+        return floatDiffInMinutes(other, absolute: absolute);
+      case CarbonUnit.hour:
+        return floatDiffInHours(other, absolute: absolute);
+      case CarbonUnit.day:
+        return floatDiffInDays(other, absolute: absolute);
+      case CarbonUnit.week:
+        return floatDiffInWeeks(other, absolute: absolute);
+      case CarbonUnit.month:
+        return _diffInMonthsDouble(other, absolute: absolute);
+      case CarbonUnit.quarter:
+        return _diffInMonthsDouble(other, monthsPerUnit: 3, absolute: absolute);
+      case CarbonUnit.year:
+        return _diffInYearsDouble(other, absolute: absolute);
+      case CarbonUnit.decade:
+        return _diffInYearsDouble(other, absolute: absolute) / 10;
+      case CarbonUnit.century:
+        return _diffInYearsDouble(other, absolute: absolute) / 100;
+      case CarbonUnit.millennium:
+        return _diffInYearsDouble(other, absolute: absolute) / 1000;
+    }
+  }
 
   @override
   int diffInDaysFloored(CarbonInterface other) =>
@@ -5407,6 +5480,20 @@ abstract class CarbonBase implements CarbonInterface {
     return null;
   }
 
+  CarbonUnit? _carbonUnitFromInput(dynamic input) {
+    if (input == null) {
+      return null;
+    }
+    if (input is CarbonUnit) {
+      return input;
+    }
+    if (input is String) {
+      final key = input.trim().toLowerCase();
+      return _carbonUnitAliases[key];
+    }
+    return null;
+  }
+
   _UnitAmount? _parseUnitAmountExpression(String expression) {
     final trimmed = expression.trim().toLowerCase();
     final match = RegExp(r'^([+-]?\d+)\s+([a-z]+)$').firstMatch(trimmed);
@@ -5772,13 +5859,13 @@ abstract class CarbonBase implements CarbonInterface {
       end = tmp;
     }
 
-    final floorEnd = _addMonths(start, monthsDelta);
+    final floorEnd = _addMonths(start, monthsDelta, monthOverflow: true);
 
     double monthsValue;
     if (!floorEnd.isBefore(end)) {
       monthsValue = monthsDelta.toDouble();
     } else {
-      final ceilEnd = _addMonths(start, monthsDelta + 1);
+      final ceilEnd = _addMonths(start, monthsDelta + 1, monthOverflow: true);
       final daysToFloor = _preciseDayDiff(floorEnd, end);
       final daysToCeil = _preciseDayDiff(end, ceilEnd);
       final denominator = daysToCeil + daysToFloor;
@@ -5803,17 +5890,21 @@ abstract class CarbonBase implements CarbonInterface {
     }
 
     var yearsDiff = end.year - start.year;
-    var floorEnd = _addMonths(start, yearsDiff * 12);
+    var floorEnd = _addMonths(start, yearsDiff * 12, monthOverflow: true);
     if (floorEnd.isAfter(end)) {
       yearsDiff -= 1;
-      floorEnd = _addMonths(start, yearsDiff * 12);
+      floorEnd = _addMonths(start, yearsDiff * 12, monthOverflow: true);
     }
 
     if (!floorEnd.isBefore(end)) {
       return sign * yearsDiff.toDouble();
     }
 
-    final ceilEnd = _addMonths(start, (yearsDiff + 1) * 12);
+    final ceilEnd = _addMonths(
+      start,
+      (yearsDiff + 1) * 12,
+      monthOverflow: true,
+    );
     final daysToFloor = _preciseDayDiff(floorEnd, end);
     final daysToCeil = _preciseDayDiff(end, ceilEnd);
     final denominator = daysToCeil + daysToFloor;

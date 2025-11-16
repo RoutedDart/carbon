@@ -75,6 +75,88 @@ Future<ExampleRun> runDiffUnitsExample() async {
   );
 }
 
+const _diffIntervalSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse('2012-01-15T12:00:00Z');
+  final earlier = base.copy()
+    ..subYears(2)
+    ..subMonths(1)
+    ..subDays(3)
+    ..subHours(6);
+
+  final signed = base.diffAsCarbonInterval(earlier, absolute: false);
+  final absolute = base.diffAsCarbonInterval(earlier);
+
+  Carbon applyInterval(CarbonInterface source, CarbonInterval interval) {
+    final copy = source.copy();
+    if (interval.monthSpan != 0) {
+      copy.addMonths(interval.monthSpan);
+    }
+    if (interval.microseconds != 0) {
+      copy.add(Duration(microseconds: interval.microseconds));
+    }
+    return copy as Carbon;
+  }
+
+  final roundTrip = applyInterval(base, signed).toIso8601String();
+  final absoluteRoundTrip = applyInterval(earlier, absolute).toIso8601String();
+
+  print('signed months -> ${signed.monthSpan}');
+  print('signed micros -> ${signed.microseconds}');
+  print('round-trip -> $roundTrip');
+  print('absolute months -> ${absolute.monthSpan}');
+  print('absolute micros -> ${absolute.microseconds}');
+  print('absolute rebuild -> $absoluteRoundTrip');
+}
+''';
+
+/// Demonstrates converting a difference into a [CarbonInterval].
+Future<ExampleRun> runDiffIntervalExample() async {
+  await _bootstrap();
+  final base = Carbon.parse('2012-01-15T12:00:00Z');
+  final earlier = base.copy()
+    ..subYears(2)
+    ..subMonths(1)
+    ..subDays(3)
+    ..subHours(6);
+  final signed = base.diffAsCarbonInterval(earlier, absolute: false);
+  final absolute = base.diffAsCarbonInterval(earlier);
+  CarbonInterface applyInterval(
+    CarbonInterface source,
+    CarbonInterval interval,
+  ) {
+    final copy = source.copy();
+    if (interval.monthSpan != 0) {
+      copy.addMonths(interval.monthSpan);
+    }
+    if (interval.microseconds != 0) {
+      copy.add(Duration(microseconds: interval.microseconds));
+    }
+    return copy;
+  }
+
+  final buffer = StringBuffer()
+    ..writeln('signed months -> ${signed.monthSpan}')
+    ..writeln('signed micros -> ${signed.microseconds}')
+    ..writeln('round-trip -> ${applyInterval(base, signed).toIso8601String()}')
+    ..writeln('absolute months -> ${absolute.monthSpan}')
+    ..writeln('absolute micros -> ${absolute.microseconds}')
+    ..writeln(
+      'absolute rebuild -> '
+      '${applyInterval(earlier, absolute).toIso8601String()}',
+    );
+  return ExampleRun(
+    code: _diffIntervalSource,
+    output: buffer.toString().trimRight(),
+  );
+}
+
 const _floatDiffSource = r'''
 import 'package:carbon/carbon.dart';
 import 'package:intl/date_symbol_data_local.dart';
@@ -199,6 +281,50 @@ Future<ExampleRun> runDurationDiffExample() async {
     ..writeln('diff() Duration hours -> ${delta.inHours}');
   return ExampleRun(
     code: _durationDiffSource,
+    output: buffer.toString().trimRight(),
+  );
+}
+
+const _diffInUnitSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse('2000-01-15T00:00:00Z');
+  final target = base.copy()
+    ..addYears(1)
+    ..addMonths(2)
+    ..addDays(5)
+    ..addHours(12);
+
+  print('years -> ${base.diffInUnit(CarbonUnit.year, target)}');
+  print('months -> ${base.diffInUnit('months', target)}');
+  print('hours (signed) -> '
+      '${target.diffInUnit('hours', base, absolute: false)}');
+}
+''';
+
+/// Shows the flexible `diffInUnit()` helper for mixed units.
+Future<ExampleRun> runDiffInUnitExample() async {
+  await _bootstrap();
+  final base = Carbon.parse('2000-01-15T00:00:00Z');
+  final target = base.copy()
+    ..addYears(1)
+    ..addMonths(2)
+    ..addDays(5)
+    ..addHours(12);
+  final buffer = StringBuffer()
+    ..writeln('years -> ${base.diffInUnit(CarbonUnit.year, target)}')
+    ..writeln('months -> ${base.diffInUnit('months', target)}')
+    ..writeln(
+      'hours (signed) -> '
+      '${target.diffInUnit('hours', base, absolute: false)}',
+    );
+  return ExampleRun(
+    code: _diffInUnitSource,
     output: buffer.toString().trimRight(),
   );
 }

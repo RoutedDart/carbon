@@ -711,6 +711,15 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Difference in days.
   int diffInDays(CarbonInterface other, {bool absolute = true});
 
+  /// Difference expressed as a [CarbonInterval].
+  CarbonInterval diffAsCarbonInterval(
+    CarbonInterface other, {
+    bool absolute = true,
+  });
+
+  /// Difference expressed as a [Duration].
+  Duration diffAsDateInterval(CarbonInterface other, {bool absolute = false});
+
   /// Difference in hours.
   int diffInHours(CarbonInterface other, {bool absolute = true});
 
@@ -740,6 +749,13 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Difference in millennia.
   int diffInMillennia(CarbonInterface other, {bool absolute = true});
+
+  /// Difference in the specified [unit].
+  double diffInUnit(
+    dynamic unit,
+    CarbonInterface other, {
+    bool absolute = false,
+  });
 
   /// Difference in days, floored (rounded down).
   int diffInDaysFloored(CarbonInterface other);

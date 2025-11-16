@@ -44,6 +44,62 @@ secondsSinceMidnight -> 120.0
 ```
 
 
+## `diffAsCarbonInterval`
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse('2012-01-15T12:00:00Z');
+  final earlier = base.copy()
+    ..subYears(2)
+    ..subMonths(1)
+    ..subDays(3)
+    ..subHours(6);
+
+  final signed = base.diffAsCarbonInterval(earlier, absolute: false);
+  final absolute = base.diffAsCarbonInterval(earlier);
+
+  Carbon applyInterval(CarbonInterface source, CarbonInterval interval) {
+    final copy = source.copy();
+    if (interval.monthSpan != 0) {
+      copy.addMonths(interval.monthSpan);
+    }
+    if (interval.microseconds != 0) {
+      copy.add(Duration(microseconds: interval.microseconds));
+    }
+    return copy as Carbon;
+  }
+
+  final roundTrip = applyInterval(base, signed).toIso8601String();
+  final absoluteRoundTrip = applyInterval(earlier, absolute).toIso8601String();
+
+  print('signed months -> ${signed.monthSpan}');
+  print('signed micros -> ${signed.microseconds}');
+  print('round-trip -> $roundTrip');
+  print('absolute months -> ${absolute.monthSpan}');
+  print('absolute micros -> ${absolute.microseconds}');
+  print('absolute rebuild -> $absoluteRoundTrip');
+}
+
+```
+
+Output:
+
+```
+signed months -> -25
+signed micros -> -280800000000
+round-trip -> 2009-12-12T06:00:00.000Z
+absolute months -> 25
+absolute micros -> 280800000000
+absolute rebuild -> 2012-01-15T12:00:00.000Z
+```
+
+
 ## `floatDiffIn*` helpers
 
 ```dart
@@ -104,6 +160,40 @@ floatDiffInYears -> 10.10068493150685
 ```
 
 
+## `diffInUnit()`
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse('2000-01-15T00:00:00Z');
+  final target = base.copy()
+    ..addYears(1)
+    ..addMonths(2)
+    ..addDays(5)
+    ..addHours(12);
+
+  print('years -> ${base.diffInUnit(CarbonUnit.year, target)}');
+  print('months -> ${base.diffInUnit('months', target)}');
+  print('hours (signed) -> '
+      '${target.diffInUnit('hours', base, absolute: false)}');
+}
+
+```
+
+Output:
+
+```
+years -> 1.1767123287671233
+months -> 14.17741935483871
+hours (signed) -> -10332.0
+```
+
+
 ## `diff()` returns `Duration`
 
 ```dart
@@ -133,12 +223,13 @@ diff() Duration hours -> 26556
 
 ## Differences compared to the PHP docs
 
-- `diff()`/`diffAsCarbonInterval()` return `CarbonInterval` in PHP. Dart's
-  `diff()` exposes the platform `Duration` instead, so you access `inDays`
-  / `inHours` rather than `years`, `months`, etc.
-- `diffAsCarbonInterval()`, `diffAsDateInterval()`, and `diffInUnit()` are not
-  implemented yet. Convert `diff()` into a `CarbonInterval` manually when you
-  need structured units.
-- Carbon's PHP-specific `invert` flag is not exposed since Dart relies on the
-  sign of the returned `Duration`.
+- `diff()`/`diffAsDateInterval()` return `Duration` instances rather than a
+  PHP `DateInterval`. Use `diffAsCarbonInterval()` when you need explicit month
+  plus microsecond components.
+- `diffInUnit()` accepts the same keywords as the other add/subtract helpers.
+  Strings such as `'hours'` and the `CarbonUnit` enum are supported, but PHP's
+  `Unit` class is not mirrored.
+- CarbonInterval itself intentionally stays slim (only months + microseconds),
+  so advanced APIs like `cascade()` or `forHumans()` still rely on the PHP
+  implementation.
 

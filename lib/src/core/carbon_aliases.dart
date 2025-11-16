@@ -64,6 +64,43 @@ const Map<String, _TemporalUnit> _temporalUnits = <String, _TemporalUnit>{
   'millenniums': _TemporalUnit.months(12000),
 };
 
+const Map<String, CarbonUnit> _carbonUnitAliases = <String, CarbonUnit>{
+  'micro': CarbonUnit.microsecond,
+  'micros': CarbonUnit.microsecond,
+  'microsecond': CarbonUnit.microsecond,
+  'microseconds': CarbonUnit.microsecond,
+  'milli': CarbonUnit.millisecond,
+  'millis': CarbonUnit.millisecond,
+  'millisecond': CarbonUnit.millisecond,
+  'milliseconds': CarbonUnit.millisecond,
+  'second': CarbonUnit.second,
+  'seconds': CarbonUnit.second,
+  'minute': CarbonUnit.minute,
+  'minutes': CarbonUnit.minute,
+  'hour': CarbonUnit.hour,
+  'hours': CarbonUnit.hour,
+  'day': CarbonUnit.day,
+  'days': CarbonUnit.day,
+  'week': CarbonUnit.week,
+  'weeks': CarbonUnit.week,
+  'weekday': CarbonUnit.day,
+  'weekdays': CarbonUnit.day,
+  'month': CarbonUnit.month,
+  'months': CarbonUnit.month,
+  'quarter': CarbonUnit.quarter,
+  'quarters': CarbonUnit.quarter,
+  'year': CarbonUnit.year,
+  'years': CarbonUnit.year,
+  'decade': CarbonUnit.decade,
+  'decades': CarbonUnit.decade,
+  'century': CarbonUnit.century,
+  'centuries': CarbonUnit.century,
+  'millennium': CarbonUnit.millennium,
+  'millenium': CarbonUnit.millennium,
+  'millennia': CarbonUnit.millennium,
+  'millenniums': CarbonUnit.millennium,
+};
+
 dynamic _invokeAlias(CarbonBase base, String name, Invocation invocation) {
   final result = _handleAddSubAlias(base, name, invocation);
   if (!identical(result, _aliasNotHandled)) {

@@ -224,9 +224,13 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   CarbonInterface average([dynamic other]);
 
   /// Applies a PHP-style modification string (e.g., "+1 day").
+  ///
+  /// #### Throws
+  /// - [ArgumentError] when the expression cannot be parsed.
   CarbonInterface modify(String expression);
 
-  /// Alias for [modify]; mirrors PHP Carbon's `change()` helper.
+  /// Alias for [modify]; mirrors PHP Carbon's `change()` helper so code ported
+  /// from PHP continues to compile.
   CarbonInterface change(String expression);
 
   /// Applies relative string such as "next week" or "tomorrow".

@@ -91,3 +91,55 @@ Future<ExampleRun> runDateTimeConversionExample() async {
     output: buffer.toString().trimRight(),
   );
 }
+
+const _carbonizeSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse(
+    '2019-02-01T03:45:27.612584',
+    timeZone: 'Europe/Paris',
+  );
+  final fromString = base.carbonize('2019-03-21');
+  final period = base.carbonize(base.daysUntil('2019-12-10'));
+  final interval = base.carbonize(CarbonInterval.days(3));
+  final duration = base.carbonize(const Duration(hours: 12));
+
+  print('carbonize string -> ${fromString.toIso8601String(keepOffset: true)}');
+  print('carbonize period -> ${period.toIso8601String(keepOffset: true)}');
+  print('carbonize interval -> ${interval.toIso8601String(keepOffset: true)}');
+  print('carbonize duration -> ${duration.toIso8601String(keepOffset: true)}');
+}
+''';
+
+/// Demonstrates PHP-style `carbonize()` inputs.
+Future<ExampleRun> runCarbonizeExample() async {
+  await _bootstrap();
+  final base = Carbon.parse(
+    '2019-02-01T03:45:27.612584',
+    timeZone: 'Europe/Paris',
+  );
+  final fromString = base.carbonize('2019-03-21');
+  final period = base.carbonize(base.daysUntil('2019-12-10'));
+  final interval = base.carbonize(CarbonInterval.days(3));
+  final duration = base.carbonize(const Duration(hours: 12));
+  final buffer = StringBuffer()
+    ..writeln(
+      'carbonize string -> ${fromString.toIso8601String(keepOffset: true)}',
+    )
+    ..writeln('carbonize period -> ${period.toIso8601String(keepOffset: true)}')
+    ..writeln(
+      'carbonize interval -> ${interval.toIso8601String(keepOffset: true)}',
+    )
+    ..writeln(
+      'carbonize duration -> ${duration.toIso8601String(keepOffset: true)}',
+    );
+  return ExampleRun(
+    code: _carbonizeSource,
+    output: buffer.toString().trimRight(),
+  );
+}

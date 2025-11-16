@@ -74,11 +74,48 @@ toMutable runtimeType -> Carbon
 ```
 
 
+## `carbonize()` helpers
+
+`carbonize()` mirrors the PHP helper: strings reuse the current timezone,
+intervals/durations add to a clone, and periods return their starting date.
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse(
+    '2019-02-01T03:45:27.612584',
+    timeZone: 'Europe/Paris',
+  );
+  final fromString = base.carbonize('2019-03-21');
+  final period = base.carbonize(base.daysUntil('2019-12-10'));
+  final interval = base.carbonize(CarbonInterval.days(3));
+  final duration = base.carbonize(const Duration(hours: 12));
+
+  print('carbonize string -> ${fromString.toIso8601String(keepOffset: true)}');
+  print('carbonize period -> ${period.toIso8601String(keepOffset: true)}');
+  print('carbonize interval -> ${interval.toIso8601String(keepOffset: true)}');
+  print('carbonize duration -> ${duration.toIso8601String(keepOffset: true)}');
+}
+
+```
+
+Output:
+
+```
+carbonize string -> 2019-03-21T00:00:00.000+01:00
+carbonize period -> 2019-02-01T08:45:27.612584Z
+carbonize interval -> 2019-02-04T09:45:27.612584+01:00
+carbonize duration -> 2019-02-01T21:45:27.612584+01:00
+```
+
+
 ## Differences compared to the PHP docs
 
-- `carbonize()` is not implemented. Use `Carbon.parse()`,
-  `Carbon.fromDateTime()`, or manual math when you need to coerce other inputs
-  relative to an existing instance.
 - `cast()` is not available. Instead, call `.toMutable()` / `.toImmutable()` or
   construct your subclass manually with `MyCarbon.from(CarbonInterface source)`.
 - `toDate()` maps to `toDateTime()` and `toDateTimeImmutable()` in Dart.

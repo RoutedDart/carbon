@@ -66,6 +66,35 @@ change('next friday') -> 2012-02-10T00:00:00.000Z
 ```
 
 
+## `shiftTimezone()` (vs `tz()`)
+
+`shiftTimezone()` reinterprets the current wall time in a different timezone,
+while `tz()` keeps the instant intact and merely changes the projection.
+
+```dart
+import 'package:carbon/carbon.dart';
+
+Future<void> main() async {
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse('2024-11-10T00:00:00', timeZone: 'UTC');
+  final tzProjection = base.copy().tz('Asia/Tokyo');
+  final shifted = base.copy().shiftTimezone('Asia/Tokyo');
+
+  print('tz -> ${tzProjection.toIso8601String(keepOffset: true)}');
+  print('shiftTimezone -> ${shifted.toIso8601String(keepOffset: true)}');
+}
+
+```
+
+Output:
+
+```
+tz -> 2024-11-10T14:00:00.000+09:00
+shiftTimezone -> 2024-11-10T05:00:00.000+09:00
+```
+
+
 ## Differences compared to the PHP docs
 
 - Generic `add()`/`sub()` accept `Duration`, `CarbonInterval`, or explicit
@@ -74,7 +103,4 @@ change('next friday') -> 2012-02-10T00:00:00.000Z
   fully supported.
 - `rawAdd()`/`rawSub()` helpers from PHP are not exposed; use `add()` with a
   `Duration` instead when you want to bypass locale-aware tweaks.
-- `carbonize()` and `shiftTimezone()` setters documented under addition/sub
-  are not implemented yet, so ported examples should stick to the provided
-  helper methods.
 

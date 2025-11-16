@@ -123,3 +123,56 @@ Future<ExampleRun> runIsoFormatExample() async {
     output: buffer.toString().trimRight(),
   );
 }
+
+const _formatProbeSource = r'''
+import 'package:carbon/carbon.dart';
+
+Future<void> main() async {
+  print("hasFormatWithModifiers('21/05/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormatWithModifiers('21/05/1975', 'd#m#Y!')}");
+  print("hasFormatWithModifiers('5/21/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormatWithModifiers('5/21/1975', 'd#m#Y!')}");
+  print("hasFormat('21#05#1975!', 'd#m#Y!') -> "
+      "${Carbon.hasFormat('21#05#1975!', 'd#m#Y!')}");
+  print("hasFormat('21/05/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormat('21/05/1975', 'd#m#Y!')}");
+  print("canBeCreatedFromFormat('1975-05-21 22', 'Y-m-d H') -> "
+      "${Carbon.canBeCreatedFromFormat('1975-05-21 22', 'Y-m-d H')}");
+  print("canBeCreatedFromFormat('5', 'N') -> "
+      "${Carbon.canBeCreatedFromFormat('5', 'N')}");
+}
+''';
+
+/// Demonstrates `hasFormat`, `hasFormatWithModifiers`, and creation probing.
+Future<ExampleRun> runFormatProbeExample() async {
+  await _bootstrap();
+  final buffer = StringBuffer()
+    ..writeln(
+      "hasFormatWithModifiers('21/05/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormatWithModifiers('21/05/1975', 'd#m#Y!')}",
+    )
+    ..writeln(
+      "hasFormatWithModifiers('5/21/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormatWithModifiers('5/21/1975', 'd#m#Y!')}",
+    )
+    ..writeln(
+      "hasFormat('21#05#1975!', 'd#m#Y!') -> "
+      "${Carbon.hasFormat('21#05#1975!', 'd#m#Y!')}",
+    )
+    ..writeln(
+      "hasFormat('21/05/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormat('21/05/1975', 'd#m#Y!')}",
+    )
+    ..writeln(
+      "canBeCreatedFromFormat('1975-05-21 22', 'Y-m-d H') -> "
+      "${Carbon.canBeCreatedFromFormat('1975-05-21 22', 'Y-m-d H')}",
+    )
+    ..writeln(
+      "canBeCreatedFromFormat('5', 'N') -> "
+      "${Carbon.canBeCreatedFromFormat('5', 'N')}",
+    );
+  return ExampleRun(
+    code: _formatProbeSource,
+    output: buffer.toString().trimRight(),
+  );
+}

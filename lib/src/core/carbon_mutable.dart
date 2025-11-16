@@ -809,6 +809,66 @@ class Carbon extends CarbonBase {
     'r': 'ddd, DD MMM YYYY HH:mm:ss ZZ',
   };
 
+  static const Map<String, String> _phpFormatRegex = <String, String>{
+    'd': r'(3[01]|[12][0-9]|0[1-9])',
+    'D': r'(Sun|Mon|Tue|Wed|Thu|Fri|Sat)',
+    'j': r'([123][0-9]|[1-9])',
+    'l': r'([a-zA-Z]{2,})',
+    'N': r'([1-7])',
+    'S': r'(st|nd|rd|th)',
+    'w': r'([0-6])',
+    'z': r'(36[0-5]|3[0-5][0-9]|[12][0-9]{2}|[1-9]?[0-9])',
+    'W': r'(5[012]|[1-4][0-9]|0?[1-9])',
+    'F': r'([a-zA-Z]{2,})',
+    'm': r'(1[012]|0[1-9])',
+    'M': r'([a-zA-Z]{3})',
+    'n': r'(1[012]|[1-9])',
+    't': r'(2[89]|3[01])',
+    'L': r'(0|1)',
+    'o': r'([1-9][0-9]{0,4})',
+    'Y': r'([1-9]?[0-9]{4})',
+    'y': r'([0-9]{2})',
+    'a': r'(am|pm)',
+    'A': r'(AM|PM)',
+    'B': r'([0-9]{3})',
+    'g': r'(1[012]|[1-9])',
+    'G': r'(2[0-3]|1?[0-9])',
+    'h': r'(1[012]|0[1-9])',
+    'H': r'(2[0-3]|[01][0-9])',
+    'i': r'([0-5][0-9])',
+    's': r'([0-5][0-9])',
+    'u': r'([0-9]{1,6})',
+    'v': r'([0-9]{1,3})',
+    'e': r'([a-zA-Z]{1,5})|([a-zA-Z]*\/[a-zA-Z]*)',
+    'I': r'(0|1)',
+    'O': r'([+-](1[0123]|0[0-9])[0134][05])',
+    'P': r'([+-](1[0123]|0[0-9]):[0134][05])',
+    'p': r'(Z|[+-](1[0123]|0[0-9]):[0134][05])',
+    'T': r'([a-zA-Z]{1,5})',
+    'Z': r'(-?[1-5]?[0-9]{1,4})',
+    'U': r'([0-9]*)',
+    'c':
+        r'(([1-9]?[0-9]{4})-(1[012]|0[1-9])-(3[01]|[12][0-9]|0[1-9])T(2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9])[+-](1[012]|0[0-9]):([0134][05]))',
+    'r':
+        r'(([a-zA-Z]{3}), ([123][0-9]|0[1-9]) ([a-zA-Z]{3}) ([1-9]?[0-9]{4}) (2[0-3]|[01][0-9]):([0-5][0-9]):([0-5][0-9]) [+-](1[012]|0[0-9])([0134][05]))',
+  };
+
+  static const Map<String, String> _phpFormatRegexModifiers = <String, String>{
+    '*': r'.+',
+    ' ': r'[ \t]',
+    '#': r'[;:\/.,()-]',
+    '?': r'([^a]|[a])',
+    '!': '',
+    '|': '',
+    '+': '',
+  };
+
+  static final Map<String, String> _phpFormatRegexWithModifiers =
+      Map<String, String>.unmodifiable(
+        Map<String, String>.of(_phpFormatRegex)
+          ..addAll(_phpFormatRegexModifiers),
+      );
+
   static final RegExp _clockGlyphPattern = RegExp(r'[HhGgmsSavuaA]');
 
   static _PhpFormatTranslation _translatePhpFormat(String format) {
@@ -1335,6 +1395,51 @@ class Carbon extends CarbonBase {
     return adjusted.copyWith(settings: settings);
   }
 
+  /// Checks whether [input] matches [format] exactly.
+  static bool hasFormat(String? input, String format) {
+    if (input == null || input.isEmpty || format.isEmpty) {
+      return false;
+    }
+    return _matchFormatPattern(input, format, _phpFormatRegex);
+  }
+
+  /// Checks whether [input] matches [format] with PHP modifiers enabled.
+  static bool hasFormatWithModifiers(String? input, String format) {
+    if (input == null || input.isEmpty || format.isEmpty) {
+      return false;
+    }
+    return _matchFormatPattern(input, format, _phpFormatRegexWithModifiers);
+  }
+
+  /// Returns true when [input] can be parsed using the PHP [format].
+  static bool canBeCreatedFromFormat(
+    String? input,
+    String format, {
+    String? locale,
+    String? timeZone,
+    CarbonSettings settings = const CarbonSettings(),
+  }) {
+    if (input == null || format.isEmpty) {
+      return false;
+    }
+    try {
+      createFromFormat(
+        format,
+        input,
+        locale: locale,
+        timeZone: timeZone,
+        settings: settings,
+      );
+    } on FormatException {
+      return false;
+    } on CarbonMessageException {
+      return false;
+    } on ArgumentError {
+      return false;
+    }
+    return hasFormatWithModifiers(input, format);
+  }
+
   static bool _isPhpMissing(Object? value) =>
       identical(value, _phpCreateMissing);
 
@@ -1350,6 +1455,42 @@ class Carbon extends CarbonBase {
       return input.timeZoneName;
     }
     return null;
+  }
+
+  static bool _matchFormatPattern(
+    String input,
+    String format,
+    Map<String, String> replacements,
+  ) {
+    final buffer = StringBuffer('^');
+    var escaping = false;
+    for (var i = 0; i < format.length; i++) {
+      final char = format[i];
+      if (escaping) {
+        buffer.write(RegExp.escape(char));
+        escaping = false;
+        continue;
+      }
+      if (char == '\\') {
+        escaping = true;
+        continue;
+      }
+      final replacement = replacements[char];
+      if (replacement != null) {
+        if (replacement.isEmpty) {
+          continue;
+        }
+        buffer.write('(?:$replacement)');
+        continue;
+      }
+      buffer.write(RegExp.escape(char));
+    }
+    buffer.write(r'$');
+    try {
+      return RegExp(buffer.toString()).hasMatch(input);
+    } on FormatException {
+      return false;
+    }
   }
 
   static bool _looksLikeZone(Object? candidate) {

@@ -78,6 +78,44 @@ Custom ISO tokens: jeudi week 09, 18:45
 ```
 
 
+## Format probing helpers
+
+`hasFormat()` and `hasFormatWithModifiers()` let you check whether a string
+matches a PHP-style format before attempting to parse it. Combine them with
+`canBeCreatedFromFormat()` to mirror the guard clauses shown on the PHP site.
+
+```dart
+import 'package:carbon/carbon.dart';
+
+Future<void> main() async {
+  print("hasFormatWithModifiers('21/05/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormatWithModifiers('21/05/1975', 'd#m#Y!')}");
+  print("hasFormatWithModifiers('5/21/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormatWithModifiers('5/21/1975', 'd#m#Y!')}");
+  print("hasFormat('21#05#1975!', 'd#m#Y!') -> "
+      "${Carbon.hasFormat('21#05#1975!', 'd#m#Y!')}");
+  print("hasFormat('21/05/1975', 'd#m#Y!') -> "
+      "${Carbon.hasFormat('21/05/1975', 'd#m#Y!')}");
+  print("canBeCreatedFromFormat('1975-05-21 22', 'Y-m-d H') -> "
+      "${Carbon.canBeCreatedFromFormat('1975-05-21 22', 'Y-m-d H')}");
+  print("canBeCreatedFromFormat('5', 'N') -> "
+      "${Carbon.canBeCreatedFromFormat('5', 'N')}");
+}
+
+```
+
+Output:
+
+```
+hasFormatWithModifiers('21/05/1975', 'd#m#Y!') -> true
+hasFormatWithModifiers('5/21/1975', 'd#m#Y!') -> false
+hasFormat('21#05#1975!', 'd#m#Y!') -> true
+hasFormat('21/05/1975', 'd#m#Y!') -> false
+canBeCreatedFromFormat('1975-05-21 22', 'Y-m-d H') -> true
+canBeCreatedFromFormat('5', 'N') -> false
+```
+
+
 ## Customizing `toString()`
 
 Call `Carbon.setToStringFormat()` to change the global default string or
@@ -120,9 +158,6 @@ startOfWeek setting -> 1
 - `format()` accepts ICU/Intl tokens (the same syntax used by `DateFormat`), not
   PHP's `DateTime::format()` letters. Use `isoFormat()` when you want Carbon's
   PHP-style tokens (`Do`, `LLLL`, etc.).
-- `Carbon::hasFormat()` and `hasFormatWithModifiers()` are not implemented yet.
-  Attempting to probe arbitrary strings requires a try/catch around
-  `Carbon.createFromFormat()` for now.
 - HTML helpers such as `toHtmlString()`/`toHtmlDiffString()` have not been
   ported. Compose them manually using `format()`/`diffForHumans()`.
 

@@ -86,3 +86,33 @@ Future<ExampleRun> runGenericAddExample() async {
     output: buffer.toString().trimRight(),
   );
 }
+
+const _shiftTimezoneSource = r'''
+import 'package:carbon/carbon.dart';
+
+Future<void> main() async {
+  await Carbon.configureTimeMachine(testing: true);
+
+  final base = Carbon.parse('2024-11-10T00:00:00', timeZone: 'UTC');
+  final tzProjection = base.copy().tz('Asia/Tokyo');
+  final shifted = base.copy().shiftTimezone('Asia/Tokyo');
+
+  print('tz -> ${tzProjection.toIso8601String(keepOffset: true)}');
+  print('shiftTimezone -> ${shifted.toIso8601String(keepOffset: true)}');
+}
+''';
+
+/// Compares `tz()` (project instant) with `shiftTimezone()` (shift wall time).
+Future<ExampleRun> runShiftTimezoneExample() async {
+  await _bootstrap();
+  final base = Carbon.parse('2024-11-10T00:00:00', timeZone: 'UTC');
+  final tzProjection = base.copy().tz('Asia/Tokyo');
+  final shifted = base.copy().shiftTimezone('Asia/Tokyo');
+  final buffer = StringBuffer()
+    ..writeln('tz -> ${tzProjection.toIso8601String(keepOffset: true)}')
+    ..writeln('shiftTimezone -> ${shifted.toIso8601String(keepOffset: true)}');
+  return ExampleRun(
+    code: _shiftTimezoneSource,
+    output: buffer.toString().trimRight(),
+  );
+}

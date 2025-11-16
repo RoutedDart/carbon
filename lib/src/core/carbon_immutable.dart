@@ -193,6 +193,26 @@ class CarbonImmutable extends CarbonBase {
     settings: settings,
   ).toImmutable();
 
+  static bool hasFormat(String? input, String format) =>
+      Carbon.hasFormat(input, format);
+
+  static bool hasFormatWithModifiers(String? input, String format) =>
+      Carbon.hasFormatWithModifiers(input, format);
+
+  static bool canBeCreatedFromFormat(
+    String? input,
+    String format, {
+    String? locale,
+    String? timeZone,
+    CarbonSettings settings = const CarbonSettings(),
+  }) => Carbon.canBeCreatedFromFormat(
+    input,
+    format,
+    locale: locale,
+    timeZone: timeZone,
+    settings: settings,
+  );
+
   static CarbonImmutable? createSafe([
     int? year,
     int? month,

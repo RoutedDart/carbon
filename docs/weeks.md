@@ -83,6 +83,40 @@ isoWeeksInYear -> 52
 ```
 
 
+## Moving between weeks
+
+`setWeekNumber()` and `setIsoWeekNumber()` mirror PHP's setter-style helpers.
+Use them to move relative to locale or ISO weeks while keeping the day/time
+intact.
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+
+  final date = Carbon.parse('2024-06-05T00:00:00Z');
+  final week = date.weekNumber();
+  final moved = date.copy().setWeekNumber(week + 2);
+  final isoMoved = date.copy().setIsoWeekNumber(2);
+
+  print('weekNumber -> $week');
+  print('setWeekNumber(week+2) -> ${moved.isoFormat('YYYY-MM-DD')}');
+  print('setIsoWeekNumber(2) -> ${isoMoved.isoFormat('YYYY-MM-DD')}');
+}
+
+```
+
+Output:
+
+```
+weekNumber -> 23
+setWeekNumber(week+2) -> 2024-06-19
+setIsoWeekNumber(2) -> 2024-01-10
+```
+
+
 ## Jumping to another weekday
 
 `setDayOfWeek()` reprojects a date onto another weekday using Carbon's locale
@@ -112,16 +146,50 @@ weekday -> 2017-02-01T00:00:00.000Z
 ```
 
 
+## Days since start of week
+
+`getDaysFromStartOfWeek()`/`setDaysFromStartOfWeek()` mirror the PHP helpers.
+You can query how many days have elapsed since the locale-defined start and
+jump to another offset using either locale defaults or custom weekday inputs.
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+
+  final date = Carbon.parse('2024-06-05T00:00:00Z');
+  print('default days -> ${date.getDaysFromStartOfWeek()}');
+  print("sunday start -> ${date.getDaysFromStartOfWeek('sunday')}");
+
+  final monday = date.copy()..setDaysFromStartOfWeek(0);
+  final tuesdayFromSunday = date.copy()..setDaysFromStartOfWeek(2, 'sunday');
+
+  print('setDaysFromStartOfWeek(0) -> ${monday.toIso8601String()}');
+  print("setDaysFromStartOfWeek(2, 'sunday') -> ${tuesdayFromSunday.toIso8601String()}");
+}
+
+```
+
+Output:
+
+```
+default days -> 2
+sunday start -> 3
+setDaysFromStartOfWeek(0) -> 2024-06-03T00:00:00.000Z
+setDaysFromStartOfWeek(2, 'sunday') -> 2024-06-04T00:00:00.000Z
+```
+
+
 ## Differences compared to the PHP docs
 
 - Dart Carbon does not expose the magic properties `firstWeekDay`,
   `lastWeekDay`, or `weekendDays`. Inspect `Carbon.defaultSettings.startOfWeek`
   and `Carbon.getWeekendDays()` instead.
-- Helpers such as `week()`/`isoWeek()` that accept setter-style arguments are
-  not implemented. Use `localeWeek`/`isoWeek` getters plus `setWeekStartsAt()`
-  or arithmetic helpers to move across weeks.
-- `getDaysFromStartOfWeek()` and `setDaysFromStartOfWeek()` have not been
-  ported yet. Call `startOfWeek()` and add days manually for now.
+- PHP's `week()`/`isoWeek()` setter-style helpers map to
+  `setWeekNumber()`/`setIsoWeekNumber()` in Dart so the API stays strongly
+  typed.
 - Passing overrides (like custom first weekday) directly to
   `weeksInYear()`/`weekYear()` methods is not supported; configure the global
   defaults via `Carbon.setWeekStartsAt()` before calling the getters.

@@ -43,3 +43,38 @@ Future<ExampleRun> runPeriodBasicsExample() async {
     output: buffer.toString().trimRight(),
   );
 }
+
+const _periodAdvancedSource = r'''
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  final start = Carbon.parse('2024-12-23T00:00:00Z');
+  final period = start.daysUntil('2025-01-05T00:00:00Z');
+  final weekdays = period
+      .filter((date) => !date.isWeekend())
+      .recurrences(5);
+
+  for (final date in weekdays) {
+    print(date.toIso8601String());
+  }
+}
+''';
+
+Future<ExampleRun> runPeriodAdvancedExample() async {
+  await _bootstrap();
+  final start = Carbon.parse('2024-12-23T00:00:00Z');
+  final period = start.daysUntil('2025-01-05T00:00:00Z');
+  final weekdays = period.filter((date) => !date.isWeekend()).recurrences(5);
+  final buffer = StringBuffer();
+  for (final date in weekdays) {
+    buffer.writeln(date.toIso8601String());
+  }
+  return ExampleRun(
+    code: _periodAdvancedSource,
+    output: buffer.toString().trimRight(),
+  );
+}

@@ -1918,9 +1918,11 @@ String _intervalDifferences() => '''
 
 Future<String> _buildCarbonPeriod() async {
   final example = await carbon_period_examples.runPeriodBasicsExample();
+  final filtered = await carbon_period_examples.runPeriodAdvancedExample();
   final sections = <String>[
     _periodOverview(),
     _periodExample(example),
+    _periodAdvanced(filtered),
     _periodDifferences(),
   ];
   return sections.join('\n\n');
@@ -1949,13 +1951,28 @@ ${example.output}
 ```
 ''';
 
+String _periodAdvanced(ExampleRun example) =>
+    '''
+## Filtering and recurrences
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
 String _periodDifferences() => '''
 ## Differences compared to the PHP docs
 
-- Advanced factory helpers such as `CarbonPeriod::recurrences()` or `::make()`
-  are not implemented. Construct periods via `CarbonPeriod.parse`/`create`.
-- `CarbonPeriod::filter()` and `diffFiltered()` rely on PHP callbacks; Dart does
-  not expose the same API yet.
+- Filtering and recurrences helpers (`filter`, `recurrences`, `times`) now exist.
+  Build the raw period with the `*_Until` helpers and then slice or filter the
+  iterable to match PHP scenarios such as limiting a period to the first N
+  recurrences or only the weekday entries.
 ''';
 
 Future<String> _buildCarbonTimeZone() async {

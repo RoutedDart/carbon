@@ -12,9 +12,11 @@ part of '../carbon.dart';
 /// Periods mirror the PHP Carbon period object: [start] and [end] describe the
 /// inclusive bounds and iterating returns every intermediate `Carbon`.
 class CarbonPeriod extends Iterable<Carbon> {
-  CarbonPeriod._(this._instances);
+  CarbonPeriod._(this._instances, {int? recurrences})
+    : _recurrencesLimit = recurrences ?? _instances.length;
 
   final List<Carbon> _instances;
+  final int _recurrencesLimit;
 
   @override
   bool get isEmpty => _instances.isEmpty;
@@ -29,4 +31,28 @@ class CarbonPeriod extends Iterable<Carbon> {
 
   @override
   Iterator<Carbon> get iterator => _instances.iterator;
+
+  /// Returns the configured maximum number of occurrences this period should
+  /// return. The actual length might be smaller if the source range ended
+  /// before the recurrence limit was reached.
+  int get maxRecurrences => _recurrencesLimit;
+
+  /// Returns a new period limited to [count] recurrences.
+  CarbonPeriod recurrences(int count) {
+    if (count <= 0) {
+      throw ArgumentError.value(count, 'count', 'must be positive');
+    }
+    final truncated = _instances.take(count).toList();
+    return CarbonPeriod._(truncated, recurrences: count);
+  }
+
+  /// Alias for [recurrences].
+  CarbonPeriod times(int count) => recurrences(count);
+
+  /// Filters the current period using [predicate] and returns a new period.
+  CarbonPeriod filter(bool Function(Carbon) predicate) {
+    final filtered = _instances.where(predicate).toList();
+    final limited = filtered.take(_recurrencesLimit).toList();
+    return CarbonPeriod._(limited, recurrences: _recurrencesLimit);
+  }
 }

@@ -1077,6 +1077,12 @@ abstract class CarbonBase implements CarbonInterface {
       _wrap(_dateTime.subtract(duration));
 
   @override
+  CarbonInterface operator +(Duration duration) => add(duration);
+
+  @override
+  CarbonInterface operator -(Duration duration) => subtract(duration);
+
+  @override
   CarbonInterface subtract([dynamic value, dynamic unit]) =>
       _applyDynamicAdjustment(value: value, unit: unit, isAddition: false);
 

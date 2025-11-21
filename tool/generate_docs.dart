@@ -1441,7 +1441,8 @@ String _additionOverview() => '''
 
 Carbon exposes the same additive helpers as PHP Carbon (`addYears()`,
 `addWeekdays()`, `addRealHours()`, etc.) plus the `change()`/`modify()` shortcut
-for natural-language adjustments. All mutators keep the "mutable vs immutable"
+for natural-language adjustments. The `+` and `-` operators are also overloaded to directly
+add or subtract `Duration` objects. All mutators keep the "mutable vs immutable"
 contract intact: `Carbon` mutates in place, `CarbonImmutable` returns copies.
 ''';
 
@@ -1518,6 +1519,8 @@ String _additionDifferences() => '''
   amount+unit values. Passing free-form strings like `'1 day'` works for the most
   common units, but PHP's `DateInterval` objects and obscure keywords are not
   fully supported.
+- The `+` and `-` operators are overloaded to allow direct addition and
+  subtraction of `Duration` objects from `Carbon` and `CarbonImmutable` instances.
 - Use `rawAdd()`/`rawSub()` to call `DateTime.add()`/`subtract()` directly when you
   want to bypass Carbon-specific rounding or overflow rules.
 ''';

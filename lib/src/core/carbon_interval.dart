@@ -246,6 +246,24 @@ class CarbonInterval {
     return buffer.toString();
   }
 
+  /// Add a given duration to the interval.
+  CarbonInterval add(Duration duration) => CarbonInterval._(
+        monthSpan: monthSpan,
+        microseconds: microseconds + duration.inMicroseconds,
+      );
+
+  /// Subtract a given duration from the interval.
+  CarbonInterval sub(Duration duration) => CarbonInterval._(
+        monthSpan: monthSpan,
+        microseconds: microseconds - duration.inMicroseconds,
+      );
+
+  /// Add a given duration to the interval.
+  CarbonInterval operator +(Duration duration) => add(duration);
+
+  /// Subtract a given duration from the interval.
+  CarbonInterval operator -(Duration duration) => sub(duration);
+
   /// Compares intervals similar to PHP `CarbonInterval::compareDateIntervals()`.
   static int compareDateIntervals(CarbonInterval a, CarbonInterval b) {
     final monthDiff = a.monthSpan - b.monthSpan;

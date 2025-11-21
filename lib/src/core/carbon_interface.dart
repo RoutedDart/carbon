@@ -97,6 +97,12 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Alias for [subtract].
   CarbonInterface sub([dynamic value, dynamic unit]);
 
+  /// Adds a [Duration] to this CarbonInterface instance.
+  CarbonInterface operator +(Duration duration);
+
+  /// Subtracts a [Duration] from this CarbonInterface instance.
+  CarbonInterface operator -(Duration duration);
+
   /// Adds a number of days. Negative values subtract.
   CarbonInterface addDays(int days);
 

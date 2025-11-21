@@ -37,8 +37,6 @@ macro result -> 2024-06-09T23:59:59.999999Z
 ## Differences compared to the PHP docs
 
 - `CarbonMixin::macro()`/`Carbon::macro()` exist, but there is no `mixin`
-  support in Dart—macros apply to all Carbon instances globally.
-- PHP's ability to macro CarbonInterval/CarbonPeriod automatically is not
-  mirrored. Register separate macros via `CarbonInterval.registerMacro` or wrap
-  helpers manually when needed.
-
+  support in Dart—macros register globally across the Carbon family.
+- CarbonInterval and CarbonPeriod now expose their own `registerMacro()` helpers
+  so PHP-style macros can be attached directly to intervals/periods as well.

@@ -11,7 +11,7 @@ part of '../carbon.dart';
 /// arguments forwarded from the macro invocation.
 typedef CarbonMacro =
     dynamic Function(
-      CarbonInterface carbon,
+      dynamic target,
       List<dynamic> positionalArguments,
       Map<Symbol, dynamic> namedArguments,
     );

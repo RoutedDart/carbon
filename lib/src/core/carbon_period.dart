@@ -12,8 +12,31 @@ part of '../carbon.dart';
 /// Periods mirror the PHP Carbon period object: [start] and [end] describe the
 /// inclusive bounds and iterating returns every intermediate `Carbon`.
 class CarbonPeriod extends Iterable<Carbon> {
+  static final Map<String, CarbonMacro> _macros = <String, CarbonMacro>{};
+  static void registerMacro(String name, CarbonMacro macro) =>
+      _macros[name] = macro;
+  static void unregisterMacro(String name) => _macros.remove(name);
+  static bool hasMacro(String name) => _macros.containsKey(name);
+  static void resetMacros() => _macros.clear();
+
   CarbonPeriod._(this._instances, {int? recurrences})
     : _recurrencesLimit = recurrences ?? _instances.length;
+
+  /// Invokes a registered macro by [name] for this period.
+  dynamic carbon(
+    String name, [
+    List<dynamic> positionalArguments = const <dynamic>[],
+    Map<Symbol, dynamic> namedArguments = const <Symbol, dynamic>{},
+  ]) {
+    final macro = _macros[name];
+    if (macro == null) {
+      if (CarbonBase.strictMode) {
+        throw CarbonUnknownMethodException(name);
+      }
+      return null;
+    }
+    return macro(this, positionalArguments, namedArguments);
+  }
 
   final List<Carbon> _instances;
   final int _recurrencesLimit;
@@ -55,4 +78,21 @@ class CarbonPeriod extends Iterable<Carbon> {
     final limited = filtered.take(_recurrencesLimit).toList();
     return CarbonPeriod._(limited, recurrences: _recurrencesLimit);
   }
+
+  @override
+  dynamic noSuchMethod(Invocation invocation) {
+    if (invocation.isMethod) {
+      final name = _symbolToString(invocation.memberName);
+      final macro = _macros[name];
+      if (macro != null) {
+        return macro(this, invocation.positionalArguments, invocation.namedArguments);
+      }
+    }
+    return super.noSuchMethod(invocation);
+  }
+
+  static String _symbolToString(Symbol symbol) => symbol
+      .toString()
+      .replaceAll('Symbol("', '')
+      .replaceAll('")', '');
 }

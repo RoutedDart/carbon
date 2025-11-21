@@ -18,6 +18,15 @@ void main() {
       expect(Carbon.hasMacro('doubleYears'), isFalse);
     });
 
+    test('carbon() helper invokes registered macros', () {
+      Carbon.registerMacro('doubleYears', (carbon, args, _) {
+        final target = args.isEmpty ? 1 : args.first as int;
+        return carbon.addYears(target).year;
+      });
+      final Carbon carbon = Carbon.parse('2000-01-01');
+      expect(carbon.carbon('doubleYears', [2]), 2002);
+    });
+
     test('macros expose getter/setter helpers', () {
       Carbon.registerMacro('getSchoolYear', (carbon, unusedPositional, unusedNamed) {
         var year = carbon.year;

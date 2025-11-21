@@ -172,6 +172,23 @@ abstract class CarbonBase implements CarbonInterface {
   /// Clears all registered macros (primarily for tests).
   static void resetMacros() => _macros.clear();
 
+  /// Invokes a registered macro by [name], returning null when strict mode is
+  /// disabled and the macro is missing.
+  dynamic carbon(
+    String name, [
+    List<dynamic> positionalArguments = const <dynamic>[],
+    Map<Symbol, dynamic> namedArguments = const <Symbol, dynamic>{},
+  ]) {
+    final macro = _macros[name];
+    if (macro == null) {
+      if (_strictMode) {
+        throw CarbonUnknownMethodException(name);
+      }
+      return null;
+    }
+    return macro(this, positionalArguments, namedArguments);
+  }
+
   /// Resets global locale/start-of-week/test-now defaults.
   static void resetDefaults() {
     _defaultLocale = 'en';

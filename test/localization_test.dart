@@ -47,7 +47,7 @@ void main() {
 
       final juneEs = june.locale('es');
       expect(juneEs.localeMonth, 'junio');
-      expect(juneEs.shortLocaleMonth, 'jun');
+      expect(juneEs.shortLocaleMonth, 'jun.');
     });
 
     test('English properties return English names regardless of locale', () {

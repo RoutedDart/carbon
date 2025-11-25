@@ -583,6 +583,7 @@ abstract class CarbonBase implements CarbonInterface {
     if (locale == null) {
       return null;
     }
+
     for (final candidate in _localeCandidates(locale)) {
       final start = kLocaleWeekStartDefaults[candidate];
       if (start != null) {
@@ -1965,21 +1966,14 @@ abstract class CarbonBase implements CarbonInterface {
 
   @override
   int get weekNumberInMonth {
-    // PHP Carbon counts weeks based on Monday as week start (weekday=1)
-    // Each Monday starts a new week number
-    final dayOfMonth = _dateTime.day;
-    // Calculate how many Mondays have occurred up to and including current day
-    int mondayCount = 0;
-    for (int d = 1; d <= dayOfMonth; d++) {
-      final testDate = DateTime.utc(_dateTime.year, _dateTime.month, d);
-      if (testDate.weekday == DateTime.monday) {
-        mondayCount++;
-      }
-    }
+    final startOfWeek = CarbonTranslator.matchLocale(_locale).firstDayOfWeek;
+    final firstOfMonth = DateTime.utc(_dateTime.year, _dateTime.month, 1);
 
-    // If we've seen a Monday (including today), we're in that week
-    // If we haven't seen a Monday yet, we're in week 1
-    return mondayCount == 0 ? 1 : mondayCount + 1;
+    final firstDayWeekday = firstOfMonth.weekday;
+
+    final offset = (firstDayWeekday - startOfWeek + 7) % 7;
+
+    return ((_dateTime.day + offset) / 7).ceil();
   }
 
   @override
@@ -5251,7 +5245,12 @@ abstract class CarbonBase implements CarbonInterface {
       interval = CarbonInterval.fromDuration(durationStep!);
     }
 
-    return CarbonPeriod._(items, locale: _locale, interval: interval, explicitlyLimited: false);
+    return CarbonPeriod._(
+      items,
+      locale: _locale,
+      interval: interval,
+      explicitlyLimited: false,
+    );
   }
 
   int _weekIndex(DateTime origin, DateTime current) {

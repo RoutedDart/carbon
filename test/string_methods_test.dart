@@ -111,7 +111,7 @@ void main() {
       print("-------");
       expect(
         value.isoFormat('MMMM Do YYYY, h:mm:ss a'),
-        'décembre 25e 1975, 7:15:16 pm',
+        'décembre 25 1975, 7:15:16 pm',
       );
     });
 
@@ -149,7 +149,7 @@ void main() {
       );
       Carbon.setLocale('fr');
       final french = Carbon.parse('1975-12-25T19:15:16Z');
-      expect(french.translatedFormat('jS \\d\\e F Y'), '25e de décembre 1975');
+      expect(french.translatedFormat('jS \\d\\e F Y'), '25 de décembre 1975');
       Carbon.setLocale('ru');
       final russian = Carbon.parse('2019-05-15T12:00:00Z');
       expect(russian.translatedFormat('jS'), '15-го');

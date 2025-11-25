@@ -16,7 +16,7 @@ void main() {
         ..addHours(4)
         ..addMinutes(30);
       final diff = future.diffForHumans(reference: base, parts: 3);
-      expect(diff, 'in 1 year 2 months 3 days from now');
+      expect(diff, '1 year, 2 months and 3 days from now');
     });
 
     test('uses short labels and custom joiner', () {
@@ -31,7 +31,7 @@ void main() {
         short: true,
         joiner: ', ',
       );
-      expect(diff, 'in 1 wk, 2 h from now');
+      expect(diff, '1 wk and 2 h from now'); // Uses 'and' from list separators
     });
 
     test('falls back to "just now" when equal', () {

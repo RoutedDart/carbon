@@ -10,14 +10,21 @@ void main() {
 
   group('php-style create', () {
     test('defaults to zero date when no args provided', () {
-      final result = Carbon.createPhp();
+      final result = Carbon.createFromDateTime();
       expect(result, isNotNull);
       expect(result!.toIso8601String(), '0000-01-01T00:00:00.000Z');
     });
 
     test('explicit null values reuse now components', () {
       withClock(Clock.fixed(DateTime.utc(2025, 11, 16, 9, 45, 30)), () {
-        final result = Carbon.createPhp(null, null, null, null, null, null);
+        final result = Carbon.createFromDateTime(
+          null,
+          null,
+          null,
+          null,
+          null,
+          null,
+        );
         expect(result, isNotNull);
         expect(result!.year, 2025);
         expect(result.month, 11);
@@ -29,7 +36,7 @@ void main() {
     });
 
     test('wraps overflowing units the same as PHP', () {
-      final result = Carbon.createPhp(2011, 1, 40, 0, 0, 61);
+      final result = Carbon.createFromDateTime(2011, 1, 40, 0, 0, 61);
       expect(result, isNotNull);
       final value = result!;
       expect(value.year, 2011);
@@ -43,7 +50,7 @@ void main() {
       'string input treats second argument as timezone when applicable',
       () async {
         await Carbon.configureTimeMachine(testing: true);
-        final result = Carbon.createPhp(
+        final result = Carbon.createFromDateTime(
           '2020-01-05 12:00:00',
           'America/New_York',
         );
@@ -58,7 +65,15 @@ void main() {
 
     test('explicit timezone parameter overrides month hint', () async {
       await Carbon.configureTimeMachine(testing: true);
-      final result = Carbon.createPhp(2024, 5, 1, 10, 30, 0, 'Europe/Paris');
+      final result = Carbon.createFromDateTime(
+        2024,
+        5,
+        1,
+        10,
+        30,
+        0,
+        'Europe/Paris',
+      );
       expect(result, isNotNull);
       expect(result!.timeZoneName, 'Europe/Paris');
       expect(
@@ -68,9 +83,9 @@ void main() {
     });
 
     test('invalid values throw in strict mode but return null otherwise', () {
-      expect(() => Carbon.createPhp(null, -5), throwsRangeError);
+      expect(() => Carbon.createFromDateTime(null, -5), throwsRangeError);
       Carbon.useStrictMode(false);
-      final result = Carbon.createPhp(null, -5);
+      final result = Carbon.createFromDateTime(null, -5);
       expect(result, isNull);
       Carbon.useStrictMode(true);
     });

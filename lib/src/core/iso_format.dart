@@ -99,6 +99,13 @@ String _expandIsoPresetTokens(String pattern, String locale) {
 }
 
 String? _isoPresetExpansion(String token, String locale) {
+  // First check if the locale data has this format defined
+  final localeData = CarbonTranslator.matchLocale(locale);
+  if (localeData.formats.containsKey(token)) {
+    return localeData.formats[token];
+  }
+
+  // Fallback to hardcoded overrides for specific locales
   for (final candidate in CarbonBase._localeCandidates(locale)) {
     final overrides = _localePresetIsoOverrides[candidate];
     if (overrides != null && overrides.containsKey(token)) {

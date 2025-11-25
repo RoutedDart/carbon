@@ -121,7 +121,7 @@ class Carbon extends CarbonBase {
   /// which case the current `now()` component is used. When [year] is a string
   /// or [DateTime], the optional [month] parameter doubles as a timezone label
   /// just like PHP's signature.
-  static CarbonInterface? createPhp([
+  static CarbonInterface? createFromDateTime([
     Object? year = _phpCreateMissing,
     Object? month = _phpCreateMissing,
     Object? day = _phpCreateMissing,

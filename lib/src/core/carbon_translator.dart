@@ -289,8 +289,27 @@ class CarbonTranslator {
     String? locale,
     bool alt = false,
   }) {
-    final match = matchLocale(locale);
-    final table = alt ? match.altNumbers : match.numbers;
+    var match = matchLocale(locale);
+    var table = alt ? match.altNumbers : match.numbers;
+
+    if (table.isEmpty) {
+      // If the matched locale has no numbers, try explicit fallbacks of the requested locale
+      final requested = _normalizeLocale(locale ?? _defaultLocale);
+      final fallbacks = _fallbackLocales[requested];
+      if (fallbacks != null) {
+        for (final fallback in fallbacks) {
+          final fallbackMatch = matchLocale(fallback);
+          final fallbackTable = alt
+              ? fallbackMatch.altNumbers
+              : fallbackMatch.numbers;
+          if (fallbackTable.isNotEmpty) {
+            table = fallbackTable;
+            break;
+          }
+        }
+      }
+    }
+
     if (table.isEmpty) {
       return input;
     }

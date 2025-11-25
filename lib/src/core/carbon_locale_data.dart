@@ -69,6 +69,18 @@ class CarbonLocaleData {
   /// Standalone weekday names (nominative case).
   final List<String> weekdaysStandalone;
 
+  /// Period recurrences string.
+  final String? periodRecurrences;
+
+  /// Period interval string.
+  final String? periodInterval;
+
+  /// Period start date string.
+  final String? periodStartDate;
+
+  /// Period end date string.
+  final String? periodEndDate;
+
   const CarbonLocaleData({
     required this.localeCode,
     this.numbers = const {},
@@ -91,6 +103,10 @@ class CarbonLocaleData {
     this.firstDayOfWeek = 1,
     this.dayOfFirstWeekOfYear = 4,
     this.listSeparators = const [],
+    this.periodRecurrences,
+    this.periodInterval,
+    this.periodStartDate,
+    this.periodEndDate,
   });
 
   /// Merges this locale data with another, prioritizing values from [other].
@@ -133,6 +149,10 @@ class CarbonLocaleData {
       weekdaysStandalone: other.weekdaysStandalone.isNotEmpty
           ? other.weekdaysStandalone
           : weekdaysStandalone,
+      periodRecurrences: other.periodRecurrences ?? periodRecurrences,
+      periodInterval: other.periodInterval ?? periodInterval,
+      periodStartDate: other.periodStartDate ?? periodStartDate,
+      periodEndDate: other.periodEndDate ?? periodEndDate,
     );
   }
 
@@ -164,12 +184,16 @@ class CarbonLocaleData {
     List<String>? weekdays,
     List<String>? weekdaysShort,
     List<String>? weekdaysMin,
-    int? firstDayOfWeek,
-    int? dayOfFirstWeekOfYear,
-    List<String>? listSeparators,
     Map<String, String>? ordinalWords,
     List<String>? monthsStandalone,
     List<String>? weekdaysStandalone,
+    int? firstDayOfWeek,
+    int? dayOfFirstWeekOfYear,
+    List<String>? listSeparators,
+    String? periodRecurrences,
+    String? periodInterval,
+    String? periodStartDate,
+    String? periodEndDate,
   }) {
     return CarbonLocaleData(
       localeCode: localeCode ?? this.localeCode,
@@ -187,12 +211,16 @@ class CarbonLocaleData {
       weekdays: weekdays ?? this.weekdays,
       weekdaysShort: weekdaysShort ?? this.weekdaysShort,
       weekdaysMin: weekdaysMin ?? this.weekdaysMin,
-      firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
-      dayOfFirstWeekOfYear: dayOfFirstWeekOfYear ?? this.dayOfFirstWeekOfYear,
-      listSeparators: listSeparators ?? this.listSeparators,
       ordinalWords: ordinalWords ?? this.ordinalWords,
       monthsStandalone: monthsStandalone ?? this.monthsStandalone,
       weekdaysStandalone: weekdaysStandalone ?? this.weekdaysStandalone,
+      firstDayOfWeek: firstDayOfWeek ?? this.firstDayOfWeek,
+      dayOfFirstWeekOfYear: dayOfFirstWeekOfYear ?? this.dayOfFirstWeekOfYear,
+      listSeparators: listSeparators ?? this.listSeparators,
+      periodRecurrences: periodRecurrences ?? this.periodRecurrences,
+      periodInterval: periodInterval ?? this.periodInterval,
+      periodStartDate: periodStartDate ?? this.periodStartDate,
+      periodEndDate: periodEndDate ?? this.periodEndDate,
     );
   }
 }

@@ -28,4 +28,24 @@ void main() {
       expect(date.isWeekend(), isFalse);
     }
   });
+
+  test('toString formats period with locale strings', () {
+    final start = Carbon.parse('2024-12-01T00:00:00Z');
+    final period = start.daysUntil('2024-12-05T00:00:00Z');
+
+    final result = period.toString();
+    expect(result, contains('Every 1 day'));
+    expect(result, contains('from 2024-12-01'));
+    expect(result, contains('to 2024-12-05'));
+  });
+
+  test('toString includes recurrences when limited', () {
+    final start = Carbon.parse('2024-12-01T00:00:00Z');
+    final period = start.daysUntil('2024-12-10T00:00:00Z').recurrences(3);
+
+    final result = period.toString();
+    expect(result, contains('3 times'));
+    expect(result, contains('every 1 day')); // lowercase when after recurrences
+    expect(result, contains('from 2024-12-01'));
+  });
 }

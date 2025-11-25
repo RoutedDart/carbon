@@ -21,7 +21,7 @@ typedef CarbonTestNowGenerator =
 /// Subclasses implement mutability semantics (in-place vs. new objects).
 abstract class CarbonBase implements CarbonInterface {
   /// Creates a Carbon base instance with UTC conversion and defaults.
-  CarbonBase({ 
+  CarbonBase({
     required DateTime dateTime,
     String? locale,
     String? timeZone,
@@ -1951,6 +1951,102 @@ abstract class CarbonBase implements CarbonInterface {
 
   @override
   int get quarter => ((_dateTime.month - 1) ~/ 3) + 1;
+
+  @override
+  int get age => diffInYears(Carbon.now(), absolute: true);
+
+  @override
+  int get yearIso {
+    final thursday = _dateTime.add(
+      Duration(days: 3 - ((_dateTime.weekday + 6) % 7)),
+    );
+    return thursday.year;
+  }
+
+  @override
+  int get weekNumberInMonth {
+    // PHP Carbon counts weeks based on Monday as week start (weekday=1)
+    // Each Monday starts a new week number
+    final dayOfMonth = _dateTime.day;
+    // Calculate how many Mondays have occurred up to and including current day
+    int mondayCount = 0;
+    for (int d = 1; d <= dayOfMonth; d++) {
+      final testDate = DateTime.utc(_dateTime.year, _dateTime.month, d);
+      if (testDate.weekday == DateTime.monday) {
+        mondayCount++;
+      }
+    }
+
+    // If we've seen a Monday (including today), we're in that week
+    // If we haven't seen a Monday yet, we're in week 1
+    return mondayCount == 0 ? 1 : mondayCount + 1;
+  }
+
+  @override
+  String get localeDayOfWeek {
+    final localeData = CarbonTranslator.matchLocale(_locale);
+    return localeData.weekdays[_dateTime.weekday % 7];
+  }
+
+  @override
+  String get localeMonth {
+    final localeData = CarbonTranslator.matchLocale(_locale);
+    return localeData.months[_dateTime.month - 1];
+  }
+
+  @override
+  String get englishDayOfWeek {
+    final localeData = CarbonTranslator.matchLocale('en');
+    return localeData.weekdays[_dateTime.weekday % 7];
+  }
+
+  @override
+  String get dayName => localeDayOfWeek;
+
+  @override
+  String get shortLocaleDayOfWeek {
+    final localeData = CarbonTranslator.matchLocale(_locale);
+    return localeData.weekdaysShort[_dateTime.weekday % 7];
+  }
+
+  @override
+  String get minDayName {
+    final localeData = CarbonTranslator.matchLocale(_locale);
+    return localeData.weekdaysMin[_dateTime.weekday % 7];
+  }
+
+  @override
+  String get shortLocaleMonth {
+    final localeData = CarbonTranslator.matchLocale(_locale);
+    return localeData.monthsShort[_dateTime.month - 1];
+  }
+
+  @override
+  String get shortEnglishDayOfWeek {
+    final localeData = CarbonTranslator.matchLocale('en');
+    return localeData.weekdaysShort[_dateTime.weekday % 7];
+  }
+
+  @override
+  String get englishMonth {
+    final localeData = CarbonTranslator.matchLocale('en');
+    return localeData.months[_dateTime.month - 1];
+  }
+
+  @override
+  String get shortEnglishMonth {
+    final localeData = CarbonTranslator.matchLocale('en');
+    return localeData.monthsShort[_dateTime.month - 1];
+  }
+
+  @override
+  String get shortDayName => shortLocaleDayOfWeek;
+
+  @override
+  String get monthName => localeMonth;
+
+  @override
+  String get shortMonthName => shortLocaleMonth;
 
   @override
   int get decade => _dateTime.year ~/ 10;
@@ -4317,7 +4413,7 @@ abstract class CarbonBase implements CarbonInterface {
     final local = _localDateTimeForFormatting();
     final weekday = _localizedWeekdayShortName(_locale, local.weekday);
     final month = _localizedMonthShortName(_locale, local.month);
-    return '$weekday, $month ${local.day}, ${_padYear(local.year)} ${_formatTwelveHour(local)}';
+    return '$weekday, $month ${local.day}, ${_padYear(local.year)} ${_formatTwelveHour(local, _locale)}';
   }
 
   @override
@@ -4448,7 +4544,9 @@ abstract class CarbonBase implements CarbonInterface {
 
     final diff = _dateTime.difference(base);
     if (diff == Duration.zero) {
-      return short ? 'now' : 'just now';
+      final diffNowKey = short ? 'now' : 'diff_now';
+      return humanLocale.translationStrings[diffNowKey] ??
+          (short ? 'now' : 'just now');
     }
     final future = diff > Duration.zero;
     final segments = _buildHumanDiffSegments(
@@ -4464,14 +4562,84 @@ abstract class CarbonBase implements CarbonInterface {
           ),
         )
         .toList();
-    final joined = translatedSegments.join(joiner);
-    final prefix = future ? 'in ' : '';
-    final suffix = future ? 'from now' : 'ago';
-    final text = '$prefix$joined $suffix'.trim();
+
+    // Use locale list separators if available, otherwise use joiner parameter
+    String joined;
+    if (translatedSegments.length <= 1) {
+      joined = translatedSegments.join();
+    } else if (humanLocale.listSeparators.isEmpty) {
+      // No locale separators, use joiner parameter
+      joined = translatedSegments.join(joiner);
+    } else {
+      // Use locale list separators
+      final regularSep = humanLocale.listSeparators.isNotEmpty
+          ? humanLocale.listSeparators[0]
+          : joiner;
+      final finalSep = humanLocale.listSeparators.length > 1
+          ? humanLocale.listSeparators[1]
+          : regularSep;
+
+      if (translatedSegments.length == 2) {
+        joined = translatedSegments.join(finalSep);
+      } else {
+        final allButLast = translatedSegments.sublist(
+          0,
+          translatedSegments.length - 1,
+        );
+        final last = translatedSegments.last;
+        joined = allButLast.join(regularSep) + finalSep + last;
+      }
+    }
+
+    // Use localized templates from translation strings
+    final key = future ? 'from_now' : 'ago';
+    final template =
+        humanLocale.translationStrings[key] ??
+        (future
+            ? (short ? ':time' : 'in :time')
+            : (short ? ':time' : ':time ago'));
+
+    final text = template.replaceAll(':time', joined);
     return CarbonTranslator.translateTimeString(
       text,
       locale: humanLocale.localeCode,
     );
+  }
+
+  @override
+  String calendar({CarbonInterface? reference, Map<String, String>? formats}) {
+    final ref = reference ?? Carbon.now();
+
+    // Calculate difference in days using start of day comparison
+    // Match PHP: $other->diffInDays($current) where $other=ref, $current=self
+    // Note: Dart's diffInDays has opposite sign semantics from PHP
+    // PHP: ref.diffInDays(target) = +1 when target is tomorrow
+    // Dart: ref.diffInDays(target) = -1 when target is tomorrow
+    // So we negate the result to match PHP behavior
+    final startOfSelf = copy().startOfDay();
+    final startOfRef = ref.copy().startOfDay();
+    final diff = -startOfRef.diffInDays(startOfSelf, absolute: false);
+
+    final format = formats ?? CarbonTranslator.matchLocale(_locale).calendar;
+
+    String formatString;
+    if (diff < -6) {
+      formatString = format['sameElse'] ?? 'L';
+    } else if (diff < -1) {
+      formatString = format['lastWeek'] ?? 'L';
+    } else if (diff < 0) {
+      formatString = format['lastDay'] ?? 'L';
+    } else if (diff < 1) {
+      formatString = format['sameDay'] ?? 'L';
+    } else if (diff < 2) {
+      formatString = format['nextDay'] ?? 'L';
+    } else if (diff < 7) {
+      formatString = format['nextWeek'] ?? 'L';
+    } else {
+      formatString = format['sameElse'] ?? 'L';
+    }
+
+    return isoFormat(formatString);
   }
 
   @override
@@ -5075,7 +5243,15 @@ abstract class CarbonBase implements CarbonInterface {
       }
       cursor = next;
     }
-    return CarbonPeriod._(items, locale: _locale);
+    // Create interval from step information
+    final CarbonInterval interval;
+    if (monthStep != null) {
+      interval = CarbonInterval.months(monthStep);
+    } else {
+      interval = CarbonInterval.fromDuration(durationStep!);
+    }
+
+    return CarbonPeriod._(items, locale: _locale, interval: interval, explicitlyLimited: false);
   }
 
   int _weekIndex(DateTime origin, DateTime current) {
@@ -6509,12 +6685,16 @@ String _formatIsoFraction(int micros) {
   return '.$text';
 }
 
-String _formatTwelveHour(DateTime value) {
+String _formatTwelveHour(DateTime value, String locale) {
   var hour = value.hour % 12;
   if (hour == 0) {
     hour = 12;
   }
-  final suffix = value.hour >= 12 ? 'PM' : 'AM';
+  // Use locale's meridiem function if available
+  final localeData = CarbonTranslator.matchLocale(locale);
+  final suffix =
+      localeData.meridiem?.call(value.hour, value.minute, false) ??
+      (value.hour >= 12 ? 'PM' : 'AM');
   return '$hour:${_twoDigits(value.minute)} $suffix';
 }
 

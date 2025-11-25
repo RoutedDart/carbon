@@ -292,4 +292,35 @@ void main() {
       expect(date.decadesInMillennium, 100);
     });
   });
+
+  group('Carbon core properties - age/yearIso/weekNumberInMonth', () {
+    test('age returns years since date', () {
+      final birthDate = Carbon.create(year: 1990, month: 1, day: 1);
+      final now = Carbon.create(year: 2024, month: 1, day: 1);
+
+      // Mock current time for consistent test
+      Carbon.setTestNow(now);
+
+      try {
+        expect(birthDate.age, 34);
+      } finally {
+        Carbon.setTestNow(null);
+      }
+    });
+
+    test('yearIso returns ISO year', () {
+      final date = Carbon.create(year: 2024, month: 1, day: 1);
+      expect(date.yearIso, 2024);
+    });
+
+    test('weekNumberInMonth returns week number within month', () {
+      // January 1, 2024 is a Monday, so it's in week 1
+      final date = Carbon.create(year: 2024, month: 1, day: 1);
+      expect(date.weekNumberInMonth, 1);
+
+      // January 15, 2024 should be in week 3
+      final midMonth = Carbon.create(year: 2024, month: 1, day: 15);
+      expect(midMonth.weekNumberInMonth, 3);
+    });
+  });
 }

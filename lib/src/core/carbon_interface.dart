@@ -720,6 +720,12 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
   /// Calculates the difference from another date.
   Duration diff(CarbonInterface other);
 
+  /// Formats the date relative to the [reference] date (defaults to now).
+  ///
+  /// Uses localized strings like "Today at 2:30 PM", "Yesterday at...", etc.
+  /// [formats] can be used to override the locale's calendar formats.
+  String calendar({CarbonInterface? reference, Map<String, String>? formats});
+
   /// Difference in days.
   int diffInDays(CarbonInterface other, {bool absolute = true});
 
@@ -1030,6 +1036,12 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Calendar year.
   int get year;
+
+  /// Age in years (equivalent to diffInYears() with default parameters).
+  int get age;
+
+  /// ISO year (may differ from calendar year around year boundaries).
+  int get yearIso;
 
   /// Sets the year.
   CarbonInterface setYear(int year);
@@ -1511,6 +1523,9 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Week of month.
   int get weekOfMonth;
+
+  /// Week number within the current month (1-5).
+  int get weekNumberInMonth;
 
   /// Week of quarter.
   int get weekOfQuarter;
@@ -2009,6 +2024,45 @@ abstract class CarbonInterface implements Comparable<CarbonInterface> {
 
   /// Converts to a mutable [Carbon] instance.
   Carbon toMutable();
+
+  /// Localized full day name for the current locale.
+  String get localeDayOfWeek;
+
+  /// Localized short day name for the current locale.
+  String get shortLocaleDayOfWeek;
+
+  /// Localized minimal day name for the current locale.
+  String get minDayName;
+
+  /// Localized full month name for the current locale.
+  String get localeMonth;
+
+  /// Localized short month name for the current locale.
+  String get shortLocaleMonth;
+
+  /// English full day name (regardless of current locale).
+  String get englishDayOfWeek;
+
+  /// English short day name (regardless of current locale).
+  String get shortEnglishDayOfWeek;
+
+  /// English full month name (regardless of current locale).
+  String get englishMonth;
+
+  /// English short month name (regardless of current locale).
+  String get shortEnglishMonth;
+
+  /// Localized day name using current locale (alias for localeDayOfWeek).
+  String get dayName;
+
+  /// Localized short day name using current locale.
+  String get shortDayName;
+
+  /// Localized month name using current locale (alias for localeMonth).
+  String get monthName;
+
+  /// Localized short month name using current locale.
+  String get shortMonthName;
 }
 
 /// Extension providing deprecated locale alias.

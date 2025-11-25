@@ -307,7 +307,7 @@ String _instantiationComponents(ExampleRun example) =>
     '''
 ## Component factories and `create*` helpers
 
-The positional factory from PHP is available via `Carbon.createPhp`, while the
+The positional factory from PHP is available via `Carbon.createFromDateTime`, while the
 named `Carbon.create` constructor uses explicit parameters. `createFromDate`
 and `createFromTime*` fill omitted components with the current (or test) clock,
 and `Carbon.make()` returns `null` when the input cannot be parsed.
@@ -2089,10 +2089,12 @@ String _intervalDifferences() => '''
 Future<String> _buildCarbonPeriod() async {
   final example = await carbon_period_examples.runPeriodBasicsExample();
   final filtered = await carbon_period_examples.runPeriodAdvancedExample();
+  final strings = await carbon_period_examples.runPeriodFormattingExample();
   final sections = <String>[
     _periodOverview(),
     _periodExample(example),
     _periodAdvanced(filtered),
+    _periodStrings(strings),
     _periodDifferences(),
   ];
   return sections.join('\n\n');
@@ -2124,6 +2126,25 @@ ${example.output}
 String _periodAdvanced(ExampleRun example) =>
     '''
 ## Filtering and recurrences
+
+```dart
+${example.code}
+```
+
+Output:
+
+```
+${example.output}
+```
+''';
+
+String _periodStrings(ExampleRun example) =>
+    '''
+## Localized string output
+
+`CarbonPeriod.toString()` mirrors PHP Carbon by reading the locale's
+`periodInterval`, `periodRecurrences`, and related strings. The same period can
+emit different languages or recurrence summaries without manual formatting.
 
 ```dart
 ${example.code}

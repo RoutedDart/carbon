@@ -63,7 +63,12 @@ function jsonValueToDart($value, $indent = 2) {
 }
 
 function generateDartLocaleFromJson($localeCode, $jsonData) {
-    $constName = 'locale' . str_replace('_', '', ucwords(strtolower($localeCode), '_'));
+    // Sanitize locale code for Dart variable name (replace @ with _At or remove it)
+    // e.g., "aa_ER@saaho" becomes "aa_ER_saaho" for variable name
+    $sanitizedForVarName = str_replace('@', '_', $localeCode);
+    $constName = 'locale' . str_replace('_', '', ucwords(strtolower($sanitizedForVarName), '_'));
+    
+    // Keep original locale code for the localeCode field
     $normalizedCode = strtolower(str_replace('-', '_', $localeCode));
     
     $dart = "const CarbonLocaleData $constName = CarbonLocaleData(\n";
@@ -82,6 +87,12 @@ function generateDartLocaleFromJson($localeCode, $jsonData) {
         'firstDayOfWeek' => 'firstDayOfWeek',
         'dayOfFirstWeekOfYear' => 'dayOfFirstWeekOfYear',
         'ordinalWords' => 'ordinalWords',
+        'calendar' => 'calendar',
+        'list' => 'listSeparators',
+        'periodRecurrences' => 'periodRecurrences',
+        'periodInterval' => 'periodInterval',
+        'periodStartDate' => 'periodStartDate',
+        'periodEndDate' => 'periodEndDate',
     ];
     
     foreach ($fieldMap as $jsonKey => $dartKey) {
@@ -98,9 +109,23 @@ function generateDartLocaleFromJson($localeCode, $jsonData) {
         $dart .= "  ordinal: _ordinal,\n";
     }
     
-    // Add meridiem function if present
+    // Add meridiem function if present (either from function or array)
     if (isset($jsonData['meridiem_function'])) {
         $dart .= "  meridiem: _meridiem,\n";
+    } elseif (isset($jsonData['meridiem']) && is_array($jsonData['meridiem'])) {
+        $dart .= "  meridiem: _meridiem,\n";
+    }
+    
+    // Add default calendar formats if not provided (matches PHP Carbon's internal defaults)
+    if (!isset($jsonData['calendar']) || empty($jsonData['calendar'])) {
+        $dart .= "  calendar: {\n";
+        $dart .= "    'sameDay': '[Today at] LT',\n";
+        $dart .= "    'nextDay': '[Tomorrow at] LT',\n";
+        $dart .= "    'nextWeek': 'dddd [at] LT',\n";
+        $dart .= "    'lastDay': '[Yesterday at] LT',\n";
+        $dart .= "    'lastWeek': '[Last] dddd [at] LT',\n";
+        $dart .= "    'sameElse': 'L',\n";
+        $dart .= "  },\n";
     }
     
     $dart .= ");\n";
@@ -188,7 +213,9 @@ foreach ($baseLocales as $locale) {
                 continue;
             }
             
-            $regionalConst = 'locale' . str_replace('_', '', ucwords(strtolower($regional), '_'));
+            // Sanitize @ character for Dart variable name
+            $sanitizedRegional = str_replace('@', '_', $regional);
+            $regionalConst = 'locale' . str_replace('_', '', ucwords(strtolower($sanitizedRegional), '_'));
             
             // Generate copyWith for regional variant
             $fileContent .= "// Regional variant: $regional\n";
@@ -197,14 +224,34 @@ foreach ($baseLocales as $locale) {
             
             // Only include fields that differ from parent
             $diffFields = [];
-            foreach (['weekdays', 'weekdaysShort', 'weekdaysMin', 'months', 'monthsShort', 'monthsStandalone'] as $field) {
+            $fieldMap = [
+                'translationStrings' => 'translationStrings',
+                'formats' => 'formats',
+                'months' => 'months',
+                'monthsStandalone' => 'monthsStandalone',
+                'monthsShort' => 'monthsShort',
+                'weekdays' => 'weekdays',
+                'weekdaysShort' => 'weekdaysShort',
+                'weekdaysMin' => 'weekdaysMin',
+                'firstDayOfWeek' => 'firstDayOfWeek',
+                'dayOfFirstWeekOfYear' => 'dayOfFirstWeekOfYear',
+                'ordinalWords' => 'ordinalWords',
+                'calendar' => 'calendar',
+                'list' => 'listSeparators',
+                'periodRecurrences' => 'periodRecurrences',
+                'periodInterval' => 'periodInterval',
+                'periodStartDate' => 'periodStartDate',
+                'periodEndDate' => 'periodEndDate',
+            ];
+            foreach (['weekdays', 'weekdaysShort', 'weekdaysMin', 'months', 'monthsShort', 'monthsStandalone', 'calendar', 'ordinalWords', 'list', 'periodRecurrences', 'periodInterval', 'periodStartDate', 'periodEndDate'] as $field) {
                 if (isset($regionalData[$field]) && (!isset($jsonData[$field]) || $regionalData[$field] !== $jsonData[$field])) {
                     $diffFields[$field] = jsonValueToDart($regionalData[$field], 2);
                 }
             }
             
             foreach ($diffFields as $field => $value) {
-                $fileContent .= "  $field: $value,\n";
+                $dartKey = $fieldMap[$field] ?? $field;
+                $fileContent .= "  $dartKey: $value,\n";
             }
             
             $fileContent .= ");\n\n";
@@ -225,6 +272,14 @@ foreach ($baseLocales as $locale) {
         $fileContent .= "\n// Auto-generated meridiem function\n";
         $fileContent .= "String _meridiem(int hour, dynamic minute, dynamic isLower) {\n";
         $fileContent .= $jsonData['meridiem_function'];
+        $fileContent .= "}\n";
+    } elseif (isset($jsonData['meridiem']) && is_array($jsonData['meridiem'])) {
+        // Generate simple meridiem function from array
+        $am = addslashes($jsonData['meridiem'][0] ?? 'AM');
+        $pm = addslashes($jsonData['meridiem'][1] ?? 'PM');
+        $fileContent .= "\n// Auto-generated meridiem function from array\n";
+        $fileContent .= "String _meridiem(int hour, dynamic minute, dynamic isLower) {\n";
+        $fileContent .= "  return hour < 12 ? '$am' : '$pm';\n";
         $fileContent .= "}\n";
     }
     

@@ -72,7 +72,7 @@ Future<void> main() async {
 Output:
 
 ```
-English LLLL: Thursday, February 29, 2024 6:45 PM
+English LLLL: Thursday, February 29, 2024 6:45 PM
 French LLLL: jeudi 29 février 2024 18:45
 Custom ISO tokens: jeudi week 09, 18:45
 ```
@@ -148,7 +148,7 @@ Output:
 ```
 default toString -> 1975-12-25 14:15:16
 global override -> Thursday, December 25, 1975 2:15:16 PM
-instance override -> Thursday, December 25, 1975 2:15 PM
+instance override -> Thursday, December 25, 1975 2:15 PM
 startOfWeek setting -> 1
 ```
 

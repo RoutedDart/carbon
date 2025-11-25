@@ -125,7 +125,8 @@ Future<void> main() async {
 
   CarbonTranslator.registerLocale(
     'fr',
-    CarbonTranslation(
+    CarbonLocaleData(
+      localeCode: 'fr',
       numbers: {
         '1': 'un ',
         '2': 'deux ',
@@ -160,7 +161,7 @@ Output:
 
 ```
 French diff -> il y a un an
-French digits -> 123
+French digits -> un deux trois
 French snippet -> minutes il y a
 ```
 

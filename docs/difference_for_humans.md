@@ -60,9 +60,9 @@ Future<void> main() async {
 Output:
 
 ```
-multi unit -> in 1 year 2 months 3 days from now
-short join -> in 1 yr, 2 mo from now
-just now -> a moment ago
+multi unit -> 1 year, 2 months and 3 days from now
+short join -> 1 yr and 2 mo from now
+just now -> 0 seconds ago
 ```
 
 
@@ -82,7 +82,8 @@ Future<void> main() async {
 
   CarbonTranslator.registerLocale(
     'fr',
-    CarbonTranslation(
+    CarbonLocaleData(
+      localeCode: 'fr',
       timeStrings: {
         'ago': 'il y a',
         'from now': "d'ici",

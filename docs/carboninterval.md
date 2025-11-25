@@ -50,7 +50,7 @@ Future<void> main() async {
 Output:
 
 ```
-forHumans -> 3 days from now
+forHumans -> 3 days 5 hours
 ```
 
 

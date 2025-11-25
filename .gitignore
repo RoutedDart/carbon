@@ -8,4 +8,7 @@ pubspec.lock
 openspec/
 AGENTS.md
 Roadmap*
-php_app/
+# php_app/
+# lib/src/core/locales/json
+.idea
+.cursor

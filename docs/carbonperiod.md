@@ -68,6 +68,49 @@ Output:
 ```
 
 
+## Localized string output
+
+`CarbonPeriod.toString()` mirrors PHP Carbon by reading the locale's
+`periodInterval`, `periodRecurrences`, and related strings. The same period can
+emit different languages or recurrence summaries without manual formatting.
+
+```dart
+import 'package:carbon/carbon.dart';
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('en');
+  await Carbon.configureTimeMachine(testing: true);
+
+  Carbon.setLocale('en');
+  CarbonPeriod.setLocale('en');
+
+  final start = Carbon.parse('2024-12-01T00:00:00Z');
+  final basic = start.daysUntil('2024-12-05T00:00:00Z');
+  print(basic);
+
+  final limited = start.daysUntil('2024-12-10T00:00:00Z').recurrences(3);
+  print(limited);
+
+  Carbon.setLocale('so');
+  CarbonPeriod.setLocale('so');
+
+  final somali =
+      Carbon.parse('2024-12-01T00:00:00Z').daysUntil('2024-12-05T00:00:00Z');
+  print(somali);
+}
+
+```
+
+Output:
+
+```
+Every 1 day from 2024-12-01 to 2024-12-05
+3 times every 1 day from 2024-12-01 to 2024-12-03
+1 maalin kasta laga bilaabo 2024-12-01 ilaa 2024-12-05
+```
+
+
 ## Differences compared to the PHP docs
 
 - Filtering and recurrences helpers (`filter`, `recurrences`, `times`) now exist.

@@ -73,14 +73,24 @@ function extractLocaleData($localeCode, $langDir, $converter) {
             $data['months'] = array_values($localeFileData['months']);
         }
         
+        // Get short months with mmm_suffix if present
+        if (isset($localeFileData['months_short']) && is_array($localeFileData['months_short'])) {
+            $monthsShort = array_values($localeFileData['months_short']);
+            $mmmSuffix = isset($localeFileData['mmm_suffix']) && is_string($localeFileData['mmm_suffix']) ? $localeFileData['mmm_suffix'] : null;
+            
+            // If mmm_suffix exists and is not the translation key itself, append it
+            // (The check $mmmSuffix !== 'mmm_suffix' is for cases where the key itself is returned if no translation is found)
+            if ($mmmSuffix && $mmmSuffix !== 'mmm_suffix') {
+                $monthsShort = array_map(function($month) use ($mmmSuffix) {
+                    return $month . $mmmSuffix;
+                }, $monthsShort);
+            }
+            $data['monthsShort'] = $monthsShort;
+        }
+        
         // Get standalone months
         if (isset($localeFileData['months_standalone']) && is_array($localeFileData['months_standalone'])) {
             $data['monthsStandalone'] = array_values($localeFileData['months_standalone']);
-        }
-        
-        // Get short months
-        if (isset($localeFileData['months_short']) && is_array($localeFileData['months_short'])) {
-            $data['monthsShort'] = array_values($localeFileData['months_short']);
         }
         
         // Get weekdays from locale file directly (handles callables properly)
@@ -102,6 +112,28 @@ function extractLocaleData($localeCode, $langDir, $converter) {
         // Extract weekdays_short
         if (isset($localeFileData['weekdays_short']) && is_array($localeFileData['weekdays_short'])) {
             $data['weekdaysShort'] = array_values($localeFileData['weekdays_short']);
+        }
+
+        // Extract calendar
+        if (isset($localeFileData['calendar']) && is_array($localeFileData['calendar'])) {
+            $data['calendar'] = array_filter($localeFileData['calendar'], 'is_string');
+        }
+
+        // Extract ordinal_words
+        if (isset($localeFileData['ordinal_words']) && is_array($localeFileData['ordinal_words'])) {
+            $data['ordinalWords'] = $localeFileData['ordinal_words'];
+        }
+
+        // Extract list
+        if (isset($localeFileData['list']) && is_array($localeFileData['list'])) {
+            $data['list'] = array_values($localeFileData['list']);
+        }
+
+        // Extract period strings
+        foreach (['period_recurrences', 'period_interval', 'period_start_date', 'period_end_date'] as $key) {
+            if (isset($localeFileData[$key]) && is_string($localeFileData[$key])) {
+                $data[lcfirst(str_replace(' ', '', ucwords(str_replace('_', ' ', $key))))] = $localeFileData[$key];
+            }
         }
         
         // Extract weekdays_min
@@ -193,7 +225,7 @@ function extractLocaleData($localeCode, $langDir, $converter) {
                 $body = implode("", array_slice($source, $startLine, $length));
                 
                 // Strip array key assignment if present (e.g. 'meridiem' => ...)
-                $body = preg_replace('/^\s*[\'"]\w+[\'"]\s*=>\s*/', '', $body);
+                $body = preg_replace('/^\s*[\'\"]\w+[\'\"]\s*=>\s*/', '', $body);
                 
                 // Determine if it's an Arrow Function (fn) or Closure (function)
                 $isArrow = false;
@@ -234,7 +266,11 @@ function extractLocaleData($localeCode, $langDir, $converter) {
             } catch (Exception $e) {
                 // Skip if conversion fails
             }
+        } elseif (isset($localeFileData['meridiem']) && is_array($localeFileData['meridiem'])) {
+            // Meridiem array (e.g., [0 => 'AM', 1 => 'PM'] or ['ص', 'م'])
+            $data['meridiem'] = $localeFileData['meridiem'];
         }
+        
         
         // Ordinal words (static mapping)
         if (isset($localeFileData['ordinal_words']) && is_array($localeFileData['ordinal_words'])) {
@@ -261,22 +297,24 @@ foreach ($files as $file) {
     
     $localeCode = basename($file, '.php');
     
-    // Skip special characters
-    if (strpos($localeCode, '@') !== false) {
-        $skipped++;
-        continue;
-    }
-    
     echo "Processing: $localeCode\n";
     
     $data = extractLocaleData($localeCode, $langDir, $converter);
+    
+    // Debug for @ locales
+    if (strpos($localeCode, '@') !== false) {
+        echo "  [@locale] Data is " . (($data && !empty($data)) ? "NOT empty" : "empty") . "\n";
+        if ($data) {
+            echo "  [@locale] Keys: " . implode(', ', array_keys($data)) . "\n";
+        }
+    }
     
     if ($data && !empty($data)) {
         $jsonFile = "$outputDir/$localeCode.json";
         file_put_contents($jsonFile, json_encode($data, JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE));
         $processed++;
     } else {
-        echo "  Skipped (no data)\n";
+        echo "  Skipped '$localeCode' (no data)\n";
         $skipped++;
     }
 }

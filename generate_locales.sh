@@ -23,6 +23,7 @@ cd ..
 
 echo "✨ Formatting generated Dart code..."
 dart format lib/src/core/locales/generated/
+dart fix --apply
 
 echo "🔍 Running Dart Analyze..."
 # We allow analyze to fail (it might just have infos) but it's good to show output

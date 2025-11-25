@@ -76,8 +76,8 @@ Future<void> main() async {
   Carbon.setTestNow('2024-06-15T09:30:00-05:00');
 
   final christmas = Carbon.createFromDate(null, 12, 25);
-  final y2k = Carbon.createPhp(2000, 1, 1, 0, 0, 0)!;
-  final alsoY2k = Carbon.createPhp(1999, 12, 31, 24)!;
+  final y2k = Carbon.createFromDateTime(2000, 1, 1, 0, 0, 0)!;
+  final alsoY2k = Carbon.createFromDateTime(1999, 12, 31, 24)!;
   final noonLondon = Carbon.createFromTime(12, 0, 0, 0, 'Europe/London');
   final teaTime = Carbon.createFromTimeString('17:00:00', timeZone: 'Europe/London');
   final fromFormat = Carbon.createFromFormat('Y-m-d H', '1975-05-21 22');
@@ -110,8 +110,8 @@ Future<ExampleRun> runComponentFactoriesExample() async {
   Carbon.setTestNow('2024-06-15T09:30:00-05:00');
 
   final christmas = Carbon.createFromDate(null, 12, 25);
-  final y2k = Carbon.createPhp(2000, 1, 1, 0, 0, 0)!;
-  final alsoY2K = Carbon.createPhp(1999, 12, 31, 24)!;
+  final y2k = Carbon.createFromDateTime(2000, 1, 1, 0, 0, 0)!;
+  final alsoY2K = Carbon.createFromDateTime(1999, 12, 31, 24)!;
   final noonLondon = Carbon.createFromTime(12, 0, 0, 0, 'Europe/London');
   final teaTime = Carbon.createFromTimeString(
     '17:00:00',

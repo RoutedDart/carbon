@@ -125,6 +125,18 @@ const CarbonLocaleData localePt = CarbonLocaleData(
     'fifth': 'quinta',
     'last': 'última',
   },
+  calendar: {
+    'sameDay': '[Hoje às] LT',
+    'nextDay': '[Amanhã às] LT',
+    'nextWeek': 'dddd [às] LT',
+    'lastDay': '[Ontem às] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' e '],
+  periodRecurrences: 'uma vez|:count vezes',
+  periodInterval: 'cada :interval',
+  periodStartDate: 'de :date',
+  periodEndDate: 'até :date',
 );
 
 // Regional variant: pt_AO
@@ -135,6 +147,8 @@ final CarbonLocaleData localePtAo = localePt.copyWith(
 // Regional variant: pt_BR
 final CarbonLocaleData localePtBr = localePt.copyWith(
   localeCode: 'pt_br',
+  periodRecurrences: 'uma|:count vez',
+  periodInterval: 'toda :interval',
 );
 
 // Regional variant: pt_CH

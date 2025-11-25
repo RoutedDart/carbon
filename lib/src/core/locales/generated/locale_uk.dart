@@ -149,6 +149,12 @@ const CarbonLocaleData localeUk = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {'sameElse': 'L'},
+  listSeparators: [', ', ' i '],
+  periodRecurrences: 'один раз|:count рази|:count разів',
+  periodInterval: 'кожні :interval',
+  periodStartDate: 'з :date',
+  periodEndDate: 'до :date',
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -161,7 +167,7 @@ final CarbonLocaleData localeUkUa = localeUk.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'M' || period == 'd' || period == 'DDD' || period == 'w' || period == 'W' ? '${number}-й' : (period == 'D' ? '${number}-го' : number))).toString();
+    return ((period == 'M' || period == 'd' || period == 'DDD' || period == 'w' || period == 'W' ? '$number-й' : (period == 'D' ? '$number-го' : number))).toString();
 }
 
 // Auto-generated meridiem function

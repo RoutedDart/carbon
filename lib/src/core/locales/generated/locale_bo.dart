@@ -105,6 +105,15 @@ const CarbonLocaleData localeBo = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[དི་རིང] LT',
+    'nextDay': '[སང་ཉིན] LT',
+    'nextWeek': '[བདུན་ཕྲག་རྗེས་མ], LT',
+    'lastDay': '[ཁ་སང] LT',
+    'lastWeek': '[བདུན་ཕྲག་མཐའ་མ] dddd, LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ཨནད་ '],
   meridiem: _meridiem,
 );
 

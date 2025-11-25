@@ -110,6 +110,15 @@ const CarbonLocaleData localeMs = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Hari ini pukul] LT',
+    'nextDay': '[Esok pukul] LT',
+    'nextWeek': 'dddd [pukul] LT',
+    'lastDay': '[Kelmarin pukul] LT',
+    'lastWeek': 'dddd [lepas pukul] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' dan '],
   meridiem: _meridiem,
 );
 

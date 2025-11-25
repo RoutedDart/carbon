@@ -119,6 +119,15 @@ const CarbonLocaleData localeEl = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Σήμερα {}] LT',
+    'nextDay': '[Αύριο {}] LT',
+    'nextWeek': 'dddd [{}] LT',
+    'lastDay': '[Χθες {}] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' και '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: el_CY
@@ -131,3 +140,8 @@ final CarbonLocaleData localeElGr = localeEl.copyWith(
   localeCode: 'el_gr',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'ΠΜ' : 'ΜΜ';
+}

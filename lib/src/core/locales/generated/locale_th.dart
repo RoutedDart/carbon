@@ -96,6 +96,16 @@ const CarbonLocaleData localeTh = CarbonLocaleData(
     'ศ.',
     'ส.',
   ],
+  calendar: {
+    'sameDay': '[วันนี้ เวลา] LT',
+    'nextDay': '[พรุ่งนี้ เวลา] LT',
+    'nextWeek': 'dddd[หน้า เวลา] LT',
+    'lastDay': '[เมื่อวานนี้ เวลา] LT',
+    'lastWeek': '[วัน]dddd[ที่แล้ว เวลา] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' และ '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: th_TH
@@ -103,3 +113,8 @@ final CarbonLocaleData localeThTh = localeTh.copyWith(
   localeCode: 'th_th',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'ก่อนเที่ยง' : 'หลังเที่ยง';
+}

@@ -104,7 +104,17 @@ const CarbonLocaleData localeCy = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Heddiw am] LT',
+    'nextDay': '[Yfory am] LT',
+    'nextWeek': 'dddd [am] LT',
+    'lastDay': '[Ddoe am] LT',
+    'lastWeek': 'dddd [diwethaf am] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' a '],
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: cy_GB
@@ -115,5 +125,10 @@ final CarbonLocaleData localeCyGb = localeCy.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '${number}${(number > 20 ? (([40, 50, 60, 80, 100]).contains((number).toInt()) ? 'fed' : 'ain') : ['', 'af', 'il', 'ydd', 'ydd', 'ed', 'ed', 'ed', 'fed', 'fed', 'fed', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'fed'][number] ?? '')}';
+    return '$number${(number > 20 ? (([40, 50, 60, 80, 100]).contains((number).toInt()) ? 'fed' : 'ain') : ['', 'af', 'il', 'ydd', 'ydd', 'ed', 'ed', 'ed', 'fed', 'fed', 'fed', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'fed'][number])}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'yb' : 'yh';
 }

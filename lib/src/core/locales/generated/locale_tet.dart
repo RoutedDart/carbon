@@ -94,5 +94,13 @@ const CarbonLocaleData localeTet = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Ohin iha] LT',
+    'nextDay': '[Aban iha] LT',
+    'nextWeek': 'dddd [iha] LT',
+    'lastDay': '[Horiseik iha] LT',
+    'lastWeek': 'dddd [semana kotuk] [iha] LT',
+    'sameElse': 'L',
+  },
 );
 

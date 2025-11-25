@@ -90,6 +90,14 @@ const CarbonLocaleData localeOr = CarbonLocaleData(
     'ଶନି',
   ],
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: or_IN

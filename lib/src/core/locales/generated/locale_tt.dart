@@ -79,10 +79,83 @@ const CarbonLocaleData localeTt = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: tt_RU
 final CarbonLocaleData localeTtRu = localeTt.copyWith(
   localeCode: 'tt_ru',
+);
+
+// Regional variant: tt_RU@iqtelif
+final CarbonLocaleData localeTtRuIqtelif = localeTt.copyWith(
+  localeCode: 'tt_ru@iqtelif',
+  weekdays: [
+    'Yekşembí',
+    'Düşembí',
+    'Sişembí',
+    'Çerşembí',
+    'Pencíşembí',
+    'Comğa',
+    'Şimbe',
+  ],
+  weekdaysShort: [
+    'Yek',
+    'Düş',
+    'Siş',
+    'Çer',
+    'Pen',
+    'Com',
+    'Şim',
+  ],
+  weekdaysMin: [
+    'Yek',
+    'Düş',
+    'Siş',
+    'Çer',
+    'Pen',
+    'Com',
+    'Şim',
+  ],
+  months: [
+    'Ğınwar',
+    'Fiwral\'',
+    'Mart',
+    'April',
+    'May',
+    'Yün',
+    'Yül',
+    'Awgust',
+    'Sintebír',
+    'Üktebír',
+    'Noyebír',
+    'Dikebír',
+  ],
+  monthsShort: [
+    'Ğın',
+    'Fiw',
+    'Mar',
+    'Apr',
+    'May',
+    'Yün',
+    'Yül',
+    'Awg',
+    'Sin',
+    'Ükt',
+    'Noy',
+    'Dik',
+  ],
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
 );
 

@@ -6,6 +6,8 @@ import 'package:carbon/carbon.dart';
 const CarbonLocaleData localeLv = CarbonLocaleData(
   localeCode: 'lv',
   translationStrings: {
+    'ago': 'pirms :time',
+    'from_now': 'pēc :time',
     'year': '0 gadu|:count gads|:count gadi',
     'y': ':count g.',
     'a_year': '{1}gads|0 gadu|:count gads|:count gadi',
@@ -143,6 +145,14 @@ const CarbonLocaleData localeLv = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[šodien] [plkst.] LT',
+    'nextDay': '[rīt] [plkst.] LT',
+    'lastDay': '[vakar] [plkst.] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' un '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: lv_LV
@@ -150,3 +160,8 @@ final CarbonLocaleData localeLvLv = localeLv.copyWith(
   localeCode: 'lv_lv',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'priekšpusdiena' : 'pēcpusdiena';
+}

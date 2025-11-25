@@ -93,7 +93,14 @@ const CarbonLocaleData localeJa = CarbonLocaleData(
     '金',
     '土',
   ],
+  calendar: {
+    'sameDay': '[今日] LT',
+    'nextDay': '[明日] LT',
+    'lastDay': '[昨日] LT',
+    'sameElse': 'L',
+  },
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: ja_JP
@@ -104,5 +111,10 @@ final CarbonLocaleData localeJaJp = localeJa.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '${number}日' : number)).toString();
+    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number日' : number)).toString();
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? '午前' : '午後';
 }

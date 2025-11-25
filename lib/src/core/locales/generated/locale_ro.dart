@@ -104,6 +104,16 @@ const CarbonLocaleData localeRo = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[azi la] LT',
+    'nextDay': '[mâine la] LT',
+    'nextWeek': 'dddd [la] LT',
+    'lastDay': '[ieri la] LT',
+    'lastWeek': '[fosta] dddd [la] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' și '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: ro_MD
@@ -116,3 +126,8 @@ final CarbonLocaleData localeRoRo = localeRo.copyWith(
   localeCode: 'ro_ro',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'a.m.' : 'p.m.';
+}

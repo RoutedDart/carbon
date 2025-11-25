@@ -102,7 +102,16 @@ const CarbonLocaleData localeKy = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Бүгүн саат] LT',
+    'nextDay': '[Эртең саат] LT',
+    'nextWeek': 'dddd [саат] LT',
+    'lastDay': '[Кече саат] LT',
+    'lastWeek': '[Өткен аптанын] dddd [күнү] [саат] LT',
+    'sameElse': 'L',
+  },
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: ky_KG
@@ -114,5 +123,10 @@ final CarbonLocaleData localeKyKg = localeKy.copyWith(
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   var suffixes = {0: '-чү', 1: '-чи', 2: '-чи', 3: '-чү', 4: '-чү', 5: '-чи', 6: '-чы', 7: '-чи', 8: '-чи', 9: '-чу', 10: '-чу', 20: '-чы', 30: '-чу', 40: '-чы', 50: '-чү', 60: '-чы', 70: '-чи', 80: '-чи', 90: '-чу', 100: '-чү'};
-    return '${number}${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+    return '$number${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'таңкы' : 'түштөн кийинки';
 }

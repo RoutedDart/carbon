@@ -101,6 +101,16 @@ const CarbonLocaleData localeSe = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[otne ti] LT',
+    'nextDay': '[ihttin ti] LT',
+    'nextWeek': 'dddd [ti] LT',
+    'lastDay': '[ikte ti] LT',
+    'lastWeek': '[ovddit] dddd [ti] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ja '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: se_FI
@@ -159,3 +169,8 @@ final CarbonLocaleData localeSeSe = localeSe.copyWith(
   localeCode: 'se_se',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'i.b.' : 'e.b.';
+}

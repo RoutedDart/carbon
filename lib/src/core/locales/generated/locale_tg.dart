@@ -87,6 +87,15 @@ const CarbonLocaleData localeTg = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Имрӯз соати] LT',
+    'nextDay': '[Пагоҳ соати] LT',
+    'nextWeek': 'dddd[и] [ҳафтаи оянда соати] LT',
+    'lastDay': '[Дирӯз соати] LT',
+    'lastWeek': 'dddd[и] [ҳафтаи гузашта соати] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ва '],
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -103,7 +112,7 @@ String _ordinal(int number, String period) {
       return '$number-ıncı';
     }
   var suffixes = {0: '-ум', 1: '-ум', 2: '-юм', 3: '-юм', 4: '-ум', 5: '-ум', 6: '-ум', 7: '-ум', 8: '-ум', 9: '-ум', 10: '-ум', 12: '-ум', 13: '-ум', 20: '-ум', 30: '-юм', 40: '-ум', 50: '-ум', 60: '-ум', 70: '-ум', 80: '-ум', 90: '-ум', 100: '-ум'};
-    return '${number}${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+    return '$number${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
 }
 
 // Auto-generated meridiem function

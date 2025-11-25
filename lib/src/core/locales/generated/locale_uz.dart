@@ -103,6 +103,16 @@ const CarbonLocaleData localeUz = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Бугун соат] LT [да]',
+    'nextDay': '[Эртага] LT [да]',
+    'nextWeek': 'dddd [куни соат] LT [да]',
+    'lastDay': '[Кеча соат] LT [да]',
+    'lastWeek': '[Утган] dddd [куни соат] LT [да]',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ва '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: uz_Arab
@@ -163,6 +173,15 @@ final CarbonLocaleData localeUzArab = localeUz.copyWith(
     'نوم',
     'دسم',
   ],
+  calendar: {
+    'sameDay': '[امروز ساعت] LT',
+    'nextDay': '[فردا ساعت] LT',
+    'nextWeek': 'dddd [ساعت] LT',
+    'lastDay': '[دیروز ساعت] LT',
+    'lastWeek': 'dddd [پیش] [ساعت] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: ['، ', ' و '],
 );
 
 // Regional variant: uz_Cyrl
@@ -228,6 +247,15 @@ final CarbonLocaleData localeUzLatn = localeUz.copyWith(
     'Noy',
     'Dek',
   ],
+  calendar: {
+    'sameDay': '[Bugun soat] LT [da]',
+    'nextDay': '[Ertaga] LT [da]',
+    'nextWeek': 'dddd [kuni soat] LT [da]',
+    'lastDay': '[Kecha soat] LT [da]',
+    'lastWeek': '[O\'tgan] dddd [kuni soat] LT [da]',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' va '],
 );
 
 // Regional variant: uz_UZ
@@ -288,5 +316,79 @@ final CarbonLocaleData localeUzUz = localeUz.copyWith(
     'Noy',
     'Dek',
   ],
+  calendar: {
+    'sameDay': '[Bugun soat] LT [da]',
+    'nextDay': '[Ertaga] LT [da]',
+    'nextWeek': 'dddd [kuni soat] LT [da]',
+    'lastDay': '[Kecha soat] LT [da]',
+    'lastWeek': '[O\'tgan] dddd [kuni soat] LT [da]',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' va '],
 );
 
+// Regional variant: uz_UZ@cyrillic
+final CarbonLocaleData localeUzUzCyrillic = localeUz.copyWith(
+  localeCode: 'uz_uz@cyrillic',
+  weekdays: [
+    'Якшанба',
+    'Душанба',
+    'Сешанба',
+    'Чоршанба',
+    'Пайшанба',
+    'Жума',
+    'Шанба',
+  ],
+  weekdaysShort: [
+    'Якш',
+    'Душ',
+    'Сеш',
+    'Чор',
+    'Пай',
+    'Жум',
+    'Шан',
+  ],
+  weekdaysMin: [
+    'Якш',
+    'Душ',
+    'Сеш',
+    'Чор',
+    'Пай',
+    'Жум',
+    'Шан',
+  ],
+  months: [
+    'Январ',
+    'Феврал',
+    'Март',
+    'Апрел',
+    'Май',
+    'Июн',
+    'Июл',
+    'Август',
+    'Сентябр',
+    'Октябр',
+    'Ноябр',
+    'Декабр',
+  ],
+  monthsShort: [
+    'Янв',
+    'Фев',
+    'Мар',
+    'Апр',
+    'Май',
+    'Июн',
+    'Июл',
+    'Авг',
+    'Сен',
+    'Окт',
+    'Ноя',
+    'Дек',
+  ],
+);
+
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'эрталаб' : 'кечаси';
+}

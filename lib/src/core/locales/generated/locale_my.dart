@@ -104,6 +104,16 @@ const CarbonLocaleData localeMy = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[ယနေ.] LT [မှာ]',
+    'nextDay': '[မနက်ဖြန်] LT [မှာ]',
+    'nextWeek': 'dddd LT [မှာ]',
+    'lastDay': '[မနေ.က] LT [မှာ]',
+    'lastWeek': '[ပြီးခဲ့သော] dddd LT [မှာ]',
+    'sameElse': 'L',
+  },
+  periodRecurrences: ':count ကြိမ်',
+  meridiem: _meridiem,
 );
 
 // Regional variant: my_MM
@@ -111,3 +121,8 @@ final CarbonLocaleData localeMyMm = localeMy.copyWith(
   localeCode: 'my_mm',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'နံနက်' : 'ညနေ';
+}

@@ -104,6 +104,15 @@ const CarbonLocaleData localeDa = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[i dag kl.] LT',
+    'nextDay': '[i morgen kl.] LT',
+    'nextWeek': 'på dddd [kl.] LT',
+    'lastDay': '[i går kl.] LT',
+    'lastWeek': '[i] dddd[s kl.] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' og '],
 );
 
 // Regional variant: da_DK

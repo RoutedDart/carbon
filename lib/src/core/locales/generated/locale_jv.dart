@@ -94,6 +94,15 @@ const CarbonLocaleData localeJv = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Dinten puniko pukul] LT',
+    'nextDay': '[Mbenjang pukul] LT',
+    'nextWeek': 'dddd [pukul] LT',
+    'lastDay': '[Kala wingi pukul] LT',
+    'lastWeek': 'dddd [kepengker pukul] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' lan '],
   meridiem: _meridiem,
 );
 

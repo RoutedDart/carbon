@@ -94,6 +94,15 @@ const CarbonLocaleData localeHi = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[आज] LT',
+    'nextDay': '[कल] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[कल] LT',
+    'lastWeek': '[पिछले] dddd, LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' और '],
   meridiem: _meridiem,
 );
 

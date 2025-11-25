@@ -75,18 +75,18 @@ const CarbonLocaleData localeAst = CarbonLocaleData(
     'd’avientu',
   ],
   monthsShort: [
-    'xin',
-    'feb',
-    'mar',
-    'abr',
-    'may',
-    'xun',
-    'xnt',
-    'ago',
-    'set',
-    'och',
-    'pay',
-    'avi',
+    'xin.',
+    'feb.',
+    'mar.',
+    'abr.',
+    'may.',
+    'xun.',
+    'xnt.',
+    'ago.',
+    'set.',
+    'och.',
+    'pay.',
+    'avi.',
   ],
   weekdays: [
     'domingu',
@@ -126,6 +126,13 @@ const CarbonLocaleData localeAst = CarbonLocaleData(
     'fifth': 'quinto',
     'last': 'último',
   },
+  calendar: {'sameElse': 'L'},
+  listSeparators: [', ', ' y '],
+  periodRecurrences: 'una vez|:count veces',
+  periodInterval: 'cada :interval',
+  periodStartDate: 'de :date',
+  periodEndDate: 'a :date',
+  meridiem: _meridiem,
 );
 
 // Regional variant: ast_ES
@@ -133,3 +140,8 @@ final CarbonLocaleData localeAstEs = localeAst.copyWith(
   localeCode: 'ast_es',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'a. m.' : 'p. m.';
+}

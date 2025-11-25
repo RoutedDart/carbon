@@ -103,6 +103,16 @@ const CarbonLocaleData localePs = CarbonLocaleData(
     'خ',
   ],
   firstDayOfWeek: 6,
+  listSeparators: ['، ', ' او '],
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ps_AF
@@ -110,3 +120,8 @@ final CarbonLocaleData localePsAf = localePs.copyWith(
   localeCode: 'ps_af',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'غ.م.' : 'غ.و.';
+}

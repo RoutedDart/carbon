@@ -94,6 +94,15 @@ const CarbonLocaleData localeYo = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Ònì ni] LT',
+    'nextDay': '[Ọ̀la ni] LT',
+    'nextWeek': 'dddd [Ọsẹ̀ tón\'bọ] [ni] LT',
+    'lastDay': '[Àna ni] LT',
+    'lastWeek': 'dddd [Ọsẹ̀ tólọ́] [ni] LT',
+    'sameElse': 'L',
+  },
+  meridiem: _meridiem,
 );
 
 // Regional variant: yo_BJ
@@ -161,3 +170,8 @@ final CarbonLocaleData localeYoNg = localeYo.copyWith(
   localeCode: 'yo_ng',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'Àárọ̀' : 'Ọ̀sán';
+}

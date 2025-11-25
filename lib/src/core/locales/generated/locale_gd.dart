@@ -101,7 +101,17 @@ const CarbonLocaleData localeGd = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[An-diugh aig] LT',
+    'nextDay': '[A-màireach aig] LT',
+    'nextWeek': 'dddd [aig] LT',
+    'lastDay': '[An-dè aig] LT',
+    'lastWeek': 'dddd [seo chaidh] [aig] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' agus '],
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: gd_GB
@@ -112,5 +122,10 @@ final CarbonLocaleData localeGdGb = localeGd.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '${number}${(number == 1 ? 'd' : (number % 10 == 2 ? 'na' : 'mh'))}';
+    return '$number${(number == 1 ? 'd' : (number % 10 == 2 ? 'na' : 'mh'))}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'm' : 'f';
 }

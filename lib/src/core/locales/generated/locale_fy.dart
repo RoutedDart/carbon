@@ -60,18 +60,18 @@ const CarbonLocaleData localeFy = CarbonLocaleData(
     'desimber',
   ],
   monthsShort: [
-    'jan',
-    'feb',
-    'mrt',
-    'apr',
-    'mai',
-    'jun',
-    'jul',
-    'aug',
-    'sep',
-    'okt',
-    'nov',
-    'des',
+    'jan.',
+    'feb.',
+    'mrt.',
+    'apr.',
+    'mai.',
+    'jun.',
+    'jul.',
+    'aug.',
+    'sep.',
+    'okt.',
+    'nov.',
+    'des.',
   ],
   weekdays: [
     'snein',
@@ -102,6 +102,15 @@ const CarbonLocaleData localeFy = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[hjoed om] LT',
+    'nextDay': '[moarn om] LT',
+    'nextWeek': 'dddd [om] LT',
+    'lastDay': '[juster om] LT',
+    'lastWeek': '[ôfrûne] dddd [om] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' en '],
   ordinal: _ordinal,
 );
 
@@ -163,6 +172,11 @@ final CarbonLocaleData localeFyDe = localeFy.copyWith(
     'Now',
     'Dez',
   ],
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
 );
 
 // Regional variant: fy_NL
@@ -210,23 +224,23 @@ final CarbonLocaleData localeFyNl = localeFy.copyWith(
     'Desimber',
   ],
   monthsShort: [
-    'Jan',
-    'Feb',
-    'Mrt',
-    'Apr',
-    'Mai',
-    'Jun',
-    'Jul',
-    'Aug',
-    'Sep',
-    'Okt',
-    'Nov',
-    'Des',
+    'Jan.',
+    'Feb.',
+    'Mrt.',
+    'Apr.',
+    'Mai.',
+    'Jun.',
+    'Jul.',
+    'Aug.',
+    'Sep.',
+    'Okt.',
+    'Nov.',
+    'Des.',
   ],
 );
 
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '${number}${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+    return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
 }

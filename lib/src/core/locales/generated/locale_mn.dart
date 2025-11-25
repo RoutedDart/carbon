@@ -134,6 +134,15 @@ const CarbonLocaleData localeMn = CarbonLocaleData(
     'Бя',
   ],
   firstDayOfWeek: 1,
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: mn_MN
@@ -141,3 +150,8 @@ final CarbonLocaleData localeMnMn = localeMn.copyWith(
   localeCode: 'mn_mn',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'өглөө' : 'орой';
+}

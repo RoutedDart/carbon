@@ -79,6 +79,14 @@ const CarbonLocaleData localeWo = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: wo_SN

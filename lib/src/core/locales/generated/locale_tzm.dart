@@ -87,6 +87,14 @@ const CarbonLocaleData localeTzm = CarbonLocaleData(
   ],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[ⴰⵙⴷⵅ ⴴ] LT',
+    'nextDay': '[ⴰⵙⴽⴰ ⴴ] LT',
+    'nextWeek': 'dddd [ⴴ] LT',
+    'lastDay': '[ⴰⵚⴰⵏⵜ ⴴ] LT',
+    'lastWeek': 'dddd [ⴴ] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: tzm_Latn
@@ -147,5 +155,13 @@ final CarbonLocaleData localeTzmLatn = localeTzm.copyWith(
     'nwwanbir',
     'dwjnbir',
   ],
+  calendar: {
+    'sameDay': '[asdkh g] LT',
+    'nextDay': '[aska g] LT',
+    'nextWeek': 'dddd [g] LT',
+    'lastDay': '[assant g] LT',
+    'lastWeek': 'dddd [g] LT',
+    'sameElse': 'L',
+  },
 );
 

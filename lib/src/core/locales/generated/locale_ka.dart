@@ -27,6 +27,10 @@ const CarbonLocaleData localeKa = CarbonLocaleData(
     'second': ':count წამი',
     's': ':count წამი',
     'a_second': '{1}რამდენიმე წამი|[-Inf,Inf]:count წამი',
+    'ago': ':time წინ',
+    'from_now': ':time',
+    'after': ':time შემდეგ',
+    'before': ':time ადრე',
     'diff_now': 'ახლა',
     'diff_today': 'დღეს',
     'diff_yesterday': 'გუშინ',
@@ -113,6 +117,14 @@ const CarbonLocaleData localeKa = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[დღეს], LT[-ზე]',
+    'nextDay': '[ხვალ], LT[-ზე]',
+    'lastDay': '[გუშინ], LT[-ზე]',
+    'lastWeek': '[წინა] dddd, LT-ზე',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' და '],
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -129,12 +141,12 @@ String _ordinal(int number, String period) {
       return (number).toString();
     }
     if (number == 1) {
-      return '${number}-ლი';
+      return '$number-ლი';
     }
     if (number < 20 || number <= 100 && number % 20 == 0 || number % 100 == 0) {
-      return 'მე-${number}';
+      return 'მე-$number';
     }
-    return '${number}-ე';
+    return '$number-ე';
 }
 
 // Auto-generated meridiem function

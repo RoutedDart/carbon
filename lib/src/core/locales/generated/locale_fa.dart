@@ -103,6 +103,16 @@ const CarbonLocaleData localeFa = CarbonLocaleData(
   ],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[امروز ساعت] LT',
+    'nextDay': '[فردا ساعت] LT',
+    'nextWeek': 'dddd [ساعت] LT',
+    'lastDay': '[دیروز ساعت] LT',
+    'lastWeek': 'dddd [پیش] [ساعت] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: ['، ', ' و '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: fa_AF
@@ -115,3 +125,8 @@ final CarbonLocaleData localeFaIr = localeFa.copyWith(
   localeCode: 'fa_ir',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'قبل از ظهر' : 'بعد از ظهر';
+}

@@ -91,6 +91,16 @@ const CarbonLocaleData localeLo = CarbonLocaleData(
     'ສກ',
     'ສ',
   ],
+  calendar: {
+    'sameDay': '[ມື້ນີ້ເວລາ] LT',
+    'nextDay': '[ມື້ອື່ນເວລາ] LT',
+    'nextWeek': '[ວັນ]dddd[ໜ້າເວລາ] LT',
+    'lastDay': '[ມື້ວານນີ້ເວລາ] LT',
+    'lastWeek': '[ວັນ]dddd[ແລ້ວນີ້ເວລາ] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', 'ແລະ '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: lo_LA
@@ -98,3 +108,8 @@ final CarbonLocaleData localeLoLa = localeLo.copyWith(
   localeCode: 'lo_la',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'ຕອນເຊົ້າ' : 'ຕອນແລງ';
+}

@@ -106,6 +106,16 @@ const CarbonLocaleData localeSq = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Sot në] LT',
+    'nextDay': '[Nesër në] LT',
+    'nextWeek': 'dddd [në] LT',
+    'lastDay': '[Dje në] LT',
+    'lastWeek': 'dddd [e kaluar në] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' dhe '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: sq_AL
@@ -123,3 +133,8 @@ final CarbonLocaleData localeSqXk = localeSq.copyWith(
   localeCode: 'sq_xk',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'PD' : 'MD';
+}

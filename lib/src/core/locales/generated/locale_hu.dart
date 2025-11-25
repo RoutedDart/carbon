@@ -136,6 +136,14 @@ const CarbonLocaleData localeHu = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[ma] LT[-kor]',
+    'nextDay': '[holnap] LT[-kor]',
+    'lastDay': '[tegnap] LT[-kor]',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' és '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: hu_HU
@@ -143,3 +151,8 @@ final CarbonLocaleData localeHuHu = localeHu.copyWith(
   localeCode: 'hu_hu',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'DE' : 'DU';
+}

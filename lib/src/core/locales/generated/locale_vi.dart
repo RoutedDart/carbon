@@ -104,6 +104,16 @@ const CarbonLocaleData localeVi = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Hôm nay lúc] LT',
+    'nextDay': '[Ngày mai lúc] LT',
+    'nextWeek': 'dddd [tuần tới lúc] LT',
+    'lastDay': '[Hôm qua lúc] LT',
+    'lastWeek': 'dddd [tuần trước lúc] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' và '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: vi_VN
@@ -111,3 +121,8 @@ final CarbonLocaleData localeViVn = localeVi.copyWith(
   localeCode: 'vi_vn',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'SA' : 'CH';
+}

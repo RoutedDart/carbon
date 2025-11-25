@@ -68,18 +68,18 @@ const CarbonLocaleData localeNl = CarbonLocaleData(
     'december',
   ],
   monthsShort: [
-    'jan',
-    'feb',
-    'mrt',
-    'apr',
-    'mei',
-    'jun',
-    'jul',
-    'aug',
-    'sep',
-    'okt',
-    'nov',
-    'dec',
+    'jan.',
+    'feb.',
+    'mrt.',
+    'apr.',
+    'mei.',
+    'jun.',
+    'jul.',
+    'aug.',
+    'sep.',
+    'okt.',
+    'nov.',
+    'dec.',
   ],
   weekdays: [
     'zondag',
@@ -110,7 +110,20 @@ const CarbonLocaleData localeNl = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[vandaag om] LT',
+    'nextDay': '[morgen om] LT',
+    'nextWeek': 'dddd [om] LT',
+    'lastDay': '[gisteren om] LT',
+    'lastWeek': '[afgelopen] dddd [om] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' en '],
+  periodRecurrences: ':count keer',
+  periodStartDate: 'van :date',
+  periodEndDate: 'tot :date',
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: nl_AW
@@ -169,5 +182,10 @@ final CarbonLocaleData localeNlSx = localeNl.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '${number}${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+    return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? '\'s ochtends' : '\'s middags';
 }

@@ -28,6 +28,7 @@ const CarbonLocaleData localeGl = CarbonLocaleData(
     'a_second': 'uns segundos|:count segundos',
     's': ':count seg.',
     'ago': 'hai :time',
+    'from_now': 'en :time',
     'diff_now': 'agora',
     'diff_today': 'hoxe',
     'diff_today_regexp': 'hoxe(?:\\s+ás)?',
@@ -103,6 +104,9 @@ const CarbonLocaleData localeGl = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {'sameElse': 'L'},
+  listSeparators: [', ', ' e '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: gl_ES
@@ -110,3 +114,8 @@ final CarbonLocaleData localeGlEs = localeGl.copyWith(
   localeCode: 'gl_es',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'a.m.' : 'p.m.';
+}

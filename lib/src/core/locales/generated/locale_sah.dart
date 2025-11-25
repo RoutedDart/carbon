@@ -32,6 +32,10 @@ const CarbonLocaleData localeSah = CarbonLocaleData(
     'ms': ':count мс',
     'microsecond': '{1}:count микросекунда|:count микросекунды|:count микросекунд',
     'a_microsecond': '{1}микросекунда|:count микросекунда|:count микросекунды|:count микросекунд',
+    'ago': ':time назад',
+    'from_now': 'через :time',
+    'after': ':time после',
+    'before': ':time до',
     'diff_now': 'только что',
     'diff_today': 'Сегодня,',
     'diff_today_regexp': 'Сегодня,?(?:\\s+в)?',
@@ -123,6 +127,13 @@ const CarbonLocaleData localeSah = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Сегодня, в] LT',
+    'nextDay': '[Завтра, в] LT',
+    'lastDay': '[Вчера, в] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -135,7 +146,7 @@ final CarbonLocaleData localeSahRu = localeSah.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'M' || period == 'd' || period == 'DDD' ? '${number}-й' : (period == 'D' ? '${number}-го' : (period == 'w' || period == 'W' ? '${number}-я' : number)))).toString();
+    return ((period == 'M' || period == 'd' || period == 'DDD' ? '$number-й' : (period == 'D' ? '$number-го' : (period == 'w' || period == 'W' ? '$number-я' : number)))).toString();
 }
 
 // Auto-generated meridiem function

@@ -113,7 +113,21 @@ const CarbonLocaleData localeBho = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
   ordinal: _ordinal,
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: bho_IN
@@ -124,7 +138,12 @@ final CarbonLocaleData localeBhoIn = localeBho.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
   lastDigit = number % 10;
-    return '${number}${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'पूर्वाह्न' : 'अपराह्न';
 }

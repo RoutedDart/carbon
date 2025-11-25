@@ -113,7 +113,21 @@ const CarbonLocaleData localeKs = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
   ordinal: _ordinal,
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ks_IN
@@ -121,10 +135,75 @@ final CarbonLocaleData localeKsIn = localeKs.copyWith(
   localeCode: 'ks_in',
 );
 
+// Regional variant: ks_IN@devanagari
+final CarbonLocaleData localeKsInDevanagari = localeKs.copyWith(
+  localeCode: 'ks_in@devanagari',
+  weekdays: [
+    'आथवार',
+    'चॅ़दुरवार',
+    'बोमवार',
+    'ब्वदवार',
+    'ब्रसवार',
+    'शोकुरवार',
+    'बटुवार',
+  ],
+  weekdaysShort: [
+    'आथ ',
+    'चॅ़दुर',
+    'बोम',
+    'ब्वद',
+    'ब्रस',
+    'शोकुर',
+    'बटु',
+  ],
+  weekdaysMin: [
+    'आथ ',
+    'चॅ़दुर',
+    'बोम',
+    'ब्वद',
+    'ब्रस',
+    'शोकुर',
+    'बटु',
+  ],
+  months: [
+    'जनवरी',
+    'फ़रवरी',
+    'मार्च',
+    'अप्रेल',
+    'मई',
+    'जून',
+    'जुलाई',
+    'अगस्त',
+    'सितम्बर',
+    'अक्टूबर',
+    'नवम्बर',
+    'दिसम्बर',
+  ],
+  monthsShort: [
+    'जनवरी',
+    'फ़रवरी',
+    'मार्च',
+    'अप्रेल',
+    'मई',
+    'जून',
+    'जुलाई',
+    'अगस्त',
+    'सितम्बर',
+    'अक्टूबर',
+    'नवम्बर',
+    'दिसम्बर',
+  ],
+);
+
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
   lastDigit = number % 10;
-    return '${number}${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'دوپھربرونھ' : 'دوپھرپتھ';
 }

@@ -104,7 +104,16 @@ const CarbonLocaleData localeMk = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Денес во] LT',
+    'nextDay': '[Утре во] LT',
+    'nextWeek': '[Во] dddd [во] LT',
+    'lastDay': '[Вчера во] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: mk_MK
@@ -115,27 +124,32 @@ final CarbonLocaleData localeMkMk = localeMk.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
-  var last2Digits;
+  int lastDigit;
+  int last2Digits;
   lastDigit = number % 10;
   last2Digits = number % 100;
     if (number == 0) {
-      return '${number}-ев';
+      return '$number-ев';
     }
     if (last2Digits == 0) {
-      return '${number}-ен';
+      return '$number-ен';
     }
     if (last2Digits > 10 && last2Digits < 20) {
-      return '${number}-ти';
+      return '$number-ти';
     }
     if (lastDigit == 1) {
-      return '${number}-ви';
+      return '$number-ви';
     }
     if (lastDigit == 2) {
-      return '${number}-ри';
+      return '$number-ри';
     }
     if (lastDigit == 7 || lastDigit == 8) {
-      return '${number}-ми';
+      return '$number-ми';
     }
-    return '${number}-ти';
+    return '$number-ти';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'АМ' : 'ПМ';
 }

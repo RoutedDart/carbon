@@ -96,6 +96,16 @@ const CarbonLocaleData localeUr = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[آج بوقت] LT',
+    'nextDay': '[کل بوقت] LT',
+    'nextWeek': 'dddd [بوقت] LT',
+    'lastDay': '[گذشتہ روز بوقت] LT',
+    'lastWeek': '[گذشتہ] dddd [بوقت] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: ['، ', ' اور '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: ur_IN
@@ -162,3 +172,8 @@ final CarbonLocaleData localeUrPk = localeUr.copyWith(
   ],
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'صبح' : 'شام';
+}

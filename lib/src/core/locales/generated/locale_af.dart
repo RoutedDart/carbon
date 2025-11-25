@@ -104,7 +104,17 @@ const CarbonLocaleData localeAf = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Vandag om] LT',
+    'nextDay': '[Môre om] LT',
+    'nextWeek': 'dddd [om] LT',
+    'lastDay': '[Gister om] LT',
+    'lastWeek': '[Laas] dddd [om] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' en '],
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: af_NA
@@ -152,5 +162,10 @@ final CarbonLocaleData localeAfZa = localeAf.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '${number}${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+    return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'VM' : 'NM';
 }

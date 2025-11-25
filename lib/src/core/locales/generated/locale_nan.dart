@@ -113,7 +113,21 @@ const CarbonLocaleData localeNan = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
   ordinal: _ordinal,
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: nan_TW
@@ -121,10 +135,75 @@ final CarbonLocaleData localeNanTw = localeNan.copyWith(
   localeCode: 'nan_tw',
 );
 
+// Regional variant: nan_TW@latin
+final CarbonLocaleData localeNanTwLatin = localeNan.copyWith(
+  localeCode: 'nan_tw@latin',
+  weekdays: [
+    'lé-pài-ji̍t',
+    'pài-it',
+    'pài-jī',
+    'pài-saⁿ',
+    'pài-sì',
+    'pài-gō͘',
+    'pài-la̍k',
+  ],
+  weekdaysShort: [
+    'lp',
+    'p1',
+    'p2',
+    'p3',
+    'p4',
+    'p5',
+    'p6',
+  ],
+  weekdaysMin: [
+    'lp',
+    'p1',
+    'p2',
+    'p3',
+    'p4',
+    'p5',
+    'p6',
+  ],
+  months: [
+    '1goe̍h',
+    '2goe̍h',
+    '3goe̍h',
+    '4goe̍h',
+    '5goe̍h',
+    '6goe̍h',
+    '7goe̍h',
+    '8goe̍h',
+    '9goe̍h',
+    '10goe̍h',
+    '11goe̍h',
+    '12goe̍h',
+  ],
+  monthsShort: [
+    '1g',
+    '2g',
+    '3g',
+    '4g',
+    '5g',
+    '6g',
+    '7g',
+    '8g',
+    '9g',
+    '10g',
+    '11g',
+    '12g',
+  ],
+);
+
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
   lastDigit = number % 10;
-    return '${number}${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? '頂晡' : '下晡';
 }

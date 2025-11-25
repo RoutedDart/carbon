@@ -90,6 +90,15 @@ const CarbonLocaleData localeGom = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Aiz] LT',
+    'nextDay': '[Faleam] LT',
+    'nextWeek': '[Ieta to] dddd[,] LT',
+    'lastDay': '[Kal] LT',
+    'lastWeek': '[Fatlo] dddd[,] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ani '],
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -102,7 +111,7 @@ final CarbonLocaleData localeGomLatn = localeGom.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '${number}${(period == 'D' ? 'er' : '')}';
+    return '$number${(period == 'D' ? 'er' : '')}';
 }
 
 // Auto-generated meridiem function

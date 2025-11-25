@@ -131,6 +131,19 @@ const CarbonLocaleData localeKu = CarbonLocaleData(
   ],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
+  listSeparators: [', ', ' û '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ku_TR

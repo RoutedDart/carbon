@@ -28,6 +28,7 @@ const CarbonLocaleData localePl = CarbonLocaleData(
     'a_second': '{1}kilka sekund|:count sekunda|:count sekundy|:count sekund',
     's': ':count sek.',
     'ago': ':time temu',
+    'from_now': 'za :time',
     'after': ':time po',
     'before': ':time przed',
     'diff_now': 'teraz',
@@ -120,6 +121,14 @@ const CarbonLocaleData localePl = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Dziś o] LT',
+    'nextDay': '[Jutro o] LT',
+    'lastDay': '[Wczoraj o] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' i '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: pl_PL
@@ -127,3 +136,8 @@ final CarbonLocaleData localePlPl = localePl.copyWith(
   localeCode: 'pl_pl',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'przed południem' : 'po południu';
+}

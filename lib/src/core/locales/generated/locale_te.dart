@@ -99,6 +99,14 @@ const CarbonLocaleData localeTe = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[నేడు] LT',
+    'nextDay': '[రేపు] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[నిన్న] LT',
+    'lastWeek': '[గత] dddd, LT',
+    'sameElse': 'L',
+  },
   meridiem: _meridiem,
 );
 

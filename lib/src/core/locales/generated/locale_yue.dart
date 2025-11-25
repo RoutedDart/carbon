@@ -95,7 +95,16 @@ const CarbonLocaleData localeYue = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[今天] LT',
+    'nextDay': '[明天] LT',
+    'nextWeek': '[下]dddd LT',
+    'lastDay': '[昨天] LT',
+    'lastWeek': '[上]dddd LT',
+    'sameElse': 'L',
+  },
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: yue_HK
@@ -129,6 +138,14 @@ final CarbonLocaleData localeYueHans = localeYue.copyWith(
     '十一月',
     '十二月',
   ],
+  calendar: {
+    'sameDay': '[今天]LT',
+    'nextDay': '[明天]LT',
+    'nextWeek': '[下]ddddLT',
+    'lastDay': '[昨天]LT',
+    'lastWeek': '[上]ddddLT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: yue_Hant
@@ -162,5 +179,10 @@ final CarbonLocaleData localeYueHant = localeYue.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '${number}日' : (period == 'M' ? '${number}月' : (period == 'w' || period == 'W' ? '${number}周' : number)))).toString();
+    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number日' : (period == 'M' ? '$number月' : (period == 'w' || period == 'W' ? '$number周' : number)))).toString();
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? '上午' : '下午';
 }

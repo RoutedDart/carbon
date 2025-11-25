@@ -156,6 +156,14 @@ const CarbonLocaleData localeBe = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Сёння ў] LT',
+    'nextDay': '[Заўтра ў] LT',
+    'nextWeek': '[У] dddd [ў] LT',
+    'lastDay': '[Учора ў] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' і '],
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -220,10 +228,75 @@ final CarbonLocaleData localeBeBy = localeBe.copyWith(
   ],
 );
 
+// Regional variant: be_BY@latin
+final CarbonLocaleData localeBeByLatin = localeBe.copyWith(
+  localeCode: 'be_by@latin',
+  weekdays: [
+    'Niadziela',
+    'Paniadziełak',
+    'Aŭtorak',
+    'Sierada',
+    'Čaćvier',
+    'Piatnica',
+    'Subota',
+  ],
+  weekdaysShort: [
+    'Nia',
+    'Pan',
+    'Aŭt',
+    'Sie',
+    'Čać',
+    'Pia',
+    'Sub',
+  ],
+  weekdaysMin: [
+    'Nia',
+    'Pan',
+    'Aŭt',
+    'Sie',
+    'Čać',
+    'Pia',
+    'Sub',
+  ],
+  months: [
+    'studzienia',
+    'lutaha',
+    'sakavika',
+    'krasavika',
+    'maja',
+    'červienia',
+    'lipienia',
+    'žniŭnia',
+    'vieraśnia',
+    'kastryčnika',
+    'listapada',
+    'śniežnia',
+  ],
+  monthsShort: [
+    'Stu',
+    'Lut',
+    'Sak',
+    'Kra',
+    'Maj',
+    'Čer',
+    'Lip',
+    'Žni',
+    'Vie',
+    'Kas',
+    'Lis',
+    'Śni',
+  ],
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
+);
+
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'M' || period == 'd' || period == 'DDD' || period == 'w' || period == 'W' ? (number % 10 == 2 || number % 10 == 3 && number % 100 != 12 && number % 100 != 13 ? '${number}-і' : '${number}-ы') : (period == 'D' ? '${number}-га' : number))).toString();
+    return ((period == 'M' || period == 'd' || period == 'DDD' || period == 'w' || period == 'W' ? (number % 10 == 2 || number % 10 == 3 && number % 100 != 12 && number % 100 != 13 ? '$number-і' : '$number-ы') : (period == 'D' ? '$number-га' : number))).toString();
 }
 
 // Auto-generated meridiem function

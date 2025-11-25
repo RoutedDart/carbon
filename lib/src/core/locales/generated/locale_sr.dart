@@ -103,6 +103,13 @@ const CarbonLocaleData localeSr = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[danas u] LT',
+    'nextDay': '[sutra u] LT',
+    'lastDay': '[juče u] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' i '],
 );
 
 // Regional variant: sr_Cyrl
@@ -163,6 +170,13 @@ final CarbonLocaleData localeSrCyrl = localeSr.copyWith(
     'нов.',
     'дец.',
   ],
+  calendar: {
+    'sameDay': '[данас у] LT',
+    'nextDay': '[сутра у] LT',
+    'lastDay': '[јуче у] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
 );
 
 // Regional variant: sr_Cyrl_BA
@@ -223,6 +237,13 @@ final CarbonLocaleData localeSrCyrlBa = localeSr.copyWith(
     'нов.',
     'дец.',
   ],
+  calendar: {
+    'sameDay': '[данас у] LT',
+    'nextDay': '[сутра у] LT',
+    'lastDay': '[јуче у] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
 );
 
 // Regional variant: sr_Cyrl_ME
@@ -283,6 +304,13 @@ final CarbonLocaleData localeSrCyrlMe = localeSr.copyWith(
     'нов.',
     'дец.',
   ],
+  calendar: {
+    'sameDay': '[данас у] LT',
+    'nextDay': '[сутра у] LT',
+    'lastDay': '[јуче у] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
 );
 
 // Regional variant: sr_Cyrl_XK
@@ -343,6 +371,13 @@ final CarbonLocaleData localeSrCyrlXk = localeSr.copyWith(
     'нов.',
     'дец.',
   ],
+  calendar: {
+    'sameDay': '[данас у] LT',
+    'nextDay': '[сутра у] LT',
+    'lastDay': '[јуче у] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
 );
 
 // Regional variant: sr_Latn
@@ -394,6 +429,12 @@ final CarbonLocaleData localeSrLatnMe = localeSr.copyWith(
     'pet.',
     'sub.',
   ],
+  calendar: {
+    'sameDay': '[danas u] LT',
+    'nextDay': '[sjutra u] LT',
+    'lastDay': '[juče u] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: sr_Latn_XK
@@ -431,6 +472,12 @@ final CarbonLocaleData localeSrMe = localeSr.copyWith(
     'pet.',
     'sub.',
   ],
+  calendar: {
+    'sameDay': '[danas u] LT',
+    'nextDay': '[sjutra u] LT',
+    'lastDay': '[juče u] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: sr_RS
@@ -491,5 +538,17 @@ final CarbonLocaleData localeSrRs = localeSr.copyWith(
     'нов.',
     'дец.',
   ],
+  calendar: {
+    'sameDay': '[данас у] LT',
+    'nextDay': '[сутра у] LT',
+    'lastDay': '[јуче у] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
+);
+
+// Regional variant: sr_RS@latin
+final CarbonLocaleData localeSrRsLatin = localeSr.copyWith(
+  localeCode: 'sr_rs@latin',
 );
 

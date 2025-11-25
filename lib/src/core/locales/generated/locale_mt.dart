@@ -95,6 +95,15 @@ const CarbonLocaleData localeMt = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Illum fil-]LT',
+    'nextDay': '[Għada fil-]LT',
+    'nextWeek': 'dddd [fil-]LT',
+    'lastDay': '[Il-bieraħ fil-]LT',
+    'lastWeek': 'dddd [li għadda] [fil-]LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' u '],
 );
 
 // Regional variant: mt_MT

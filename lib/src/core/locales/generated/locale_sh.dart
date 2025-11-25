@@ -91,5 +91,20 @@ const CarbonLocaleData localeSh = CarbonLocaleData(
     'Pet',
     'Sub',
   ],
+  listSeparators: [', ', ' i '],
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'pre podne' : 'po podne';
+}

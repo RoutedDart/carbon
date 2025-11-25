@@ -93,6 +93,16 @@ const CarbonLocaleData localeDv = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[މިއަދު] LT',
+    'nextDay': '[މާދަމާ] LT',
+    'nextWeek': 'dddd LT',
+    'lastDay': '[އިއްޔެ] LT',
+    'lastWeek': '[ފާއިތުވި] dddd LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' އަދި '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: dv_MV
@@ -128,3 +138,8 @@ final CarbonLocaleData localeDvMv = localeDv.copyWith(
   ],
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'މކ' : 'މފ';
+}

@@ -103,6 +103,20 @@ const CarbonLocaleData localeAr = CarbonLocaleData(
   ],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[اليوم عند الساعة] LT',
+    'nextDay': '[غدًا عند الساعة] LT',
+    'nextWeek': 'dddd [عند الساعة] LT',
+    'lastDay': '[أمس عند الساعة] LT',
+    'lastWeek': 'dddd [عند الساعة] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: ['، ', ' و '],
+  periodRecurrences: '{0}مرة|{1}مرة|{2}:count مرتين|]2,11[:count مرات|]10,Inf[:count مرة',
+  periodInterval: 'كل :interval',
+  periodStartDate: 'من :date',
+  periodEndDate: 'إلى :date',
+  meridiem: _meridiem,
 );
 
 // Regional variant: ar_AE
@@ -233,6 +247,14 @@ final CarbonLocaleData localeArDz = localeAr.copyWith(
     'نوفمبر',
     'ديسمبر',
   ],
+  calendar: {
+    'sameDay': '[اليوم على الساعة] LT',
+    'nextDay': '[غدا على الساعة] LT',
+    'nextWeek': 'dddd [على الساعة] LT',
+    'lastDay': '[أمس على الساعة] LT',
+    'lastWeek': 'dddd [على الساعة] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ar_EG
@@ -471,6 +493,14 @@ final CarbonLocaleData localeArKw = localeAr.copyWith(
     'نونبر',
     'دجنبر',
   ],
+  calendar: {
+    'sameDay': '[اليوم على الساعة] LT',
+    'nextDay': '[غدا على الساعة] LT',
+    'nextWeek': 'dddd [على الساعة] LT',
+    'lastDay': '[أمس على الساعة] LT',
+    'lastWeek': 'dddd [على الساعة] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ar_LB
@@ -527,6 +557,7 @@ final CarbonLocaleData localeArLb = localeAr.copyWith(
 // Regional variant: ar_LY
 final CarbonLocaleData localeArLy = localeAr.copyWith(
   localeCode: 'ar_ly',
+  periodRecurrences: 'مرة|مرة|:count مرتين|:count مرات|:count مرة',
 );
 
 // Regional variant: ar_MA
@@ -569,6 +600,14 @@ final CarbonLocaleData localeArMa = localeAr.copyWith(
     'نونبر',
     'دجنبر',
   ],
+  calendar: {
+    'sameDay': '[اليوم على الساعة] LT',
+    'nextDay': '[غدا على الساعة] LT',
+    'nextWeek': 'dddd [على الساعة] LT',
+    'lastDay': '[أمس على الساعة] LT',
+    'lastWeek': 'dddd [على الساعة] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ar_MR
@@ -667,6 +706,14 @@ final CarbonLocaleData localeArSa = localeAr.copyWith(
     'ج',
     'س',
   ],
+  calendar: {
+    'sameDay': '[اليوم على الساعة] LT',
+    'nextDay': '[غدا على الساعة] LT',
+    'nextWeek': 'dddd [على الساعة] LT',
+    'lastDay': '[أمس على الساعة] LT',
+    'lastWeek': 'dddd [على الساعة] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ar_SD
@@ -849,6 +896,14 @@ final CarbonLocaleData localeArTn = localeAr.copyWith(
     'نوفمبر',
     'ديسمبر',
   ],
+  calendar: {
+    'sameDay': '[اليوم على الساعة] LT',
+    'nextDay': '[غدا على الساعة] LT',
+    'nextWeek': 'dddd [على الساعة] LT',
+    'lastDay': '[أمس على الساعة] LT',
+    'lastWeek': 'dddd [على الساعة] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: ar_YE
@@ -888,3 +943,8 @@ final CarbonLocaleData localeArYe = localeAr.copyWith(
   ],
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'ص' : 'م';
+}

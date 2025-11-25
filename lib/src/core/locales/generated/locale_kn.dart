@@ -92,6 +92,14 @@ const CarbonLocaleData localeKn = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[ಇಂದು] LT',
+    'nextDay': '[ನಾಳೆ] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[ನಿನ್ನೆ] LT',
+    'lastWeek': '[ಕೊನೆಯ] dddd, LT',
+    'sameElse': 'L',
+  },
   meridiem: _meridiem,
 );
 

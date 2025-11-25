@@ -115,6 +115,15 @@ const CarbonLocaleData localeHy = CarbonLocaleData(
     'շբթ',
   ],
   firstDayOfWeek: 1,
+  calendar: {
+    'sameDay': '[այսօր] LT',
+    'nextDay': '[վաղը] LT',
+    'nextWeek': 'dddd [օրը ժամը] LT',
+    'lastDay': '[երեկ] LT',
+    'lastWeek': '[անցած] dddd [օրը ժամը] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' եւ '],
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -127,7 +136,7 @@ final CarbonLocaleData localeHyAm = localeHy.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'DDD' || period == 'w' || period == 'W' || period == 'DDDo' ? '${number}${(number == 1 ? '-ին' : '-րդ')}' : number)).toString();
+    return ((period == 'DDD' || period == 'w' || period == 'W' || period == 'DDDo' ? '$number${(number == 1 ? '-ին' : '-րդ')}' : number)).toString();
 }
 
 // Auto-generated meridiem function

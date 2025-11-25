@@ -103,6 +103,16 @@ const CarbonLocaleData localeFi = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  listSeparators: [', ', ' ja '],
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: fi_FI
@@ -110,3 +120,8 @@ final CarbonLocaleData localeFiFi = localeFi.copyWith(
   localeCode: 'fi_fi',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'aamupäivä' : 'iltapäivä';
+}

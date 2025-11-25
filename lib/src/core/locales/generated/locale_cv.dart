@@ -21,6 +21,7 @@ const CarbonLocaleData localeCv = CarbonLocaleData(
     'second': ':count ҫеккунт',
     'a_second': '{1}пӗр-ик ҫеккунт|:count ҫеккунт',
     'ago': ':time каялла',
+    'from_now': ':timeран',
     'diff_yesterday': 'Ӗнер',
     'diff_today': 'Паян',
     'diff_tomorrow': 'Ыран',
@@ -90,6 +91,15 @@ const CarbonLocaleData localeCv = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Паян] LT [сехетре]',
+    'nextDay': '[Ыран] LT [сехетре]',
+    'nextWeek': '[Ҫитес] dddd LT [сехетре]',
+    'lastDay': '[Ӗнер] LT [сехетре]',
+    'lastWeek': '[Иртнӗ] dddd LT [сехетре]',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' тата '],
 );
 
 // Regional variant: cv_RU

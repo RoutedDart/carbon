@@ -94,6 +94,16 @@ const CarbonLocaleData localeEu = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[gaur] LT[etan]',
+    'nextDay': '[bihar] LT[etan]',
+    'nextWeek': 'dddd LT[etan]',
+    'lastDay': '[atzo] LT[etan]',
+    'lastWeek': '[aurreko] dddd LT[etan]',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' eta '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: eu_ES
@@ -101,3 +111,8 @@ final CarbonLocaleData localeEuEs = localeEu.copyWith(
   localeCode: 'eu_es',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'g' : 'a';
+}

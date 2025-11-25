@@ -86,6 +86,15 @@ const CarbonLocaleData localeUg = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[بۈگۈن سائەت] LT',
+    'nextDay': '[ئەتە سائەت] LT',
+    'nextWeek': '[كېلەركى] dddd [سائەت] LT',
+    'lastDay': '[تۆنۈگۈن] LT',
+    'lastWeek': '[ئالدىنقى] dddd [سائەت] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ۋە '],
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -98,12 +107,12 @@ final CarbonLocaleData localeUgCn = localeUg.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '${number}-كۈنى' : (period == 'w' || period == 'W' ? '${number}-ھەپتە' : number))).toString();
+    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number-كۈنى' : (period == 'w' || period == 'W' ? '$number-ھەپتە' : number))).toString();
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-  var time;
+  num time;
   time = hour * 100 + minute;
     if (time < 600) {
       return 'يېرىم كېچە';

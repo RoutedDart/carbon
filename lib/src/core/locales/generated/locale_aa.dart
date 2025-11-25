@@ -113,7 +113,21 @@ const CarbonLocaleData localeAa = CarbonLocaleData(
   ],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
   ordinal: _ordinal,
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: aa_DJ
@@ -141,6 +155,66 @@ final CarbonLocaleData localeAaEr = localeAa.copyWith(
     'Kam',
     'Gum',
     'Sab',
+  ],
+  months: [
+    'Qunxa Garablu',
+    'Naharsi Kudo',
+    'Ciggilta Kudo',
+    'Agda Baxisso',
+    'Caxah Alsa',
+    'Qasa Dirri',
+    'Qado Dirri',
+    'Leqeeni',
+    'Waysu',
+    'Diteli',
+    'Ximoli',
+    'Kaxxa Garablu',
+  ],
+  monthsShort: [
+    'Qun',
+    'Nah',
+    'Cig',
+    'Agd',
+    'Cax',
+    'Qas',
+    'Qad',
+    'Leq',
+    'Way',
+    'Dit',
+    'Xim',
+    'Kax',
+  ],
+);
+
+// Regional variant: aa_ER@saaho
+final CarbonLocaleData localeAaErSaaho = localeAa.copyWith(
+  localeCode: 'aa_er@saaho',
+  weekdays: [
+    'Naba Sambat',
+    'Sani',
+    'Salus',
+    'Rabuq',
+    'Camus',
+    'Jumqata',
+    'Qunxa Sambat',
+  ],
+  weekdaysShort: [
+    'Nab',
+    'San',
+    'Sal',
+    'Rab',
+    'Cam',
+    'Jum',
+    'Qun',
+  ],
+  weekdaysMin: [
+    'Nab',
+    'San',
+    'Sal',
+    'Rab',
+    'Cam',
+    'Jum',
+    'Qun',
   ],
   months: [
     'Qunxa Garablu',
@@ -212,7 +286,12 @@ final CarbonLocaleData localeAaEt = localeAa.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
   lastDigit = number % 10;
-    return '${number}${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'saaku' : 'carra';
 }

@@ -96,6 +96,15 @@ const CarbonLocaleData localeHe = CarbonLocaleData(
     'ו',
     'ש',
   ],
+  calendar: {
+    'sameDay': '[היום ב־]LT',
+    'nextDay': '[מחר ב־]LT',
+    'nextWeek': 'dddd [בשעה] LT',
+    'lastDay': '[אתמול ב־]LT',
+    'lastWeek': '[ביום] dddd [האחרון בשעה] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ו -'],
   meridiem: _meridiem,
 );
 
@@ -114,10 +123,10 @@ String _meridiem(int hour, dynamic minute, dynamic isLower) {
       return 'בבוקר';
     }
     if (hour < 12) {
-      return ((isLower ? 'לפנה\"צ' : 'לפני הצהריים')).toString();
+      return ((isLower ? 'לפנה"צ' : 'לפני הצהריים')).toString();
     }
     if (hour < 18) {
-      return ((isLower ? 'אחה\"צ' : 'אחרי הצהריים')).toString();
+      return ((isLower ? 'אחה"צ' : 'אחרי הצהריים')).toString();
     }
     return 'בערב';
 }

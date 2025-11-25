@@ -96,6 +96,15 @@ const CarbonLocaleData localeTl = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': 'LT [ngayong araw]',
+    'nextDay': '[Bukas ng] LT',
+    'nextWeek': 'LT [sa susunod na] dddd',
+    'lastDay': 'LT [kahapon]',
+    'lastWeek': 'LT [noong nakaraang] dddd',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' at '],
 );
 
 // Regional variant: tl_PH

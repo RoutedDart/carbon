@@ -104,6 +104,15 @@ const CarbonLocaleData localeKk = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Бүгін сағат] LT',
+    'nextDay': '[Ертең сағат] LT',
+    'nextWeek': 'dddd [сағат] LT',
+    'lastDay': '[Кеше сағат] LT',
+    'lastWeek': '[Өткен аптаның] dddd [сағат] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' және '],
   ordinal: _ordinal,
 );
 
@@ -116,5 +125,5 @@ final CarbonLocaleData localeKkKz = localeKk.copyWith(
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   var suffixes = {0: '-ші', 1: '-ші', 2: '-ші', 3: '-ші', 4: '-ші', 5: '-ші', 6: '-шы', 7: '-ші', 8: '-ші', 9: '-шы', 10: '-шы', 20: '-шы', 30: '-шы', 40: '-шы', 50: '-ші', 60: '-шы', 70: '-ші', 80: '-ші', 90: '-шы', 100: '-ші'};
-    return '${number}${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+    return '$number${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
 }

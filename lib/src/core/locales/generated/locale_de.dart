@@ -140,6 +140,18 @@ const CarbonLocaleData localeDe = CarbonLocaleData(
     'fifth': 'fünfter',
     'last': 'letzten',
   },
+  calendar: {
+    'sameDay': '[heute um] LT [Uhr]',
+    'nextDay': '[morgen um] LT [Uhr]',
+    'nextWeek': 'dddd [um] LT [Uhr]',
+    'lastDay': '[gestern um] LT [Uhr]',
+    'lastWeek': '[letzten] dddd [um] LT [Uhr]',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' und '],
+  periodRecurrences: 'einmal|:count mal',
+  periodStartDate: 'von :date',
+  periodEndDate: 'bis :date',
 );
 
 // Regional variant: de_AT

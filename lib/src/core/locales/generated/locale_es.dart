@@ -75,18 +75,18 @@ const CarbonLocaleData localeEs = CarbonLocaleData(
     'diciembre',
   ],
   monthsShort: [
-    'ene',
-    'feb',
-    'mar',
-    'abr',
-    'may',
-    'jun',
-    'jul',
-    'ago',
-    'sep',
-    'oct',
-    'nov',
-    'dic',
+    'ene.',
+    'feb.',
+    'mar.',
+    'abr.',
+    'may.',
+    'jun.',
+    'jul.',
+    'ago.',
+    'sep.',
+    'oct.',
+    'nov.',
+    'dic.',
   ],
   weekdays: [
     'domingo',
@@ -126,6 +126,13 @@ const CarbonLocaleData localeEs = CarbonLocaleData(
     'fifth': 'quinto',
     'last': 'último',
   },
+  calendar: {'sameElse': 'L'},
+  listSeparators: [', ', ' y '],
+  periodRecurrences: 'una vez|:count veces',
+  periodInterval: 'cada :interval',
+  periodStartDate: 'de :date',
+  periodEndDate: 'a :date',
+  meridiem: _meridiem,
 );
 
 // Regional variant: es_419
@@ -276,18 +283,18 @@ final CarbonLocaleData localeEsUy = localeEs.copyWith(
     'diciembre',
   ],
   monthsShort: [
-    'ene',
-    'feb',
-    'mar',
-    'abr',
-    'may',
-    'jun',
-    'jul',
-    'ago',
-    'set',
-    'oct',
-    'nov',
-    'dic',
+    'ene.',
+    'feb.',
+    'mar.',
+    'abr.',
+    'may.',
+    'jun.',
+    'jul.',
+    'ago.',
+    'set.',
+    'oct.',
+    'nov.',
+    'dic.',
   ],
 );
 
@@ -296,3 +303,8 @@ final CarbonLocaleData localeEsVe = localeEs.copyWith(
   localeCode: 'es_ve',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'a. m.' : 'p. m.';
+}

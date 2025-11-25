@@ -145,7 +145,21 @@ const CarbonLocaleData localeLt = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Šiandien] LT',
+    'nextDay': '[Rytoj] LT',
+    'nextWeek': 'dddd LT',
+    'lastDay': '[Vakar] LT',
+    'lastWeek': '[Paskutinį] dddd LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ir '],
+  periodRecurrences: 'kartą|:count kartų',
+  periodInterval: 'kiekvieną :interval',
+  periodStartDate: 'nuo :date',
+  periodEndDate: 'iki :date',
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: lt_LT
@@ -157,4 +171,9 @@ final CarbonLocaleData localeLtLt = localeLt.copyWith(
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
     return ((number == 0 ? '0-is' : (number == 3 ? '3-ias' : '$number-as'))).toString();
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'priešpiet' : 'popiet';
 }

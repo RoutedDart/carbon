@@ -80,6 +80,16 @@ const CarbonLocaleData localeGsw = CarbonLocaleData(
     'Fr',
     'Sa',
   ],
+  listSeparators: [', ', ' und '],
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: gsw_CH
@@ -125,3 +135,8 @@ final CarbonLocaleData localeGswLi = localeGsw.copyWith(
   ],
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'am Vormittag' : 'am Namittag';
+}

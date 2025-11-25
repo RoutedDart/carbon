@@ -125,7 +125,14 @@ const CarbonLocaleData localeCa = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {'sameElse': 'L'},
+  listSeparators: [', ', ' i '],
+  periodRecurrences: ':count cop|:count cops',
+  periodInterval: 'cada :interval',
+  periodStartDate: 'de :date',
+  periodEndDate: 'fins a :date',
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: ca_AD
@@ -156,5 +163,10 @@ final CarbonLocaleData localeCaIt = localeCa.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '${number}${(period == 'w' || period == 'W' ? 'a' : (number == 1 ? 'r' : (number == 2 ? 'n' : (number == 3 ? 'r' : (number == 4 ? 't' : 'è')))))}';
+    return '$number${(period == 'w' || period == 'W' ? 'a' : (number == 1 ? 'r' : (number == 2 ? 'n' : (number == 3 ? 'r' : (number == 4 ? 't' : 'è')))))}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'a. m.' : 'p. m.';
 }

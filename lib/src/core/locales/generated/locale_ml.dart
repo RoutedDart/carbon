@@ -90,6 +90,14 @@ const CarbonLocaleData localeMl = CarbonLocaleData(
     'വെ',
     'ശ',
   ],
+  calendar: {
+    'sameDay': '[ഇന്ന്] LT',
+    'nextDay': '[നാളെ] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[ഇന്നലെ] LT',
+    'lastWeek': '[കഴിഞ്ഞ] dddd, LT',
+    'sameElse': 'L',
+  },
   meridiem: _meridiem,
 );
 

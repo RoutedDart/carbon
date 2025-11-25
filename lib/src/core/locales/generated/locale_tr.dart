@@ -105,7 +105,17 @@ const CarbonLocaleData localeTr = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[bugün saat] LT',
+    'nextDay': '[yarın saat] LT',
+    'nextWeek': '[gelecek] dddd [saat] LT',
+    'lastDay': '[dün] LT',
+    'lastWeek': '[geçen] dddd [saat] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ve '],
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: tr_CY
@@ -139,7 +149,7 @@ final CarbonLocaleData localeTrTr = localeTr.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
     switch (period) {
       case 'd':
       case 'D':
@@ -152,6 +162,11 @@ String _ordinal(int number, String period) {
         }
       var suffixes = {1: '\'inci', 5: '\'inci', 8: '\'inci', 70: '\'inci', 80: '\'inci', 2: '\'nci', 7: '\'nci', 20: '\'nci', 50: '\'nci', 3: '\'üncü', 4: '\'üncü', 100: '\'üncü', 6: '\'ncı', 9: '\'uncu', 10: '\'uncu', 30: '\'uncu', 60: '\'ıncı', 90: '\'ıncı'};
       lastDigit = number % 10;
-        return '${number}${suffixes[lastDigit] ?? suffixes[number % 100 - lastDigit] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+        return '$number${suffixes[lastDigit] ?? suffixes[number % 100 - lastDigit] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
     }
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'ÖÖ' : 'ÖS';
 }

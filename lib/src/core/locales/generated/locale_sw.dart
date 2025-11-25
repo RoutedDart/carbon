@@ -103,6 +103,15 @@ const CarbonLocaleData localeSw = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[leo saa] LT',
+    'nextDay': '[kesho saa] LT',
+    'nextWeek': '[wiki ijayo] dddd [saat] LT',
+    'lastDay': '[jana] LT',
+    'lastWeek': '[wiki iliyopita] dddd [saat] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' na '],
 );
 
 // Regional variant: sw_CD

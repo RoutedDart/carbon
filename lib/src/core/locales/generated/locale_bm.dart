@@ -101,5 +101,14 @@ const CarbonLocaleData localeBm = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Bi lɛrɛ] LT',
+    'nextDay': '[Sini lɛrɛ] LT',
+    'nextWeek': 'dddd [don lɛrɛ] LT',
+    'lastDay': '[Kunu lɛrɛ] LT',
+    'lastWeek': 'dddd [tɛmɛnen lɛrɛ] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ni '],
 );
 

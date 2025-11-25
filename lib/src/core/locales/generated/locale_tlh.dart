@@ -13,6 +13,8 @@ const CarbonLocaleData localeTlh = CarbonLocaleData(
     'hour': '{1}wa’ rep|:count rep',
     'minute': '{1}wa’ tup|:count tup',
     'second': '{1}puS lup|:count lup',
+    'ago': ':time ret',
+    'from_now': ':time pIq',
     'diff_yesterday': 'wa’Hu’',
     'diff_today': 'DaHjaj',
     'diff_tomorrow': 'wa’leS',
@@ -82,5 +84,14 @@ const CarbonLocaleData localeTlh = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[DaHjaj] LT',
+    'nextDay': '[wa’leS] LT',
+    'nextWeek': 'LLL',
+    'lastDay': '[wa’Hu’] LT',
+    'lastWeek': 'LLL',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ’ej '],
 );
 

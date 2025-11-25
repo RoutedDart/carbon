@@ -116,6 +116,17 @@ const CarbonLocaleData localeSl = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[danes ob] LT',
+    'nextDay': '[jutri ob] LT',
+    'nextWeek': 'dddd [ob] LT',
+    'lastDay': '[včeraj ob] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' in '],
+  periodStartDate: 'od :date',
+  periodEndDate: 'do :date',
+  meridiem: _meridiem,
 );
 
 // Regional variant: sl_SI
@@ -123,3 +134,8 @@ final CarbonLocaleData localeSlSi = localeSl.copyWith(
   localeCode: 'sl_si',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'dopoldan' : 'popoldan';
+}

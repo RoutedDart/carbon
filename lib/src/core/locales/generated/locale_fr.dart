@@ -131,6 +131,19 @@ const CarbonLocaleData localeFr = CarbonLocaleData(
     'fifth': 'cinquième',
     'last': 'dernier',
   },
+  calendar: {
+    'sameDay': '[Aujourd’hui à] LT',
+    'nextDay': '[Demain à] LT',
+    'nextWeek': 'dddd [à] LT',
+    'lastDay': '[Hier à] LT',
+    'lastWeek': 'dddd [dernier à] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' et '],
+  periodRecurrences: ':count fois',
+  periodInterval: 'tous les :interval',
+  periodStartDate: 'de :date',
+  periodEndDate: 'à :date',
   ordinal: _ordinal,
 );
 
@@ -367,5 +380,5 @@ final CarbonLocaleData localeFrYt = localeFr.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'D' ? '${number}${(number == 1 ? 'er' : '')}' : (period == 'w' || period == 'W' ? '${number}${(number == 1 ? 're' : 'e')}' : '${number}${(number == 1 ? 'er' : 'e')}'))).toString();
+    return ((period == 'D' ? '$number${(number == 1 ? 'er' : '')}' : (period == 'w' || period == 'W' ? '$number${(number == 1 ? 're' : 'e')}' : '$number${(number == 1 ? 'er' : 'e')}'))).toString();
 }

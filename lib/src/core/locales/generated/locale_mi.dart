@@ -94,6 +94,15 @@ const CarbonLocaleData localeMi = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[i teie mahana, i] LT',
+    'nextDay': '[apopo i] LT',
+    'nextWeek': 'dddd [i] LT',
+    'lastDay': '[inanahi i] LT',
+    'lastWeek': 'dddd [whakamutunga i] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' me te '],
 );
 
 // Regional variant: mi_NZ

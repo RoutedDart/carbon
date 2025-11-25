@@ -104,7 +104,16 @@ const CarbonLocaleData localeBg = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Днес в] LT',
+    'nextDay': '[Утре в] LT',
+    'nextWeek': 'dddd [в] LT',
+    'lastDay': '[Вчера в] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' и '],
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: bg_BG
@@ -115,8 +124,8 @@ final CarbonLocaleData localeBgBg = localeBg.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
-  var last2Digits;
+  int lastDigit;
+  int last2Digits;
   lastDigit = number % 10;
   last2Digits = number % 100;
     if (number == 0) {
@@ -138,4 +147,9 @@ String _ordinal(int number, String period) {
       return '$number-ми';
     }
     return '$number-ти';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'преди обяд' : 'следобед';
 }

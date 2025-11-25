@@ -103,6 +103,16 @@ const CarbonLocaleData localeEt = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[täna] LT',
+    'nextDay': '[homme] LT',
+    'lastDay': '[eile] LT',
+    'nextWeek': 'dddd LT',
+    'lastWeek': '[eelmine] dddd LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ja '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: et_EE
@@ -110,3 +120,8 @@ final CarbonLocaleData localeEtEe = localeEt.copyWith(
   localeCode: 'et_ee',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'enne lõunat' : 'pärast lõunat';
+}

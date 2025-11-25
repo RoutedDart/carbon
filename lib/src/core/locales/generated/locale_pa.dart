@@ -87,6 +87,15 @@ const CarbonLocaleData localePa = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[ਅਜ] LT',
+    'nextDay': '[ਕਲ] LT',
+    'nextWeek': '[ਅਗਲਾ] dddd, LT',
+    'lastDay': '[ਕਲ] LT',
+    'lastWeek': '[ਪਿਛਲੇ] dddd, LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' ਅਤੇ '],
   meridiem: _meridiem,
 );
 
@@ -148,6 +157,15 @@ final CarbonLocaleData localePaArab = localePa.copyWith(
     'نومبر',
     'دسمبر',
   ],
+  calendar: {
+    'sameDay': '[آج بوقت] LT',
+    'nextDay': '[کل بوقت] LT',
+    'nextWeek': 'dddd [بوقت] LT',
+    'lastDay': '[گذشتہ روز بوقت] LT',
+    'lastWeek': '[گذشتہ] dddd [بوقت] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: ['، ', ' اور '],
 );
 
 // Regional variant: pa_Guru
@@ -259,6 +277,11 @@ final CarbonLocaleData localePaPk = localePa.copyWith(
     'نومبر',
     'دسمبر',
   ],
+  listSeparators: [', ', ' and '],
+  periodRecurrences: '{1}once|{0}:count times|[-Inf,Inf]:count times',
+  periodInterval: 'every :interval',
+  periodStartDate: 'from :date',
+  periodEndDate: 'to :date',
 );
 
 

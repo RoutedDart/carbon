@@ -45,6 +45,10 @@ const CarbonLocaleData localeCs = CarbonLocaleData(
     'year_before': ':count rokem|:count roky|:count lety',
     'y_before': ':count rok.|:count rok.|:count let.',
     'a_year_before': 'rokem|:count roky|:count lety',
+    'ago': 'před :time',
+    'from_now': 'za :time',
+    'before': 'před :time',
+    'after': 'za :time',
     'months_regexp': '/(DD?o?\\.?(\\[[^\\[\\]]*\\]|\\s)+MMMM?|L{2,4}|l{2,4})/',
     'diff_now': 'nyní',
     'diff_yesterday': 'včera',
@@ -129,6 +133,16 @@ const CarbonLocaleData localeCs = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  listSeparators: [', ', ' a '],
+  meridiem: _meridiem,
+  calendar: {
+    'sameDay': '[Today at] LT',
+    'nextDay': '[Tomorrow at] LT',
+    'nextWeek': 'dddd [at] LT',
+    'lastDay': '[Yesterday at] LT',
+    'lastWeek': '[Last] dddd [at] LT',
+    'sameElse': 'L',
+  },
 );
 
 // Regional variant: cs_CZ
@@ -136,3 +150,8 @@ final CarbonLocaleData localeCsCz = localeCs.copyWith(
   localeCode: 'cs_cz',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'dopoledne' : 'odpoledne';
+}

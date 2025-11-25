@@ -103,5 +103,24 @@ const CarbonLocaleData localeCkb = CarbonLocaleData(
   ],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[ئەمڕۆ لە کاتژمێر] LT',
+    'nextDay': '[سبەینێ لە کاتژمێر] LT',
+    'nextWeek': 'dddd [لە کاتژمێر] LT',
+    'lastDay': '[دوێنێ لە کاتژمێر] LT',
+    'lastWeek': 'dddd [لە کاتژمێر] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: ['، ', ' و '],
+  periodRecurrences: '{0}جار|{1}جار|{2}:count دووجار|]2,11[:count جار|]10,Inf[:count جار',
+  periodInterval: 'هەموو :interval',
+  periodStartDate: 'لە :date',
+  periodEndDate: 'بۆ :date',
+  meridiem: _meridiem,
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'پ.ن' : 'د.ن';
+}

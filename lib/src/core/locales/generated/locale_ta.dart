@@ -101,6 +101,15 @@ const CarbonLocaleData localeTa = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[இன்று] LT',
+    'nextDay': '[நாளை] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[நேற்று] LT',
+    'lastWeek': '[கடந்த வாரம்] dddd, LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' மற்றும் '],
   meridiem: _meridiem,
 );
 

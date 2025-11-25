@@ -115,6 +115,13 @@ const CarbonLocaleData localeHr = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[danas u] LT',
+    'nextDay': '[sutra u] LT',
+    'lastDay': '[jučer u] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' i '],
 );
 
 // Regional variant: hr_BA

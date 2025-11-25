@@ -91,6 +91,16 @@ const CarbonLocaleData localeSd = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[اڄ] LT',
+    'nextDay': '[سڀاڻي] LT',
+    'nextWeek': 'dddd [اڳين هفتي تي] LT',
+    'lastDay': '[ڪالهه] LT',
+    'lastWeek': '[گزريل هفتي] dddd [تي] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: ['، ', ' ۽ '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: sd_IN
@@ -153,3 +163,68 @@ final CarbonLocaleData localeSdIn = localeSd.copyWith(
   ],
 );
 
+// Regional variant: sd_IN@devanagari
+final CarbonLocaleData localeSdInDevanagari = localeSd.copyWith(
+  localeCode: 'sd_in@devanagari',
+  weekdays: [
+    'आर्तवारू',
+    'सूमरू',
+    'मंगलू',
+    'ॿुधरू',
+    'विस्पति',
+    'जुमो',
+    'छंछस',
+  ],
+  weekdaysShort: [
+    'आर्तवारू',
+    'सूमरू',
+    'मंगलू',
+    'ॿुधरू',
+    'विस्पति',
+    'जुमो',
+    'छंछस',
+  ],
+  weekdaysMin: [
+    'आर्तवारू',
+    'सूमरू',
+    'मंगलू',
+    'ॿुधरू',
+    'विस्पति',
+    'जुमो',
+    'छंछस',
+  ],
+  months: [
+    'जनवरी',
+    'फबरवरी',
+    'मार्चि',
+    'अप्रेल',
+    'मे',
+    'जूनि',
+    'जूलाइ',
+    'आगस्टु',
+    'सेप्टेंबरू',
+    'आक्टूबरू',
+    'नवंबरू',
+    'ॾिसंबरू',
+  ],
+  monthsShort: [
+    'जनवरी',
+    'फबरवरी',
+    'मार्चि',
+    'अप्रेल',
+    'मे',
+    'जूनि',
+    'जूलाइ',
+    'आगस्टु',
+    'सेप्टेंबरू',
+    'आक्टूबरू',
+    'नवंबरू',
+    'ॾिसंबरू',
+  ],
+);
+
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'صبح' : 'شام';
+}

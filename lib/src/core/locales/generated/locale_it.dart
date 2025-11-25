@@ -34,6 +34,7 @@ const CarbonLocaleData localeIt = CarbonLocaleData(
     'a_microsecond': 'un microsecondo|:count microsecondi',
     'µs': ':countµs',
     'ago': ':time fa',
+    'from_now': 'in :time',
     'after': ':time dopo',
     'before': ':time prima',
     'diff_now': 'proprio ora',
@@ -123,6 +124,17 @@ const CarbonLocaleData localeIt = CarbonLocaleData(
     'fifth': 'quinto',
     'last': 'ultimo',
   },
+  calendar: {
+    'sameDay': '[Oggi alle] LT',
+    'nextDay': '[Domani alle] LT',
+    'nextWeek': 'dddd [alle] LT',
+    'lastDay': '[Ieri alle] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' e '],
+  periodInterval: 'ogni :interval',
+  periodStartDate: 'dal :date',
+  periodEndDate: 'al :date',
 );
 
 // Regional variant: it_CH

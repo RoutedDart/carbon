@@ -105,6 +105,19 @@ const CarbonLocaleData localeBn = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[আজ] LT',
+    'nextDay': '[আগামীকাল] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[গতকাল] LT',
+    'lastWeek': '[গত] dddd, LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' এবং '],
+  periodRecurrences: ':count বার|:count বার',
+  periodInterval: 'প্রতি :interval',
+  periodStartDate: ':date থেকে',
+  periodEndDate: ':date পর্যন্ত',
   meridiem: _meridiem,
 );
 

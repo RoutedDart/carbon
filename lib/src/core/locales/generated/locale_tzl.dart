@@ -94,5 +94,19 @@ const CarbonLocaleData localeTzl = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[oxhi à] LT',
+    'nextDay': '[demà à] LT',
+    'nextWeek': 'dddd [à] LT',
+    'lastDay': '[ieiri à] LT',
+    'lastWeek': '[sür el] dddd [lasteu à] LT',
+    'sameElse': 'L',
+  },
+  meridiem: _meridiem,
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'D\'A' : 'D\'O';
+}

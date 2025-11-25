@@ -87,6 +87,14 @@ const CarbonLocaleData localeSs = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Namuhla nga] LT',
+    'nextDay': '[Kusasa nga] LT',
+    'nextWeek': 'dddd [nga] LT',
+    'lastDay': '[Itolo nga] LT',
+    'lastWeek': 'dddd [leliphelile] [nga] LT',
+    'sameElse': 'L',
+  },
   ordinal: _ordinal,
   meridiem: _meridiem,
 );
@@ -99,9 +107,9 @@ final CarbonLocaleData localeSsZa = localeSs.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
   lastDigit = number % 10;
-    return '${number}${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
+    return '$number${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
 }
 
 // Auto-generated meridiem function

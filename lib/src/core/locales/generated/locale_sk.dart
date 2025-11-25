@@ -33,6 +33,8 @@ const CarbonLocaleData localeSk = CarbonLocaleData(
     'microsecond': ':count mikrosekunda|:count mikrosekundy|:count mikrosekúnd',
     'a_microsecond': 'mikrosekunda|:count mikrosekundy|:count mikrosekúnd',
     'µs': ':count µs',
+    'ago': 'pred :time',
+    'from_now': 'o :time',
     'before': ':time pred',
     'after': ':time po',
     'hour_after': ':count hodinu|:count hodiny|:count hodín',
@@ -125,6 +127,15 @@ const CarbonLocaleData localeSk = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[dnes o] LT',
+    'nextDay': '[zajtra o] LT',
+    'lastDay': '[včera o] LT',
+    'nextWeek': 'dddd [o] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' a '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: sk_SK
@@ -132,3 +143,8 @@ final CarbonLocaleData localeSkSk = localeSk.copyWith(
   localeCode: 'sk_sk',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'dopoludnia' : 'popoludní';
+}

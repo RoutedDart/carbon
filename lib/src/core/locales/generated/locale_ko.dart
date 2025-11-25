@@ -99,7 +99,16 @@ const CarbonLocaleData localeKo = CarbonLocaleData(
     '금',
     '토',
   ],
+  calendar: {
+    'sameDay': '오늘 LT',
+    'nextDay': '내일 LT',
+    'nextWeek': 'dddd LT',
+    'lastDay': '어제 LT',
+    'lastWeek': '지난주 dddd LT',
+    'sameElse': 'L',
+  },
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: ko_KP
@@ -115,5 +124,10 @@ final CarbonLocaleData localeKoKr = localeKo.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '${number}일' : (period == 'M' ? '${number}월' : (period == 'w' || period == 'W' ? '${number}주' : number)))).toString();
+    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number일' : (period == 'M' ? '$number월' : (period == 'w' || period == 'W' ? '$number주' : number)))).toString();
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? '오전' : '오후';
 }

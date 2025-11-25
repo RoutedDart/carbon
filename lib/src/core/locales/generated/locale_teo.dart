@@ -101,6 +101,16 @@ const CarbonLocaleData localeTeo = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[இன்று] LT',
+    'nextDay': '[நாளை] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[நேற்று] LT',
+    'lastWeek': '[கடந்த வாரம்] dddd, LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' மற்றும் '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: teo_KE
@@ -108,3 +118,8 @@ final CarbonLocaleData localeTeoKe = localeTeo.copyWith(
   localeCode: 'teo_ke',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'Taparachu' : 'Ebongi';
+}

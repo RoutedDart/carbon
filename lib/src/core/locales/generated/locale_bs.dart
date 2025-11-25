@@ -101,6 +101,14 @@ const CarbonLocaleData localeBs = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[danas u] LT',
+    'nextDay': '[sutra u] LT',
+    'lastDay': '[jučer u] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' i '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: bs_BA
@@ -173,3 +181,8 @@ final CarbonLocaleData localeBsLatn = localeBs.copyWith(
   localeCode: 'bs_latn',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'prijepodne' : 'popodne';
+}

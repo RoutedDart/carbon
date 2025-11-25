@@ -103,7 +103,17 @@ const CarbonLocaleData localeSv = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[I dag] LT',
+    'nextDay': '[I morgon] LT',
+    'nextWeek': '[På] dddd LT',
+    'lastDay': '[I går] LT',
+    'lastWeek': '[I] dddd[s] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' och '],
   ordinal: _ordinal,
+  meridiem: _meridiem,
 );
 
 // Regional variant: sv_AX
@@ -124,7 +134,12 @@ final CarbonLocaleData localeSvSe = localeSv.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
   lastDigit = number % 10;
-    return '${number}${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
+    return '$number${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
+}
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'fm' : 'em';
 }

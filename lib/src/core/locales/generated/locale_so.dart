@@ -116,6 +116,19 @@ const CarbonLocaleData localeSo = CarbonLocaleData(
   ],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Maanta markay tahay] LT',
+    'nextDay': '[Beri markay tahay] LT',
+    'nextWeek': 'dddd [markay tahay] LT',
+    'lastDay': '[Shalay markay ahayd] LT',
+    'lastWeek': '[Hore] dddd [Markay ahayd] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' and '],
+  periodRecurrences: 'mar|:count jeer',
+  periodInterval: ':interval kasta',
+  periodStartDate: 'laga bilaabo :date',
+  periodEndDate: 'ilaa :date',
   ordinal: _ordinal,
 );
 
@@ -142,7 +155,7 @@ final CarbonLocaleData localeSoSo = localeSo.copyWith(
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var lastDigit;
+  int lastDigit;
   lastDigit = number % 10;
-    return '${number}${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }

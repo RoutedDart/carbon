@@ -96,6 +96,15 @@ const CarbonLocaleData localeFo = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[Í dag kl.] LT',
+    'nextDay': '[Í morgin kl.] LT',
+    'nextWeek': 'dddd [kl.] LT',
+    'lastDay': '[Í gjár kl.] LT',
+    'lastWeek': '[síðstu] dddd [kl] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' og '],
 );
 
 // Regional variant: fo_DK

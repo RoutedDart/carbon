@@ -94,6 +94,15 @@ const CarbonLocaleData localeGu = CarbonLocaleData(
   ],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[આજ] LT',
+    'nextDay': '[કાલે] LT',
+    'nextWeek': 'dddd, LT',
+    'lastDay': '[ગઇકાલે] LT',
+    'lastWeek': '[પાછલા] dddd, LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' અને '],
   meridiem: _meridiem,
 );
 

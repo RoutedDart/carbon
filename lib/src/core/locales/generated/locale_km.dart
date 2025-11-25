@@ -103,6 +103,16 @@ const CarbonLocaleData localeKm = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
+  calendar: {
+    'sameDay': '[ថ្ងៃនេះ ម៉ោង] LT',
+    'nextDay': '[ស្អែក ម៉ោង] LT',
+    'nextWeek': 'dddd [ម៉ោង] LT',
+    'lastDay': '[ម្សិលមិញ ម៉ោង] LT',
+    'lastWeek': 'dddd [សប្តាហ៍មុន] [ម៉ោង] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', 'និង '],
+  meridiem: _meridiem,
 );
 
 // Regional variant: km_KH
@@ -110,3 +120,8 @@ final CarbonLocaleData localeKmKh = localeKm.copyWith(
   localeCode: 'km_kh',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'ព្រឹក' : 'ល្ងាច';
+}

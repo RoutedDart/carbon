@@ -21,7 +21,9 @@ const CarbonLocaleData localeSi = CarbonLocaleData(
     'second': '{1}තත්පර 1|තත්පර :count',
     'a_second': '{1}තත්පර කිහිපයකට|තත්පර :count',
     'ago': ':time කට පෙර',
+    'from_now': ':time කින්',
     'before': ':time කට පෙර',
+    'after': ':time කින්',
     'diff_now': 'දැන්',
     'diff_today': 'අද',
     'diff_yesterday': 'ඊයේ',
@@ -91,6 +93,15 @@ const CarbonLocaleData localeSi = CarbonLocaleData(
     'සෙ',
   ],
   firstDayOfWeek: 1,
+  calendar: {
+    'sameDay': '[අද] LT[ට]',
+    'nextDay': '[හෙට] LT[ට]',
+    'nextWeek': 'dddd LT[ට]',
+    'lastDay': '[ඊයේ] LT[ට]',
+    'lastWeek': '[පසුගිය] dddd LT[ට]',
+    'sameElse': 'L',
+  },
+  meridiem: _meridiem,
 );
 
 // Regional variant: si_LK
@@ -98,3 +109,8 @@ final CarbonLocaleData localeSiLk = localeSi.copyWith(
   localeCode: 'si_lk',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'පෙර වරු' : 'පස් වරු';
+}

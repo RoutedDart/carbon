@@ -103,5 +103,20 @@ const CarbonLocaleData localeEo = CarbonLocaleData(
   ],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
+  calendar: {
+    'sameDay': '[Hodiaŭ je] LT',
+    'nextDay': '[Morgaŭ je] LT',
+    'nextWeek': 'dddd [je] LT',
+    'lastDay': '[Hieraŭ je] LT',
+    'lastWeek': '[pasinta] dddd [je] LT',
+    'sameElse': 'L',
+  },
+  listSeparators: [', ', ' kaj '],
+  meridiem: _meridiem,
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'a.t.m.' : 'p.t.m.';
+}

@@ -75,18 +75,18 @@ const CarbonLocaleData localeQu = CarbonLocaleData(
     'diciembre',
   ],
   monthsShort: [
-    'ene',
-    'feb',
-    'mar',
-    'abr',
-    'may',
-    'jun',
-    'jul',
-    'ago',
-    'set',
-    'oct',
-    'nov',
-    'dic',
+    'ene.',
+    'feb.',
+    'mar.',
+    'abr.',
+    'may.',
+    'jun.',
+    'jul.',
+    'ago.',
+    'set.',
+    'oct.',
+    'nov.',
+    'dic.',
   ],
   weekdays: [
     'domingo',
@@ -126,6 +126,13 @@ const CarbonLocaleData localeQu = CarbonLocaleData(
     'fifth': 'quinto',
     'last': 'último',
   },
+  calendar: {'sameElse': 'L'},
+  listSeparators: [', ', ' y '],
+  periodRecurrences: 'una vez|:count veces',
+  periodInterval: 'cada :interval',
+  periodStartDate: 'de :date',
+  periodEndDate: 'a :date',
+  meridiem: _meridiem,
 );
 
 // Regional variant: qu_BO
@@ -138,3 +145,8 @@ final CarbonLocaleData localeQuEc = localeQu.copyWith(
   localeCode: 'qu_ec',
 );
 
+
+// Auto-generated meridiem function from array
+String _meridiem(int hour, dynamic minute, dynamic isLower) {
+  return hour < 12 ? 'a. m.' : 'p. m.';
+}

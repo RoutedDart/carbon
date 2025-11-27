@@ -18,6 +18,7 @@ import 'package:time_machine/time_machine.dart' as tm;
 import 'package:time_machine/src/timezones/tzdb_datetimezone_source.dart'
         // ignore: invalid_use_of_internal_member
         show
+        // ignore: invalid_use_of_internal_member
         ITzdbDateTimeZoneSource;
 
 part 'core/carbon_macro.dart';

@@ -87,15 +87,7 @@ const CarbonLocaleData localeTh = CarbonLocaleData(
     'ศุกร์',
     'เสาร์',
   ],
-  weekdaysMin: [
-    'อา.',
-    'จ.',
-    'อ.',
-    'พ.',
-    'พฤ.',
-    'ศ.',
-    'ส.',
-  ],
+  weekdaysMin: ['อา.', 'จ.', 'อ.', 'พ.', 'พฤ.', 'ศ.', 'ส.'],
   calendar: {
     'sameDay': '[วันนี้ เวลา] LT',
     'nextDay': '[พรุ่งนี้ เวลา] LT',
@@ -109,10 +101,7 @@ const CarbonLocaleData localeTh = CarbonLocaleData(
 );
 
 // Regional variant: th_TH
-final CarbonLocaleData localeThTh = localeTh.copyWith(
-  localeCode: 'th_th',
-);
-
+final CarbonLocaleData localeThTh = localeTh.copyWith(localeCode: 'th_th');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

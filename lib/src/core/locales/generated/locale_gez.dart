@@ -27,11 +27,15 @@ const CarbonLocaleData localeGez = CarbonLocaleData(
     'second': ':count ካልእ',
     'a_second': ':count ካልእ',
     's': ':count ካልእ',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeGez = CarbonLocaleData(
     'ኀደረ',
     'ኀሠሠ',
   ],
-  weekdays: [
-    'እኁድ',
-    'ሰኑይ',
-    'ሠሉስ',
-    'ራብዕ',
-    'ሐሙስ',
-    'ዓርበ',
-    'ቀዳሚት',
-  ],
-  weekdaysShort: [
-    'እኁድ',
-    'ሰኑይ',
-    'ሠሉስ',
-    'ራብዕ',
-    'ሐሙስ',
-    'ዓርበ',
-    'ቀዳሚ',
-  ],
-  weekdaysMin: [
-    'እኁድ',
-    'ሰኑይ',
-    'ሠሉስ',
-    'ራብዕ',
-    'ሐሙስ',
-    'ዓርበ',
-    'ቀዳሚ',
-  ],
+  weekdays: ['እኁድ', 'ሰኑይ', 'ሠሉስ', 'ራብዕ', 'ሐሙስ', 'ዓርበ', 'ቀዳሚት'],
+  weekdaysShort: ['እኁድ', 'ሰኑይ', 'ሠሉስ', 'ራብዕ', 'ሐሙስ', 'ዓርበ', 'ቀዳሚ'],
+  weekdaysMin: ['እኁድ', 'ሰኑይ', 'ሠሉስ', 'ራብዕ', 'ሐሙስ', 'ዓርበ', 'ቀዳሚ'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,9 +111,7 @@ const CarbonLocaleData localeGez = CarbonLocaleData(
 );
 
 // Regional variant: gez_ER
-final CarbonLocaleData localeGezEr = localeGez.copyWith(
-  localeCode: 'gez_er',
-);
+final CarbonLocaleData localeGezEr = localeGez.copyWith(localeCode: 'gez_er');
 
 // Regional variant: gez_ET
 final CarbonLocaleData localeGezEt = localeGez.copyWith(
@@ -168,12 +146,11 @@ final CarbonLocaleData localeGezEt = localeGez.copyWith(
   ],
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

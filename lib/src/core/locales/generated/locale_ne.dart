@@ -74,24 +74,8 @@ const CarbonLocaleData localeNe = CarbonLocaleData(
     'शुक्रबार',
     'शनिबार',
   ],
-  weekdaysShort: [
-    'आइत.',
-    'सोम.',
-    'मङ्गल.',
-    'बुध.',
-    'बिहि.',
-    'शुक्र.',
-    'शनि.',
-  ],
-  weekdaysMin: [
-    'आ.',
-    'सो.',
-    'मं.',
-    'बु.',
-    'बि.',
-    'शु.',
-    'श.',
-  ],
+  weekdaysShort: ['आइत.', 'सोम.', 'मङ्गल.', 'बुध.', 'बिहि.', 'शुक्र.', 'शनि.'],
+  weekdaysMin: ['आ.', 'सो.', 'मं.', 'बु.', 'बि.', 'शु.', 'श.'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -140,24 +124,21 @@ final CarbonLocaleData localeNeIn = localeNe.copyWith(
 );
 
 // Regional variant: ne_NP
-final CarbonLocaleData localeNeNp = localeNe.copyWith(
-  localeCode: 'ne_np',
-);
-
+final CarbonLocaleData localeNeNp = localeNe.copyWith(localeCode: 'ne_np');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 3) {
-      return 'राति';
-    }
-    if (hour < 12) {
-      return 'बिहान';
-    }
-    if (hour < 16) {
-      return 'दिउँसो';
-    }
-    if (hour < 20) {
-      return 'साँझ';
-    }
+  if (hour < 3) {
     return 'राति';
+  }
+  if (hour < 12) {
+    return 'बिहान';
+  }
+  if (hour < 16) {
+    return 'दिउँसो';
+  }
+  if (hour < 20) {
+    return 'साँझ';
+  }
+  return 'राति';
 }

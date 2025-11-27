@@ -66,33 +66,9 @@ const CarbonLocaleData localeZh = CarbonLocaleData(
     '11月',
     '12月',
   ],
-  weekdays: [
-    '星期日',
-    '星期一',
-    '星期二',
-    '星期三',
-    '星期四',
-    '星期五',
-    '星期六',
-  ],
-  weekdaysShort: [
-    '周日',
-    '周一',
-    '周二',
-    '周三',
-    '周四',
-    '周五',
-    '周六',
-  ],
-  weekdaysMin: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
+  weekdays: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+  weekdaysShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
+  weekdaysMin: ['日', '一', '二', '三', '四', '五', '六'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -108,22 +84,12 @@ const CarbonLocaleData localeZh = CarbonLocaleData(
 );
 
 // Regional variant: zh_CN
-final CarbonLocaleData localeZhCn = localeZh.copyWith(
-  localeCode: 'zh_cn',
-);
+final CarbonLocaleData localeZhCn = localeZh.copyWith(localeCode: 'zh_cn');
 
 // Regional variant: zh_HK
 final CarbonLocaleData localeZhHk = localeZh.copyWith(
   localeCode: 'zh_hk',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   calendar: {
     'sameDay': '[今天] LT',
     'nextDay': '[明天] LT',
@@ -135,9 +101,7 @@ final CarbonLocaleData localeZhHk = localeZh.copyWith(
 );
 
 // Regional variant: zh_Hans
-final CarbonLocaleData localeZhHans = localeZh.copyWith(
-  localeCode: 'zh_hans',
-);
+final CarbonLocaleData localeZhHans = localeZh.copyWith(localeCode: 'zh_hans');
 
 // Regional variant: zh_Hans_HK
 final CarbonLocaleData localeZhHansHk = localeZh.copyWith(
@@ -157,15 +121,7 @@ final CarbonLocaleData localeZhHansSg = localeZh.copyWith(
 // Regional variant: zh_Hant
 final CarbonLocaleData localeZhHant = localeZh.copyWith(
   localeCode: 'zh_hant',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   calendar: {
     'sameDay': '[今天] LT',
     'nextDay': '[明天] LT',
@@ -179,15 +135,7 @@ final CarbonLocaleData localeZhHant = localeZh.copyWith(
 // Regional variant: zh_Hant_HK
 final CarbonLocaleData localeZhHantHk = localeZh.copyWith(
   localeCode: 'zh_hant_hk',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   calendar: {
     'sameDay': '[今天] LT',
     'nextDay': '[明天] LT',
@@ -201,15 +149,7 @@ final CarbonLocaleData localeZhHantHk = localeZh.copyWith(
 // Regional variant: zh_Hant_MO
 final CarbonLocaleData localeZhHantMo = localeZh.copyWith(
   localeCode: 'zh_hant_mo',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   calendar: {
     'sameDay': '[今天] LT',
     'nextDay': '[明天] LT',
@@ -223,15 +163,7 @@ final CarbonLocaleData localeZhHantMo = localeZh.copyWith(
 // Regional variant: zh_Hant_TW
 final CarbonLocaleData localeZhHantTw = localeZh.copyWith(
   localeCode: 'zh_hant_tw',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   calendar: {
     'sameDay': '[今天] LT',
     'nextDay': '[明天] LT',
@@ -245,15 +177,7 @@ final CarbonLocaleData localeZhHantTw = localeZh.copyWith(
 // Regional variant: zh_MO
 final CarbonLocaleData localeZhMo = localeZh.copyWith(
   localeCode: 'zh_mo',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   calendar: {
     'sameDay': '[今天] LT',
     'nextDay': '[明天] LT',
@@ -267,15 +191,7 @@ final CarbonLocaleData localeZhMo = localeZh.copyWith(
 // Regional variant: zh_SG
 final CarbonLocaleData localeZhSg = localeZh.copyWith(
   localeCode: 'zh_sg',
-  weekdaysShort: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
+  weekdaysShort: ['日', '一', '二', '三', '四', '五', '六'],
   monthsShort: [
     '一月',
     '二月',
@@ -295,15 +211,7 @@ final CarbonLocaleData localeZhSg = localeZh.copyWith(
 // Regional variant: zh_TW
 final CarbonLocaleData localeZhTw = localeZh.copyWith(
   localeCode: 'zh_tw',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   calendar: {
     'sameDay': '[今天] LT',
     'nextDay': '[明天] LT',
@@ -315,34 +223,36 @@ final CarbonLocaleData localeZhTw = localeZh.copyWith(
 );
 
 // Regional variant: zh_YUE
-final CarbonLocaleData localeZhYue = localeZh.copyWith(
-  localeCode: 'zh_yue',
-);
-
+final CarbonLocaleData localeZhYue = localeZh.copyWith(localeCode: 'zh_yue');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number日' : (period == 'M' ? '$number月' : (period == 'w' || period == 'W' ? '$number周' : number)))).toString();
+  return ((period == 'd' || period == 'D' || period == 'DDD'
+          ? '$number日'
+          : (period == 'M'
+                ? '$number月'
+                : (period == 'w' || period == 'W' ? '$number周' : number))))
+      .toString();
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
   num time;
   time = hour * 100 + minute;
-    if (time < 600) {
-      return '凌晨';
-    }
-    if (time < 900) {
-      return '早上';
-    }
-    if (time < 1130) {
-      return '上午';
-    }
-    if (time < 1230) {
-      return '中午';
-    }
-    if (time < 1800) {
-      return '下午';
-    }
-    return '晚上';
+  if (time < 600) {
+    return '凌晨';
+  }
+  if (time < 900) {
+    return '早上';
+  }
+  if (time < 1130) {
+    return '上午';
+  }
+  if (time < 1230) {
+    return '中午';
+  }
+  if (time < 1800) {
+    return '下午';
+  }
+  return '晚上';
 }

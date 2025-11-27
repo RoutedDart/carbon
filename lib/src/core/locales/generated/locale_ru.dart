@@ -26,12 +26,17 @@ const CarbonLocaleData localeRu = CarbonLocaleData(
     'a_minute': '{1}минута|:count минута|:count минуты|:count минут',
     'second': ':count секунда|:count секунды|:count секунд',
     's': ':count сек.',
-    'a_second': '{1}несколько секунд|:count секунду|:count секунды|:count секунд',
-    'millisecond': '{1}:count миллисекунда|:count миллисекунды|:count миллисекунд',
-    'a_millisecond': '{1}миллисекунда|:count миллисекунда|:count миллисекунды|:count миллисекунд',
+    'a_second':
+        '{1}несколько секунд|:count секунду|:count секунды|:count секунд',
+    'millisecond':
+        '{1}:count миллисекунда|:count миллисекунды|:count миллисекунд',
+    'a_millisecond':
+        '{1}миллисекунда|:count миллисекунда|:count миллисекунды|:count миллисекунд',
     'ms': ':count мс',
-    'microsecond': '{1}:count микросекунда|:count микросекунды|:count микросекунд',
-    'a_microsecond': '{1}микросекунда|:count микросекунда|:count микросекунды|:count микросекунд',
+    'microsecond':
+        '{1}:count микросекунда|:count микросекунды|:count микросекунд',
+    'a_microsecond':
+        '{1}микросекунда|:count микросекунда|:count микросекунды|:count микросекунд',
     'ago': ':time назад',
     'from_now': 'через :time',
     'after': ':time после',
@@ -46,7 +51,8 @@ const CarbonLocaleData localeRu = CarbonLocaleData(
     'diff_before_yesterday': 'позавчера',
     'diff_after_tomorrow': 'послезавтра',
     'months_regexp': '/(DD?o?\\.?(\\[[^\\[\\]]*\\]|\\s)+MMMM?|L{2,4}|l{2,4})/',
-    'weekdays_regexp': '/\\[\\s*(В|в)\\s*((?:прошлую|следующую|эту)\\s*)?\\]\\s*dddd/',
+    'weekdays_regexp':
+        '/\\[\\s*(В|в)\\s*((?:прошлую|следующую|эту)\\s*)?\\]\\s*dddd/',
   },
   formats: {
     'LT': 'H:mm',
@@ -107,24 +113,8 @@ const CarbonLocaleData localeRu = CarbonLocaleData(
     'пятницу',
     'субботу',
   ],
-  weekdaysShort: [
-    'вск',
-    'пнд',
-    'втр',
-    'срд',
-    'чтв',
-    'птн',
-    'сбт',
-  ],
-  weekdaysMin: [
-    'вс',
-    'пн',
-    'вт',
-    'ср',
-    'чт',
-    'пт',
-    'сб',
-  ],
+  weekdaysShort: ['вск', 'пнд', 'втр', 'срд', 'чтв', 'птн', 'сбт'],
+  weekdaysMin: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -139,29 +129,19 @@ const CarbonLocaleData localeRu = CarbonLocaleData(
 );
 
 // Regional variant: ru_BY
-final CarbonLocaleData localeRuBy = localeRu.copyWith(
-  localeCode: 'ru_by',
-);
+final CarbonLocaleData localeRuBy = localeRu.copyWith(localeCode: 'ru_by');
 
 // Regional variant: ru_KG
-final CarbonLocaleData localeRuKg = localeRu.copyWith(
-  localeCode: 'ru_kg',
-);
+final CarbonLocaleData localeRuKg = localeRu.copyWith(localeCode: 'ru_kg');
 
 // Regional variant: ru_KZ
-final CarbonLocaleData localeRuKz = localeRu.copyWith(
-  localeCode: 'ru_kz',
-);
+final CarbonLocaleData localeRuKz = localeRu.copyWith(localeCode: 'ru_kz');
 
 // Regional variant: ru_MD
-final CarbonLocaleData localeRuMd = localeRu.copyWith(
-  localeCode: 'ru_md',
-);
+final CarbonLocaleData localeRuMd = localeRu.copyWith(localeCode: 'ru_md');
 
 // Regional variant: ru_RU
-final CarbonLocaleData localeRuRu = localeRu.copyWith(
-  localeCode: 'ru_ru',
-);
+final CarbonLocaleData localeRuRu = localeRu.copyWith(localeCode: 'ru_ru');
 
 // Regional variant: ru_UA
 final CarbonLocaleData localeRuUa = localeRu.copyWith(
@@ -175,42 +155,30 @@ final CarbonLocaleData localeRuUa = localeRu.copyWith(
     'пятница',
     'суббота',
   ],
-  weekdaysShort: [
-    'вск',
-    'пнд',
-    'вто',
-    'срд',
-    'чтв',
-    'птн',
-    'суб',
-  ],
-  weekdaysMin: [
-    'вс',
-    'пн',
-    'вт',
-    'ср',
-    'чт',
-    'пт',
-    'су',
-  ],
+  weekdaysShort: ['вск', 'пнд', 'вто', 'срд', 'чтв', 'птн', 'суб'],
+  weekdaysMin: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'су'],
 );
-
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'M' || period == 'd' || period == 'DDD' ? '$number-й' : (period == 'D' ? '$number-го' : (period == 'w' || period == 'W' ? '$number-я' : number)))).toString();
+  return ((period == 'M' || period == 'd' || period == 'DDD'
+          ? '$number-й'
+          : (period == 'D'
+                ? '$number-го'
+                : (period == 'w' || period == 'W' ? '$number-я' : number))))
+      .toString();
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'ночи';
-    }
-    if (hour < 12) {
-      return 'утра';
-    }
-    if (hour < 17) {
-      return 'дня';
-    }
-    return 'вечера';
+  if (hour < 4) {
+    return 'ночи';
+  }
+  if (hour < 12) {
+    return 'утра';
+  }
+  if (hour < 17) {
+    return 'дня';
+  }
+  return 'вечера';
 }

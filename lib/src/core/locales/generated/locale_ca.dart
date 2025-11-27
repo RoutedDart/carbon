@@ -105,24 +105,8 @@ const CarbonLocaleData localeCa = CarbonLocaleData(
     'divendres',
     'dissabte',
   ],
-  weekdaysShort: [
-    'dg.',
-    'dl.',
-    'dt.',
-    'dc.',
-    'dj.',
-    'dv.',
-    'ds.',
-  ],
-  weekdaysMin: [
-    'dg',
-    'dl',
-    'dt',
-    'dc',
-    'dj',
-    'dv',
-    'ds',
-  ],
+  weekdaysShort: ['dg.', 'dl.', 'dt.', 'dc.', 'dj.', 'dv.', 'ds.'],
+  weekdaysMin: ['dg', 'dl', 'dt', 'dc', 'dj', 'dv', 'ds'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {'sameElse': 'L'},
@@ -136,14 +120,10 @@ const CarbonLocaleData localeCa = CarbonLocaleData(
 );
 
 // Regional variant: ca_AD
-final CarbonLocaleData localeCaAd = localeCa.copyWith(
-  localeCode: 'ca_ad',
-);
+final CarbonLocaleData localeCaAd = localeCa.copyWith(localeCode: 'ca_ad');
 
 // Regional variant: ca_ES
-final CarbonLocaleData localeCaEs = localeCa.copyWith(
-  localeCode: 'ca_es',
-);
+final CarbonLocaleData localeCaEs = localeCa.copyWith(localeCode: 'ca_es');
 
 // Regional variant: ca_ES_Valencia
 final CarbonLocaleData localeCaEsValencia = localeCa.copyWith(
@@ -151,19 +131,14 @@ final CarbonLocaleData localeCaEsValencia = localeCa.copyWith(
 );
 
 // Regional variant: ca_FR
-final CarbonLocaleData localeCaFr = localeCa.copyWith(
-  localeCode: 'ca_fr',
-);
+final CarbonLocaleData localeCaFr = localeCa.copyWith(localeCode: 'ca_fr');
 
 // Regional variant: ca_IT
-final CarbonLocaleData localeCaIt = localeCa.copyWith(
-  localeCode: 'ca_it',
-);
-
+final CarbonLocaleData localeCaIt = localeCa.copyWith(localeCode: 'ca_it');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(period == 'w' || period == 'W' ? 'a' : (number == 1 ? 'r' : (number == 2 ? 'n' : (number == 3 ? 'r' : (number == 4 ? 't' : 'è')))))}';
+  return '$number${(period == 'w' || period == 'W' ? 'a' : (number == 1 ? 'r' : (number == 2 ? 'n' : (number == 3 ? 'r' : (number == 4 ? 't' : 'è')))))}';
 }
 
 // Auto-generated meridiem function from array

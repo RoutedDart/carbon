@@ -111,24 +111,8 @@ const CarbonLocaleData localeDe = CarbonLocaleData(
     'Freitag',
     'Samstag',
   ],
-  weekdaysShort: [
-    'So.',
-    'Mo.',
-    'Di.',
-    'Mi.',
-    'Do.',
-    'Fr.',
-    'Sa.',
-  ],
-  weekdaysMin: [
-    'So',
-    'Mo',
-    'Di',
-    'Mi',
-    'Do',
-    'Fr',
-    'Sa',
-  ],
+  weekdaysShort: ['So.', 'Mo.', 'Di.', 'Mi.', 'Do.', 'Fr.', 'Sa.'],
+  weekdaysMin: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   ordinalWords: {
@@ -188,41 +172,22 @@ final CarbonLocaleData localeDeAt = localeDe.copyWith(
 );
 
 // Regional variant: de_BE
-final CarbonLocaleData localeDeBe = localeDe.copyWith(
-  localeCode: 'de_be',
-);
+final CarbonLocaleData localeDeBe = localeDe.copyWith(localeCode: 'de_be');
 
 // Regional variant: de_CH
 final CarbonLocaleData localeDeCh = localeDe.copyWith(
   localeCode: 'de_ch',
-  weekdaysShort: [
-    'So',
-    'Mo',
-    'Di',
-    'Mi',
-    'Do',
-    'Fr',
-    'Sa',
-  ],
+  weekdaysShort: ['So', 'Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa'],
 );
 
 // Regional variant: de_DE
-final CarbonLocaleData localeDeDe = localeDe.copyWith(
-  localeCode: 'de_de',
-);
+final CarbonLocaleData localeDeDe = localeDe.copyWith(localeCode: 'de_de');
 
 // Regional variant: de_IT
-final CarbonLocaleData localeDeIt = localeDe.copyWith(
-  localeCode: 'de_it',
-);
+final CarbonLocaleData localeDeIt = localeDe.copyWith(localeCode: 'de_it');
 
 // Regional variant: de_LI
-final CarbonLocaleData localeDeLi = localeDe.copyWith(
-  localeCode: 'de_li',
-);
+final CarbonLocaleData localeDeLi = localeDe.copyWith(localeCode: 'de_li');
 
 // Regional variant: de_LU
-final CarbonLocaleData localeDeLu = localeDe.copyWith(
-  localeCode: 'de_lu',
-);
-
+final CarbonLocaleData localeDeLu = localeDe.copyWith(localeCode: 'de_lu');

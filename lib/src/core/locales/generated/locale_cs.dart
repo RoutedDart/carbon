@@ -113,24 +113,8 @@ const CarbonLocaleData localeCs = CarbonLocaleData(
     'pátek',
     'sobota',
   ],
-  weekdaysShort: [
-    'ned',
-    'pon',
-    'úte',
-    'stř',
-    'čtv',
-    'pát',
-    'sob',
-  ],
-  weekdaysMin: [
-    'ne',
-    'po',
-    'út',
-    'st',
-    'čt',
-    'pá',
-    'so',
-  ],
+  weekdaysShort: ['ned', 'pon', 'úte', 'stř', 'čtv', 'pát', 'sob'],
+  weekdaysMin: ['ne', 'po', 'út', 'st', 'čt', 'pá', 'so'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   listSeparators: [', ', ' a '],
@@ -146,10 +130,7 @@ const CarbonLocaleData localeCs = CarbonLocaleData(
 );
 
 // Regional variant: cs_CZ
-final CarbonLocaleData localeCsCz = localeCs.copyWith(
-  localeCode: 'cs_cz',
-);
-
+final CarbonLocaleData localeCsCz = localeCs.copyWith(localeCode: 'cs_cz');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

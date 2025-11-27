@@ -74,24 +74,8 @@ const CarbonLocaleData localeTet = CarbonLocaleData(
     'Sesta',
     'Sabadu',
   ],
-  weekdaysShort: [
-    'Dom',
-    'Seg',
-    'Ters',
-    'Kua',
-    'Kint',
-    'Sest',
-    'Sab',
-  ],
-  weekdaysMin: [
-    'Do',
-    'Seg',
-    'Te',
-    'Ku',
-    'Ki',
-    'Ses',
-    'Sa',
-  ],
+  weekdaysShort: ['Dom', 'Seg', 'Ters', 'Kua', 'Kint', 'Sest', 'Sab'],
+  weekdaysMin: ['Do', 'Seg', 'Te', 'Ku', 'Ki', 'Ses', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -103,4 +87,3 @@ const CarbonLocaleData localeTet = CarbonLocaleData(
     'sameElse': 'L',
   },
 );
-

@@ -92,15 +92,7 @@ const CarbonLocaleData localeMzn = CarbonLocaleData(
     'جمعه',
     'شنبه',
   ],
-  weekdaysMin: [
-    'ی',
-    'د',
-    'س',
-    'چ',
-    'پ',
-    'ج',
-    'ش',
-  ],
+  weekdaysMin: ['ی', 'د', 'س', 'چ', 'پ', 'ج', 'ش'],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -114,7 +106,6 @@ const CarbonLocaleData localeMzn = CarbonLocaleData(
   listSeparators: ['، ', ' و '],
   meridiem: _meridiem,
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

@@ -99,24 +99,8 @@ const CarbonLocaleData localeEl = CarbonLocaleData(
     'Παρασκευή',
     'Σάββατο',
   ],
-  weekdaysShort: [
-    'Κυρ',
-    'Δευ',
-    'Τρι',
-    'Τετ',
-    'Πεμ',
-    'Παρ',
-    'Σαβ',
-  ],
-  weekdaysMin: [
-    'Κυ',
-    'Δε',
-    'Τρ',
-    'Τε',
-    'Πε',
-    'Πα',
-    'Σα',
-  ],
+  weekdaysShort: ['Κυρ', 'Δευ', 'Τρι', 'Τετ', 'Πεμ', 'Παρ', 'Σαβ'],
+  weekdaysMin: ['Κυ', 'Δε', 'Τρ', 'Τε', 'Πε', 'Πα', 'Σα'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -131,15 +115,10 @@ const CarbonLocaleData localeEl = CarbonLocaleData(
 );
 
 // Regional variant: el_CY
-final CarbonLocaleData localeElCy = localeEl.copyWith(
-  localeCode: 'el_cy',
-);
+final CarbonLocaleData localeElCy = localeEl.copyWith(localeCode: 'el_cy');
 
 // Regional variant: el_GR
-final CarbonLocaleData localeElGr = localeEl.copyWith(
-  localeCode: 'el_gr',
-);
-
+final CarbonLocaleData localeElGr = localeEl.copyWith(localeCode: 'el_gr');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

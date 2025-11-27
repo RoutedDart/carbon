@@ -75,33 +75,9 @@ const CarbonLocaleData localeId = CarbonLocaleData(
     'Nov',
     'Des',
   ],
-  weekdays: [
-    'Minggu',
-    'Senin',
-    'Selasa',
-    'Rabu',
-    'Kamis',
-    'Jumat',
-    'Sabtu',
-  ],
-  weekdaysShort: [
-    'Min',
-    'Sen',
-    'Sel',
-    'Rab',
-    'Kam',
-    'Jum',
-    'Sab',
-  ],
-  weekdaysMin: [
-    'Mg',
-    'Sn',
-    'Sl',
-    'Rb',
-    'Km',
-    'Jm',
-    'Sb',
-  ],
+  weekdays: ['Minggu', 'Senin', 'Selasa', 'Rabu', 'Kamis', 'Jumat', 'Sabtu'],
+  weekdaysShort: ['Min', 'Sen', 'Sel', 'Rab', 'Kam', 'Jum', 'Sab'],
+  weekdaysMin: ['Mg', 'Sn', 'Sl', 'Rb', 'Km', 'Jm', 'Sb'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -117,21 +93,18 @@ const CarbonLocaleData localeId = CarbonLocaleData(
 );
 
 // Regional variant: id_ID
-final CarbonLocaleData localeIdId = localeId.copyWith(
-  localeCode: 'id_id',
-);
-
+final CarbonLocaleData localeIdId = localeId.copyWith(localeCode: 'id_id');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 11) {
-      return 'pagi';
-    }
-    if (hour < 15) {
-      return 'siang';
-    }
-    if (hour < 19) {
-      return 'sore';
-    }
-    return 'malam';
+  if (hour < 11) {
+    return 'pagi';
+  }
+  if (hour < 15) {
+    return 'siang';
+  }
+  if (hour < 19) {
+    return 'sore';
+  }
+  return 'malam';
 }

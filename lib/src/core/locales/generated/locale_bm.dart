@@ -72,33 +72,9 @@ const CarbonLocaleData localeBm = CarbonLocaleData(
     'Now',
     'Des',
   ],
-  weekdays: [
-    'Kari',
-    'Ntɛnɛn',
-    'Tarata',
-    'Araba',
-    'Alamisa',
-    'Juma',
-    'Sibiri',
-  ],
-  weekdaysShort: [
-    'Kar',
-    'Ntɛ',
-    'Tar',
-    'Ara',
-    'Ala',
-    'Jum',
-    'Sib',
-  ],
-  weekdaysMin: [
-    'Ka',
-    'Nt',
-    'Ta',
-    'Ar',
-    'Al',
-    'Ju',
-    'Si',
-  ],
+  weekdays: ['Kari', 'Ntɛnɛn', 'Tarata', 'Araba', 'Alamisa', 'Juma', 'Sibiri'],
+  weekdaysShort: ['Kar', 'Ntɛ', 'Tar', 'Ara', 'Ala', 'Jum', 'Sib'],
+  weekdaysMin: ['Ka', 'Nt', 'Ta', 'Ar', 'Al', 'Ju', 'Si'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -111,4 +87,3 @@ const CarbonLocaleData localeBm = CarbonLocaleData(
   },
   listSeparators: [', ', ' ni '],
 );
-

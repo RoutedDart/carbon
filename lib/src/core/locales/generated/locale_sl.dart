@@ -19,7 +19,8 @@ const CarbonLocaleData localeSl = CarbonLocaleData(
     'minute': ':count minuta|:count minuti|:count minute|:count minut',
     'min': ':count min.',
     'second': ':count sekunda|:count sekundi|:count sekunde|:count sekund',
-    'a_second': '{1}nekaj sekund|:count sekunda|:count sekundi|:count sekunde|:count sekund',
+    'a_second':
+        '{1}nekaj sekund|:count sekunda|:count sekundi|:count sekunde|:count sekund',
     's': ':count s',
     'year_ago': ':count letom|:count letoma|:count leti|:count leti',
     'y_ago': ':count letom|:count letoma|:count leti|:count leti',
@@ -28,13 +29,16 @@ const CarbonLocaleData localeSl = CarbonLocaleData(
     'day_ago': ':count dnem|:count dnevoma|:count dnevi|:count dnevi',
     'd_ago': ':count dnem|:count dnevoma|:count dnevi|:count dnevi',
     'hour_ago': ':count uro|:count urama|:count urami|:count urami',
-    'minute_ago': ':count minuto|:count minutama|:count minutami|:count minutami',
-    'second_ago': ':count sekundo|:count sekundama|:count sekundami|:count sekundami',
+    'minute_ago':
+        ':count minuto|:count minutama|:count minutami|:count minutami',
+    'second_ago':
+        ':count sekundo|:count sekundama|:count sekundami|:count sekundami',
     'day_from_now': ':count dan|:count dneva|:count dni|:count dni',
     'd_from_now': ':count dan|:count dneva|:count dni|:count dni',
     'hour_from_now': ':count uro|:count uri|:count ure|:count ur',
     'minute_from_now': ':count minuto|:count minuti|:count minute|:count minut',
-    'second_from_now': ':count sekundo|:count sekundi|:count sekunde|:count sekund',
+    'second_from_now':
+        ':count sekundo|:count sekundi|:count sekunde|:count sekund',
     'ago': 'pred :time',
     'from_now': 'čez :time',
     'after': ':time kasneje',
@@ -96,24 +100,8 @@ const CarbonLocaleData localeSl = CarbonLocaleData(
     'petek',
     'sobota',
   ],
-  weekdaysShort: [
-    'ned',
-    'pon',
-    'tor',
-    'sre',
-    'čet',
-    'pet',
-    'sob',
-  ],
-  weekdaysMin: [
-    'ne',
-    'po',
-    'to',
-    'sr',
-    'če',
-    'pe',
-    'so',
-  ],
+  weekdaysShort: ['ned', 'pon', 'tor', 'sre', 'čet', 'pet', 'sob'],
+  weekdaysMin: ['ne', 'po', 'to', 'sr', 'če', 'pe', 'so'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -130,10 +118,7 @@ const CarbonLocaleData localeSl = CarbonLocaleData(
 );
 
 // Regional variant: sl_SI
-final CarbonLocaleData localeSlSi = localeSl.copyWith(
-  localeCode: 'sl_si',
-);
-
+final CarbonLocaleData localeSlSi = localeSl.copyWith(localeCode: 'sl_si');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

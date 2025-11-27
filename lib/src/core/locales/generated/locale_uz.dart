@@ -83,24 +83,8 @@ const CarbonLocaleData localeUz = CarbonLocaleData(
     'жума',
     'шанба',
   ],
-  weekdaysShort: [
-    'якш',
-    'душ',
-    'сеш',
-    'чор',
-    'пай',
-    'жум',
-    'шан',
-  ],
-  weekdaysMin: [
-    'як',
-    'ду',
-    'се',
-    'чо',
-    'па',
-    'жу',
-    'ша',
-  ],
+  weekdaysShort: ['якш', 'душ', 'сеш', 'чор', 'пай', 'жум', 'шан'],
+  weekdaysMin: ['як', 'ду', 'се', 'чо', 'па', 'жу', 'ша'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -127,24 +111,8 @@ final CarbonLocaleData localeUzArab = localeUz.copyWith(
     'جمعه',
     'شنبه',
   ],
-  weekdaysShort: [
-    'ی.',
-    'د.',
-    'س.',
-    'چ.',
-    'پ.',
-    'ج.',
-    'ش.',
-  ],
-  weekdaysMin: [
-    'ی.',
-    'د.',
-    'س.',
-    'چ.',
-    'پ.',
-    'ج.',
-    'ش.',
-  ],
+  weekdaysShort: ['ی.', 'د.', 'س.', 'چ.', 'پ.', 'ج.', 'ش.'],
+  weekdaysMin: ['ی.', 'د.', 'س.', 'چ.', 'پ.', 'ج.', 'ش.'],
   months: [
     'جنوری',
     'فبروری',
@@ -185,9 +153,7 @@ final CarbonLocaleData localeUzArab = localeUz.copyWith(
 );
 
 // Regional variant: uz_Cyrl
-final CarbonLocaleData localeUzCyrl = localeUz.copyWith(
-  localeCode: 'uz_cyrl',
-);
+final CarbonLocaleData localeUzCyrl = localeUz.copyWith(localeCode: 'uz_cyrl');
 
 // Regional variant: uz_Latn
 final CarbonLocaleData localeUzLatn = localeUz.copyWith(
@@ -201,24 +167,8 @@ final CarbonLocaleData localeUzLatn = localeUz.copyWith(
     'Juma',
     'Shanba',
   ],
-  weekdaysShort: [
-    'Yak',
-    'Dush',
-    'Sesh',
-    'Chor',
-    'Pay',
-    'Jum',
-    'Shan',
-  ],
-  weekdaysMin: [
-    'Ya',
-    'Du',
-    'Se',
-    'Cho',
-    'Pa',
-    'Ju',
-    'Sha',
-  ],
+  weekdaysShort: ['Yak', 'Dush', 'Sesh', 'Chor', 'Pay', 'Jum', 'Shan'],
+  weekdaysMin: ['Ya', 'Du', 'Se', 'Cho', 'Pa', 'Ju', 'Sha'],
   months: [
     'Yanvar',
     'Fevral',
@@ -270,24 +220,8 @@ final CarbonLocaleData localeUzUz = localeUz.copyWith(
     'Juma',
     'Shanba',
   ],
-  weekdaysShort: [
-    'Yak',
-    'Du',
-    'Se',
-    'Cho',
-    'Pay',
-    'Ju',
-    'Sha',
-  ],
-  weekdaysMin: [
-    'Yak',
-    'Du',
-    'Se',
-    'Cho',
-    'Pay',
-    'Ju',
-    'Sha',
-  ],
+  weekdaysShort: ['Yak', 'Du', 'Se', 'Cho', 'Pay', 'Ju', 'Sha'],
+  weekdaysMin: ['Yak', 'Du', 'Se', 'Cho', 'Pay', 'Ju', 'Sha'],
   months: [
     'Yanvar',
     'Fevral',
@@ -339,24 +273,8 @@ final CarbonLocaleData localeUzUzCyrillic = localeUz.copyWith(
     'Жума',
     'Шанба',
   ],
-  weekdaysShort: [
-    'Якш',
-    'Душ',
-    'Сеш',
-    'Чор',
-    'Пай',
-    'Жум',
-    'Шан',
-  ],
-  weekdaysMin: [
-    'Якш',
-    'Душ',
-    'Сеш',
-    'Чор',
-    'Пай',
-    'Жум',
-    'Шан',
-  ],
+  weekdaysShort: ['Якш', 'Душ', 'Сеш', 'Чор', 'Пай', 'Жум', 'Шан'],
+  weekdaysMin: ['Якш', 'Душ', 'Сеш', 'Чор', 'Пай', 'Жум', 'Шан'],
   months: [
     'Январ',
     'Феврал',
@@ -386,7 +304,6 @@ final CarbonLocaleData localeUzUzCyrillic = localeUz.copyWith(
     'Дек',
   ],
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

@@ -27,11 +27,15 @@ const CarbonLocaleData localeLzh = CarbonLocaleData(
     'second': ':count 楚',
     'a_second': ':count 楚',
     's': ':count 楚',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeLzh = CarbonLocaleData(
     '十一',
     '十二',
   ],
-  weekdays: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
-  weekdaysShort: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
-  weekdaysMin: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
+  weekdays: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
+  weekdaysShort: ['日', '一', '二', '三', '四', '五', '六'],
+  weekdaysMin: ['日', '一', '二', '三', '四', '五', '六'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,16 +111,13 @@ const CarbonLocaleData localeLzh = CarbonLocaleData(
 );
 
 // Regional variant: lzh_TW
-final CarbonLocaleData localeLzhTw = localeLzh.copyWith(
-  localeCode: 'lzh_tw',
-);
-
+final CarbonLocaleData localeLzhTw = localeLzh.copyWith(localeCode: 'lzh_tw');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

@@ -70,24 +70,8 @@ const CarbonLocaleData localeGom = CarbonLocaleData(
     'Sukrar',
     'Son\'var',
   ],
-  weekdaysShort: [
-    'Ait.',
-    'Som.',
-    'Mon.',
-    'Bud.',
-    'Bre.',
-    'Suk.',
-    'Son.',
-  ],
-  weekdaysMin: [
-    'Ai',
-    'Sm',
-    'Mo',
-    'Bu',
-    'Br',
-    'Su',
-    'Sn',
-  ],
+  weekdaysShort: ['Ait.', 'Som.', 'Mon.', 'Bud.', 'Bre.', 'Suk.', 'Son.'],
+  weekdaysMin: ['Ai', 'Sm', 'Mo', 'Bu', 'Br', 'Su', 'Sn'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -108,25 +92,24 @@ final CarbonLocaleData localeGomLatn = localeGom.copyWith(
   localeCode: 'gom_latn',
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(period == 'D' ? 'er' : '')}';
+  return '$number${(period == 'D' ? 'er' : '')}';
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'rati';
-    }
-    if (hour < 12) {
-      return 'sokalli';
-    }
-    if (hour < 16) {
-      return 'donparam';
-    }
-    if (hour < 20) {
-      return 'sanje';
-    }
+  if (hour < 4) {
     return 'rati';
+  }
+  if (hour < 12) {
+    return 'sokalli';
+  }
+  if (hour < 16) {
+    return 'donparam';
+  }
+  if (hour < 20) {
+    return 'sanje';
+  }
+  return 'rati';
 }

@@ -66,24 +66,8 @@ const CarbonLocaleData localeUg = CarbonLocaleData(
     'جۈمە',
     'شەنبە',
   ],
-  weekdaysShort: [
-    'يە',
-    'دۈ',
-    'سە',
-    'چا',
-    'پە',
-    'جۈ',
-    'شە',
-  ],
-  weekdaysMin: [
-    'يە',
-    'دۈ',
-    'سە',
-    'چا',
-    'پە',
-    'جۈ',
-    'شە',
-  ],
+  weekdaysShort: ['يە', 'دۈ', 'سە', 'چا', 'پە', 'جۈ', 'شە'],
+  weekdaysMin: ['يە', 'دۈ', 'سە', 'چا', 'پە', 'جۈ', 'شە'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -100,34 +84,34 @@ const CarbonLocaleData localeUg = CarbonLocaleData(
 );
 
 // Regional variant: ug_CN
-final CarbonLocaleData localeUgCn = localeUg.copyWith(
-  localeCode: 'ug_cn',
-);
-
+final CarbonLocaleData localeUgCn = localeUg.copyWith(localeCode: 'ug_cn');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number-كۈنى' : (period == 'w' || period == 'W' ? '$number-ھەپتە' : number))).toString();
+  return ((period == 'd' || period == 'D' || period == 'DDD'
+          ? '$number-كۈنى'
+          : (period == 'w' || period == 'W' ? '$number-ھەپتە' : number)))
+      .toString();
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
   num time;
   time = hour * 100 + minute;
-    if (time < 600) {
-      return 'يېرىم كېچە';
-    }
-    if (time < 900) {
-      return 'سەھەر';
-    }
-    if (time < 1130) {
-      return 'چۈشتىن بۇرۇن';
-    }
-    if (time < 1230) {
-      return 'چۈش';
-    }
-    if (time < 1800) {
-      return 'چۈشتىن كېيىن';
-    }
-    return 'كەچ';
+  if (time < 600) {
+    return 'يېرىم كېچە';
+  }
+  if (time < 900) {
+    return 'سەھەر';
+  }
+  if (time < 1130) {
+    return 'چۈشتىن بۇرۇن';
+  }
+  if (time < 1230) {
+    return 'چۈش';
+  }
+  if (time < 1800) {
+    return 'چۈشتىن كېيىن';
+  }
+  return 'كەچ';
 }

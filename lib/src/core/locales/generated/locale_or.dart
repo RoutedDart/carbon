@@ -71,24 +71,8 @@ const CarbonLocaleData localeOr = CarbonLocaleData(
     'ଶୁକ୍ରବାର',
     'ଶନିବାର',
   ],
-  weekdaysShort: [
-    'ରବି',
-    'ସୋମ',
-    'ମଙ୍ଗଳ',
-    'ବୁଧ',
-    'ଗୁରୁ',
-    'ଶୁକ୍ର',
-    'ଶନି',
-  ],
-  weekdaysMin: [
-    'ରବି',
-    'ସୋମ',
-    'ମଙ୍ଗଳ',
-    'ବୁଧ',
-    'ଗୁରୁ',
-    'ଶୁକ୍ର',
-    'ଶନି',
-  ],
+  weekdaysShort: ['ରବି', 'ସୋମ', 'ମଙ୍ଗଳ', 'ବୁଧ', 'ଗୁରୁ', 'ଶୁକ୍ର', 'ଶନି'],
+  weekdaysMin: ['ରବି', 'ସୋମ', 'ମଙ୍ଗଳ', 'ବୁଧ', 'ଗୁରୁ', 'ଶୁକ୍ର', 'ଶନି'],
   dayOfFirstWeekOfYear: 1,
   calendar: {
     'sameDay': '[Today at] LT',
@@ -101,7 +85,4 @@ const CarbonLocaleData localeOr = CarbonLocaleData(
 );
 
 // Regional variant: or_IN
-final CarbonLocaleData localeOrIn = localeOr.copyWith(
-  localeCode: 'or_in',
-);
-
+final CarbonLocaleData localeOrIn = localeOr.copyWith(localeCode: 'or_in');

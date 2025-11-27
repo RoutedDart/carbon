@@ -27,11 +27,15 @@ const CarbonLocaleData localeDua = CarbonLocaleData(
     'second': ':count maba',
     'a_second': ':count maba',
     's': ':count maba',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeDua = CarbonLocaleData(
     'tin',
     'elá',
   ],
-  weekdays: [
-    'éti',
-    'mɔ́sú',
-    'kwasú',
-    'mukɔ́sú',
-    'ŋgisú',
-    'ɗónɛsú',
-    'esaɓasú',
-  ],
-  weekdaysShort: [
-    'ét',
-    'mɔ́s',
-    'kwa',
-    'muk',
-    'ŋgi',
-    'ɗón',
-    'esa',
-  ],
-  weekdaysMin: [
-    'ét',
-    'mɔ́s',
-    'kwa',
-    'muk',
-    'ŋgi',
-    'ɗón',
-    'esa',
-  ],
+  weekdays: ['éti', 'mɔ́sú', 'kwasú', 'mukɔ́sú', 'ŋgisú', 'ɗónɛsú', 'esaɓasú'],
+  weekdaysShort: ['ét', 'mɔ́s', 'kwa', 'muk', 'ŋgi', 'ɗón', 'esa'],
+  weekdaysMin: ['ét', 'mɔ́s', 'kwa', 'muk', 'ŋgi', 'ɗón', 'esa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -130,12 +110,11 @@ const CarbonLocaleData localeDua = CarbonLocaleData(
   },
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

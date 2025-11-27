@@ -67,24 +67,8 @@ const CarbonLocaleData localeTg = CarbonLocaleData(
     'ҷумъа',
     'шанбе',
   ],
-  weekdaysShort: [
-    'яшб',
-    'дшб',
-    'сшб',
-    'чшб',
-    'пшб',
-    'ҷум',
-    'шнб',
-  ],
-  weekdaysMin: [
-    'яш',
-    'дш',
-    'сш',
-    'чш',
-    'пш',
-    'ҷм',
-    'шб',
-  ],
+  weekdaysShort: ['яшб', 'дшб', 'сшб', 'чшб', 'пшб', 'ҷум', 'шнб'],
+  weekdaysMin: ['яш', 'дш', 'сш', 'чш', 'пш', 'ҷм', 'шб'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -101,33 +85,53 @@ const CarbonLocaleData localeTg = CarbonLocaleData(
 );
 
 // Regional variant: tg_TJ
-final CarbonLocaleData localeTgTj = localeTg.copyWith(
-  localeCode: 'tg_tj',
-);
-
+final CarbonLocaleData localeTgTj = localeTg.copyWith(localeCode: 'tg_tj');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    if (number == 0) {
-      return '$number-ıncı';
-    }
-  var suffixes = {0: '-ум', 1: '-ум', 2: '-юм', 3: '-юм', 4: '-ум', 5: '-ум', 6: '-ум', 7: '-ум', 8: '-ум', 9: '-ум', 10: '-ум', 12: '-ум', 13: '-ум', 20: '-ум', 30: '-юм', 40: '-ум', 50: '-ум', 60: '-ум', 70: '-ум', 80: '-ум', 90: '-ум', 100: '-ум'};
-    return '$number${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+  if (number == 0) {
+    return '$number-ıncı';
+  }
+  var suffixes = {
+    0: '-ум',
+    1: '-ум',
+    2: '-юм',
+    3: '-юм',
+    4: '-ум',
+    5: '-ум',
+    6: '-ум',
+    7: '-ум',
+    8: '-ум',
+    9: '-ум',
+    10: '-ум',
+    12: '-ум',
+    13: '-ум',
+    20: '-ум',
+    30: '-юм',
+    40: '-ум',
+    50: '-ум',
+    60: '-ум',
+    70: '-ум',
+    80: '-ум',
+    90: '-ум',
+    100: '-ум',
+  };
+  return '$number${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'шаб';
-    }
-    if (hour < 11) {
-      return 'субҳ';
-    }
-    if (hour < 16) {
-      return 'рӯз';
-    }
-    if (hour < 19) {
-      return 'бегоҳ';
-    }
+  if (hour < 4) {
     return 'шаб';
+  }
+  if (hour < 11) {
+    return 'субҳ';
+  }
+  if (hour < 16) {
+    return 'рӯз';
+  }
+  if (hour < 19) {
+    return 'бегоҳ';
+  }
+  return 'шаб';
 }

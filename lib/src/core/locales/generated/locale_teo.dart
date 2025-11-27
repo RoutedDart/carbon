@@ -81,24 +81,8 @@ const CarbonLocaleData localeTeo = CarbonLocaleData(
     'Nakakany',
     'Nakasabiti',
   ],
-  weekdaysShort: [
-    'Jum',
-    'Bar',
-    'Aar',
-    'Uni',
-    'Ung',
-    'Kan',
-    'Sab',
-  ],
-  weekdaysMin: [
-    'Jum',
-    'Bar',
-    'Aar',
-    'Uni',
-    'Ung',
-    'Kan',
-    'Sab',
-  ],
+  weekdaysShort: ['Jum', 'Bar', 'Aar', 'Uni', 'Ung', 'Kan', 'Sab'],
+  weekdaysMin: ['Jum', 'Bar', 'Aar', 'Uni', 'Ung', 'Kan', 'Sab'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -114,10 +98,7 @@ const CarbonLocaleData localeTeo = CarbonLocaleData(
 );
 
 // Regional variant: teo_KE
-final CarbonLocaleData localeTeoKe = localeTeo.copyWith(
-  localeCode: 'teo_ke',
-);
-
+final CarbonLocaleData localeTeoKe = localeTeo.copyWith(localeCode: 'teo_ke');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

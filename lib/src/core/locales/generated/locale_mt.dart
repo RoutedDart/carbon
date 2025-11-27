@@ -75,24 +75,8 @@ const CarbonLocaleData localeMt = CarbonLocaleData(
     'Il-Ġimgħa',
     'Is-Sibt',
   ],
-  weekdaysShort: [
-    'Ħad',
-    'Tne',
-    'Tli',
-    'Erb',
-    'Ħam',
-    'Ġim',
-    'Sib',
-  ],
-  weekdaysMin: [
-    'Ħa',
-    'Tn',
-    'Tl',
-    'Er',
-    'Ħa',
-    'Ġi',
-    'Si',
-  ],
+  weekdaysShort: ['Ħad', 'Tne', 'Tli', 'Erb', 'Ħam', 'Ġim', 'Sib'],
+  weekdaysMin: ['Ħa', 'Tn', 'Tl', 'Er', 'Ħa', 'Ġi', 'Si'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -107,7 +91,4 @@ const CarbonLocaleData localeMt = CarbonLocaleData(
 );
 
 // Regional variant: mt_MT
-final CarbonLocaleData localeMtMt = localeMt.copyWith(
-  localeCode: 'mt_mt',
-);
-
+final CarbonLocaleData localeMtMt = localeMt.copyWith(localeCode: 'mt_mt');

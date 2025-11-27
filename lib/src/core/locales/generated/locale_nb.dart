@@ -90,24 +90,8 @@ const CarbonLocaleData localeNb = CarbonLocaleData(
     'fredag',
     'lørdag',
   ],
-  weekdaysShort: [
-    'søn',
-    'man',
-    'tir',
-    'ons',
-    'tor',
-    'fre',
-    'lør',
-  ],
-  weekdaysMin: [
-    'sø',
-    'ma',
-    'ti',
-    'on',
-    'to',
-    'fr',
-    'lø',
-  ],
+  weekdaysShort: ['søn', 'man', 'tir', 'ons', 'tor', 'fre', 'lør'],
+  weekdaysMin: ['sø', 'ma', 'ti', 'on', 'to', 'fr', 'lø'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -127,15 +111,10 @@ const CarbonLocaleData localeNb = CarbonLocaleData(
 );
 
 // Regional variant: nb_NO
-final CarbonLocaleData localeNbNo = localeNb.copyWith(
-  localeCode: 'nb_no',
-);
+final CarbonLocaleData localeNbNo = localeNb.copyWith(localeCode: 'nb_no');
 
 // Regional variant: nb_SJ
-final CarbonLocaleData localeNbSj = localeNb.copyWith(
-  localeCode: 'nb_sj',
-);
-
+final CarbonLocaleData localeNbSj = localeNb.copyWith(localeCode: 'nb_sj');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

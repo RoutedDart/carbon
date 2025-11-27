@@ -84,24 +84,8 @@ const CarbonLocaleData localeMk = CarbonLocaleData(
     'петок',
     'сабота',
   ],
-  weekdaysShort: [
-    'нед',
-    'пон',
-    'вто',
-    'сре',
-    'чет',
-    'пет',
-    'саб',
-  ],
-  weekdaysMin: [
-    'нe',
-    'пo',
-    'вт',
-    'ср',
-    'че',
-    'пе',
-    'сa',
-  ],
+  weekdaysShort: ['нед', 'пон', 'вто', 'сре', 'чет', 'пет', 'саб'],
+  weekdaysMin: ['нe', 'пo', 'вт', 'ср', 'че', 'пе', 'сa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -117,10 +101,7 @@ const CarbonLocaleData localeMk = CarbonLocaleData(
 );
 
 // Regional variant: mk_MK
-final CarbonLocaleData localeMkMk = localeMk.copyWith(
-  localeCode: 'mk_mk',
-);
-
+final CarbonLocaleData localeMkMk = localeMk.copyWith(localeCode: 'mk_mk');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
@@ -128,25 +109,25 @@ String _ordinal(int number, String period) {
   int last2Digits;
   lastDigit = number % 10;
   last2Digits = number % 100;
-    if (number == 0) {
-      return '$number-ев';
-    }
-    if (last2Digits == 0) {
-      return '$number-ен';
-    }
-    if (last2Digits > 10 && last2Digits < 20) {
-      return '$number-ти';
-    }
-    if (lastDigit == 1) {
-      return '$number-ви';
-    }
-    if (lastDigit == 2) {
-      return '$number-ри';
-    }
-    if (lastDigit == 7 || lastDigit == 8) {
-      return '$number-ми';
-    }
+  if (number == 0) {
+    return '$number-ев';
+  }
+  if (last2Digits == 0) {
+    return '$number-ен';
+  }
+  if (last2Digits > 10 && last2Digits < 20) {
     return '$number-ти';
+  }
+  if (lastDigit == 1) {
+    return '$number-ви';
+  }
+  if (lastDigit == 2) {
+    return '$number-ри';
+  }
+  if (lastDigit == 7 || lastDigit == 8) {
+    return '$number-ми';
+  }
+  return '$number-ти';
 }
 
 // Auto-generated meridiem function from array

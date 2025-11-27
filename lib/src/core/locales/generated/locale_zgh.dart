@@ -90,24 +90,8 @@ const CarbonLocaleData localeZgh = CarbonLocaleData(
     'ⵓⵙⵉⵎⵡⴰⵙ',
     'ⵓⵙⵉⴹⵢⴰⵙ',
   ],
-  weekdaysShort: [
-    'ⵓⵙⴰ',
-    'ⵡⴰⵢ',
-    'ⵓⵙⵉ',
-    'ⵡⴰⴽ',
-    'ⵓⴽⵡ',
-    'ⵓⵙⵉⵎ',
-    'ⵓⵙⵉⴹ',
-  ],
-  weekdaysMin: [
-    'ⵓⵙⴰ',
-    'ⵡⴰⵢ',
-    'ⵓⵙⵉ',
-    'ⵡⴰⴽ',
-    'ⵓⴽⵡ',
-    'ⵓⵙⵉⵎ',
-    'ⵓⵙⵉⴹ',
-  ],
+  weekdaysShort: ['ⵓⵙⴰ', 'ⵡⴰⵢ', 'ⵓⵙⵉ', 'ⵡⴰⴽ', 'ⵓⴽⵡ', 'ⵓⵙⵉⵎ', 'ⵓⵙⵉⴹ'],
+  weekdaysMin: ['ⵓⵙⴰ', 'ⵡⴰⵢ', 'ⵓⵙⵉ', 'ⵡⴰⴽ', 'ⵓⴽⵡ', 'ⵓⵙⵉⵎ', 'ⵓⵙⵉⴹ'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -125,7 +109,6 @@ const CarbonLocaleData localeZgh = CarbonLocaleData(
   periodEndDate: 'ⵉ :date',
   meridiem: _meridiem,
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

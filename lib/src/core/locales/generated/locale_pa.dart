@@ -67,24 +67,8 @@ const CarbonLocaleData localePa = CarbonLocaleData(
     'ਸ਼ੁੱਕਰਵਾਰ',
     'ਸ਼ਨੀਚਰਵਾਰ',
   ],
-  weekdaysShort: [
-    'ਐਤ',
-    'ਸੋਮ',
-    'ਮੰਗਲ',
-    'ਬੁਧ',
-    'ਵੀਰ',
-    'ਸ਼ੁਕਰ',
-    'ਸ਼ਨੀ',
-  ],
-  weekdaysMin: [
-    'ਐਤ',
-    'ਸੋਮ',
-    'ਮੰਗਲ',
-    'ਬੁਧ',
-    'ਵੀਰ',
-    'ਸ਼ੁਕਰ',
-    'ਸ਼ਨੀ',
-  ],
+  weekdaysShort: ['ਐਤ', 'ਸੋਮ', 'ਮੰਗਲ', 'ਬੁਧ', 'ਵੀਰ', 'ਸ਼ੁਕਰ', 'ਸ਼ਨੀ'],
+  weekdaysMin: ['ਐਤ', 'ਸੋਮ', 'ਮੰਗਲ', 'ਬੁਧ', 'ਵੀਰ', 'ਸ਼ੁਕਰ', 'ਸ਼ਨੀ'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -102,33 +86,9 @@ const CarbonLocaleData localePa = CarbonLocaleData(
 // Regional variant: pa_Arab
 final CarbonLocaleData localePaArab = localePa.copyWith(
   localeCode: 'pa_arab',
-  weekdays: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بُدھ',
-    'جمعرات',
-    'جمعہ',
-    'ہفتہ',
-  ],
-  weekdaysShort: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بُدھ',
-    'جمعرات',
-    'جمعہ',
-    'ہفتہ',
-  ],
-  weekdaysMin: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بُدھ',
-    'جمعرات',
-    'جمعہ',
-    'ہفتہ',
-  ],
+  weekdays: ['اتوار', 'پیر', 'منگل', 'بُدھ', 'جمعرات', 'جمعہ', 'ہفتہ'],
+  weekdaysShort: ['اتوار', 'پیر', 'منگل', 'بُدھ', 'جمعرات', 'جمعہ', 'ہفتہ'],
+  weekdaysMin: ['اتوار', 'پیر', 'منگل', 'بُدھ', 'جمعرات', 'جمعہ', 'ہفتہ'],
   months: [
     'جنوری',
     'فروری',
@@ -180,24 +140,8 @@ final CarbonLocaleData localePaGuru = localePa.copyWith(
     'ਸ਼ੁੱਕਰਵਾਰ',
     'ਸ਼ਨਿੱਚਰਵਾਰ',
   ],
-  weekdaysShort: [
-    'ਐਤ',
-    'ਸੋਮ',
-    'ਮੰਗਲ',
-    'ਬੁੱਧ',
-    'ਵੀਰ',
-    'ਸ਼ੁੱਕਰ',
-    'ਸ਼ਨਿੱਚਰ',
-  ],
-  weekdaysMin: [
-    'ਐਤ',
-    'ਸੋਮ',
-    'ਮੰਗ',
-    'ਬੁੱਧ',
-    'ਵੀਰ',
-    'ਸ਼ੁੱਕ',
-    'ਸ਼ਨਿੱ',
-  ],
+  weekdaysShort: ['ਐਤ', 'ਸੋਮ', 'ਮੰਗਲ', 'ਬੁੱਧ', 'ਵੀਰ', 'ਸ਼ੁੱਕਰ', 'ਸ਼ਨਿੱਚਰ'],
+  weekdaysMin: ['ਐਤ', 'ਸੋਮ', 'ਮੰਗ', 'ਬੁੱਧ', 'ਵੀਰ', 'ਸ਼ੁੱਕ', 'ਸ਼ਨਿੱ'],
   monthsShort: [
     'ਜਨ',
     'ਫ਼ਰ',
@@ -215,40 +159,14 @@ final CarbonLocaleData localePaGuru = localePa.copyWith(
 );
 
 // Regional variant: pa_IN
-final CarbonLocaleData localePaIn = localePa.copyWith(
-  localeCode: 'pa_in',
-);
+final CarbonLocaleData localePaIn = localePa.copyWith(localeCode: 'pa_in');
 
 // Regional variant: pa_PK
 final CarbonLocaleData localePaPk = localePa.copyWith(
   localeCode: 'pa_pk',
-  weekdays: [
-    'اتوار',
-    'پير',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعه',
-    'هفته',
-  ],
-  weekdaysShort: [
-    'اتوار',
-    'پير',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعه',
-    'هفته',
-  ],
-  weekdaysMin: [
-    'اتوار',
-    'پير',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعه',
-    'هفته',
-  ],
+  weekdays: ['اتوار', 'پير', 'منگل', 'بدھ', 'جمعرات', 'جمعه', 'هفته'],
+  weekdaysShort: ['اتوار', 'پير', 'منگل', 'بدھ', 'جمعرات', 'جمعه', 'هفته'],
+  weekdaysMin: ['اتوار', 'پير', 'منگل', 'بدھ', 'جمعرات', 'جمعه', 'هفته'],
   months: [
     'جنوري',
     'فروري',
@@ -284,20 +202,19 @@ final CarbonLocaleData localePaPk = localePa.copyWith(
   periodEndDate: 'to :date',
 );
 
-
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'ਰਾਤ';
-    }
-    if (hour < 10) {
-      return 'ਸਵੇਰ';
-    }
-    if (hour < 17) {
-      return 'ਦੁਪਹਿਰ';
-    }
-    if (hour < 20) {
-      return 'ਸ਼ਾਮ';
-    }
+  if (hour < 4) {
     return 'ਰਾਤ';
+  }
+  if (hour < 10) {
+    return 'ਸਵੇਰ';
+  }
+  if (hour < 17) {
+    return 'ਦੁਪਹਿਰ';
+  }
+  if (hour < 20) {
+    return 'ਸ਼ਾਮ';
+  }
+  return 'ਰਾਤ';
 }

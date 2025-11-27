@@ -27,11 +27,15 @@ const CarbonLocaleData localeAa = CarbonLocaleData(
     'second': '{1}:count second|{0}:count seconds|[-Inf,Inf]:count seconds',
     'a_second': '{0,1}a few seconds|[-Inf,Inf]:count seconds',
     's': ':counts',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -93,24 +97,8 @@ const CarbonLocaleData localeAa = CarbonLocaleData(
     'Gumqata',
     'Sabti',
   ],
-  weekdaysShort: [
-    'aca',
-    'etl',
-    'tal',
-    'arb',
-    'kam',
-    'gum',
-    'sab',
-  ],
-  weekdaysMin: [
-    'aca',
-    'etl',
-    'tal',
-    'arb',
-    'kam',
-    'gum',
-    'sab',
-  ],
+  weekdaysShort: ['aca', 'etl', 'tal', 'arb', 'kam', 'gum', 'sab'],
+  weekdaysMin: ['aca', 'etl', 'tal', 'arb', 'kam', 'gum', 'sab'],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,31 +119,13 @@ const CarbonLocaleData localeAa = CarbonLocaleData(
 );
 
 // Regional variant: aa_DJ
-final CarbonLocaleData localeAaDj = localeAa.copyWith(
-  localeCode: 'aa_dj',
-);
+final CarbonLocaleData localeAaDj = localeAa.copyWith(localeCode: 'aa_dj');
 
 // Regional variant: aa_ER
 final CarbonLocaleData localeAaEr = localeAa.copyWith(
   localeCode: 'aa_er',
-  weekdaysShort: [
-    'Aca',
-    'Etl',
-    'Tal',
-    'Arb',
-    'Kam',
-    'Gum',
-    'Sab',
-  ],
-  weekdaysMin: [
-    'Aca',
-    'Etl',
-    'Tal',
-    'Arb',
-    'Kam',
-    'Gum',
-    'Sab',
-  ],
+  weekdaysShort: ['Aca', 'Etl', 'Tal', 'Arb', 'Kam', 'Gum', 'Sab'],
+  weekdaysMin: ['Aca', 'Etl', 'Tal', 'Arb', 'Kam', 'Gum', 'Sab'],
   months: [
     'Qunxa Garablu',
     'Naharsi Kudo',
@@ -198,24 +168,8 @@ final CarbonLocaleData localeAaErSaaho = localeAa.copyWith(
     'Jumqata',
     'Qunxa Sambat',
   ],
-  weekdaysShort: [
-    'Nab',
-    'San',
-    'Sal',
-    'Rab',
-    'Cam',
-    'Jum',
-    'Qun',
-  ],
-  weekdaysMin: [
-    'Nab',
-    'San',
-    'Sal',
-    'Rab',
-    'Cam',
-    'Jum',
-    'Qun',
-  ],
+  weekdaysShort: ['Nab', 'San', 'Sal', 'Rab', 'Cam', 'Jum', 'Qun'],
+  weekdaysMin: ['Nab', 'San', 'Sal', 'Rab', 'Cam', 'Jum', 'Qun'],
   months: [
     'Qunxa Garablu',
     'Naharsi Kudo',
@@ -249,24 +203,8 @@ final CarbonLocaleData localeAaErSaaho = localeAa.copyWith(
 // Regional variant: aa_ET
 final CarbonLocaleData localeAaEt = localeAa.copyWith(
   localeCode: 'aa_et',
-  weekdaysShort: [
-    'Aca',
-    'Etl',
-    'Tal',
-    'Arb',
-    'Kam',
-    'Gum',
-    'Sab',
-  ],
-  weekdaysMin: [
-    'Aca',
-    'Etl',
-    'Tal',
-    'Arb',
-    'Kam',
-    'Gum',
-    'Sab',
-  ],
+  weekdaysShort: ['Aca', 'Etl', 'Tal', 'Arb', 'Kam', 'Gum', 'Sab'],
+  weekdaysMin: ['Aca', 'Etl', 'Tal', 'Arb', 'Kam', 'Gum', 'Sab'],
   monthsShort: [
     'Qun',
     'Kud',
@@ -283,12 +221,11 @@ final CarbonLocaleData localeAaEt = localeAa.copyWith(
   ],
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

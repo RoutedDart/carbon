@@ -9,7 +9,7 @@ part of '../carbon.dart';
 
 /// Iterable range produced by Carbon's `range*` helpers.
 ///
-/// Periods mirror the PHP Carbon period object: [start] and [end] describe the
+/// [start] and [end] describe the
 /// inclusive bounds and iterating returns every intermediate `Carbon`.
 class CarbonPeriod extends Iterable<Carbon> {
   static final Map<String, CarbonMacro> _macros = <String, CarbonMacro>{};
@@ -32,11 +32,17 @@ class CarbonPeriod extends Iterable<Carbon> {
   /// Gets the fallback locale for the default locale.
   static String? getFallbackLocale() => CarbonTranslator.getFallbackLocale();
 
-  CarbonPeriod._(this._instances, {int? recurrences, String? locale, CarbonInterval? interval, bool? explicitlyLimited})
-    : _recurrencesLimit = recurrences ?? _instances.length,
-      _locale = locale ?? CarbonBase.defaultLocale,
-      _interval = interval,
-      _recurrencesExplicitlyLimited = explicitlyLimited ?? (recurrences != null);
+  CarbonPeriod._(
+    this._instances, {
+    int? recurrences,
+    String? locale,
+    CarbonInterval? interval,
+    bool? explicitlyLimited,
+  }) : _recurrencesLimit = recurrences ?? _instances.length,
+       _locale = locale ?? CarbonBase.defaultLocale,
+       _interval = interval,
+       _recurrencesExplicitlyLimited =
+           explicitlyLimited ?? (recurrences != null);
 
   /// Invokes a registered macro by [name] for this period.
   dynamic carbon(
@@ -69,12 +75,12 @@ class CarbonPeriod extends Iterable<Carbon> {
 
   /// Creates a new CarbonPeriod with the specified locale.
   CarbonPeriod locale(String locale) => CarbonPeriod._(
-        _instances,
-        recurrences: _recurrencesLimit,
-        locale: locale,
-        interval: _interval,
-        explicitlyLimited: _recurrencesExplicitlyLimited,
-      );
+    _instances,
+    recurrences: _recurrencesLimit,
+    locale: locale,
+    interval: _interval,
+    explicitlyLimited: _recurrencesExplicitlyLimited,
+  );
 
   @override
   bool get isEmpty => _instances.isEmpty;
@@ -104,7 +110,13 @@ class CarbonPeriod extends Iterable<Carbon> {
       throw ArgumentError.value(count, 'count', 'must be positive');
     }
     final truncated = _instances.take(count).toList();
-    return CarbonPeriod._(truncated, recurrences: count, locale: _locale, interval: _interval, explicitlyLimited: true);
+    return CarbonPeriod._(
+      truncated,
+      recurrences: count,
+      locale: _locale,
+      interval: _interval,
+      explicitlyLimited: true,
+    );
   }
 
   /// Alias for [recurrences].
@@ -114,7 +126,13 @@ class CarbonPeriod extends Iterable<Carbon> {
   CarbonPeriod filter(bool Function(Carbon) predicate) {
     final filtered = _instances.where(predicate).toList();
     final limited = filtered.take(_recurrencesLimit).toList();
-    return CarbonPeriod._(limited, recurrences: _recurrencesLimit, locale: _locale, interval: _interval, explicitlyLimited: _recurrencesExplicitlyLimited);
+    return CarbonPeriod._(
+      limited,
+      recurrences: _recurrencesLimit,
+      locale: _locale,
+      interval: _interval,
+      explicitlyLimited: _recurrencesExplicitlyLimited,
+    );
   }
 
   @override
@@ -152,7 +170,11 @@ class CarbonPeriod extends Iterable<Carbon> {
     // Add interval (don't capitalize if recurrences were added)
     final hasRecurrences = _recurrencesExplicitlyLimited;
     if (_interval != null) {
-      final intervalStr = _formatInterval(localeData, _interval, capitalize: !hasRecurrences);
+      final intervalStr = _formatInterval(
+        localeData,
+        _interval,
+        capitalize: !hasRecurrences,
+      );
       buffer.write(intervalStr);
     }
 
@@ -177,7 +199,7 @@ class CarbonPeriod extends Iterable<Carbon> {
 
     // Handle pluralization patterns like '{1}once|{0}:count times|[-Inf,Inf]:count times'
     final patterns = template.split('|');
-    
+
     // Try explicit conditions first
     for (final part in patterns) {
       final match = RegExp(r'^([\[\]\{].+?[\]\}\}])(.*)$').firstMatch(part);
@@ -200,7 +222,9 @@ class CarbonPeriod extends Iterable<Carbon> {
         var result = patterns[0].replaceAll(RegExp(r'\{1\}'), '');
         return result.replaceAll(':count', count.toString());
       } else {
-        var result = patterns.length > 2 ? patterns[patterns.length - 1] : patterns[1];
+        var result = patterns.length > 2
+            ? patterns[patterns.length - 1]
+            : patterns[1];
         return result.replaceAll(':count', count.toString());
       }
     }
@@ -242,19 +266,23 @@ class CarbonPeriod extends Iterable<Carbon> {
     return false;
   }
 
-  String _formatInterval(CarbonLocaleData localeData, CarbonInterval? interval, {bool capitalize = true}) {
+  String _formatInterval(
+    CarbonLocaleData localeData,
+    CarbonInterval? interval, {
+    bool capitalize = true,
+  }) {
     final template = localeData.periodInterval;
     if (template == null || interval == null) return '';
 
     // Format interval to show numeric count like "1 day" instead of "a day"
     final intervalStr = _formatIntervalForPeriod(interval, _locale);
     var result = template.replaceAll(':interval', intervalStr);
-    
+
     // Capitalize first letter to match PHP's "Every" vs "every" (only at start of string)
     if (capitalize && result.isNotEmpty) {
       result = result[0].toUpperCase() + result.substring(1);
     }
-    
+
     return result;
   }
 
@@ -298,21 +326,29 @@ class CarbonPeriod extends Iterable<Carbon> {
     return '0 seconds';
   }
 
-  String _formatUnitWithCount(String unit, int count, CarbonLocaleData localeData) {
+  String _formatUnitWithCount(
+    String unit,
+    int count,
+    CarbonLocaleData localeData,
+  ) {
     // Use the base unit translation (e.g., 'day' not 'a_day') which has :count placeholder
     // This ensures we get "1 day" format, not "a day" or "un jour"
     final messages = localeData.translationStrings;
     final template = messages[unit];
-    
+
     if (template == null) {
       // Fallback: use translateUnit
-      return CarbonTranslator.translateUnit(unit, count, locale: localeData.localeCode);
+      return CarbonTranslator.translateUnit(
+        unit,
+        count,
+        locale: localeData.localeCode,
+      );
     }
 
     // Parse the pluralization pattern and extract the unit name
     // Templates like: ':count day|:count days' or '{1}:count day|{0}:count days|[-Inf,Inf]:count days'
     final parts = template.split('|');
-    
+
     // Find the right part based on count
     String? selectedPart;
     for (final part in parts) {
@@ -327,7 +363,7 @@ class CarbonPeriod extends Iterable<Carbon> {
         }
       }
     }
-    
+
     // If no condition matched, use implicit rules (singular | plural)
     if (selectedPart == null) {
       if (parts.length > 1) {
@@ -339,7 +375,7 @@ class CarbonPeriod extends Iterable<Carbon> {
 
     // Replace :count with actual count and remove any article prefixes
     var result = selectedPart.replaceAll(':count', count.toString());
-    
+
     // Remove common article patterns at the start (language-agnostic)
     // This handles patterns like "a day", "un jour", etc. by detecting if it doesn't start with a digit
     // and removing word(s) before the unit name
@@ -353,7 +389,7 @@ class CarbonPeriod extends Iterable<Carbon> {
         result = '$count $result';
       }
     }
-    
+
     return result;
   }
 

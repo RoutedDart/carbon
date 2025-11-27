@@ -84,24 +84,8 @@ const CarbonLocaleData localeDa = CarbonLocaleData(
     'fredag',
     'lørdag',
   ],
-  weekdaysShort: [
-    'søn.',
-    'man.',
-    'tir.',
-    'ons.',
-    'tor.',
-    'fre.',
-    'lør.',
-  ],
-  weekdaysMin: [
-    'sø.',
-    'ma.',
-    'ti.',
-    'on.',
-    'to.',
-    'fr.',
-    'lø.',
-  ],
+  weekdaysShort: ['søn.', 'man.', 'tir.', 'ons.', 'tor.', 'fre.', 'lør.'],
+  weekdaysMin: ['sø.', 'ma.', 'ti.', 'on.', 'to.', 'fr.', 'lø.'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -116,12 +100,7 @@ const CarbonLocaleData localeDa = CarbonLocaleData(
 );
 
 // Regional variant: da_DK
-final CarbonLocaleData localeDaDk = localeDa.copyWith(
-  localeCode: 'da_dk',
-);
+final CarbonLocaleData localeDaDk = localeDa.copyWith(localeCode: 'da_dk');
 
 // Regional variant: da_GL
-final CarbonLocaleData localeDaGl = localeDa.copyWith(
-  localeCode: 'da_gl',
-);
-
+final CarbonLocaleData localeDaGl = localeDa.copyWith(localeCode: 'da_gl');

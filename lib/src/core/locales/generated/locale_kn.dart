@@ -72,24 +72,8 @@ const CarbonLocaleData localeKn = CarbonLocaleData(
     'ಶುಕ್ರವಾರ',
     'ಶನಿವಾರ',
   ],
-  weekdaysShort: [
-    'ಭಾನು',
-    'ಸೋಮ',
-    'ಮಂಗಳ',
-    'ಬುಧ',
-    'ಗುರು',
-    'ಶುಕ್ರ',
-    'ಶನಿ',
-  ],
-  weekdaysMin: [
-    'ಭಾ',
-    'ಸೋ',
-    'ಮಂ',
-    'ಬು',
-    'ಗು',
-    'ಶು',
-    'ಶ',
-  ],
+  weekdaysShort: ['ಭಾನು', 'ಸೋಮ', 'ಮಂಗಳ', 'ಬುಧ', 'ಗುರು', 'ಶುಕ್ರ', 'ಶನಿ'],
+  weekdaysMin: ['ಭಾ', 'ಸೋ', 'ಮಂ', 'ಬು', 'ಗು', 'ಶು', 'ಶ'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -104,24 +88,21 @@ const CarbonLocaleData localeKn = CarbonLocaleData(
 );
 
 // Regional variant: kn_IN
-final CarbonLocaleData localeKnIn = localeKn.copyWith(
-  localeCode: 'kn_in',
-);
-
+final CarbonLocaleData localeKnIn = localeKn.copyWith(localeCode: 'kn_in');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'ರಾತ್ರಿ';
-    }
-    if (hour < 10) {
-      return 'ಬೆಳಿಗ್ಗೆ';
-    }
-    if (hour < 17) {
-      return 'ಮಧ್ಯಾಹ್ನ';
-    }
-    if (hour < 20) {
-      return 'ಸಂಜೆ';
-    }
+  if (hour < 4) {
     return 'ರಾತ್ರಿ';
+  }
+  if (hour < 10) {
+    return 'ಬೆಳಿಗ್ಗೆ';
+  }
+  if (hour < 17) {
+    return 'ಮಧ್ಯಾಹ್ನ';
+  }
+  if (hour < 20) {
+    return 'ಸಂಜೆ';
+  }
+  return 'ರಾತ್ರಿ';
 }

@@ -84,24 +84,8 @@ const CarbonLocaleData localeCy = CarbonLocaleData(
     'Dydd Gwener',
     'Dydd Sadwrn',
   ],
-  weekdaysShort: [
-    'Sul',
-    'Llun',
-    'Maw',
-    'Mer',
-    'Iau',
-    'Gwe',
-    'Sad',
-  ],
-  weekdaysMin: [
-    'Su',
-    'Ll',
-    'Ma',
-    'Me',
-    'Ia',
-    'Gw',
-    'Sa',
-  ],
+  weekdaysShort: ['Sul', 'Llun', 'Maw', 'Mer', 'Iau', 'Gwe', 'Sad'],
+  weekdaysMin: ['Su', 'Ll', 'Ma', 'Me', 'Ia', 'Gw', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -118,14 +102,11 @@ const CarbonLocaleData localeCy = CarbonLocaleData(
 );
 
 // Regional variant: cy_GB
-final CarbonLocaleData localeCyGb = localeCy.copyWith(
-  localeCode: 'cy_gb',
-);
-
+final CarbonLocaleData localeCyGb = localeCy.copyWith(localeCode: 'cy_gb');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(number > 20 ? (([40, 50, 60, 80, 100]).contains((number).toInt()) ? 'fed' : 'ain') : ['', 'af', 'il', 'ydd', 'ydd', 'ed', 'ed', 'ed', 'fed', 'fed', 'fed', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'fed'][number])}';
+  return '$number${(number > 20 ? (([40, 50, 60, 80, 100]).contains((number).toInt()) ? 'fed' : 'ain') : ['', 'af', 'il', 'ydd', 'ydd', 'ed', 'ed', 'ed', 'fed', 'fed', 'fed', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'eg', 'fed', 'eg', 'fed'][number])}';
 }
 
 // Auto-generated meridiem function from array

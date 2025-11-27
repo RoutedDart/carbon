@@ -30,11 +30,8 @@ class CarbonInterval {
   /// Gets the fallback locale for the default locale.
   static String? getFallbackLocale() => CarbonTranslator.getFallbackLocale();
 
-  CarbonInterval._({
-    this.monthSpan = 0,
-    this.microseconds = 0,
-    String? locale,
-  }) : _locale = locale ?? CarbonBase.defaultLocale;
+  CarbonInterval._({this.monthSpan = 0, this.microseconds = 0, String? locale})
+    : _locale = locale ?? CarbonBase.defaultLocale;
 
   /// Invokes a registered macro by [name] for this interval.
   dynamic carbon(
@@ -66,10 +63,10 @@ class CarbonInterval {
 
   /// Creates a new CarbonInterval with the specified locale.
   CarbonInterval locale(String locale) => CarbonInterval._(
-        monthSpan: monthSpan,
-        microseconds: microseconds,
-        locale: locale,
-      );
+    monthSpan: monthSpan,
+    microseconds: microseconds,
+    locale: locale,
+  );
 
   /// Total days approximated by treating months as 30 days.
   double get totalDays =>
@@ -199,9 +196,7 @@ class CarbonInterval {
     int parts = -1, // Number of parts to show (default all)
     String joiner = ' ',
   }) {
-    final localeData = CarbonTranslator.matchLocale(
-      locale ?? _locale,
-    );
+    final localeData = CarbonTranslator.matchLocale(locale ?? _locale);
     final code = localeData.localeCode;
 
     // Decompose interval

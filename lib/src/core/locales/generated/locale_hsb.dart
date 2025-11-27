@@ -27,11 +27,15 @@ const CarbonLocaleData localeHsb = CarbonLocaleData(
     'second': ':count druhi',
     'a_second': ':count druhi',
     's': ':count druhi',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -93,24 +97,8 @@ const CarbonLocaleData localeHsb = CarbonLocaleData(
     'Pjatk',
     'Sobota',
   ],
-  weekdaysShort: [
-    'Nj',
-    'Pó',
-    'Wu',
-    'Sr',
-    'Št',
-    'Pj',
-    'So',
-  ],
-  weekdaysMin: [
-    'Nj',
-    'Pó',
-    'Wu',
-    'Sr',
-    'Št',
-    'Pj',
-    'So',
-  ],
+  weekdaysShort: ['Nj', 'Pó', 'Wu', 'Sr', 'Št', 'Pj', 'So'],
+  weekdaysMin: ['Nj', 'Pó', 'Wu', 'Sr', 'Št', 'Pj', 'So'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   listSeparators: [', ', ' and '],
@@ -130,14 +118,11 @@ const CarbonLocaleData localeHsb = CarbonLocaleData(
 );
 
 // Regional variant: hsb_DE
-final CarbonLocaleData localeHsbDe = localeHsb.copyWith(
-  localeCode: 'hsb_de',
-);
-
+final CarbonLocaleData localeHsbDe = localeHsb.copyWith(localeCode: 'hsb_de');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }

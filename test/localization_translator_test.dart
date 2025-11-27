@@ -41,7 +41,10 @@ void main() {
   test('translateTimeString applies replacements', () {
     CarbonTranslator.registerLocale(
       'tt',
-      const CarbonLocaleData(localeCode: 'tt', timeStrings: {'minutes': 'minutos'}),
+      const CarbonLocaleData(
+        localeCode: 'tt',
+        timeStrings: {'minutes': 'minutos'},
+      ),
     );
 
     expect(

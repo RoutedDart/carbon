@@ -72,24 +72,8 @@ const CarbonLocaleData localeMl = CarbonLocaleData(
     'വെള്ളിയാഴ്ച',
     'ശനിയാഴ്ച',
   ],
-  weekdaysShort: [
-    'ഞായർ',
-    'തിങ്കൾ',
-    'ചൊവ്വ',
-    'ബുധൻ',
-    'വ്യാഴം',
-    'വെള്ളി',
-    'ശനി',
-  ],
-  weekdaysMin: [
-    'ഞാ',
-    'തി',
-    'ചൊ',
-    'ബു',
-    'വ്യാ',
-    'വെ',
-    'ശ',
-  ],
+  weekdaysShort: ['ഞായർ', 'തിങ്കൾ', 'ചൊവ്വ', 'ബുധൻ', 'വ്യാഴം', 'വെള്ളി', 'ശനി'],
+  weekdaysMin: ['ഞാ', 'തി', 'ചൊ', 'ബു', 'വ്യാ', 'വെ', 'ശ'],
   calendar: {
     'sameDay': '[ഇന്ന്] LT',
     'nextDay': '[നാളെ] LT',
@@ -102,24 +86,21 @@ const CarbonLocaleData localeMl = CarbonLocaleData(
 );
 
 // Regional variant: ml_IN
-final CarbonLocaleData localeMlIn = localeMl.copyWith(
-  localeCode: 'ml_in',
-);
-
+final CarbonLocaleData localeMlIn = localeMl.copyWith(localeCode: 'ml_in');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'രാത്രി';
-    }
-    if (hour < 12) {
-      return 'രാവിലെ';
-    }
-    if (hour < 17) {
-      return 'ഉച്ച കഴിഞ്ഞ്';
-    }
-    if (hour < 20) {
-      return 'വൈകുന്നേരം';
-    }
+  if (hour < 4) {
     return 'രാത്രി';
+  }
+  if (hour < 12) {
+    return 'രാവിലെ';
+  }
+  if (hour < 17) {
+    return 'ഉച്ച കഴിഞ്ഞ്';
+  }
+  if (hour < 20) {
+    return 'വൈകുന്നേരം';
+  }
+  return 'രാത്രി';
 }

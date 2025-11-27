@@ -81,33 +81,9 @@ const CarbonLocaleData localeMs = CarbonLocaleData(
     'Nov',
     'Dis',
   ],
-  weekdays: [
-    'Ahad',
-    'Isnin',
-    'Selasa',
-    'Rabu',
-    'Khamis',
-    'Jumaat',
-    'Sabtu',
-  ],
-  weekdaysShort: [
-    'Ahd',
-    'Isn',
-    'Sel',
-    'Rab',
-    'Kha',
-    'Jum',
-    'Sab',
-  ],
-  weekdaysMin: [
-    'Ah',
-    'Is',
-    'Sl',
-    'Rb',
-    'Km',
-    'Jm',
-    'Sb',
-  ],
+  weekdays: ['Ahad', 'Isnin', 'Selasa', 'Rabu', 'Khamis', 'Jumaat', 'Sabtu'],
+  weekdaysShort: ['Ahd', 'Isn', 'Sel', 'Rab', 'Kha', 'Jum', 'Sab'],
+  weekdaysMin: ['Ah', 'Is', 'Sl', 'Rb', 'Km', 'Jm', 'Sb'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -123,34 +99,27 @@ const CarbonLocaleData localeMs = CarbonLocaleData(
 );
 
 // Regional variant: ms_BN
-final CarbonLocaleData localeMsBn = localeMs.copyWith(
-  localeCode: 'ms_bn',
-);
+final CarbonLocaleData localeMsBn = localeMs.copyWith(localeCode: 'ms_bn');
 
 // Regional variant: ms_MY
-final CarbonLocaleData localeMsMy = localeMs.copyWith(
-  localeCode: 'ms_my',
-);
+final CarbonLocaleData localeMsMy = localeMs.copyWith(localeCode: 'ms_my');
 
 // Regional variant: ms_SG
-final CarbonLocaleData localeMsSg = localeMs.copyWith(
-  localeCode: 'ms_sg',
-);
-
+final CarbonLocaleData localeMsSg = localeMs.copyWith(localeCode: 'ms_sg');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 1) {
-      return 'tengah malam';
-    }
-    if (hour < 12) {
-      return 'pagi';
-    }
-    if (hour < 13) {
-      return 'tengah hari';
-    }
-    if (hour < 19) {
-      return 'petang';
-    }
-    return 'malam';
+  if (hour < 1) {
+    return 'tengah malam';
+  }
+  if (hour < 12) {
+    return 'pagi';
+  }
+  if (hour < 13) {
+    return 'tengah hari';
+  }
+  if (hour < 19) {
+    return 'petang';
+  }
+  return 'malam';
 }

@@ -95,24 +95,8 @@ const CarbonLocaleData localeHr = CarbonLocaleData(
     'petak',
     'subotu',
   ],
-  weekdaysShort: [
-    'ned.',
-    'pon.',
-    'uto.',
-    'sri.',
-    'čet.',
-    'pet.',
-    'sub.',
-  ],
-  weekdaysMin: [
-    'ne',
-    'po',
-    'ut',
-    'sr',
-    'če',
-    'pe',
-    'su',
-  ],
+  weekdaysShort: ['ned.', 'pon.', 'uto.', 'sri.', 'čet.', 'pet.', 'sub.'],
+  weekdaysMin: ['ne', 'po', 'ut', 'sr', 'če', 'pe', 'su'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -136,24 +120,8 @@ final CarbonLocaleData localeHrBa = localeHr.copyWith(
     'petak',
     'subota',
   ],
-  weekdaysShort: [
-    'ned',
-    'pon',
-    'uto',
-    'sri',
-    'čet',
-    'pet',
-    'sub',
-  ],
-  weekdaysMin: [
-    'ned',
-    'pon',
-    'uto',
-    'sri',
-    'čet',
-    'pet',
-    'sub',
-  ],
+  weekdaysShort: ['ned', 'pon', 'uto', 'sri', 'čet', 'pet', 'sub'],
+  weekdaysMin: ['ned', 'pon', 'uto', 'sri', 'čet', 'pet', 'sub'],
   monthsShort: [
     'sij',
     'velj',
@@ -171,7 +139,4 @@ final CarbonLocaleData localeHrBa = localeHr.copyWith(
 );
 
 // Regional variant: hr_HR
-final CarbonLocaleData localeHrHr = localeHr.copyWith(
-  localeCode: 'hr_hr',
-);
-
+final CarbonLocaleData localeHrHr = localeHr.copyWith(localeCode: 'hr_hr');

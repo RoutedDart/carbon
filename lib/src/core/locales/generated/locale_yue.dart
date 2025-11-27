@@ -66,33 +66,9 @@ const CarbonLocaleData localeYue = CarbonLocaleData(
     '11月',
     '12月',
   ],
-  weekdays: [
-    '星期日',
-    '星期一',
-    '星期二',
-    '星期三',
-    '星期四',
-    '星期五',
-    '星期六',
-  ],
-  weekdaysShort: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
-  weekdaysMin: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
+  weekdays: ['星期日', '星期一', '星期二', '星期三', '星期四', '星期五', '星期六'],
+  weekdaysShort: ['日', '一', '二', '三', '四', '五', '六'],
+  weekdaysMin: ['日', '一', '二', '三', '四', '五', '六'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -108,22 +84,12 @@ const CarbonLocaleData localeYue = CarbonLocaleData(
 );
 
 // Regional variant: yue_HK
-final CarbonLocaleData localeYueHk = localeYue.copyWith(
-  localeCode: 'yue_hk',
-);
+final CarbonLocaleData localeYueHk = localeYue.copyWith(localeCode: 'yue_hk');
 
 // Regional variant: yue_Hans
 final CarbonLocaleData localeYueHans = localeYue.copyWith(
   localeCode: 'yue_hans',
-  weekdaysShort: [
-    '周日',
-    '周一',
-    '周二',
-    '周三',
-    '周四',
-    '周五',
-    '周六',
-  ],
+  weekdaysShort: ['周日', '周一', '周二', '周三', '周四', '周五', '周六'],
   months: [
     '一月',
     '二月',
@@ -151,15 +117,7 @@ final CarbonLocaleData localeYueHans = localeYue.copyWith(
 // Regional variant: yue_Hant
 final CarbonLocaleData localeYueHant = localeYue.copyWith(
   localeCode: 'yue_hant',
-  weekdaysShort: [
-    '週日',
-    '週一',
-    '週二',
-    '週三',
-    '週四',
-    '週五',
-    '週六',
-  ],
+  weekdaysShort: ['週日', '週一', '週二', '週三', '週四', '週五', '週六'],
   months: [
     '一月',
     '二月',
@@ -176,10 +134,14 @@ final CarbonLocaleData localeYueHant = localeYue.copyWith(
   ],
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number日' : (period == 'M' ? '$number月' : (period == 'w' || period == 'W' ? '$number周' : number)))).toString();
+  return ((period == 'd' || period == 'D' || period == 'DDD'
+          ? '$number日'
+          : (period == 'M'
+                ? '$number月'
+                : (period == 'w' || period == 'W' ? '$number周' : number))))
+      .toString();
 }
 
 // Auto-generated meridiem function from array

@@ -90,24 +90,8 @@ const CarbonLocaleData localeNl = CarbonLocaleData(
     'vrijdag',
     'zaterdag',
   ],
-  weekdaysShort: [
-    'zo.',
-    'ma.',
-    'di.',
-    'wo.',
-    'do.',
-    'vr.',
-    'za.',
-  ],
-  weekdaysMin: [
-    'zo',
-    'ma',
-    'di',
-    'wo',
-    'do',
-    'vr',
-    'za',
-  ],
+  weekdaysShort: ['zo.', 'ma.', 'di.', 'wo.', 'do.', 'vr.', 'za.'],
+  weekdaysMin: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -129,60 +113,33 @@ const CarbonLocaleData localeNl = CarbonLocaleData(
 // Regional variant: nl_AW
 final CarbonLocaleData localeNlAw = localeNl.copyWith(
   localeCode: 'nl_aw',
-  weekdaysShort: [
-    'zo',
-    'ma',
-    'di',
-    'wo',
-    'do',
-    'vr',
-    'za',
-  ],
+  weekdaysShort: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
 );
 
 // Regional variant: nl_BE
-final CarbonLocaleData localeNlBe = localeNl.copyWith(
-  localeCode: 'nl_be',
-);
+final CarbonLocaleData localeNlBe = localeNl.copyWith(localeCode: 'nl_be');
 
 // Regional variant: nl_BQ
-final CarbonLocaleData localeNlBq = localeNl.copyWith(
-  localeCode: 'nl_bq',
-);
+final CarbonLocaleData localeNlBq = localeNl.copyWith(localeCode: 'nl_bq');
 
 // Regional variant: nl_CW
-final CarbonLocaleData localeNlCw = localeNl.copyWith(
-  localeCode: 'nl_cw',
-);
+final CarbonLocaleData localeNlCw = localeNl.copyWith(localeCode: 'nl_cw');
 
 // Regional variant: nl_NL
 final CarbonLocaleData localeNlNl = localeNl.copyWith(
   localeCode: 'nl_nl',
-  weekdaysShort: [
-    'zo',
-    'ma',
-    'di',
-    'wo',
-    'do',
-    'vr',
-    'za',
-  ],
+  weekdaysShort: ['zo', 'ma', 'di', 'wo', 'do', 'vr', 'za'],
 );
 
 // Regional variant: nl_SR
-final CarbonLocaleData localeNlSr = localeNl.copyWith(
-  localeCode: 'nl_sr',
-);
+final CarbonLocaleData localeNlSr = localeNl.copyWith(localeCode: 'nl_sr');
 
 // Regional variant: nl_SX
-final CarbonLocaleData localeNlSx = localeNl.copyWith(
-  localeCode: 'nl_sx',
-);
-
+final CarbonLocaleData localeNlSx = localeNl.copyWith(localeCode: 'nl_sx');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+  return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
 }
 
 // Auto-generated meridiem function from array

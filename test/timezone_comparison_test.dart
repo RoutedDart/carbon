@@ -26,7 +26,7 @@ void main() async {
     final offsetMinutes = cityTime.utcOffset;
     final offsetSeconds = offsetMinutes * 60;
     final offsetHours = offsetMinutes / 60;
-    
+
     print('${city['name']}:');
     print('  Time: ${cityTime.format('HH:mm:ss')}');
     print('  Date: ${cityTime.format('MMM dd, yyyy')}');

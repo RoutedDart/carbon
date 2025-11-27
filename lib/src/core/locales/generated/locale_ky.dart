@@ -82,24 +82,8 @@ const CarbonLocaleData localeKy = CarbonLocaleData(
     'Жума',
     'Ишемби',
   ],
-  weekdaysShort: [
-    'Жек',
-    'Дүй',
-    'Шей',
-    'Шар',
-    'Бей',
-    'Жум',
-    'Ише',
-  ],
-  weekdaysMin: [
-    'Жк',
-    'Дй',
-    'Шй',
-    'Шр',
-    'Бй',
-    'Жм',
-    'Иш',
-  ],
+  weekdaysShort: ['Жек', 'Дүй', 'Шей', 'Шар', 'Бей', 'Жум', 'Ише'],
+  weekdaysMin: ['Жк', 'Дй', 'Шй', 'Шр', 'Бй', 'Жм', 'Иш'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -115,15 +99,33 @@ const CarbonLocaleData localeKy = CarbonLocaleData(
 );
 
 // Regional variant: ky_KG
-final CarbonLocaleData localeKyKg = localeKy.copyWith(
-  localeCode: 'ky_kg',
-);
-
+final CarbonLocaleData localeKyKg = localeKy.copyWith(localeCode: 'ky_kg');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-  var suffixes = {0: '-чү', 1: '-чи', 2: '-чи', 3: '-чү', 4: '-чү', 5: '-чи', 6: '-чы', 7: '-чи', 8: '-чи', 9: '-чу', 10: '-чу', 20: '-чы', 30: '-чу', 40: '-чы', 50: '-чү', 60: '-чы', 70: '-чи', 80: '-чи', 90: '-чу', 100: '-чү'};
-    return '$number${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+  var suffixes = {
+    0: '-чү',
+    1: '-чи',
+    2: '-чи',
+    3: '-чү',
+    4: '-чү',
+    5: '-чи',
+    6: '-чы',
+    7: '-чи',
+    8: '-чи',
+    9: '-чу',
+    10: '-чу',
+    20: '-чы',
+    30: '-чу',
+    40: '-чы',
+    50: '-чү',
+    60: '-чы',
+    70: '-чи',
+    80: '-чи',
+    90: '-чу',
+    100: '-чү',
+  };
+  return '$number${suffixes[number] ?? suffixes[number % 10] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
 }
 
 // Auto-generated meridiem function from array

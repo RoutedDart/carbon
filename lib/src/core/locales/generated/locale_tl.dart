@@ -76,24 +76,8 @@ const CarbonLocaleData localeTl = CarbonLocaleData(
     'Biyernes',
     'Sabado',
   ],
-  weekdaysShort: [
-    'Lin',
-    'Lun',
-    'Mar',
-    'Miy',
-    'Huw',
-    'Biy',
-    'Sab',
-  ],
-  weekdaysMin: [
-    'Li',
-    'Lu',
-    'Ma',
-    'Mi',
-    'Hu',
-    'Bi',
-    'Sab',
-  ],
+  weekdaysShort: ['Lin', 'Lun', 'Mar', 'Miy', 'Huw', 'Biy', 'Sab'],
+  weekdaysMin: ['Li', 'Lu', 'Ma', 'Mi', 'Hu', 'Bi', 'Sab'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -108,7 +92,4 @@ const CarbonLocaleData localeTl = CarbonLocaleData(
 );
 
 // Regional variant: tl_PH
-final CarbonLocaleData localeTlPh = localeTl.copyWith(
-  localeCode: 'tl_ph',
-);
-
+final CarbonLocaleData localeTlPh = localeTl.copyWith(localeCode: 'tl_ph');

@@ -97,24 +97,8 @@ const CarbonLocaleData localeKa = CarbonLocaleData(
     'პარასკევს',
     'შაბათს',
   ],
-  weekdaysShort: [
-    'კვი',
-    'ორშ',
-    'სამ',
-    'ოთხ',
-    'ხუთ',
-    'პარ',
-    'შაბ',
-  ],
-  weekdaysMin: [
-    'კვ',
-    'ორ',
-    'სა',
-    'ოთ',
-    'ხუ',
-    'პა',
-    'შა',
-  ],
+  weekdaysShort: ['კვი', 'ორშ', 'სამ', 'ოთხ', 'ხუთ', 'პარ', 'შაბ'],
+  weekdaysMin: ['კვ', 'ორ', 'სა', 'ოთ', 'ხუ', 'პა', 'შა'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -130,37 +114,34 @@ const CarbonLocaleData localeKa = CarbonLocaleData(
 );
 
 // Regional variant: ka_GE
-final CarbonLocaleData localeKaGe = localeKa.copyWith(
-  localeCode: 'ka_ge',
-);
-
+final CarbonLocaleData localeKaGe = localeKa.copyWith(localeCode: 'ka_ge');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    if (number == 0) {
-      return (number).toString();
-    }
-    if (number == 1) {
-      return '$number-ლი';
-    }
-    if (number < 20 || number <= 100 && number % 20 == 0 || number % 100 == 0) {
-      return 'მე-$number';
-    }
-    return '$number-ე';
+  if (number == 0) {
+    return (number).toString();
+  }
+  if (number == 1) {
+    return '$number-ლი';
+  }
+  if (number < 20 || number <= 100 && number % 20 == 0 || number % 100 == 0) {
+    return 'მე-$number';
+  }
+  return '$number-ე';
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour >= 4) {
-      if (hour < 11) {
-        return 'დილის';
-      }
-      if (hour < 16) {
-        return 'შუადღის';
-      }
-      if (hour < 22) {
-        return 'საღამოს';
-      }
+  if (hour >= 4) {
+    if (hour < 11) {
+      return 'დილის';
     }
-    return 'ღამის';
+    if (hour < 16) {
+      return 'შუადღის';
+    }
+    if (hour < 22) {
+      return 'საღამოს';
+    }
+  }
+  return 'ღამის';
 }

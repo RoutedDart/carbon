@@ -84,24 +84,8 @@ const CarbonLocaleData localeGl = CarbonLocaleData(
     'venres',
     'sábado',
   ],
-  weekdaysShort: [
-    'dom.',
-    'lun.',
-    'mar.',
-    'mér.',
-    'xov.',
-    'ven.',
-    'sáb.',
-  ],
-  weekdaysMin: [
-    'do',
-    'lu',
-    'ma',
-    'mé',
-    'xo',
-    've',
-    'sá',
-  ],
+  weekdaysShort: ['dom.', 'lun.', 'mar.', 'mér.', 'xov.', 'ven.', 'sáb.'],
+  weekdaysMin: ['do', 'lu', 'ma', 'mé', 'xo', 've', 'sá'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {'sameElse': 'L'},
@@ -110,10 +94,7 @@ const CarbonLocaleData localeGl = CarbonLocaleData(
 );
 
 // Regional variant: gl_ES
-final CarbonLocaleData localeGlEs = localeGl.copyWith(
-  localeCode: 'gl_es',
-);
-
+final CarbonLocaleData localeGlEs = localeGl.copyWith(localeCode: 'gl_es');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

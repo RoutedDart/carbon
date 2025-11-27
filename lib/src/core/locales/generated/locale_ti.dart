@@ -27,11 +27,15 @@ const CarbonLocaleData localeTi = CarbonLocaleData(
     'second': ':count ሰከንድ',
     'a_second': ':count ሰከንድ',
     's': ':count ሰከንድ',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeTi = CarbonLocaleData(
     'ሕዳር',
     'ታሕሳ',
   ],
-  weekdays: [
-    'ሰንበት',
-    'ሰኑይ',
-    'ሰሉስ',
-    'ረቡዕ',
-    'ሓሙስ',
-    'ዓርቢ',
-    'ቀዳም',
-  ],
-  weekdaysShort: [
-    'ሰንበ',
-    'ሰኑይ',
-    'ሰሉስ',
-    'ረቡዕ',
-    'ሓሙስ',
-    'ዓርቢ',
-    'ቀዳም',
-  ],
-  weekdaysMin: [
-    'ሰንበ',
-    'ሰኑይ',
-    'ሰሉስ',
-    'ረቡዕ',
-    'ሓሙስ',
-    'ዓርቢ',
-    'ቀዳም',
-  ],
+  weekdays: ['ሰንበት', 'ሰኑይ', 'ሰሉስ', 'ረቡዕ', 'ሓሙስ', 'ዓርቢ', 'ቀዳም'],
+  weekdaysShort: ['ሰንበ', 'ሰኑይ', 'ሰሉስ', 'ረቡዕ', 'ሓሙስ', 'ዓርቢ', 'ቀዳም'],
+  weekdaysMin: ['ሰንበ', 'ሰኑይ', 'ሰሉስ', 'ረቡዕ', 'ሓሙስ', 'ዓርቢ', 'ቀዳም'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,9 +111,7 @@ const CarbonLocaleData localeTi = CarbonLocaleData(
 );
 
 // Regional variant: ti_ER
-final CarbonLocaleData localeTiEr = localeTi.copyWith(
-  localeCode: 'ti_er',
-);
+final CarbonLocaleData localeTiEr = localeTi.copyWith(localeCode: 'ti_er');
 
 // Regional variant: ti_ET
 final CarbonLocaleData localeTiEt = localeTi.copyWith(
@@ -168,12 +146,11 @@ final CarbonLocaleData localeTiEt = localeTi.copyWith(
   ],
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

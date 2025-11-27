@@ -84,24 +84,8 @@ const CarbonLocaleData localeAf = CarbonLocaleData(
     'Vrydag',
     'Saterdag',
   ],
-  weekdaysShort: [
-    'Son',
-    'Maa',
-    'Din',
-    'Woe',
-    'Don',
-    'Vry',
-    'Sat',
-  ],
-  weekdaysMin: [
-    'So',
-    'Ma',
-    'Di',
-    'Wo',
-    'Do',
-    'Vr',
-    'Sa',
-  ],
+  weekdaysShort: ['Son', 'Maa', 'Din', 'Woe', 'Don', 'Vry', 'Sat'],
+  weekdaysMin: ['So', 'Ma', 'Di', 'Wo', 'Do', 'Vr', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -120,24 +104,8 @@ const CarbonLocaleData localeAf = CarbonLocaleData(
 // Regional variant: af_NA
 final CarbonLocaleData localeAfNa = localeAf.copyWith(
   localeCode: 'af_na',
-  weekdaysShort: [
-    'So.',
-    'Ma.',
-    'Di.',
-    'Wo.',
-    'Do.',
-    'Vr.',
-    'Sa.',
-  ],
-  weekdaysMin: [
-    'So.',
-    'Ma.',
-    'Di.',
-    'Wo.',
-    'Do.',
-    'Vr.',
-    'Sa.',
-  ],
+  weekdaysShort: ['So.', 'Ma.', 'Di.', 'Wo.', 'Do.', 'Vr.', 'Sa.'],
+  weekdaysMin: ['So.', 'Ma.', 'Di.', 'Wo.', 'Do.', 'Vr.', 'Sa.'],
   monthsShort: [
     'Jan.',
     'Feb.',
@@ -155,14 +123,11 @@ final CarbonLocaleData localeAfNa = localeAf.copyWith(
 );
 
 // Regional variant: af_ZA
-final CarbonLocaleData localeAfZa = localeAf.copyWith(
-  localeCode: 'af_za',
-);
-
+final CarbonLocaleData localeAfZa = localeAf.copyWith(localeCode: 'af_za');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+  return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
 }
 
 // Auto-generated meridiem function from array

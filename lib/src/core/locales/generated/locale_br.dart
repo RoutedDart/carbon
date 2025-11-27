@@ -71,33 +71,9 @@ const CarbonLocaleData localeBr = CarbonLocaleData(
     'Du',
     'Ker',
   ],
-  weekdays: [
-    'Sul',
-    'Lun',
-    'Meurzh',
-    'Merc\'her',
-    'Yaou',
-    'Gwener',
-    'Sadorn',
-  ],
-  weekdaysShort: [
-    'Sul',
-    'Lun',
-    'Meu',
-    'Mer',
-    'Yao',
-    'Gwe',
-    'Sad',
-  ],
-  weekdaysMin: [
-    'Su',
-    'Lu',
-    'Me',
-    'Mer',
-    'Ya',
-    'Gw',
-    'Sa',
-  ],
+  weekdays: ['Sul', 'Lun', 'Meurzh', 'Merc\'her', 'Yaou', 'Gwener', 'Sadorn'],
+  weekdaysShort: ['Sul', 'Lun', 'Meu', 'Mer', 'Yao', 'Gwe', 'Sad'],
+  weekdaysMin: ['Su', 'Lu', 'Me', 'Mer', 'Ya', 'Gw', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -114,14 +90,11 @@ const CarbonLocaleData localeBr = CarbonLocaleData(
 );
 
 // Regional variant: br_FR
-final CarbonLocaleData localeBrFr = localeBr.copyWith(
-  localeCode: 'br_fr',
-);
-
+final CarbonLocaleData localeBrFr = localeBr.copyWith(localeCode: 'br_fr');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(number == 1 ? 'añ' : 'vet')}';
+  return '$number${(number == 1 ? 'añ' : 'vet')}';
 }
 
 // Auto-generated meridiem function from array

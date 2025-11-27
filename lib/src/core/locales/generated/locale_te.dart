@@ -79,24 +79,8 @@ const CarbonLocaleData localeTe = CarbonLocaleData(
     'శుక్రవారం',
     'శనివారం',
   ],
-  weekdaysShort: [
-    'ఆది',
-    'సోమ',
-    'మంగళ',
-    'బుధ',
-    'గురు',
-    'శుక్ర',
-    'శని',
-  ],
-  weekdaysMin: [
-    'ఆ',
-    'సో',
-    'మం',
-    'బు',
-    'గు',
-    'శు',
-    'శ',
-  ],
+  weekdaysShort: ['ఆది', 'సోమ', 'మంగళ', 'బుధ', 'గురు', 'శుక్ర', 'శని'],
+  weekdaysMin: ['ఆ', 'సో', 'మం', 'బు', 'గు', 'శు', 'శ'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -111,24 +95,21 @@ const CarbonLocaleData localeTe = CarbonLocaleData(
 );
 
 // Regional variant: te_IN
-final CarbonLocaleData localeTeIn = localeTe.copyWith(
-  localeCode: 'te_in',
-);
-
+final CarbonLocaleData localeTeIn = localeTe.copyWith(localeCode: 'te_in');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'రాత్రి';
-    }
-    if (hour < 10) {
-      return 'ఉదయం';
-    }
-    if (hour < 17) {
-      return 'మధ్యాహ్నం';
-    }
-    if (hour < 20) {
-      return 'సాయంత్రం';
-    }
-    return ' రాత్రి';
+  if (hour < 4) {
+    return 'రాత్రి';
+  }
+  if (hour < 10) {
+    return 'ఉదయం';
+  }
+  if (hour < 17) {
+    return 'మధ్యాహ్నం';
+  }
+  if (hour < 20) {
+    return 'సాయంత్రం';
+  }
+  return ' రాత్రి';
 }

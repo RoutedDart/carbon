@@ -59,24 +59,8 @@ const CarbonLocaleData localePap = CarbonLocaleData(
     'djabierne',
     'djasabra',
   ],
-  weekdaysShort: [
-    'do',
-    'lu',
-    'ma',
-    'we',
-    'ra',
-    'bi',
-    'sa',
-  ],
-  weekdaysMin: [
-    'do',
-    'lu',
-    'ma',
-    'we',
-    'ra',
-    'bi',
-    'sa',
-  ],
+  weekdaysShort: ['do', 'lu', 'ma', 'we', 'ra', 'bi', 'sa'],
+  weekdaysMin: ['do', 'lu', 'ma', 'we', 'ra', 'bi', 'sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' i '],
@@ -91,12 +75,7 @@ const CarbonLocaleData localePap = CarbonLocaleData(
 );
 
 // Regional variant: pap_AW
-final CarbonLocaleData localePapAw = localePap.copyWith(
-  localeCode: 'pap_aw',
-);
+final CarbonLocaleData localePapAw = localePap.copyWith(localeCode: 'pap_aw');
 
 // Regional variant: pap_CW
-final CarbonLocaleData localePapCw = localePap.copyWith(
-  localeCode: 'pap_cw',
-);
-
+final CarbonLocaleData localePapCw = localePap.copyWith(localeCode: 'pap_cw');

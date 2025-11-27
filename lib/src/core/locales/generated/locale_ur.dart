@@ -67,33 +67,9 @@ const CarbonLocaleData localeUr = CarbonLocaleData(
     'نومبر',
     'دسمبر',
   ],
-  weekdays: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعہ',
-    'ہفتہ',
-  ],
-  weekdaysShort: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعہ',
-    'ہفتہ',
-  ],
-  weekdaysMin: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعہ',
-    'ہفتہ',
-  ],
+  weekdays: ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'],
+  weekdaysShort: ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'],
+  weekdaysMin: ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'ہفتہ'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -111,67 +87,18 @@ const CarbonLocaleData localeUr = CarbonLocaleData(
 // Regional variant: ur_IN
 final CarbonLocaleData localeUrIn = localeUr.copyWith(
   localeCode: 'ur_in',
-  weekdays: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعہ',
-    'سنیچر',
-  ],
-  weekdaysShort: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعہ',
-    'سنیچر',
-  ],
-  weekdaysMin: [
-    'اتوار',
-    'پیر',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعہ',
-    'سنیچر',
-  ],
+  weekdays: ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'سنیچر'],
+  weekdaysShort: ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'سنیچر'],
+  weekdaysMin: ['اتوار', 'پیر', 'منگل', 'بدھ', 'جمعرات', 'جمعہ', 'سنیچر'],
 );
 
 // Regional variant: ur_PK
 final CarbonLocaleData localeUrPk = localeUr.copyWith(
   localeCode: 'ur_pk',
-  weekdays: [
-    'اتوار',
-    'پير',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعه',
-    'هفته',
-  ],
-  weekdaysShort: [
-    'اتوار',
-    'پير',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعه',
-    'هفته',
-  ],
-  weekdaysMin: [
-    'اتوار',
-    'پير',
-    'منگل',
-    'بدھ',
-    'جمعرات',
-    'جمعه',
-    'هفته',
-  ],
+  weekdays: ['اتوار', 'پير', 'منگل', 'بدھ', 'جمعرات', 'جمعه', 'هفته'],
+  weekdaysShort: ['اتوار', 'پير', 'منگل', 'بدھ', 'جمعرات', 'جمعه', 'هفته'],
+  weekdaysMin: ['اتوار', 'پير', 'منگل', 'بدھ', 'جمعرات', 'جمعه', 'هفته'],
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

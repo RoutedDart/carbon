@@ -27,11 +27,15 @@ const CarbonLocaleData localeAm = CarbonLocaleData(
     'second': ':count ሴኮንድ',
     'a_second': ':count ሴኮንድ',
     's': ':count ሴኮንድ',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': 'ከ:time በፊት',
     'from_now': 'በ:time ውስጥ',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeAm = CarbonLocaleData(
     'ኖቬም',
     'ዲሴም',
   ],
-  weekdays: [
-    'እሑድ',
-    'ሰኞ',
-    'ማክሰኞ',
-    'ረቡዕ',
-    'ሐሙስ',
-    'ዓርብ',
-    'ቅዳሜ',
-  ],
-  weekdaysShort: [
-    'እሑድ',
-    'ሰኞ ',
-    'ማክሰ',
-    'ረቡዕ',
-    'ሐሙስ',
-    'ዓርብ',
-    'ቅዳሜ',
-  ],
-  weekdaysMin: [
-    'እሑድ',
-    'ሰኞ ',
-    'ማክሰ',
-    'ረቡዕ',
-    'ሐሙስ',
-    'ዓርብ',
-    'ቅዳሜ',
-  ],
+  weekdays: ['እሑድ', 'ሰኞ', 'ማክሰኞ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ'],
+  weekdaysShort: ['እሑድ', 'ሰኞ ', 'ማክሰ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ'],
+  weekdaysMin: ['እሑድ', 'ሰኞ ', 'ማክሰ', 'ረቡዕ', 'ሐሙስ', 'ዓርብ', 'ቅዳሜ'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,16 +111,13 @@ const CarbonLocaleData localeAm = CarbonLocaleData(
 );
 
 // Regional variant: am_ET
-final CarbonLocaleData localeAmEt = localeAm.copyWith(
-  localeCode: 'am_et',
-);
-
+final CarbonLocaleData localeAmEt = localeAm.copyWith(localeCode: 'am_et');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

@@ -82,15 +82,7 @@ const CarbonLocaleData localeDv = CarbonLocaleData(
     'ހުކުރު',
     'ހޮނިހިރު',
   ],
-  weekdaysMin: [
-    'އާދި',
-    'ހޯމަ',
-    'އަން',
-    'ބުދަ',
-    'ބުރާ',
-    'ހުކު',
-    'ހޮނި',
-  ],
+  weekdaysMin: ['އާދި', 'ހޯމަ', 'އަން', 'ބުދަ', 'ބުރާ', 'ހުކު', 'ހޮނި'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -137,7 +129,6 @@ final CarbonLocaleData localeDvMv = localeDv.copyWith(
     'ޑިސެމްބަރު',
   ],
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

@@ -96,24 +96,8 @@ const CarbonLocaleData localePt = CarbonLocaleData(
     'sexta-feira',
     'sábado',
   ],
-  weekdaysShort: [
-    'dom',
-    'seg',
-    'ter',
-    'qua',
-    'qui',
-    'sex',
-    'sáb',
-  ],
-  weekdaysMin: [
-    'Do',
-    '2ª',
-    '3ª',
-    '4ª',
-    '5ª',
-    '6ª',
-    'Sá',
-  ],
+  weekdaysShort: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'],
+  weekdaysMin: ['Do', '2ª', '3ª', '4ª', '5ª', '6ª', 'Sá'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   ordinalWords: {
@@ -140,9 +124,7 @@ const CarbonLocaleData localePt = CarbonLocaleData(
 );
 
 // Regional variant: pt_AO
-final CarbonLocaleData localePtAo = localePt.copyWith(
-  localeCode: 'pt_ao',
-);
+final CarbonLocaleData localePtAo = localePt.copyWith(localeCode: 'pt_ao');
 
 // Regional variant: pt_BR
 final CarbonLocaleData localePtBr = localePt.copyWith(
@@ -152,39 +134,25 @@ final CarbonLocaleData localePtBr = localePt.copyWith(
 );
 
 // Regional variant: pt_CH
-final CarbonLocaleData localePtCh = localePt.copyWith(
-  localeCode: 'pt_ch',
-);
+final CarbonLocaleData localePtCh = localePt.copyWith(localeCode: 'pt_ch');
 
 // Regional variant: pt_CV
-final CarbonLocaleData localePtCv = localePt.copyWith(
-  localeCode: 'pt_cv',
-);
+final CarbonLocaleData localePtCv = localePt.copyWith(localeCode: 'pt_cv');
 
 // Regional variant: pt_GQ
-final CarbonLocaleData localePtGq = localePt.copyWith(
-  localeCode: 'pt_gq',
-);
+final CarbonLocaleData localePtGq = localePt.copyWith(localeCode: 'pt_gq');
 
 // Regional variant: pt_GW
-final CarbonLocaleData localePtGw = localePt.copyWith(
-  localeCode: 'pt_gw',
-);
+final CarbonLocaleData localePtGw = localePt.copyWith(localeCode: 'pt_gw');
 
 // Regional variant: pt_LU
-final CarbonLocaleData localePtLu = localePt.copyWith(
-  localeCode: 'pt_lu',
-);
+final CarbonLocaleData localePtLu = localePt.copyWith(localeCode: 'pt_lu');
 
 // Regional variant: pt_MO
-final CarbonLocaleData localePtMo = localePt.copyWith(
-  localeCode: 'pt_mo',
-);
+final CarbonLocaleData localePtMo = localePt.copyWith(localeCode: 'pt_mo');
 
 // Regional variant: pt_MZ
-final CarbonLocaleData localePtMz = localePt.copyWith(
-  localeCode: 'pt_mz',
-);
+final CarbonLocaleData localePtMz = localePt.copyWith(localeCode: 'pt_mz');
 
 // Regional variant: pt_PT
 final CarbonLocaleData localePtPt = localePt.copyWith(
@@ -198,24 +166,11 @@ final CarbonLocaleData localePtPt = localePt.copyWith(
     'sexta',
     'sábado',
   ],
-  weekdaysMin: [
-    'dom',
-    'seg',
-    'ter',
-    'qua',
-    'qui',
-    'sex',
-    'sáb',
-  ],
+  weekdaysMin: ['dom', 'seg', 'ter', 'qua', 'qui', 'sex', 'sáb'],
 );
 
 // Regional variant: pt_ST
-final CarbonLocaleData localePtSt = localePt.copyWith(
-  localeCode: 'pt_st',
-);
+final CarbonLocaleData localePtSt = localePt.copyWith(localeCode: 'pt_st');
 
 // Regional variant: pt_TL
-final CarbonLocaleData localePtTl = localePt.copyWith(
-  localeCode: 'pt_tl',
-);
-
+final CarbonLocaleData localePtTl = localePt.copyWith(localeCode: 'pt_tl');

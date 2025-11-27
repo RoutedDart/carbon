@@ -81,24 +81,8 @@ const CarbonLocaleData localeSe = CarbonLocaleData(
     'bearjadat',
     'lávvardat',
   ],
-  weekdaysShort: [
-    'sotn',
-    'vuos',
-    'maŋ',
-    'gask',
-    'duor',
-    'bear',
-    'láv',
-  ],
-  weekdaysMin: [
-    's',
-    'v',
-    'm',
-    'g',
-    'd',
-    'b',
-    'L',
-  ],
+  weekdaysShort: ['sotn', 'vuos', 'maŋ', 'gask', 'duor', 'bear', 'láv'],
+  weekdaysMin: ['s', 'v', 'm', 'g', 'd', 'b', 'L'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -125,24 +109,8 @@ final CarbonLocaleData localeSeFi = localeSe.copyWith(
     'bearjadat',
     'lávvordat',
   ],
-  weekdaysShort: [
-    'so',
-    'má',
-    'di',
-    'ga',
-    'du',
-    'be',
-    'lá',
-  ],
-  weekdaysMin: [
-    'so',
-    'má',
-    'di',
-    'ga',
-    'du',
-    'be',
-    'lá',
-  ],
+  weekdaysShort: ['so', 'má', 'di', 'ga', 'du', 'be', 'lá'],
+  weekdaysMin: ['so', 'má', 'di', 'ga', 'du', 'be', 'lá'],
   monthsShort: [
     'ođđj',
     'guov',
@@ -160,15 +128,10 @@ final CarbonLocaleData localeSeFi = localeSe.copyWith(
 );
 
 // Regional variant: se_NO
-final CarbonLocaleData localeSeNo = localeSe.copyWith(
-  localeCode: 'se_no',
-);
+final CarbonLocaleData localeSeNo = localeSe.copyWith(localeCode: 'se_no');
 
 // Regional variant: se_SE
-final CarbonLocaleData localeSeSe = localeSe.copyWith(
-  localeCode: 'se_se',
-);
-
+final CarbonLocaleData localeSeSe = localeSe.copyWith(localeCode: 'se_se');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

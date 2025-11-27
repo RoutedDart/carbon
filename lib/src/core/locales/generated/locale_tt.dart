@@ -59,24 +59,8 @@ const CarbonLocaleData localeTt = CarbonLocaleData(
     'җомга',
     'шимбә',
   ],
-  weekdaysShort: [
-    'якш',
-    'дыш',
-    'сиш',
-    'чәрш',
-    'пәнҗ',
-    'җом',
-    'шим',
-  ],
-  weekdaysMin: [
-    'якш',
-    'дыш',
-    'сиш',
-    'чәрш',
-    'пәнҗ',
-    'җом',
-    'шим',
-  ],
+  weekdaysShort: ['якш', 'дыш', 'сиш', 'чәрш', 'пәнҗ', 'җом', 'шим'],
+  weekdaysMin: ['якш', 'дыш', 'сиш', 'чәрш', 'пәнҗ', 'җом', 'шим'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -90,9 +74,7 @@ const CarbonLocaleData localeTt = CarbonLocaleData(
 );
 
 // Regional variant: tt_RU
-final CarbonLocaleData localeTtRu = localeTt.copyWith(
-  localeCode: 'tt_ru',
-);
+final CarbonLocaleData localeTtRu = localeTt.copyWith(localeCode: 'tt_ru');
 
 // Regional variant: tt_RU@iqtelif
 final CarbonLocaleData localeTtRuIqtelif = localeTt.copyWith(
@@ -106,24 +88,8 @@ final CarbonLocaleData localeTtRuIqtelif = localeTt.copyWith(
     'Comğa',
     'Şimbe',
   ],
-  weekdaysShort: [
-    'Yek',
-    'Düş',
-    'Siş',
-    'Çer',
-    'Pen',
-    'Com',
-    'Şim',
-  ],
-  weekdaysMin: [
-    'Yek',
-    'Düş',
-    'Siş',
-    'Çer',
-    'Pen',
-    'Com',
-    'Şim',
-  ],
+  weekdaysShort: ['Yek', 'Düş', 'Siş', 'Çer', 'Pen', 'Com', 'Şim'],
+  weekdaysMin: ['Yek', 'Düş', 'Siş', 'Çer', 'Pen', 'Com', 'Şim'],
   months: [
     'Ğınwar',
     'Fiwral\'',
@@ -158,4 +124,3 @@ final CarbonLocaleData localeTtRuIqtelif = localeTt.copyWith(
   periodStartDate: 'from :date',
   periodEndDate: 'to :date',
 );
-

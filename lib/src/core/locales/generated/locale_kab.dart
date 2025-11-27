@@ -27,11 +27,15 @@ const CarbonLocaleData localeKab = CarbonLocaleData(
     'second': ':count tasdidt',
     'a_second': ':count tasdidt',
     's': ':count tasdidt',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeKab = CarbonLocaleData(
     'Wam',
     'Duj',
   ],
-  weekdays: [
-    'Acer',
-    'Arim',
-    'Aram',
-    'Ahad',
-    'Amhad',
-    'Sem',
-    'Sed',
-  ],
-  weekdaysShort: [
-    'Ace',
-    'Ari',
-    'Ara',
-    'Aha',
-    'Amh',
-    'Sem',
-    'Sed',
-  ],
-  weekdaysMin: [
-    'Ace',
-    'Ari',
-    'Ara',
-    'Aha',
-    'Amh',
-    'Sem',
-    'Sed',
-  ],
+  weekdays: ['Acer', 'Arim', 'Aram', 'Ahad', 'Amhad', 'Sem', 'Sed'],
+  weekdaysShort: ['Ace', 'Ari', 'Ara', 'Aha', 'Amh', 'Sem', 'Sed'],
+  weekdaysMin: ['Ace', 'Ari', 'Ara', 'Aha', 'Amh', 'Sem', 'Sed'],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,16 +111,13 @@ const CarbonLocaleData localeKab = CarbonLocaleData(
 );
 
 // Regional variant: kab_DZ
-final CarbonLocaleData localeKabDz = localeKab.copyWith(
-  localeCode: 'kab_dz',
-);
-
+final CarbonLocaleData localeKabDz = localeKab.copyWith(localeCode: 'kab_dz');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

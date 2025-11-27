@@ -73,24 +73,8 @@ const CarbonLocaleData localeSh = CarbonLocaleData(
     'Petak',
     'Subota',
   ],
-  weekdaysShort: [
-    'Ned',
-    'Pon',
-    'Uto',
-    'Sre',
-    'Čet',
-    'Pet',
-    'Sub',
-  ],
-  weekdaysMin: [
-    'Ned',
-    'Pon',
-    'Uto',
-    'Sre',
-    'Čet',
-    'Pet',
-    'Sub',
-  ],
+  weekdaysShort: ['Ned', 'Pon', 'Uto', 'Sre', 'Čet', 'Pet', 'Sub'],
+  weekdaysMin: ['Ned', 'Pon', 'Uto', 'Sre', 'Čet', 'Pet', 'Sub'],
   listSeparators: [', ', ' i '],
   meridiem: _meridiem,
   calendar: {
@@ -102,7 +86,6 @@ const CarbonLocaleData localeSh = CarbonLocaleData(
     'sameElse': 'L',
   },
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

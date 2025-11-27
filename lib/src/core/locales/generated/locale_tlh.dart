@@ -94,4 +94,3 @@ const CarbonLocaleData localeTlh = CarbonLocaleData(
   },
   listSeparators: [', ', ' ’ej '],
 );
-

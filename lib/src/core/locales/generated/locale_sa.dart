@@ -27,11 +27,15 @@ const CarbonLocaleData localeSa = CarbonLocaleData(
     'second': ':count द्वितीयः',
     'a_second': ':count द्वितीयः',
     's': ':count द्वितीयः',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -102,15 +106,7 @@ const CarbonLocaleData localeSa = CarbonLocaleData(
     'शुक्र',
     'शनि:',
   ],
-  weekdaysMin: [
-    'रविः',
-    'सोम:',
-    'मंगल:',
-    'बुध:',
-    'बृहस्पतिः',
-    'शुक्र',
-    'शनि:',
-  ],
+  weekdaysMin: ['रविः', 'सोम:', 'मंगल:', 'बुध:', 'बृहस्पतिः', 'शुक्र', 'शनि:'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,16 +127,13 @@ const CarbonLocaleData localeSa = CarbonLocaleData(
 );
 
 // Regional variant: sa_IN
-final CarbonLocaleData localeSaIn = localeSa.copyWith(
-  localeCode: 'sa_in',
-);
-
+final CarbonLocaleData localeSaIn = localeSa.copyWith(localeCode: 'sa_in');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

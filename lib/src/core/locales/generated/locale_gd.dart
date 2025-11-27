@@ -81,24 +81,8 @@ const CarbonLocaleData localeGd = CarbonLocaleData(
     'Dihaoine',
     'Disathairne',
   ],
-  weekdaysShort: [
-    'Did',
-    'Dil',
-    'Dim',
-    'Dic',
-    'Dia',
-    'Dih',
-    'Dis',
-  ],
-  weekdaysMin: [
-    'Dò',
-    'Lu',
-    'Mà',
-    'Ci',
-    'Ar',
-    'Ha',
-    'Sa',
-  ],
+  weekdaysShort: ['Did', 'Dil', 'Dim', 'Dic', 'Dia', 'Dih', 'Dis'],
+  weekdaysMin: ['Dò', 'Lu', 'Mà', 'Ci', 'Ar', 'Ha', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -115,14 +99,11 @@ const CarbonLocaleData localeGd = CarbonLocaleData(
 );
 
 // Regional variant: gd_GB
-final CarbonLocaleData localeGdGb = localeGd.copyWith(
-  localeCode: 'gd_gb',
-);
-
+final CarbonLocaleData localeGdGb = localeGd.copyWith(localeCode: 'gd_gb');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(number == 1 ? 'd' : (number % 10 == 2 ? 'na' : 'mh'))}';
+  return '$number${(number == 1 ? 'd' : (number % 10 == 2 ? 'na' : 'mh'))}';
 }
 
 // Auto-generated meridiem function from array

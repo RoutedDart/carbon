@@ -76,24 +76,8 @@ const CarbonLocaleData localeFo = CarbonLocaleData(
     'fríggjadagur',
     'leygardagur',
   ],
-  weekdaysShort: [
-    'sun',
-    'mán',
-    'týs',
-    'mik',
-    'hós',
-    'frí',
-    'ley',
-  ],
-  weekdaysMin: [
-    'su',
-    'má',
-    'tý',
-    'mi',
-    'hó',
-    'fr',
-    'le',
-  ],
+  weekdaysShort: ['sun', 'mán', 'týs', 'mik', 'hós', 'frí', 'ley'],
+  weekdaysMin: ['su', 'má', 'tý', 'mi', 'hó', 'fr', 'le'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -108,12 +92,7 @@ const CarbonLocaleData localeFo = CarbonLocaleData(
 );
 
 // Regional variant: fo_DK
-final CarbonLocaleData localeFoDk = localeFo.copyWith(
-  localeCode: 'fo_dk',
-);
+final CarbonLocaleData localeFoDk = localeFo.copyWith(localeCode: 'fo_dk');
 
 // Regional variant: fo_FO
-final CarbonLocaleData localeFoFo = localeFo.copyWith(
-  localeCode: 'fo_fo',
-);
-
+final CarbonLocaleData localeFoFo = localeFo.copyWith(localeCode: 'fo_fo');

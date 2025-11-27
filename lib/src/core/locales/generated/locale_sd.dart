@@ -62,33 +62,9 @@ const CarbonLocaleData localeSd = CarbonLocaleData(
     'نومبر',
     'ڊسمبر',
   ],
-  weekdays: [
-    'آچر',
-    'سومر',
-    'اڱارو',
-    'اربع',
-    'خميس',
-    'جمع',
-    'ڇنڇر',
-  ],
-  weekdaysShort: [
-    'آچر',
-    'سومر',
-    'اڱارو',
-    'اربع',
-    'خميس',
-    'جمع',
-    'ڇنڇر',
-  ],
-  weekdaysMin: [
-    'آچر',
-    'سومر',
-    'اڱارو',
-    'اربع',
-    'خميس',
-    'جمع',
-    'ڇنڇر',
-  ],
+  weekdays: ['آچر', 'سومر', 'اڱارو', 'اربع', 'خميس', 'جمع', 'ڇنڇر'],
+  weekdaysShort: ['آچر', 'سومر', 'اڱارو', 'اربع', 'خميس', 'جمع', 'ڇنڇر'],
+  weekdaysMin: ['آچر', 'سومر', 'اڱارو', 'اربع', 'خميس', 'جمع', 'ڇنڇر'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -106,33 +82,9 @@ const CarbonLocaleData localeSd = CarbonLocaleData(
 // Regional variant: sd_IN
 final CarbonLocaleData localeSdIn = localeSd.copyWith(
   localeCode: 'sd_in',
-  weekdays: [
-    'آرتوارُ',
-    'سومرُ',
-    'منگلُ',
-    'ٻُڌرُ',
-    'وسپت',
-    'جُمو',
-    'ڇنڇر',
-  ],
-  weekdaysShort: [
-    'آرتوارُ',
-    'سومرُ',
-    'منگلُ',
-    'ٻُڌرُ',
-    'وسپت',
-    'جُمو',
-    'ڇنڇر',
-  ],
-  weekdaysMin: [
-    'آرتوارُ',
-    'سومرُ',
-    'منگلُ',
-    'ٻُڌرُ',
-    'وسپت',
-    'جُمو',
-    'ڇنڇر',
-  ],
+  weekdays: ['آرتوارُ', 'سومرُ', 'منگلُ', 'ٻُڌرُ', 'وسپت', 'جُمو', 'ڇنڇر'],
+  weekdaysShort: ['آرتوارُ', 'سومرُ', 'منگلُ', 'ٻُڌرُ', 'وسپت', 'جُمو', 'ڇنڇر'],
+  weekdaysMin: ['آرتوارُ', 'سومرُ', 'منگلُ', 'ٻُڌرُ', 'وسپت', 'جُمو', 'ڇنڇر'],
   months: [
     'جنوري',
     'فبروري',
@@ -166,15 +118,7 @@ final CarbonLocaleData localeSdIn = localeSd.copyWith(
 // Regional variant: sd_IN@devanagari
 final CarbonLocaleData localeSdInDevanagari = localeSd.copyWith(
   localeCode: 'sd_in@devanagari',
-  weekdays: [
-    'आर्तवारू',
-    'सूमरू',
-    'मंगलू',
-    'ॿुधरू',
-    'विस्पति',
-    'जुमो',
-    'छंछस',
-  ],
+  weekdays: ['आर्तवारू', 'सूमरू', 'मंगलू', 'ॿुधरू', 'विस्पति', 'जुमो', 'छंछस'],
   weekdaysShort: [
     'आर्तवारू',
     'सूमरू',
@@ -222,7 +166,6 @@ final CarbonLocaleData localeSdInDevanagari = localeSd.copyWith(
     'ॾिसंबरू',
   ],
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

@@ -62,24 +62,8 @@ const CarbonLocaleData localeGsw = CarbonLocaleData(
     'Friitig',
     'Samschtig',
   ],
-  weekdaysShort: [
-    'Su',
-    'Mä',
-    'Zi',
-    'Mi',
-    'Du',
-    'Fr',
-    'Sa',
-  ],
-  weekdaysMin: [
-    'Su',
-    'Mä',
-    'Zi',
-    'Mi',
-    'Du',
-    'Fr',
-    'Sa',
-  ],
+  weekdaysShort: ['Su', 'Mä', 'Zi', 'Mi', 'Du', 'Fr', 'Sa'],
+  weekdaysMin: ['Su', 'Mä', 'Zi', 'Mi', 'Du', 'Fr', 'Sa'],
   listSeparators: [', ', ' und '],
   meridiem: _meridiem,
   calendar: {
@@ -93,9 +77,7 @@ const CarbonLocaleData localeGsw = CarbonLocaleData(
 );
 
 // Regional variant: gsw_CH
-final CarbonLocaleData localeGswCh = localeGsw.copyWith(
-  localeCode: 'gsw_ch',
-);
+final CarbonLocaleData localeGswCh = localeGsw.copyWith(localeCode: 'gsw_ch');
 
 // Regional variant: gsw_FR
 final CarbonLocaleData localeGswFr = localeGsw.copyWith(
@@ -134,7 +116,6 @@ final CarbonLocaleData localeGswLi = localeGsw.copyWith(
     'Dezämber',
   ],
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

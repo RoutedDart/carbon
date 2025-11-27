@@ -27,11 +27,15 @@ const CarbonLocaleData localeTpi = CarbonLocaleData(
     'second': ':count namba tu',
     'a_second': ':count namba tu',
     's': ':count namba tu',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeTpi = CarbonLocaleData(
     'Nov',
     'Des',
   ],
-  weekdays: [
-    'Sande',
-    'Mande',
-    'Tunde',
-    'Trinde',
-    'Fonde',
-    'Fraide',
-    'Sarere',
-  ],
-  weekdaysShort: [
-    'San',
-    'Man',
-    'Tun',
-    'Tri',
-    'Fon',
-    'Fra',
-    'Sar',
-  ],
-  weekdaysMin: [
-    'San',
-    'Man',
-    'Tun',
-    'Tri',
-    'Fon',
-    'Fra',
-    'Sar',
-  ],
+  weekdays: ['Sande', 'Mande', 'Tunde', 'Trinde', 'Fonde', 'Fraide', 'Sarere'],
+  weekdaysShort: ['San', 'Man', 'Tun', 'Tri', 'Fon', 'Fra', 'Sar'],
+  weekdaysMin: ['San', 'Man', 'Tun', 'Tri', 'Fon', 'Fra', 'Sar'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,16 +111,13 @@ const CarbonLocaleData localeTpi = CarbonLocaleData(
 );
 
 // Regional variant: tpi_PG
-final CarbonLocaleData localeTpiPg = localeTpi.copyWith(
-  localeCode: 'tpi_pg',
-);
-
+final CarbonLocaleData localeTpiPg = localeTpi.copyWith(localeCode: 'tpi_pg');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

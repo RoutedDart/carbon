@@ -104,24 +104,8 @@ const CarbonLocaleData localeOc = CarbonLocaleData(
     'divendres',
     'dissabte',
   ],
-  weekdaysShort: [
-    'dg',
-    'dl',
-    'dm',
-    'dc',
-    'dj',
-    'dv',
-    'ds',
-  ],
-  weekdaysMin: [
-    'dg',
-    'dl',
-    'dm',
-    'dc',
-    'dj',
-    'dv',
-    'ds',
-  ],
+  weekdaysShort: ['dg', 'dl', 'dm', 'dc', 'dj', 'dv', 'ds'],
+  weekdaysMin: ['dg', 'dl', 'dm', 'dc', 'dj', 'dv', 'ds'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -141,17 +125,14 @@ const CarbonLocaleData localeOc = CarbonLocaleData(
 );
 
 // Regional variant: oc_FR
-final CarbonLocaleData localeOcFr = localeOc.copyWith(
-  localeCode: 'oc_fr',
-);
-
+final CarbonLocaleData localeOcFr = localeOc.copyWith(localeCode: 'oc_fr');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   String ordinal;
   ordinal = {1: 'èr', 2: 'nd'}[(number).toInt()] ?? 'en';
-    if (RegExp(r'/^[wWhHgGis]\$/').hasMatch(period)) {
+  if (RegExp(r'/^[wWhHgGis]\$/').hasMatch(period)) {
     ordinal += 'a';
-    }
-    return '$number$ordinal';
+  }
+  return '$number$ordinal';
 }

@@ -59,24 +59,8 @@ const CarbonLocaleData localeFur = CarbonLocaleData(
     'vinars',
     'sabide',
   ],
-  weekdaysShort: [
-    'dom',
-    'lun',
-    'mar',
-    'mie',
-    'joi',
-    'vin',
-    'sab',
-  ],
-  weekdaysMin: [
-    'dom',
-    'lun',
-    'mar',
-    'mie',
-    'joi',
-    'vin',
-    'sab',
-  ],
+  weekdaysShort: ['dom', 'lun', 'mar', 'mie', 'joi', 'vin', 'sab'],
+  weekdaysMin: ['dom', 'lun', 'mar', 'mie', 'joi', 'vin', 'sab'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -90,7 +74,4 @@ const CarbonLocaleData localeFur = CarbonLocaleData(
 );
 
 // Regional variant: fur_IT
-final CarbonLocaleData localeFurIt = localeFur.copyWith(
-  localeCode: 'fur_it',
-);
-
+final CarbonLocaleData localeFurIt = localeFur.copyWith(localeCode: 'fur_it');

@@ -27,11 +27,15 @@ const CarbonLocaleData localeKl = CarbonLocaleData(
     'second': '{1}:count sikunti|{0}:count sikuntit|[-Inf,Inf]:count sikuntit',
     'a_second': '{1}sikunti|{0}:count sikuntit|[-Inf,Inf]:count sikuntit',
     's': ':counts',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time matuma siorna',
     'from_now': ':time from now',
@@ -93,24 +97,8 @@ const CarbonLocaleData localeKl = CarbonLocaleData(
     'tallimanngorneq',
     'arfininngorneq',
   ],
-  weekdaysShort: [
-    'sap',
-    'ata',
-    'mar',
-    'pin',
-    'sis',
-    'tal',
-    'arf',
-  ],
-  weekdaysMin: [
-    'sap',
-    'ata',
-    'mar',
-    'pin',
-    'sis',
-    'tal',
-    'arf',
-  ],
+  weekdaysShort: ['sap', 'ata', 'mar', 'pin', 'sis', 'tal', 'arf'],
+  weekdaysMin: ['sap', 'ata', 'mar', 'pin', 'sis', 'tal', 'arf'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -130,14 +118,11 @@ const CarbonLocaleData localeKl = CarbonLocaleData(
 );
 
 // Regional variant: kl_GL
-final CarbonLocaleData localeKlGl = localeKl.copyWith(
-  localeCode: 'kl_gl',
-);
-
+final CarbonLocaleData localeKlGl = localeKl.copyWith(localeCode: 'kl_gl');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }

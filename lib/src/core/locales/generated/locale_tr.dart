@@ -85,24 +85,8 @@ const CarbonLocaleData localeTr = CarbonLocaleData(
     'Cuma',
     'Cumartesi',
   ],
-  weekdaysShort: [
-    'Paz',
-    'Pts',
-    'Sal',
-    'Çar',
-    'Per',
-    'Cum',
-    'Cts',
-  ],
-  weekdaysMin: [
-    'Pz',
-    'Pt',
-    'Sa',
-    'Ça',
-    'Pe',
-    'Cu',
-    'Ct',
-  ],
+  weekdaysShort: ['Paz', 'Pts', 'Sal', 'Çar', 'Per', 'Cum', 'Cts'],
+  weekdaysMin: ['Pz', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -121,49 +105,49 @@ const CarbonLocaleData localeTr = CarbonLocaleData(
 // Regional variant: tr_CY
 final CarbonLocaleData localeTrCy = localeTr.copyWith(
   localeCode: 'tr_cy',
-  weekdaysShort: [
-    'Paz',
-    'Pzt',
-    'Sal',
-    'Çar',
-    'Per',
-    'Cum',
-    'Cmt',
-  ],
-  weekdaysMin: [
-    'Pa',
-    'Pt',
-    'Sa',
-    'Ça',
-    'Pe',
-    'Cu',
-    'Ct',
-  ],
+  weekdaysShort: ['Paz', 'Pzt', 'Sal', 'Çar', 'Per', 'Cum', 'Cmt'],
+  weekdaysMin: ['Pa', 'Pt', 'Sa', 'Ça', 'Pe', 'Cu', 'Ct'],
 );
 
 // Regional variant: tr_TR
-final CarbonLocaleData localeTrTr = localeTr.copyWith(
-  localeCode: 'tr_tr',
-);
-
+final CarbonLocaleData localeTrTr = localeTr.copyWith(localeCode: 'tr_tr');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
-    switch (period) {
-      case 'd':
-      case 'D':
-      case 'Do':
-      case 'DD':
-        return (number).toString();
-      default:
-        if (number == 0) {
-          return '$number\'ıncı';
-        }
-      var suffixes = {1: '\'inci', 5: '\'inci', 8: '\'inci', 70: '\'inci', 80: '\'inci', 2: '\'nci', 7: '\'nci', 20: '\'nci', 50: '\'nci', 3: '\'üncü', 4: '\'üncü', 100: '\'üncü', 6: '\'ncı', 9: '\'uncu', 10: '\'uncu', 30: '\'uncu', 60: '\'ıncı', 90: '\'ıncı'};
+  switch (period) {
+    case 'd':
+    case 'D':
+    case 'Do':
+    case 'DD':
+      return (number).toString();
+    default:
+      if (number == 0) {
+        return '$number\'ıncı';
+      }
+      var suffixes = {
+        1: '\'inci',
+        5: '\'inci',
+        8: '\'inci',
+        70: '\'inci',
+        80: '\'inci',
+        2: '\'nci',
+        7: '\'nci',
+        20: '\'nci',
+        50: '\'nci',
+        3: '\'üncü',
+        4: '\'üncü',
+        100: '\'üncü',
+        6: '\'ncı',
+        9: '\'uncu',
+        10: '\'uncu',
+        30: '\'uncu',
+        60: '\'ıncı',
+        90: '\'ıncı',
+      };
       lastDigit = number % 10;
-        return '$number${suffixes[lastDigit] ?? suffixes[number % 100 - lastDigit] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
-    }
+      return '$number${suffixes[lastDigit] ?? suffixes[number % 100 - lastDigit] ?? suffixes[(number >= 100 ? 100 : -1)] ?? ''}';
+  }
 }
 
 // Auto-generated meridiem function from array

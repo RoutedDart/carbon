@@ -83,24 +83,8 @@ const CarbonLocaleData localeSw = CarbonLocaleData(
     'Ijumaa',
     'Jumamosi',
   ],
-  weekdaysShort: [
-    'Jpl',
-    'Jtat',
-    'Jnne',
-    'Jtan',
-    'Alh',
-    'Ijm',
-    'Jmos',
-  ],
-  weekdaysMin: [
-    'J2',
-    'J3',
-    'J4',
-    'J5',
-    'Al',
-    'Ij',
-    'J1',
-  ],
+  weekdaysShort: ['Jpl', 'Jtat', 'Jnne', 'Jtan', 'Alh', 'Ijm', 'Jmos'],
+  weekdaysMin: ['J2', 'J3', 'J4', 'J5', 'Al', 'Ij', 'J1'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -115,58 +99,21 @@ const CarbonLocaleData localeSw = CarbonLocaleData(
 );
 
 // Regional variant: sw_CD
-final CarbonLocaleData localeSwCd = localeSw.copyWith(
-  localeCode: 'sw_cd',
-);
+final CarbonLocaleData localeSwCd = localeSw.copyWith(localeCode: 'sw_cd');
 
 // Regional variant: sw_KE
 final CarbonLocaleData localeSwKe = localeSw.copyWith(
   localeCode: 'sw_ke',
-  weekdaysShort: [
-    'J2',
-    'J3',
-    'J4',
-    'J5',
-    'Alh',
-    'Ij',
-    'J1',
-  ],
-  weekdaysMin: [
-    'J2',
-    'J3',
-    'J4',
-    'J5',
-    'Alh',
-    'Ij',
-    'J1',
-  ],
+  weekdaysShort: ['J2', 'J3', 'J4', 'J5', 'Alh', 'Ij', 'J1'],
+  weekdaysMin: ['J2', 'J3', 'J4', 'J5', 'Alh', 'Ij', 'J1'],
 );
 
 // Regional variant: sw_TZ
 final CarbonLocaleData localeSwTz = localeSw.copyWith(
   localeCode: 'sw_tz',
-  weekdaysShort: [
-    'J2',
-    'J3',
-    'J4',
-    'J5',
-    'Alh',
-    'Ij',
-    'J1',
-  ],
-  weekdaysMin: [
-    'J2',
-    'J3',
-    'J4',
-    'J5',
-    'Alh',
-    'Ij',
-    'J1',
-  ],
+  weekdaysShort: ['J2', 'J3', 'J4', 'J5', 'Alh', 'Ij', 'J1'],
+  weekdaysMin: ['J2', 'J3', 'J4', 'J5', 'Alh', 'Ij', 'J1'],
 );
 
 // Regional variant: sw_UG
-final CarbonLocaleData localeSwUg = localeSw.copyWith(
-  localeCode: 'sw_ug',
-);
-
+final CarbonLocaleData localeSwUg = localeSw.copyWith(localeCode: 'sw_ug');

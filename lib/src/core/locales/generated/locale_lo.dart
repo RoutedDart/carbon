@@ -64,33 +64,9 @@ const CarbonLocaleData localeLo = CarbonLocaleData(
     'ພະຈິກ',
     'ທັນວາ',
   ],
-  weekdays: [
-    'ອາທິດ',
-    'ຈັນ',
-    'ອັງຄານ',
-    'ພຸດ',
-    'ພະຫັດ',
-    'ສຸກ',
-    'ເສົາ',
-  ],
-  weekdaysShort: [
-    'ທິດ',
-    'ຈັນ',
-    'ອັງຄານ',
-    'ພຸດ',
-    'ພະຫັດ',
-    'ສຸກ',
-    'ເສົາ',
-  ],
-  weekdaysMin: [
-    'ທ',
-    'ຈ',
-    'ອຄ',
-    'ພ',
-    'ພຫ',
-    'ສກ',
-    'ສ',
-  ],
+  weekdays: ['ອາທິດ', 'ຈັນ', 'ອັງຄານ', 'ພຸດ', 'ພະຫັດ', 'ສຸກ', 'ເສົາ'],
+  weekdaysShort: ['ທິດ', 'ຈັນ', 'ອັງຄານ', 'ພຸດ', 'ພະຫັດ', 'ສຸກ', 'ເສົາ'],
+  weekdaysMin: ['ທ', 'ຈ', 'ອຄ', 'ພ', 'ພຫ', 'ສກ', 'ສ'],
   calendar: {
     'sameDay': '[ມື້ນີ້ເວລາ] LT',
     'nextDay': '[ມື້ອື່ນເວລາ] LT',
@@ -104,10 +80,7 @@ const CarbonLocaleData localeLo = CarbonLocaleData(
 );
 
 // Regional variant: lo_LA
-final CarbonLocaleData localeLoLa = localeLo.copyWith(
-  localeCode: 'lo_la',
-);
-
+final CarbonLocaleData localeLoLa = localeLo.copyWith(localeCode: 'lo_la');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

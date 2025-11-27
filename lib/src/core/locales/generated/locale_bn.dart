@@ -85,24 +85,8 @@ const CarbonLocaleData localeBn = CarbonLocaleData(
     'শুক্রবার',
     'শনিবার',
   ],
-  weekdaysShort: [
-    'রবি',
-    'সোম',
-    'মঙ্গল',
-    'বুধ',
-    'বৃহস্পতি',
-    'শুক্র',
-    'শনি',
-  ],
-  weekdaysMin: [
-    'রবি',
-    'সোম',
-    'মঙ্গ',
-    'বুধ',
-    'বৃহঃ',
-    'শুক্র',
-    'শনি',
-  ],
+  weekdaysShort: ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহস্পতি', 'শুক্র', 'শনি'],
+  weekdaysMin: ['রবি', 'সোম', 'মঙ্গ', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -124,24 +108,8 @@ const CarbonLocaleData localeBn = CarbonLocaleData(
 // Regional variant: bn_BD
 final CarbonLocaleData localeBnBd = localeBn.copyWith(
   localeCode: 'bn_bd',
-  weekdaysShort: [
-    'রবি',
-    'সোম',
-    'মঙ্গল',
-    'বুধ',
-    'বৃহঃ',
-    'শুক্র',
-    'শনি',
-  ],
-  weekdaysMin: [
-    'রবি',
-    'সোম',
-    'মঙ্গল',
-    'বুধ',
-    'বৃহঃ',
-    'শুক্র',
-    'শনি',
-  ],
+  weekdaysShort: ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'],
+  weekdaysMin: ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহঃ', 'শুক্র', 'শনি'],
   months: [
     'জানুয়ারী',
     'ফেব্রুয়ারী',
@@ -175,15 +143,7 @@ final CarbonLocaleData localeBnBd = localeBn.copyWith(
 // Regional variant: bn_IN
 final CarbonLocaleData localeBnIn = localeBn.copyWith(
   localeCode: 'bn_in',
-  weekdaysMin: [
-    'রবি',
-    'সোম',
-    'মঙ্গল',
-    'বুধ',
-    'বৃহস্পতি',
-    'শুক্র',
-    'শনি',
-  ],
+  weekdaysMin: ['রবি', 'সোম', 'মঙ্গল', 'বুধ', 'বৃহস্পতি', 'শুক্র', 'শনি'],
   months: [
     'জানুয়ারী',
     'ফেব্রুয়ারী',
@@ -214,20 +174,19 @@ final CarbonLocaleData localeBnIn = localeBn.copyWith(
   ],
 );
 
-
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'রাত';
-    }
-    if (hour < 10) {
-      return 'সকাল';
-    }
-    if (hour < 17) {
-      return 'দুপুর';
-    }
-    if (hour < 20) {
-      return 'বিকাল';
-    }
+  if (hour < 4) {
     return 'রাত';
+  }
+  if (hour < 10) {
+    return 'সকাল';
+  }
+  if (hour < 17) {
+    return 'দুপুর';
+  }
+  if (hour < 20) {
+    return 'বিকাল';
+  }
+  return 'রাত';
 }

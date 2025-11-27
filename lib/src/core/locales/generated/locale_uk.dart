@@ -26,31 +26,37 @@ const CarbonLocaleData localeUk = CarbonLocaleData(
     'a_minute': '{1}хвилина|:count хвилина|:count хвилини|:count хвилин',
     'second': ':count секунда|:count секунди|:count секунд',
     's': ':countсек',
-    'a_second': '{1}декілька секунд|:count секунда|:count секунди|:count секунд',
+    'a_second':
+        '{1}декілька секунд|:count секунда|:count секунди|:count секунд',
     'hour_ago': ':count годину|:count години|:count годин',
     'a_hour_ago': '{1}годину|:count годину|:count години|:count годин',
     'minute_ago': ':count хвилину|:count хвилини|:count хвилин',
     'a_minute_ago': '{1}хвилину|:count хвилину|:count хвилини|:count хвилин',
     'second_ago': ':count секунду|:count секунди|:count секунд',
-    'a_second_ago': '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
+    'a_second_ago':
+        '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
     'hour_from_now': ':count годину|:count години|:count годин',
     'a_hour_from_now': '{1}годину|:count годину|:count години|:count годин',
     'minute_from_now': ':count хвилину|:count хвилини|:count хвилин',
-    'a_minute_from_now': '{1}хвилину|:count хвилину|:count хвилини|:count хвилин',
+    'a_minute_from_now':
+        '{1}хвилину|:count хвилину|:count хвилини|:count хвилин',
     'second_from_now': ':count секунду|:count секунди|:count секунд',
-    'a_second_from_now': '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
+    'a_second_from_now':
+        '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
     'hour_after': ':count годину|:count години|:count годин',
     'a_hour_after': '{1}годину|:count годину|:count години|:count годин',
     'minute_after': ':count хвилину|:count хвилини|:count хвилин',
     'a_minute_after': '{1}хвилину|:count хвилину|:count хвилини|:count хвилин',
     'second_after': ':count секунду|:count секунди|:count секунд',
-    'a_second_after': '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
+    'a_second_after':
+        '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
     'hour_before': ':count годину|:count години|:count годин',
     'a_hour_before': '{1}годину|:count годину|:count години|:count годин',
     'minute_before': ':count хвилину|:count хвилини|:count хвилин',
     'a_minute_before': '{1}хвилину|:count хвилину|:count хвилини|:count хвилин',
     'second_before': ':count секунду|:count секунди|:count секунд',
-    'a_second_before': '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
+    'a_second_before':
+        '{1}декілька секунд|:count секунду|:count секунди|:count секунд',
     'ago': ':time тому',
     'from_now': 'за :time',
     'after': ':time після',
@@ -129,24 +135,8 @@ const CarbonLocaleData localeUk = CarbonLocaleData(
     'п’ятниця',
     'субота',
   ],
-  weekdaysShort: [
-    'нд',
-    'пн',
-    'вт',
-    'ср',
-    'чт',
-    'пт',
-    'сб',
-  ],
-  weekdaysMin: [
-    'нд',
-    'пн',
-    'вт',
-    'ср',
-    'чт',
-    'пт',
-    'сб',
-  ],
+  weekdaysShort: ['нд', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
+  weekdaysMin: ['нд', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {'sameElse': 'L'},
@@ -160,26 +150,30 @@ const CarbonLocaleData localeUk = CarbonLocaleData(
 );
 
 // Regional variant: uk_UA
-final CarbonLocaleData localeUkUa = localeUk.copyWith(
-  localeCode: 'uk_ua',
-);
-
+final CarbonLocaleData localeUkUa = localeUk.copyWith(localeCode: 'uk_ua');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'M' || period == 'd' || period == 'DDD' || period == 'w' || period == 'W' ? '$number-й' : (period == 'D' ? '$number-го' : number))).toString();
+  return ((period == 'M' ||
+              period == 'd' ||
+              period == 'DDD' ||
+              period == 'w' ||
+              period == 'W'
+          ? '$number-й'
+          : (period == 'D' ? '$number-го' : number)))
+      .toString();
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'ночі';
-    }
-    if (hour < 12) {
-      return 'ранку';
-    }
-    if (hour < 17) {
-      return 'дня';
-    }
-    return 'вечора';
+  if (hour < 4) {
+    return 'ночі';
+  }
+  if (hour < 12) {
+    return 'ранку';
+  }
+  if (hour < 17) {
+    return 'дня';
+  }
+  return 'вечора';
 }

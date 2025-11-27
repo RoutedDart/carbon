@@ -81,24 +81,8 @@ const CarbonLocaleData localeBs = CarbonLocaleData(
     'petak',
     'subota',
   ],
-  weekdaysShort: [
-    'ned.',
-    'pon.',
-    'uto.',
-    'sri.',
-    'čet.',
-    'pet.',
-    'sub.',
-  ],
-  weekdaysMin: [
-    'ne',
-    'po',
-    'ut',
-    'sr',
-    'če',
-    'pe',
-    'su',
-  ],
+  weekdaysShort: ['ned.', 'pon.', 'uto.', 'sri.', 'čet.', 'pet.', 'sub.'],
+  weekdaysMin: ['ne', 'po', 'ut', 'sr', 'če', 'pe', 'su'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -112,9 +96,7 @@ const CarbonLocaleData localeBs = CarbonLocaleData(
 );
 
 // Regional variant: bs_BA
-final CarbonLocaleData localeBsBa = localeBs.copyWith(
-  localeCode: 'bs_ba',
-);
+final CarbonLocaleData localeBsBa = localeBs.copyWith(localeCode: 'bs_ba');
 
 // Regional variant: bs_Cyrl
 final CarbonLocaleData localeBsCyrl = localeBs.copyWith(
@@ -128,24 +110,8 @@ final CarbonLocaleData localeBsCyrl = localeBs.copyWith(
     'петак',
     'субота',
   ],
-  weekdaysShort: [
-    'нед',
-    'пон',
-    'уто',
-    'сри',
-    'чет',
-    'пет',
-    'суб',
-  ],
-  weekdaysMin: [
-    'нед',
-    'пон',
-    'уто',
-    'сри',
-    'чет',
-    'пет',
-    'суб',
-  ],
+  weekdaysShort: ['нед', 'пон', 'уто', 'сри', 'чет', 'пет', 'суб'],
+  weekdaysMin: ['нед', 'пон', 'уто', 'сри', 'чет', 'пет', 'суб'],
   months: [
     'јануар',
     'фебруар',
@@ -177,10 +143,7 @@ final CarbonLocaleData localeBsCyrl = localeBs.copyWith(
 );
 
 // Regional variant: bs_Latn
-final CarbonLocaleData localeBsLatn = localeBs.copyWith(
-  localeCode: 'bs_latn',
-);
-
+final CarbonLocaleData localeBsLatn = localeBs.copyWith(localeCode: 'bs_latn');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

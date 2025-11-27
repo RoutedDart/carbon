@@ -27,11 +27,15 @@ const CarbonLocaleData localeHa = CarbonLocaleData(
     'second': ':count ná bíyú',
     'a_second': ':count ná bíyú',
     's': ':count ná bíyú',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -93,24 +97,8 @@ const CarbonLocaleData localeHa = CarbonLocaleData(
     'Jumaʼa',
     'Asabar',
   ],
-  weekdaysShort: [
-    'Lah',
-    'Lit',
-    'Tal',
-    'Lar',
-    'Alh',
-    'Jum',
-    'Asa',
-  ],
-  weekdaysMin: [
-    'Lh',
-    'Li',
-    'Ta',
-    'Lr',
-    'Al',
-    'Ju',
-    'As',
-  ],
+  weekdaysShort: ['Lah', 'Lit', 'Tal', 'Lar', 'Alh', 'Jum', 'Asa'],
+  weekdaysMin: ['Lh', 'Li', 'Ta', 'Lr', 'Al', 'Ju', 'As'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -130,24 +118,17 @@ const CarbonLocaleData localeHa = CarbonLocaleData(
 );
 
 // Regional variant: ha_GH
-final CarbonLocaleData localeHaGh = localeHa.copyWith(
-  localeCode: 'ha_gh',
-);
+final CarbonLocaleData localeHaGh = localeHa.copyWith(localeCode: 'ha_gh');
 
 // Regional variant: ha_NE
-final CarbonLocaleData localeHaNe = localeHa.copyWith(
-  localeCode: 'ha_ne',
-);
+final CarbonLocaleData localeHaNe = localeHa.copyWith(localeCode: 'ha_ne');
 
 // Regional variant: ha_NG
-final CarbonLocaleData localeHaNg = localeHa.copyWith(
-  localeCode: 'ha_ng',
-);
-
+final CarbonLocaleData localeHaNg = localeHa.copyWith(localeCode: 'ha_ng');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }

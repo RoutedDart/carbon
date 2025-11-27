@@ -83,24 +83,8 @@ const CarbonLocaleData localeSr = CarbonLocaleData(
     'petak',
     'subota',
   ],
-  weekdaysShort: [
-    'ned.',
-    'pon.',
-    'uto.',
-    'sre.',
-    'čet.',
-    'pet.',
-    'sub.',
-  ],
-  weekdaysMin: [
-    'ne',
-    'po',
-    'ut',
-    'sr',
-    'če',
-    'pe',
-    'su',
-  ],
+  weekdaysShort: ['ned.', 'pon.', 'uto.', 'sre.', 'čet.', 'pet.', 'sub.'],
+  weekdaysMin: ['ne', 'po', 'ut', 'sr', 'če', 'pe', 'su'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -124,24 +108,8 @@ final CarbonLocaleData localeSrCyrl = localeSr.copyWith(
     'петак',
     'субота',
   ],
-  weekdaysShort: [
-    'нед.',
-    'пон.',
-    'уто.',
-    'сре.',
-    'чет.',
-    'пет.',
-    'суб.',
-  ],
-  weekdaysMin: [
-    'не',
-    'по',
-    'ут',
-    'ср',
-    'че',
-    'пе',
-    'су',
-  ],
+  weekdaysShort: ['нед.', 'пон.', 'уто.', 'сре.', 'чет.', 'пет.', 'суб.'],
+  weekdaysMin: ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су'],
   months: [
     'јануар',
     'фебруар',
@@ -191,24 +159,8 @@ final CarbonLocaleData localeSrCyrlBa = localeSr.copyWith(
     'петак',
     'субота',
   ],
-  weekdaysShort: [
-    'нед.',
-    'пон.',
-    'ут.',
-    'ср.',
-    'чет.',
-    'пет.',
-    'суб.',
-  ],
-  weekdaysMin: [
-    'не',
-    'по',
-    'ут',
-    'ср',
-    'че',
-    'пе',
-    'су',
-  ],
+  weekdaysShort: ['нед.', 'пон.', 'ут.', 'ср.', 'чет.', 'пет.', 'суб.'],
+  weekdaysMin: ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су'],
   months: [
     'јануар',
     'фебруар',
@@ -258,24 +210,8 @@ final CarbonLocaleData localeSrCyrlMe = localeSr.copyWith(
     'петак',
     'субота',
   ],
-  weekdaysShort: [
-    'нед.',
-    'пон.',
-    'уто.',
-    'сре.',
-    'чет.',
-    'пет.',
-    'суб.',
-  ],
-  weekdaysMin: [
-    'не',
-    'по',
-    'ут',
-    'ср',
-    'че',
-    'пе',
-    'су',
-  ],
+  weekdaysShort: ['нед.', 'пон.', 'уто.', 'сре.', 'чет.', 'пет.', 'суб.'],
+  weekdaysMin: ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су'],
   months: [
     'јануар',
     'фебруар',
@@ -325,24 +261,8 @@ final CarbonLocaleData localeSrCyrlXk = localeSr.copyWith(
     'петак',
     'субота',
   ],
-  weekdaysShort: [
-    'нед.',
-    'пон.',
-    'ут.',
-    'ср.',
-    'чет.',
-    'пет.',
-    'суб.',
-  ],
-  weekdaysMin: [
-    'не',
-    'по',
-    'ут',
-    'ср',
-    'че',
-    'пе',
-    'су',
-  ],
+  weekdaysShort: ['нед.', 'пон.', 'ут.', 'ср.', 'чет.', 'пет.', 'суб.'],
+  weekdaysMin: ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су'],
   months: [
     'јануар',
     'фебруар',
@@ -381,9 +301,7 @@ final CarbonLocaleData localeSrCyrlXk = localeSr.copyWith(
 );
 
 // Regional variant: sr_Latn
-final CarbonLocaleData localeSrLatn = localeSr.copyWith(
-  localeCode: 'sr_latn',
-);
+final CarbonLocaleData localeSrLatn = localeSr.copyWith(localeCode: 'sr_latn');
 
 // Regional variant: sr_Latn_BA
 final CarbonLocaleData localeSrLatnBa = localeSr.copyWith(
@@ -397,15 +315,7 @@ final CarbonLocaleData localeSrLatnBa = localeSr.copyWith(
     'petak',
     'subota',
   ],
-  weekdaysShort: [
-    'ned.',
-    'pon.',
-    'ut.',
-    'sr.',
-    'čet.',
-    'pet.',
-    'sub.',
-  ],
+  weekdaysShort: ['ned.', 'pon.', 'ut.', 'sr.', 'čet.', 'pet.', 'sub.'],
 );
 
 // Regional variant: sr_Latn_ME
@@ -420,15 +330,7 @@ final CarbonLocaleData localeSrLatnMe = localeSr.copyWith(
     'petak',
     'subota',
   ],
-  weekdaysShort: [
-    'ned.',
-    'pon.',
-    'uto.',
-    'sri.',
-    'čet.',
-    'pet.',
-    'sub.',
-  ],
+  weekdaysShort: ['ned.', 'pon.', 'uto.', 'sri.', 'čet.', 'pet.', 'sub.'],
   calendar: {
     'sameDay': '[danas u] LT',
     'nextDay': '[sjutra u] LT',
@@ -440,15 +342,7 @@ final CarbonLocaleData localeSrLatnMe = localeSr.copyWith(
 // Regional variant: sr_Latn_XK
 final CarbonLocaleData localeSrLatnXk = localeSr.copyWith(
   localeCode: 'sr_latn_xk',
-  weekdaysShort: [
-    'ned.',
-    'pon.',
-    'ut.',
-    'sr.',
-    'čet.',
-    'pet.',
-    'sub.',
-  ],
+  weekdaysShort: ['ned.', 'pon.', 'ut.', 'sr.', 'čet.', 'pet.', 'sub.'],
 );
 
 // Regional variant: sr_ME
@@ -463,15 +357,7 @@ final CarbonLocaleData localeSrMe = localeSr.copyWith(
     'petak',
     'subota',
   ],
-  weekdaysShort: [
-    'ned.',
-    'pon.',
-    'uto.',
-    'sri.',
-    'čet.',
-    'pet.',
-    'sub.',
-  ],
+  weekdaysShort: ['ned.', 'pon.', 'uto.', 'sri.', 'čet.', 'pet.', 'sub.'],
   calendar: {
     'sameDay': '[danas u] LT',
     'nextDay': '[sjutra u] LT',
@@ -492,24 +378,8 @@ final CarbonLocaleData localeSrRs = localeSr.copyWith(
     'петак',
     'субота',
   ],
-  weekdaysShort: [
-    'нед.',
-    'пон.',
-    'уто.',
-    'сре.',
-    'чет.',
-    'пет.',
-    'суб.',
-  ],
-  weekdaysMin: [
-    'не',
-    'по',
-    'ут',
-    'ср',
-    'че',
-    'пе',
-    'су',
-  ],
+  weekdaysShort: ['нед.', 'пон.', 'уто.', 'сре.', 'чет.', 'пет.', 'суб.'],
+  weekdaysMin: ['не', 'по', 'ут', 'ср', 'че', 'пе', 'су'],
   months: [
     'јануар',
     'фебруар',
@@ -551,4 +421,3 @@ final CarbonLocaleData localeSrRs = localeSr.copyWith(
 final CarbonLocaleData localeSrRsLatin = localeSr.copyWith(
   localeCode: 'sr_rs@latin',
 );
-

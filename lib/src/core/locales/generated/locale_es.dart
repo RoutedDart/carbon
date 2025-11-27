@@ -97,24 +97,8 @@ const CarbonLocaleData localeEs = CarbonLocaleData(
     'viernes',
     'sábado',
   ],
-  weekdaysShort: [
-    'dom.',
-    'lun.',
-    'mar.',
-    'mié.',
-    'jue.',
-    'vie.',
-    'sáb.',
-  ],
-  weekdaysMin: [
-    'do',
-    'lu',
-    'ma',
-    'mi',
-    'ju',
-    'vi',
-    'sá',
-  ],
+  weekdaysShort: ['dom.', 'lun.', 'mar.', 'mié.', 'jue.', 'vie.', 'sáb.'],
+  weekdaysMin: ['do', 'lu', 'ma', 'mi', 'ju', 'vi', 'sá'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   ordinalWords: {
@@ -136,134 +120,82 @@ const CarbonLocaleData localeEs = CarbonLocaleData(
 );
 
 // Regional variant: es_419
-final CarbonLocaleData localeEs419 = localeEs.copyWith(
-  localeCode: 'es_419',
-);
+final CarbonLocaleData localeEs419 = localeEs.copyWith(localeCode: 'es_419');
 
 // Regional variant: es_AR
-final CarbonLocaleData localeEsAr = localeEs.copyWith(
-  localeCode: 'es_ar',
-);
+final CarbonLocaleData localeEsAr = localeEs.copyWith(localeCode: 'es_ar');
 
 // Regional variant: es_BO
-final CarbonLocaleData localeEsBo = localeEs.copyWith(
-  localeCode: 'es_bo',
-);
+final CarbonLocaleData localeEsBo = localeEs.copyWith(localeCode: 'es_bo');
 
 // Regional variant: es_BR
-final CarbonLocaleData localeEsBr = localeEs.copyWith(
-  localeCode: 'es_br',
-);
+final CarbonLocaleData localeEsBr = localeEs.copyWith(localeCode: 'es_br');
 
 // Regional variant: es_BZ
-final CarbonLocaleData localeEsBz = localeEs.copyWith(
-  localeCode: 'es_bz',
-);
+final CarbonLocaleData localeEsBz = localeEs.copyWith(localeCode: 'es_bz');
 
 // Regional variant: es_CL
-final CarbonLocaleData localeEsCl = localeEs.copyWith(
-  localeCode: 'es_cl',
-);
+final CarbonLocaleData localeEsCl = localeEs.copyWith(localeCode: 'es_cl');
 
 // Regional variant: es_CO
-final CarbonLocaleData localeEsCo = localeEs.copyWith(
-  localeCode: 'es_co',
-);
+final CarbonLocaleData localeEsCo = localeEs.copyWith(localeCode: 'es_co');
 
 // Regional variant: es_CR
-final CarbonLocaleData localeEsCr = localeEs.copyWith(
-  localeCode: 'es_cr',
-);
+final CarbonLocaleData localeEsCr = localeEs.copyWith(localeCode: 'es_cr');
 
 // Regional variant: es_CU
-final CarbonLocaleData localeEsCu = localeEs.copyWith(
-  localeCode: 'es_cu',
-);
+final CarbonLocaleData localeEsCu = localeEs.copyWith(localeCode: 'es_cu');
 
 // Regional variant: es_DO
-final CarbonLocaleData localeEsDo = localeEs.copyWith(
-  localeCode: 'es_do',
-);
+final CarbonLocaleData localeEsDo = localeEs.copyWith(localeCode: 'es_do');
 
 // Regional variant: es_EA
-final CarbonLocaleData localeEsEa = localeEs.copyWith(
-  localeCode: 'es_ea',
-);
+final CarbonLocaleData localeEsEa = localeEs.copyWith(localeCode: 'es_ea');
 
 // Regional variant: es_EC
-final CarbonLocaleData localeEsEc = localeEs.copyWith(
-  localeCode: 'es_ec',
-);
+final CarbonLocaleData localeEsEc = localeEs.copyWith(localeCode: 'es_ec');
 
 // Regional variant: es_ES
-final CarbonLocaleData localeEsEs = localeEs.copyWith(
-  localeCode: 'es_es',
-);
+final CarbonLocaleData localeEsEs = localeEs.copyWith(localeCode: 'es_es');
 
 // Regional variant: es_GQ
-final CarbonLocaleData localeEsGq = localeEs.copyWith(
-  localeCode: 'es_gq',
-);
+final CarbonLocaleData localeEsGq = localeEs.copyWith(localeCode: 'es_gq');
 
 // Regional variant: es_GT
-final CarbonLocaleData localeEsGt = localeEs.copyWith(
-  localeCode: 'es_gt',
-);
+final CarbonLocaleData localeEsGt = localeEs.copyWith(localeCode: 'es_gt');
 
 // Regional variant: es_HN
-final CarbonLocaleData localeEsHn = localeEs.copyWith(
-  localeCode: 'es_hn',
-);
+final CarbonLocaleData localeEsHn = localeEs.copyWith(localeCode: 'es_hn');
 
 // Regional variant: es_IC
-final CarbonLocaleData localeEsIc = localeEs.copyWith(
-  localeCode: 'es_ic',
-);
+final CarbonLocaleData localeEsIc = localeEs.copyWith(localeCode: 'es_ic');
 
 // Regional variant: es_MX
-final CarbonLocaleData localeEsMx = localeEs.copyWith(
-  localeCode: 'es_mx',
-);
+final CarbonLocaleData localeEsMx = localeEs.copyWith(localeCode: 'es_mx');
 
 // Regional variant: es_NI
-final CarbonLocaleData localeEsNi = localeEs.copyWith(
-  localeCode: 'es_ni',
-);
+final CarbonLocaleData localeEsNi = localeEs.copyWith(localeCode: 'es_ni');
 
 // Regional variant: es_PA
-final CarbonLocaleData localeEsPa = localeEs.copyWith(
-  localeCode: 'es_pa',
-);
+final CarbonLocaleData localeEsPa = localeEs.copyWith(localeCode: 'es_pa');
 
 // Regional variant: es_PE
-final CarbonLocaleData localeEsPe = localeEs.copyWith(
-  localeCode: 'es_pe',
-);
+final CarbonLocaleData localeEsPe = localeEs.copyWith(localeCode: 'es_pe');
 
 // Regional variant: es_PH
-final CarbonLocaleData localeEsPh = localeEs.copyWith(
-  localeCode: 'es_ph',
-);
+final CarbonLocaleData localeEsPh = localeEs.copyWith(localeCode: 'es_ph');
 
 // Regional variant: es_PR
-final CarbonLocaleData localeEsPr = localeEs.copyWith(
-  localeCode: 'es_pr',
-);
+final CarbonLocaleData localeEsPr = localeEs.copyWith(localeCode: 'es_pr');
 
 // Regional variant: es_PY
-final CarbonLocaleData localeEsPy = localeEs.copyWith(
-  localeCode: 'es_py',
-);
+final CarbonLocaleData localeEsPy = localeEs.copyWith(localeCode: 'es_py');
 
 // Regional variant: es_SV
-final CarbonLocaleData localeEsSv = localeEs.copyWith(
-  localeCode: 'es_sv',
-);
+final CarbonLocaleData localeEsSv = localeEs.copyWith(localeCode: 'es_sv');
 
 // Regional variant: es_US
-final CarbonLocaleData localeEsUs = localeEs.copyWith(
-  localeCode: 'es_us',
-);
+final CarbonLocaleData localeEsUs = localeEs.copyWith(localeCode: 'es_us');
 
 // Regional variant: es_UY
 final CarbonLocaleData localeEsUy = localeEs.copyWith(
@@ -299,10 +231,7 @@ final CarbonLocaleData localeEsUy = localeEs.copyWith(
 );
 
 // Regional variant: es_VE
-final CarbonLocaleData localeEsVe = localeEs.copyWith(
-  localeCode: 'es_ve',
-);
-
+final CarbonLocaleData localeEsVe = localeEs.copyWith(localeCode: 'es_ve');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

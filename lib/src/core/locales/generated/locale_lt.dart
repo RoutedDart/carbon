@@ -64,7 +64,8 @@ const CarbonLocaleData localeLt = CarbonLocaleData(
     'period_interval': 'kiekvieną :interval',
     'period_start_date': 'nuo :date',
     'period_end_date': 'iki :date',
-    'months_regexp': '/(L{2,4}|D[oD]?(\\[[^\\[\\]]*\\]|\\s)+MMMM?|MMMM?(\\[[^\\[\\]]*\\]|\\s)+D[oD]?)/',
+    'months_regexp':
+        '/(L{2,4}|D[oD]?(\\[[^\\[\\]]*\\]|\\s)+MMMM?|MMMM?(\\[[^\\[\\]]*\\]|\\s)+D[oD]?)/',
   },
   formats: {
     'LT': 'HH:mm',
@@ -125,24 +126,8 @@ const CarbonLocaleData localeLt = CarbonLocaleData(
     'penktadienį',
     'šeštadienį',
   ],
-  weekdaysShort: [
-    'sek',
-    'pir',
-    'ant',
-    'tre',
-    'ket',
-    'pen',
-    'šeš',
-  ],
-  weekdaysMin: [
-    'se',
-    'pi',
-    'an',
-    'tr',
-    'ke',
-    'pe',
-    'še',
-  ],
+  weekdaysShort: ['sek', 'pir', 'ant', 'tre', 'ket', 'pen', 'šeš'],
+  weekdaysMin: ['se', 'pi', 'an', 'tr', 'ke', 'pe', 'še'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -163,14 +148,12 @@ const CarbonLocaleData localeLt = CarbonLocaleData(
 );
 
 // Regional variant: lt_LT
-final CarbonLocaleData localeLtLt = localeLt.copyWith(
-  localeCode: 'lt_lt',
-);
-
+final CarbonLocaleData localeLtLt = localeLt.copyWith(localeCode: 'lt_lt');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((number == 0 ? '0-is' : (number == 3 ? '3-ias' : '$number-as'))).toString();
+  return ((number == 0 ? '0-is' : (number == 3 ? '3-ias' : '$number-as')))
+      .toString();
 }
 
 // Auto-generated meridiem function from array

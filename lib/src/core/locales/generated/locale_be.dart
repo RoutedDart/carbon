@@ -25,7 +25,8 @@ const CarbonLocaleData localeBe = CarbonLocaleData(
     'a_minute': '{1}хвіліна|:count хвіліна|:count хвіліны|:count хвілін',
     'min': ':count хв',
     'second': ':count секунда|:count секунды|:count секунд',
-    'a_second': '{1}некалькі секунд|:count секунда|:count секунды|:count секунд',
+    'a_second':
+        '{1}некалькі секунд|:count секунда|:count секунды|:count секунд',
     's': ':count сек',
     'hour_ago': ':count гадзіну|:count гадзіны|:count гадзін',
     'a_hour_ago': '{1}гадзіну|:count гадзіну|:count гадзіны|:count гадзін',
@@ -34,16 +35,19 @@ const CarbonLocaleData localeBe = CarbonLocaleData(
     'a_minute_ago': '{1}хвіліну|:count хвіліну|:count хвіліны|:count хвілін',
     'min_ago': ':count хвіліну|:count хвіліны|:count хвілін',
     'second_ago': ':count секунду|:count секунды|:count секунд',
-    'a_second_ago': '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
+    'a_second_ago':
+        '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
     's_ago': ':count секунду|:count секунды|:count секунд',
     'hour_from_now': ':count гадзіну|:count гадзіны|:count гадзін',
     'a_hour_from_now': '{1}гадзіну|:count гадзіну|:count гадзіны|:count гадзін',
     'h_from_now': ':count гадзіну|:count гадзіны|:count гадзін',
     'minute_from_now': ':count хвіліну|:count хвіліны|:count хвілін',
-    'a_minute_from_now': '{1}хвіліну|:count хвіліну|:count хвіліны|:count хвілін',
+    'a_minute_from_now':
+        '{1}хвіліну|:count хвіліну|:count хвіліны|:count хвілін',
     'min_from_now': ':count хвіліну|:count хвіліны|:count хвілін',
     'second_from_now': ':count секунду|:count секунды|:count секунд',
-    'a_second_from_now': '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
+    'a_second_from_now':
+        '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
     's_from_now': ':count секунду|:count секунды|:count секунд',
     'hour_after': ':count гадзіну|:count гадзіны|:count гадзін',
     'a_hour_after': '{1}гадзіну|:count гадзіну|:count гадзіны|:count гадзін',
@@ -52,7 +56,8 @@ const CarbonLocaleData localeBe = CarbonLocaleData(
     'a_minute_after': '{1}хвіліну|:count хвіліну|:count хвіліны|:count хвілін',
     'min_after': ':count хвіліну|:count хвіліны|:count хвілін',
     'second_after': ':count секунду|:count секунды|:count секунд',
-    'a_second_after': '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
+    'a_second_after':
+        '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
     's_after': ':count секунду|:count секунды|:count секунд',
     'hour_before': ':count гадзіну|:count гадзіны|:count гадзін',
     'a_hour_before': '{1}гадзіну|:count гадзіну|:count гадзіны|:count гадзін',
@@ -61,7 +66,8 @@ const CarbonLocaleData localeBe = CarbonLocaleData(
     'a_minute_before': '{1}хвіліну|:count хвіліну|:count хвіліны|:count хвілін',
     'min_before': ':count хвіліну|:count хвіліны|:count хвілін',
     'second_before': ':count секунду|:count секунды|:count секунд',
-    'a_second_before': '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
+    'a_second_before':
+        '{1}некалькі секунд|:count секунду|:count секунды|:count секунд',
     's_before': ':count секунду|:count секунды|:count секунд',
     'ago': ':time таму',
     'from_now': 'праз :time',
@@ -136,24 +142,8 @@ const CarbonLocaleData localeBe = CarbonLocaleData(
     'пятніцу',
     'суботу',
   ],
-  weekdaysShort: [
-    'нд',
-    'пн',
-    'ат',
-    'ср',
-    'чц',
-    'пт',
-    'сб',
-  ],
-  weekdaysMin: [
-    'нд',
-    'пн',
-    'ат',
-    'ср',
-    'чц',
-    'пт',
-    'сб',
-  ],
+  weekdaysShort: ['нд', 'пн', 'ат', 'ср', 'чц', 'пт', 'сб'],
+  weekdaysMin: ['нд', 'пн', 'ат', 'ср', 'чц', 'пт', 'сб'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -180,24 +170,8 @@ final CarbonLocaleData localeBeBy = localeBe.copyWith(
     'Пятніца',
     'Субота',
   ],
-  weekdaysShort: [
-    'Няд',
-    'Пан',
-    'Аўт',
-    'Срд',
-    'Чцв',
-    'Пят',
-    'Суб',
-  ],
-  weekdaysMin: [
-    'Няд',
-    'Пан',
-    'Аўт',
-    'Срд',
-    'Чцв',
-    'Пят',
-    'Суб',
-  ],
+  weekdaysShort: ['Няд', 'Пан', 'Аўт', 'Срд', 'Чцв', 'Пят', 'Суб'],
+  weekdaysMin: ['Няд', 'Пан', 'Аўт', 'Срд', 'Чцв', 'Пят', 'Суб'],
   months: [
     'студзеня',
     'лютага',
@@ -240,24 +214,8 @@ final CarbonLocaleData localeBeByLatin = localeBe.copyWith(
     'Piatnica',
     'Subota',
   ],
-  weekdaysShort: [
-    'Nia',
-    'Pan',
-    'Aŭt',
-    'Sie',
-    'Čać',
-    'Pia',
-    'Sub',
-  ],
-  weekdaysMin: [
-    'Nia',
-    'Pan',
-    'Aŭt',
-    'Sie',
-    'Čać',
-    'Pia',
-    'Sub',
-  ],
+  weekdaysShort: ['Nia', 'Pan', 'Aŭt', 'Sie', 'Čać', 'Pia', 'Sub'],
+  weekdaysMin: ['Nia', 'Pan', 'Aŭt', 'Sie', 'Čać', 'Pia', 'Sub'],
   months: [
     'studzienia',
     'lutaha',
@@ -293,22 +251,31 @@ final CarbonLocaleData localeBeByLatin = localeBe.copyWith(
   periodEndDate: 'to :date',
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'M' || period == 'd' || period == 'DDD' || period == 'w' || period == 'W' ? (number % 10 == 2 || number % 10 == 3 && number % 100 != 12 && number % 100 != 13 ? '$number-і' : '$number-ы') : (period == 'D' ? '$number-га' : number))).toString();
+  return ((period == 'M' ||
+              period == 'd' ||
+              period == 'DDD' ||
+              period == 'w' ||
+              period == 'W'
+          ? (number % 10 == 2 ||
+                    number % 10 == 3 && number % 100 != 12 && number % 100 != 13
+                ? '$number-і'
+                : '$number-ы')
+          : (period == 'D' ? '$number-га' : number)))
+      .toString();
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'ночы';
-    }
-    if (hour < 12) {
-      return 'раніцы';
-    }
-    if (hour < 17) {
-      return 'дня';
-    }
-    return 'вечара';
+  if (hour < 4) {
+    return 'ночы';
+  }
+  if (hour < 12) {
+    return 'раніцы';
+  }
+  if (hour < 17) {
+    return 'дня';
+  }
+  return 'вечара';
 }

@@ -74,24 +74,8 @@ const CarbonLocaleData localeTzl = CarbonLocaleData(
     'Viénerçi',
     'Sáturi',
   ],
-  weekdaysShort: [
-    'Súl',
-    'Lún',
-    'Mai',
-    'Már',
-    'Xhú',
-    'Vié',
-    'Sát',
-  ],
-  weekdaysMin: [
-    'Sú',
-    'Lú',
-    'Ma',
-    'Má',
-    'Xh',
-    'Vi',
-    'Sá',
-  ],
+  weekdaysShort: ['Súl', 'Lún', 'Mai', 'Már', 'Xhú', 'Vié', 'Sát'],
+  weekdaysMin: ['Sú', 'Lú', 'Ma', 'Má', 'Xh', 'Vi', 'Sá'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -104,7 +88,6 @@ const CarbonLocaleData localeTzl = CarbonLocaleData(
   },
   meridiem: _meridiem,
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

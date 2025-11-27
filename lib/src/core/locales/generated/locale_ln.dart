@@ -27,11 +27,15 @@ const CarbonLocaleData localeLn = CarbonLocaleData(
     'second': 'segɔnde :count',
     'a_second': 'segɔnde :count',
     's': 'segɔnde :count',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -93,24 +97,8 @@ const CarbonLocaleData localeLn = CarbonLocaleData(
     'Misálá mítáno',
     'Mpɔ́sɔ',
   ],
-  weekdaysShort: [
-    'm1.',
-    'm2.',
-    'm3.',
-    'm4.',
-    'm5.',
-    'm6.',
-    'm7.',
-  ],
-  weekdaysMin: [
-    'm1.',
-    'm2.',
-    'm3.',
-    'm4.',
-    'm5.',
-    'm6.',
-    'm7.',
-  ],
+  weekdaysShort: ['m1.', 'm2.', 'm3.', 'm4.', 'm5.', 'm6.', 'm7.'],
+  weekdaysMin: ['m1.', 'm2.', 'm3.', 'm4.', 'm5.', 'm6.', 'm7.'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -141,30 +129,12 @@ final CarbonLocaleData localeLnAo = localeLn.copyWith(
     'mokɔlɔ ya mítáno',
     'mpɔ́sɔ',
   ],
-  weekdaysShort: [
-    'eye',
-    'ybo',
-    'mbl',
-    'mst',
-    'min',
-    'mtn',
-    'mps',
-  ],
-  weekdaysMin: [
-    'eye',
-    'ybo',
-    'mbl',
-    'mst',
-    'min',
-    'mtn',
-    'mps',
-  ],
+  weekdaysShort: ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
+  weekdaysMin: ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
 );
 
 // Regional variant: ln_CD
-final CarbonLocaleData localeLnCd = localeLn.copyWith(
-  localeCode: 'ln_cd',
-);
+final CarbonLocaleData localeLnCd = localeLn.copyWith(localeCode: 'ln_cd');
 
 // Regional variant: ln_CF
 final CarbonLocaleData localeLnCf = localeLn.copyWith(
@@ -178,24 +148,8 @@ final CarbonLocaleData localeLnCf = localeLn.copyWith(
     'mokɔlɔ ya mítáno',
     'mpɔ́sɔ',
   ],
-  weekdaysShort: [
-    'eye',
-    'ybo',
-    'mbl',
-    'mst',
-    'min',
-    'mtn',
-    'mps',
-  ],
-  weekdaysMin: [
-    'eye',
-    'ybo',
-    'mbl',
-    'mst',
-    'min',
-    'mtn',
-    'mps',
-  ],
+  weekdaysShort: ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
+  weekdaysMin: ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
 );
 
 // Regional variant: ln_CG
@@ -210,30 +164,13 @@ final CarbonLocaleData localeLnCg = localeLn.copyWith(
     'mokɔlɔ ya mítáno',
     'mpɔ́sɔ',
   ],
-  weekdaysShort: [
-    'eye',
-    'ybo',
-    'mbl',
-    'mst',
-    'min',
-    'mtn',
-    'mps',
-  ],
-  weekdaysMin: [
-    'eye',
-    'ybo',
-    'mbl',
-    'mst',
-    'min',
-    'mtn',
-    'mps',
-  ],
+  weekdaysShort: ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
+  weekdaysMin: ['eye', 'ybo', 'mbl', 'mst', 'min', 'mtn', 'mps'],
 );
-
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }

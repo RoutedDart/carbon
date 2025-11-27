@@ -118,9 +118,7 @@ const CarbonLocaleData localeBo = CarbonLocaleData(
 );
 
 // Regional variant: bo_CN
-final CarbonLocaleData localeBoCn = localeBo.copyWith(
-  localeCode: 'bo_cn',
-);
+final CarbonLocaleData localeBoCn = localeBo.copyWith(localeCode: 'bo_cn');
 
 // Regional variant: bo_IN
 final CarbonLocaleData localeBoIn = localeBo.copyWith(
@@ -168,20 +166,19 @@ final CarbonLocaleData localeBoIn = localeBo.copyWith(
   ],
 );
 
-
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'མཚན་མོ';
-    }
-    if (hour < 10) {
-      return 'ཞོགས་ཀས';
-    }
-    if (hour < 17) {
-      return 'ཉིན་གུང';
-    }
-    if (hour < 20) {
-      return 'དགོང་དག';
-    }
+  if (hour < 4) {
     return 'མཚན་མོ';
+  }
+  if (hour < 10) {
+    return 'ཞོགས་ཀས';
+  }
+  if (hour < 17) {
+    return 'ཉིན་གུང';
+  }
+  if (hour < 20) {
+    return 'དགོང་དག';
+  }
+  return 'མཚན་མོ';
 }

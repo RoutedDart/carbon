@@ -90,15 +90,7 @@ const CarbonLocaleData localeTa = CarbonLocaleData(
     'வெள்ளி',
     'சனி',
   ],
-  weekdaysMin: [
-    'ஞா',
-    'தி',
-    'செ',
-    'பு',
-    'வி',
-    'வெ',
-    'ச',
-  ],
+  weekdaysMin: ['ஞா', 'தி', 'செ', 'பு', 'வி', 'வெ', 'ச'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -125,15 +117,7 @@ final CarbonLocaleData localeTaIn = localeTa.copyWith(
     'வெள்ளி',
     'சனி',
   ],
-  weekdaysShort: [
-    'ஞா',
-    'தி',
-    'செ',
-    'பு',
-    'வி',
-    'வெ',
-    'ச',
-  ],
+  weekdaysShort: ['ஞா', 'தி', 'செ', 'பு', 'வி', 'வெ', 'ச'],
   months: [
     'ஜனவரி',
     'பிப்ரவரி',
@@ -176,15 +160,7 @@ final CarbonLocaleData localeTaLk = localeTa.copyWith(
     'வெள்ளி',
     'சனி',
   ],
-  weekdaysShort: [
-    'ஞா',
-    'தி',
-    'செ',
-    'பு',
-    'வி',
-    'வெ',
-    'ச',
-  ],
+  weekdaysShort: ['ஞா', 'தி', 'செ', 'பு', 'வி', 'வெ', 'ச'],
   months: [
     'ஜனவரி',
     'பிப்ரவரி',
@@ -227,15 +203,7 @@ final CarbonLocaleData localeTaMy = localeTa.copyWith(
     'வெள்ளி',
     'சனி',
   ],
-  weekdaysShort: [
-    'ஞாயி.',
-    'திங்.',
-    'செவ்.',
-    'புத.',
-    'வியா.',
-    'வெள்.',
-    'சனி',
-  ],
+  weekdaysShort: ['ஞாயி.', 'திங்.', 'செவ்.', 'புத.', 'வியா.', 'வெள்.', 'சனி'],
   months: [
     'ஜனவரி',
     'பிப்ரவரி',
@@ -278,15 +246,7 @@ final CarbonLocaleData localeTaSg = localeTa.copyWith(
     'வெள்ளி',
     'சனி',
   ],
-  weekdaysShort: [
-    'ஞாயி.',
-    'திங்.',
-    'செவ்.',
-    'புத.',
-    'வியா.',
-    'வெள்.',
-    'சனி',
-  ],
+  weekdaysShort: ['ஞாயி.', 'திங்.', 'செவ்.', 'புத.', 'வியா.', 'வெள்.', 'சனி'],
   months: [
     'ஜனவரி',
     'பிப்ரவரி',
@@ -317,26 +277,25 @@ final CarbonLocaleData localeTaSg = localeTa.copyWith(
   ],
 );
 
-
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 2) {
-      return ' யாமம்';
-    }
-    if (hour < 6) {
-      return ' வைகறை';
-    }
-    if (hour < 10) {
-      return ' காலை';
-    }
-    if (hour < 14) {
-      return ' நண்பகல்';
-    }
-    if (hour < 18) {
-      return ' எற்பாடு';
-    }
-    if (hour < 22) {
-      return ' மாலை';
-    }
+  if (hour < 2) {
     return ' யாமம்';
+  }
+  if (hour < 6) {
+    return ' வைகறை';
+  }
+  if (hour < 10) {
+    return ' காலை';
+  }
+  if (hour < 14) {
+    return ' நண்பகல்';
+  }
+  if (hour < 18) {
+    return ' எற்பாடு';
+  }
+  if (hour < 22) {
+    return ' மாலை';
+  }
+  return ' யாமம்';
 }

@@ -27,11 +27,15 @@ const CarbonLocaleData localeKu = CarbonLocaleData(
     'second': ':count saniye',
     'a_second': ':count saniye',
     's': ':count saniye',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': 'berî :time',
     'from_now': 'di :time de',
@@ -102,33 +106,9 @@ const CarbonLocaleData localeKu = CarbonLocaleData(
     'ser',
     'ber',
   ],
-  weekdays: [
-    'yekşem',
-    'duşem',
-    'sêşem',
-    'çarşem',
-    'pêncşem',
-    'în',
-    'şemî',
-  ],
-  weekdaysShort: [
-    'yş',
-    'dş',
-    'sş',
-    'çş',
-    'pş',
-    'în',
-    'ş',
-  ],
-  weekdaysMin: [
-    'Y',
-    'D',
-    'S',
-    'Ç',
-    'P',
-    'Î',
-    'Ş',
-  ],
+  weekdays: ['yekşem', 'duşem', 'sêşem', 'çarşem', 'pêncşem', 'în', 'şemî'],
+  weekdaysShort: ['yş', 'dş', 'sş', 'çş', 'pş', 'în', 'ş'],
+  weekdaysMin: ['Y', 'D', 'S', 'Ç', 'P', 'Î', 'Ş'],
   firstDayOfWeek: 6,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' û '],
@@ -147,7 +127,4 @@ const CarbonLocaleData localeKu = CarbonLocaleData(
 );
 
 // Regional variant: ku_TR
-final CarbonLocaleData localeKuTr = localeKu.copyWith(
-  localeCode: 'ku_tr',
-);
-
+final CarbonLocaleData localeKuTr = localeKu.copyWith(localeCode: 'ku_tr');

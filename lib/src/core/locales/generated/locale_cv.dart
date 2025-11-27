@@ -71,24 +71,8 @@ const CarbonLocaleData localeCv = CarbonLocaleData(
     'эрнекун',
     'шӑматкун',
   ],
-  weekdaysShort: [
-    'выр',
-    'тун',
-    'ытл',
-    'юн',
-    'кӗҫ',
-    'эрн',
-    'шӑм',
-  ],
-  weekdaysMin: [
-    'вр',
-    'тн',
-    'ыт',
-    'юн',
-    'кҫ',
-    'эр',
-    'шм',
-  ],
+  weekdaysShort: ['выр', 'тун', 'ытл', 'юн', 'кӗҫ', 'эрн', 'шӑм'],
+  weekdaysMin: ['вр', 'тн', 'ыт', 'юн', 'кҫ', 'эр', 'шм'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -103,7 +87,4 @@ const CarbonLocaleData localeCv = CarbonLocaleData(
 );
 
 // Regional variant: cv_RU
-final CarbonLocaleData localeCvRu = localeCv.copyWith(
-  localeCode: 'cv_ru',
-);
-
+final CarbonLocaleData localeCvRu = localeCv.copyWith(localeCode: 'cv_ru');

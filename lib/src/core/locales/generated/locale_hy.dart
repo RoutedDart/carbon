@@ -96,24 +96,8 @@ const CarbonLocaleData localeHy = CarbonLocaleData(
     'ուրբաթ',
     'շաբաթ',
   ],
-  weekdaysShort: [
-    'կրկ',
-    'երկ',
-    'երք',
-    'չրք',
-    'հնգ',
-    'ուրբ',
-    'շբթ',
-  ],
-  weekdaysMin: [
-    'կրկ',
-    'երկ',
-    'երք',
-    'չրք',
-    'հնգ',
-    'ուրբ',
-    'շբթ',
-  ],
+  weekdaysShort: ['կրկ', 'երկ', 'երք', 'չրք', 'հնգ', 'ուրբ', 'շբթ'],
+  weekdaysMin: ['կրկ', 'երկ', 'երք', 'չրք', 'հնգ', 'ուրբ', 'շբթ'],
   firstDayOfWeek: 1,
   calendar: {
     'sameDay': '[այսօր] LT',
@@ -129,26 +113,26 @@ const CarbonLocaleData localeHy = CarbonLocaleData(
 );
 
 // Regional variant: hy_AM
-final CarbonLocaleData localeHyAm = localeHy.copyWith(
-  localeCode: 'hy_am',
-);
-
+final CarbonLocaleData localeHyAm = localeHy.copyWith(localeCode: 'hy_am');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'DDD' || period == 'w' || period == 'W' || period == 'DDDo' ? '$number${(number == 1 ? '-ին' : '-րդ')}' : number)).toString();
+  return ((period == 'DDD' || period == 'w' || period == 'W' || period == 'DDDo'
+          ? '$number${(number == 1 ? '-ին' : '-րդ')}'
+          : number))
+      .toString();
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'գիշերվա';
-    }
-    if (hour < 12) {
-      return 'առավոտվա';
-    }
-    if (hour < 17) {
-      return 'ցերեկվա';
-    }
-    return 'երեկոյան';
+  if (hour < 4) {
+    return 'գիշերվա';
+  }
+  if (hour < 12) {
+    return 'առավոտվա';
+  }
+  if (hour < 17) {
+    return 'ցերեկվա';
+  }
+  return 'երեկոյան';
 }

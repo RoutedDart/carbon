@@ -84,24 +84,8 @@ const CarbonLocaleData localeGa = CarbonLocaleData(
     'Dé hAoine',
     'Dé Satharn',
   ],
-  weekdaysShort: [
-    'Dom',
-    'Lua',
-    'Mái',
-    'Céa',
-    'Déa',
-    'hAo',
-    'Sat',
-  ],
-  weekdaysMin: [
-    'Do',
-    'Lu',
-    'Má',
-    'Ce',
-    'Dé',
-    'hA',
-    'Sa',
-  ],
+  weekdaysShort: ['Dom', 'Lua', 'Mái', 'Céa', 'Déa', 'hAo', 'Sat'],
+  weekdaysMin: ['Do', 'Lu', 'Má', 'Ce', 'Dé', 'hA', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -118,14 +102,11 @@ const CarbonLocaleData localeGa = CarbonLocaleData(
 );
 
 // Regional variant: ga_IE
-final CarbonLocaleData localeGaIe = localeGa.copyWith(
-  localeCode: 'ga_ie',
-);
-
+final CarbonLocaleData localeGaIe = localeGa.copyWith(localeCode: 'ga_ie');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(number == 1 ? 'd' : (number % 10 == 2 ? 'na' : 'mh'))}';
+  return '$number${(number == 1 ? 'd' : (number % 10 == 2 ? 'na' : 'mh'))}';
 }
 
 // Auto-generated meridiem function from array

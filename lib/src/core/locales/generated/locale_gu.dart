@@ -74,24 +74,8 @@ const CarbonLocaleData localeGu = CarbonLocaleData(
     'શુક્રવાર',
     'શનિવાર',
   ],
-  weekdaysShort: [
-    'રવિ',
-    'સોમ',
-    'મંગળ',
-    'બુધ્',
-    'ગુરુ',
-    'શુક્ર',
-    'શનિ',
-  ],
-  weekdaysMin: [
-    'ર',
-    'સો',
-    'મં',
-    'બુ',
-    'ગુ',
-    'શુ',
-    'શ',
-  ],
+  weekdaysShort: ['રવિ', 'સોમ', 'મંગળ', 'બુધ્', 'ગુરુ', 'શુક્ર', 'શનિ'],
+  weekdaysMin: ['ર', 'સો', 'મં', 'બુ', 'ગુ', 'શુ', 'શ'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -107,24 +91,21 @@ const CarbonLocaleData localeGu = CarbonLocaleData(
 );
 
 // Regional variant: gu_IN
-final CarbonLocaleData localeGuIn = localeGu.copyWith(
-  localeCode: 'gu_in',
-);
-
+final CarbonLocaleData localeGuIn = localeGu.copyWith(localeCode: 'gu_in');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 4) {
-      return 'રાત';
-    }
-    if (hour < 10) {
-      return 'સવાર';
-    }
-    if (hour < 17) {
-      return 'બપોર';
-    }
-    if (hour < 20) {
-      return 'સાંજ';
-    }
+  if (hour < 4) {
     return 'રાત';
+  }
+  if (hour < 10) {
+    return 'સવાર';
+  }
+  if (hour < 17) {
+    return 'બપોર';
+  }
+  if (hour < 20) {
+    return 'સાંજ';
+  }
+  return 'રાત';
 }

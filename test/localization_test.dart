@@ -28,7 +28,11 @@ void main() {
   group('Locale-aware properties', () {
     test('localized day names work with different locales', () {
       // Monday in English
-      final monday = Carbon.create(year: 2024, month: 1, day: 1); // January 1, 2024 is a Monday
+      final monday = Carbon.create(
+        year: 2024,
+        month: 1,
+        day: 1,
+      ); // January 1, 2024 is a Monday
       expect(monday.localeDayOfWeek, 'Monday');
       expect(monday.shortLocaleDayOfWeek, 'Mon');
       expect(monday.minDayName, 'Mo');

@@ -74,24 +74,8 @@ const CarbonLocaleData localeSi = CarbonLocaleData(
     'සිකුරාදා',
     'සෙනසුරාදා',
   ],
-  weekdaysShort: [
-    'ඉරි',
-    'සඳු',
-    'අඟ',
-    'බදා',
-    'බ්‍රහ',
-    'සිකු',
-    'සෙන',
-  ],
-  weekdaysMin: [
-    'ඉ',
-    'ස',
-    'අ',
-    'බ',
-    'බ්‍ර',
-    'සි',
-    'සෙ',
-  ],
+  weekdaysShort: ['ඉරි', 'සඳු', 'අඟ', 'බදා', 'බ්‍රහ', 'සිකු', 'සෙන'],
+  weekdaysMin: ['ඉ', 'ස', 'අ', 'බ', 'බ්‍ර', 'සි', 'සෙ'],
   firstDayOfWeek: 1,
   calendar: {
     'sameDay': '[අද] LT[ට]',
@@ -105,10 +89,7 @@ const CarbonLocaleData localeSi = CarbonLocaleData(
 );
 
 // Regional variant: si_LK
-final CarbonLocaleData localeSiLk = localeSi.copyWith(
-  localeCode: 'si_lk',
-);
-
+final CarbonLocaleData localeSiLk = localeSi.copyWith(localeCode: 'si_lk');
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

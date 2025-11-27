@@ -27,11 +27,15 @@ const CarbonLocaleData localeNiu = CarbonLocaleData(
     'second': ':count sekone',
     'a_second': ':count sekone',
     's': ':count sekone',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -93,24 +97,8 @@ const CarbonLocaleData localeNiu = CarbonLocaleData(
     'Aho Falaile',
     'Aho Faiumu',
   ],
-  weekdaysShort: [
-    'Tapu',
-    'Gofua',
-    'Ua',
-    'Lotu',
-    'Tuloto',
-    'Falaile',
-    'Faiumu',
-  ],
-  weekdaysMin: [
-    'Tapu',
-    'Gofua',
-    'Ua',
-    'Lotu',
-    'Tuloto',
-    'Falaile',
-    'Faiumu',
-  ],
+  weekdaysShort: ['Tapu', 'Gofua', 'Ua', 'Lotu', 'Tuloto', 'Falaile', 'Faiumu'],
+  weekdaysMin: ['Tapu', 'Gofua', 'Ua', 'Lotu', 'Tuloto', 'Falaile', 'Faiumu'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -130,14 +118,11 @@ const CarbonLocaleData localeNiu = CarbonLocaleData(
 );
 
 // Regional variant: niu_NU
-final CarbonLocaleData localeNiuNu = localeNiu.copyWith(
-  localeCode: 'niu_nu',
-);
-
+final CarbonLocaleData localeNiuNu = localeNiu.copyWith(localeCode: 'niu_nu');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }

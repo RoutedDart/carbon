@@ -84,24 +84,8 @@ const CarbonLocaleData localeMo = CarbonLocaleData(
     'vineri',
     'sâmbătă',
   ],
-  weekdaysShort: [
-    'dum',
-    'lun',
-    'mar',
-    'mie',
-    'joi',
-    'vin',
-    'sâm',
-  ],
-  weekdaysMin: [
-    'du',
-    'lu',
-    'ma',
-    'mi',
-    'jo',
-    'vi',
-    'sâ',
-  ],
+  weekdaysShort: ['dum', 'lun', 'mar', 'mie', 'joi', 'vin', 'sâm'],
+  weekdaysMin: ['du', 'lu', 'ma', 'mi', 'jo', 'vi', 'sâ'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -115,7 +99,6 @@ const CarbonLocaleData localeMo = CarbonLocaleData(
   listSeparators: [', ', ' și '],
   meridiem: _meridiem,
 );
-
 
 // Auto-generated meridiem function from array
 String _meridiem(int hour, dynamic minute, dynamic isLower) {

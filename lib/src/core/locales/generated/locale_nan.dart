@@ -27,11 +27,15 @@ const CarbonLocaleData localeNan = CarbonLocaleData(
     'second': ':count Bió',
     'a_second': ':count Bió',
     's': ':count Bió',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': ':time ago',
     'from_now': ':time from now',
@@ -84,33 +88,9 @@ const CarbonLocaleData localeNan = CarbonLocaleData(
     '11月',
     '12月',
   ],
-  weekdays: [
-    '禮拜日',
-    '禮拜一',
-    '禮拜二',
-    '禮拜三',
-    '禮拜四',
-    '禮拜五',
-    '禮拜六',
-  ],
-  weekdaysShort: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
-  weekdaysMin: [
-    '日',
-    '一',
-    '二',
-    '三',
-    '四',
-    '五',
-    '六',
-  ],
+  weekdays: ['禮拜日', '禮拜一', '禮拜二', '禮拜三', '禮拜四', '禮拜五', '禮拜六'],
+  weekdaysShort: ['日', '一', '二', '三', '四', '五', '六'],
+  weekdaysMin: ['日', '一', '二', '三', '四', '五', '六'],
   firstDayOfWeek: 0,
   dayOfFirstWeekOfYear: 1,
   listSeparators: [', ', ' and '],
@@ -131,9 +111,7 @@ const CarbonLocaleData localeNan = CarbonLocaleData(
 );
 
 // Regional variant: nan_TW
-final CarbonLocaleData localeNanTw = localeNan.copyWith(
-  localeCode: 'nan_tw',
-);
+final CarbonLocaleData localeNanTw = localeNan.copyWith(localeCode: 'nan_tw');
 
 // Regional variant: nan_TW@latin
 final CarbonLocaleData localeNanTwLatin = localeNan.copyWith(
@@ -147,24 +125,8 @@ final CarbonLocaleData localeNanTwLatin = localeNan.copyWith(
     'pài-gō͘',
     'pài-la̍k',
   ],
-  weekdaysShort: [
-    'lp',
-    'p1',
-    'p2',
-    'p3',
-    'p4',
-    'p5',
-    'p6',
-  ],
-  weekdaysMin: [
-    'lp',
-    'p1',
-    'p2',
-    'p3',
-    'p4',
-    'p5',
-    'p6',
-  ],
+  weekdaysShort: ['lp', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
+  weekdaysMin: ['lp', 'p1', 'p2', 'p3', 'p4', 'p5', 'p6'],
   months: [
     '1goe̍h',
     '2goe̍h',
@@ -195,12 +157,11 @@ final CarbonLocaleData localeNanTwLatin = localeNan.copyWith(
   ],
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }
 
 // Auto-generated meridiem function from array

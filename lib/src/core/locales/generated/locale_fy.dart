@@ -82,24 +82,8 @@ const CarbonLocaleData localeFy = CarbonLocaleData(
     'freed',
     'sneon',
   ],
-  weekdaysShort: [
-    'si.',
-    'mo.',
-    'ti.',
-    'wo.',
-    'to.',
-    'fr.',
-    'so.',
-  ],
-  weekdaysMin: [
-    'Si',
-    'Mo',
-    'Ti',
-    'Wo',
-    'To',
-    'Fr',
-    'So',
-  ],
+  weekdaysShort: ['si.', 'mo.', 'ti.', 'wo.', 'to.', 'fr.', 'so.'],
+  weekdaysMin: ['Si', 'Mo', 'Ti', 'Wo', 'To', 'Fr', 'So'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -126,24 +110,8 @@ final CarbonLocaleData localeFyDe = localeFy.copyWith(
     'Friedag',
     'Sinnowend',
   ],
-  weekdaysShort: [
-    'Sdg',
-    'Mdg',
-    'Dsg',
-    'Mwk',
-    'Ddg',
-    'Fdg',
-    'Swd',
-  ],
-  weekdaysMin: [
-    'Sdg',
-    'Mdg',
-    'Dsg',
-    'Mwk',
-    'Ddg',
-    'Fdg',
-    'Swd',
-  ],
+  weekdaysShort: ['Sdg', 'Mdg', 'Dsg', 'Mwk', 'Ddg', 'Fdg', 'Swd'],
+  weekdaysMin: ['Sdg', 'Mdg', 'Dsg', 'Mwk', 'Ddg', 'Fdg', 'Swd'],
   months: [
     'Jaunuwoa',
     'Februwoa',
@@ -191,24 +159,8 @@ final CarbonLocaleData localeFyNl = localeFy.copyWith(
     'Freed',
     'Sneon',
   ],
-  weekdaysShort: [
-    'Sn',
-    'Mo',
-    'Ti',
-    'Wo',
-    'To',
-    'Fr',
-    'Sn',
-  ],
-  weekdaysMin: [
-    'Sn',
-    'Mo',
-    'Ti',
-    'Wo',
-    'To',
-    'Fr',
-    'Sn',
-  ],
+  weekdaysShort: ['Sn', 'Mo', 'Ti', 'Wo', 'To', 'Fr', 'Sn'],
+  weekdaysMin: ['Sn', 'Mo', 'Ti', 'Wo', 'To', 'Fr', 'Sn'],
   months: [
     'Jannewaris',
     'Febrewaris',
@@ -239,8 +191,7 @@ final CarbonLocaleData localeFyNl = localeFy.copyWith(
   ],
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
+  return '$number${(number == 1 || number == 8 || number >= 20 ? 'ste' : 'de')}';
 }

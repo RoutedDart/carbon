@@ -60,24 +60,8 @@ const CarbonLocaleData localeCsb = CarbonLocaleData(
     'piątk',
     'sobòta',
   ],
-  weekdaysShort: [
-    'nie',
-    'pòn',
-    'wtó',
-    'str',
-    'czw',
-    'pią',
-    'sob',
-  ],
-  weekdaysMin: [
-    'nie',
-    'pòn',
-    'wtó',
-    'str',
-    'czw',
-    'pią',
-    'sob',
-  ],
+  weekdaysShort: ['nie', 'pòn', 'wtó', 'str', 'czw', 'pią', 'sob'],
+  weekdaysMin: ['nie', 'pòn', 'wtó', 'str', 'czw', 'pią', 'sob'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   listSeparators: [', ', ' a téż '],
@@ -92,7 +76,4 @@ const CarbonLocaleData localeCsb = CarbonLocaleData(
 );
 
 // Regional variant: csb_PL
-final CarbonLocaleData localeCsbPl = localeCsb.copyWith(
-  localeCode: 'csb_pl',
-);
-
+final CarbonLocaleData localeCsbPl = localeCsb.copyWith(localeCode: 'csb_pl');

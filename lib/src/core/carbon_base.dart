@@ -187,9 +187,14 @@ abstract class CarbonBase implements CarbonInterface {
     bool testing = true,
   }) async {
     if (!_timeMachineInitialized) {
+      // CRITICAL: On web, timezone data must be explicitly loaded
+      // This flag ensures all timezone information is loaded, not just the index
+      // ignore: invalid_use_of_internal_member
+      ITzdbDateTimeZoneSource.loadAllTimeZoneInformation_SetFlag();
       await tm.TimeMachine.initialize({'testing': testing});
       _timeMachineInitialized = true;
     }
+    // Always use tzdb provider as it works consistently on both VM and web
     _zoneProvider = provider ?? await tm.DateTimeZoneProviders.tzdb;
     _zoneCache.clear();
   }

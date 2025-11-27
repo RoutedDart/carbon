@@ -65,33 +65,9 @@ const CarbonLocaleData localeJv = CarbonLocaleData(
     'Nop',
     'Des',
   ],
-  weekdays: [
-    'Minggu',
-    'Senen',
-    'Seloso',
-    'Rebu',
-    'Kemis',
-    'Jemuwah',
-    'Septu',
-  ],
-  weekdaysShort: [
-    'Min',
-    'Sen',
-    'Sel',
-    'Reb',
-    'Kem',
-    'Jem',
-    'Sep',
-  ],
-  weekdaysMin: [
-    'Mg',
-    'Sn',
-    'Sl',
-    'Rb',
-    'Km',
-    'Jm',
-    'Sp',
-  ],
+  weekdays: ['Minggu', 'Senen', 'Seloso', 'Rebu', 'Kemis', 'Jemuwah', 'Septu'],
+  weekdaysShort: ['Min', 'Sen', 'Sel', 'Reb', 'Kem', 'Jem', 'Sep'],
+  weekdaysMin: ['Mg', 'Sn', 'Sl', 'Rb', 'Km', 'Jm', 'Sp'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -106,17 +82,16 @@ const CarbonLocaleData localeJv = CarbonLocaleData(
   meridiem: _meridiem,
 );
 
-
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 11) {
-      return 'enjing';
-    }
-    if (hour < 15) {
-      return 'siyang';
-    }
-    if (hour < 19) {
-      return 'sonten';
-    }
-    return 'ndalu';
+  if (hour < 11) {
+    return 'enjing';
+  }
+  if (hour < 15) {
+    return 'siyang';
+  }
+  if (hour < 19) {
+    return 'sonten';
+  }
+  return 'ndalu';
 }

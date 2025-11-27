@@ -83,24 +83,8 @@ const CarbonLocaleData localeSv = CarbonLocaleData(
     'fredag',
     'lördag',
   ],
-  weekdaysShort: [
-    'sön',
-    'mån',
-    'tis',
-    'ons',
-    'tors',
-    'fre',
-    'lör',
-  ],
-  weekdaysMin: [
-    'sö',
-    'må',
-    'ti',
-    'on',
-    'to',
-    'fr',
-    'lö',
-  ],
+  weekdaysShort: ['sön', 'mån', 'tis', 'ons', 'tors', 'fre', 'lör'],
+  weekdaysMin: ['sö', 'må', 'ti', 'on', 'to', 'fr', 'lö'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -117,26 +101,19 @@ const CarbonLocaleData localeSv = CarbonLocaleData(
 );
 
 // Regional variant: sv_AX
-final CarbonLocaleData localeSvAx = localeSv.copyWith(
-  localeCode: 'sv_ax',
-);
+final CarbonLocaleData localeSvAx = localeSv.copyWith(localeCode: 'sv_ax');
 
 // Regional variant: sv_FI
-final CarbonLocaleData localeSvFi = localeSv.copyWith(
-  localeCode: 'sv_fi',
-);
+final CarbonLocaleData localeSvFi = localeSv.copyWith(localeCode: 'sv_fi');
 
 // Regional variant: sv_SE
-final CarbonLocaleData localeSvSe = localeSv.copyWith(
-  localeCode: 'sv_se',
-);
-
+final CarbonLocaleData localeSvSe = localeSv.copyWith(localeCode: 'sv_se');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
 }
 
 // Auto-generated meridiem function from array

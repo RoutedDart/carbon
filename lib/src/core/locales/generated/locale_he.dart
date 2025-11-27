@@ -69,33 +69,9 @@ const CarbonLocaleData localeHe = CarbonLocaleData(
     'נוב׳',
     'דצמ׳',
   ],
-  weekdays: [
-    'ראשון',
-    'שני',
-    'שלישי',
-    'רביעי',
-    'חמישי',
-    'שישי',
-    'שבת',
-  ],
-  weekdaysShort: [
-    'א׳',
-    'ב׳',
-    'ג׳',
-    'ד׳',
-    'ה׳',
-    'ו׳',
-    'ש׳',
-  ],
-  weekdaysMin: [
-    'א',
-    'ב',
-    'ג',
-    'ד',
-    'ה',
-    'ו',
-    'ש',
-  ],
+  weekdays: ['ראשון', 'שני', 'שלישי', 'רביעי', 'חמישי', 'שישי', 'שבת'],
+  weekdaysShort: ['א׳', 'ב׳', 'ג׳', 'ד׳', 'ה׳', 'ו׳', 'ש׳'],
+  weekdaysMin: ['א', 'ב', 'ג', 'ד', 'ה', 'ו', 'ש'],
   calendar: {
     'sameDay': '[היום ב־]LT',
     'nextDay': '[מחר ב־]LT',
@@ -109,24 +85,21 @@ const CarbonLocaleData localeHe = CarbonLocaleData(
 );
 
 // Regional variant: he_IL
-final CarbonLocaleData localeHeIl = localeHe.copyWith(
-  localeCode: 'he_il',
-);
-
+final CarbonLocaleData localeHeIl = localeHe.copyWith(localeCode: 'he_il');
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 5) {
-      return 'לפנות בוקר';
-    }
-    if (hour < 10) {
-      return 'בבוקר';
-    }
-    if (hour < 12) {
-      return ((isLower ? 'לפנה"צ' : 'לפני הצהריים')).toString();
-    }
-    if (hour < 18) {
-      return ((isLower ? 'אחה"צ' : 'אחרי הצהריים')).toString();
-    }
-    return 'בערב';
+  if (hour < 5) {
+    return 'לפנות בוקר';
+  }
+  if (hour < 10) {
+    return 'בבוקר';
+  }
+  if (hour < 12) {
+    return ((isLower ? 'לפנה"צ' : 'לפני הצהריים')).toString();
+  }
+  if (hour < 18) {
+    return ((isLower ? 'אחה"צ' : 'אחרי הצהריים')).toString();
+  }
+  return 'בערב';
 }

@@ -164,4 +164,3 @@ final CarbonLocaleData localeTzmLatn = localeTzm.copyWith(
     'sameElse': 'L',
   },
 );
-

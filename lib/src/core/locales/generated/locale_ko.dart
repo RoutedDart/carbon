@@ -72,33 +72,9 @@ const CarbonLocaleData localeKo = CarbonLocaleData(
     '11월',
     '12월',
   ],
-  weekdays: [
-    '일요일',
-    '월요일',
-    '화요일',
-    '수요일',
-    '목요일',
-    '금요일',
-    '토요일',
-  ],
-  weekdaysShort: [
-    '일',
-    '월',
-    '화',
-    '수',
-    '목',
-    '금',
-    '토',
-  ],
-  weekdaysMin: [
-    '일',
-    '월',
-    '화',
-    '수',
-    '목',
-    '금',
-    '토',
-  ],
+  weekdays: ['일요일', '월요일', '화요일', '수요일', '목요일', '금요일', '토요일'],
+  weekdaysShort: ['일', '월', '화', '수', '목', '금', '토'],
+  weekdaysMin: ['일', '월', '화', '수', '목', '금', '토'],
   calendar: {
     'sameDay': '오늘 LT',
     'nextDay': '내일 LT',
@@ -112,19 +88,19 @@ const CarbonLocaleData localeKo = CarbonLocaleData(
 );
 
 // Regional variant: ko_KP
-final CarbonLocaleData localeKoKp = localeKo.copyWith(
-  localeCode: 'ko_kp',
-);
+final CarbonLocaleData localeKoKp = localeKo.copyWith(localeCode: 'ko_kp');
 
 // Regional variant: ko_KR
-final CarbonLocaleData localeKoKr = localeKo.copyWith(
-  localeCode: 'ko_kr',
-);
-
+final CarbonLocaleData localeKoKr = localeKo.copyWith(localeCode: 'ko_kr');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
-    return ((period == 'd' || period == 'D' || period == 'DDD' ? '$number일' : (period == 'M' ? '$number월' : (period == 'w' || period == 'W' ? '$number주' : number)))).toString();
+  return ((period == 'd' || period == 'D' || period == 'DDD'
+          ? '$number일'
+          : (period == 'M'
+                ? '$number월'
+                : (period == 'w' || period == 'W' ? '$number주' : number))))
+      .toString();
 }
 
 // Auto-generated meridiem function from array

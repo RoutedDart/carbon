@@ -59,24 +59,8 @@ const CarbonLocaleData localeWo = CarbonLocaleData(
     'ajjuma',
     'gaawu',
   ],
-  weekdaysShort: [
-    'dib',
-    'alt',
-    'tal',
-    'all',
-    'alx',
-    'ajj',
-    'gaa',
-  ],
-  weekdaysMin: [
-    'dib',
-    'alt',
-    'tal',
-    'all',
-    'alx',
-    'ajj',
-    'gaa',
-  ],
+  weekdaysShort: ['dib', 'alt', 'tal', 'all', 'alx', 'ajj', 'gaa'],
+  weekdaysMin: ['dib', 'alt', 'tal', 'all', 'alx', 'ajj', 'gaa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 1,
   calendar: {
@@ -90,7 +74,4 @@ const CarbonLocaleData localeWo = CarbonLocaleData(
 );
 
 // Regional variant: wo_SN
-final CarbonLocaleData localeWoSn = localeWo.copyWith(
-  localeCode: 'wo_sn',
-);
-
+final CarbonLocaleData localeWoSn = localeWo.copyWith(localeCode: 'wo_sn');

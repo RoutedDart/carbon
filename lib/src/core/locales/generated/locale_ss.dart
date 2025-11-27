@@ -67,24 +67,8 @@ const CarbonLocaleData localeSs = CarbonLocaleData(
     'Lesihlanu',
     'Umgcibelo',
   ],
-  weekdaysShort: [
-    'Lis',
-    'Umb',
-    'Lsb',
-    'Les',
-    'Lsi',
-    'Lsh',
-    'Umg',
-  ],
-  weekdaysMin: [
-    'Li',
-    'Us',
-    'Lb',
-    'Lt',
-    'Ls',
-    'Lh',
-    'Ug',
-  ],
+  weekdaysShort: ['Lis', 'Umb', 'Lsb', 'Les', 'Lsi', 'Lsh', 'Umg'],
+  weekdaysMin: ['Li', 'Us', 'Lb', 'Lt', 'Ls', 'Lh', 'Ug'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -100,28 +84,25 @@ const CarbonLocaleData localeSs = CarbonLocaleData(
 );
 
 // Regional variant: ss_ZA
-final CarbonLocaleData localeSsZa = localeSs.copyWith(
-  localeCode: 'ss_za',
-);
-
+final CarbonLocaleData localeSsZa = localeSs.copyWith(localeCode: 'ss_za');
 
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'e' : (lastDigit == 1 || lastDigit == 2 ? 'a' : 'e'))}';
 }
 
 // Auto-generated meridiem function
 String _meridiem(int hour, dynamic minute, dynamic isLower) {
-    if (hour < 11) {
-      return 'ekuseni';
-    }
-    if (hour < 15) {
-      return 'emini';
-    }
-    if (hour < 19) {
-      return 'entsambama';
-    }
-    return 'ebusuku';
+  if (hour < 11) {
+    return 'ekuseni';
+  }
+  if (hour < 15) {
+    return 'emini';
+  }
+  if (hour < 19) {
+    return 'entsambama';
+  }
+  return 'ebusuku';
 }

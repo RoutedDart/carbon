@@ -27,11 +27,15 @@ const CarbonLocaleData localeNds = CarbonLocaleData(
     'second': ':count Sekunn|:count Sekunnen',
     'a_second': 'en poor Sekunnen|:count Sekunn|:count Sekunnen',
     's': ':counts',
-    'millisecond': '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
-    'a_millisecond': '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'millisecond':
+        '{1}:count millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
+    'a_millisecond':
+        '{1}a millisecond|{0}:count milliseconds|[-Inf,Inf]:count milliseconds',
     'ms': ':countms',
-    'microsecond': '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
-    'a_microsecond': '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'microsecond':
+        '{1}:count microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
+    'a_microsecond':
+        '{1}a microsecond|{0}:count microseconds|[-Inf,Inf]:count microseconds',
     'µs': ':countµs',
     'ago': 'vör :time',
     'from_now': 'in :time',
@@ -93,24 +97,8 @@ const CarbonLocaleData localeNds = CarbonLocaleData(
     'Freedag',
     'Sünnavend',
   ],
-  weekdaysShort: [
-    'Sdag',
-    'Maan',
-    'Ding',
-    'Midd',
-    'Dunn',
-    'Free',
-    'Svd.',
-  ],
-  weekdaysMin: [
-    'Sd',
-    'Ma',
-    'Di',
-    'Mi',
-    'Du',
-    'Fr',
-    'Sa',
-  ],
+  weekdaysShort: ['Sdag', 'Maan', 'Ding', 'Midd', 'Dunn', 'Free', 'Svd.'],
+  weekdaysMin: ['Sd', 'Ma', 'Di', 'Mi', 'Du', 'Fr', 'Sa'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   listSeparators: [', ', ' and '],
@@ -130,9 +118,7 @@ const CarbonLocaleData localeNds = CarbonLocaleData(
 );
 
 // Regional variant: nds_DE
-final CarbonLocaleData localeNdsDe = localeNds.copyWith(
-  localeCode: 'nds_de',
-);
+final CarbonLocaleData localeNdsDe = localeNds.copyWith(localeCode: 'nds_de');
 
 // Regional variant: nds_NL
 final CarbonLocaleData localeNdsNl = localeNds.copyWith(
@@ -146,24 +132,8 @@ final CarbonLocaleData localeNdsNl = localeNds.copyWith(
     'Friedag',
     'Sinnowend',
   ],
-  weekdaysShort: [
-    'Sdg',
-    'Mdg',
-    'Dsg',
-    'Mwk',
-    'Ddg',
-    'Fdg',
-    'Swd',
-  ],
-  weekdaysMin: [
-    'Sdg',
-    'Mdg',
-    'Dsg',
-    'Mwk',
-    'Ddg',
-    'Fdg',
-    'Swd',
-  ],
+  weekdaysShort: ['Sdg', 'Mdg', 'Dsg', 'Mwk', 'Ddg', 'Fdg', 'Swd'],
+  weekdaysMin: ['Sdg', 'Mdg', 'Dsg', 'Mwk', 'Ddg', 'Fdg', 'Swd'],
   months: [
     'Jaunuwoa',
     'Februwoa',
@@ -194,10 +164,9 @@ final CarbonLocaleData localeNdsNl = localeNds.copyWith(
   ],
 );
 
-
 // Auto-generated ordinal function
 String _ordinal(int number, String period) {
   int lastDigit;
   lastDigit = number % 10;
-    return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
+  return '$number${(number % 100 ~/ 10 == 1 ? 'th' : (lastDigit == 1 ? 'st' : (lastDigit == 2 ? 'nd' : (lastDigit == 3 ? 'rd' : 'th'))))}';
 }

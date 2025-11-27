@@ -74,24 +74,8 @@ const CarbonLocaleData localeMi = CarbonLocaleData(
     'Paraire',
     'Hātarei',
   ],
-  weekdaysShort: [
-    'Ta',
-    'Ma',
-    'Tū',
-    'We',
-    'Tāi',
-    'Pa',
-    'Hā',
-  ],
-  weekdaysMin: [
-    'Ta',
-    'Ma',
-    'Tū',
-    'We',
-    'Tāi',
-    'Pa',
-    'Hā',
-  ],
+  weekdaysShort: ['Ta', 'Ma', 'Tū', 'We', 'Tāi', 'Pa', 'Hā'],
+  weekdaysMin: ['Ta', 'Ma', 'Tū', 'We', 'Tāi', 'Pa', 'Hā'],
   firstDayOfWeek: 1,
   dayOfFirstWeekOfYear: 4,
   calendar: {
@@ -106,7 +90,4 @@ const CarbonLocaleData localeMi = CarbonLocaleData(
 );
 
 // Regional variant: mi_NZ
-final CarbonLocaleData localeMiNz = localeMi.copyWith(
-  localeCode: 'mi_nz',
-);
-
+final CarbonLocaleData localeMiNz = localeMi.copyWith(localeCode: 'mi_nz');

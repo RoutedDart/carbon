@@ -1,88 +1,376 @@
-## Carbon for Dart
+<div align="center">
 
-This package rebuilds the fluent [Carbon](https://carbon.nesbot.com/) API for
-Dart and Flutter applications. It focuses on providing readable chains such as
-`Carbon.now().addWeeks(2).startOfMonth()` while maintaining strict parity with
-the original PHP library so feature work can be validated quickly.
+# Carbon for Dart 🕐
 
-## Features
+[![Pub Version](https://img.shields.io/pub/v/carbon?logo=dart&logoColor=white)](https://pub.dev/packages/carbon)
+[![Dart SDK Version](https://badgen.net/pub/sdk-version/carbon)](https://pub.dev/packages/carbon)
+[![License](https://img.shields.io/github/license/RoutedDart/carbon)](https://github.com/RoutedDart/carbon/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/RoutedDart/carbon/dart.yml?branch=master)](https://github.com/RoutedDart/carbon/actions)
+[![Coverage](https://img.shields.io/badge/coverage-check%20workflow-blue)](https://github.com/RoutedDart/carbon/actions)
 
-- Fluent creation helpers (`now`, `today`, `create`, `parse`).
-- Calendar math with overflow options, rounding, and comparison helpers.
-- Locale-aware formatting, human-readable differences, and timezone support.
-- Moment-style ISO parsing helpers (`createFromIsoFormat`) plus locale-aware
-  weekend defaults and translator metadata.
-- `modify` / `relative` DSL plus `addReal*` helpers for DST-aware adjustments.
-- Macro system for user-defined helpers plus mutable/immutable variants.
-- DateTime interop helpers so `Carbon` instances can be passed wherever a
-  vanilla `DateTime` is expected.
+**A fluent date and time library for Dart** - inspired by the popular PHP [Carbon](https://carbon.nesbot.com/) library.
 
-## Getting started
+[Features](#-features) • [Installation](#-installation) • [Quick Start](#-quick-start) • [Documentation](#-usage-examples) • [Contributing](#-contributing)
 
-1. Fetch Dart dependencies:
-   ```bash
-   dart pub get
-   ```
-2. Run the Dart test suite:
-   ```bash
-   dart test
-   ```
-3. (Optional) Spin up the PHP comparison sandbox via Docker (see below).
+</div>
 
-## PHP reference sandbox via Docker
+---
 
-The repo now includes a lightweight Docker Compose setup that initializes a PHP
-project under `php_app/`. The sandbox installs `nesbot/carbon` so you can verify
-behavior against the upstream implementation without polluting your host system.
+## ✨ Features
 
-```bash
-# Install PHP dependencies once
-docker compose run --rm phpapp composer install
+Carbon makes working with dates and times in Dart/Flutter intuitive and enjoyable:
 
-# Execute the demo script (prints a JSON payload)
-docker compose run --rm phpapp composer start
+- 🔗 **Fluent API** - Chain methods like `Carbon.now().addWeeks(2).startOfMonth()`
+- 🌍 **Timezone Support** - Full IANA timezone database support via `time_machine`
+- 🌐 **Localization** - Locale-aware formatting and human-readable differences in 100+ languages
+- 📅 **Smart Date Math** - Calendar operations with overflow handling and DST awareness
+- 🔄 **Mutable & Immutable** - Choose between `Carbon` and `CarbonImmutable` based on your needs
+- ⏱️ **Intervals & Periods** - Work with date ranges and recurring intervals
+- 🧪 **Testing Helpers** - Freeze time with `setTestNow()` for deterministic tests
+- 🔌 **DateTime Interop** - Convert to/from native DateTime when needed
+- 🎯 **PHP Carbon Parity** - Validated against the original PHP implementation
 
-# Open an interactive shell for ad-hoc experiments
-docker compose run --rm phpapp bash
+## 📦 Installation
+
+Add Carbon to your `pubspec.yaml`:
+
+```yaml
+dependencies:
+  carbon: ^0.1.0
 ```
 
-Because the entire repository is mounted into the container at `/workspace`,
-you can edit Dart sources locally and immediately re-run PHP experiments.
+Then run:
 
-## Usage (Dart)
+```bash
+dart pub get
+# or
+flutter pub get
+```
+
+## 🚀 Quick Start
 
 ```dart
 import 'package:carbon/carbon.dart';
 
 void main() {
-  final payday = Carbon.now().addWeeks(2).endOfWeek();
-  print(payday.format('yyyy-MM-dd HH:mm'));
+  // Get current time
+  final now = Carbon.now();
+  print(now.toIso8601String());
+  
+  // Fluent date manipulation
+  final nextWeek = Carbon.now().addWeeks(1).startOfDay();
+  print('Next week starts: ${nextWeek.format('yyyy-MM-dd')}');
+  
+  // Human-readable differences
+  final birthday = Carbon.parse('1990-05-15');
+  print(birthday.diffForHumans()); // "34 years ago"
+  
+  // Comparisons
+  if (now.isWeekend()) {
+    print('Enjoy your weekend! 🎉');
+  }
+}
 
-final birthday = Carbon.createFromIsoFormat('LL', 'April 4, 2019')
-    .locale('fr_FR');
-print(birthday.translatedFormat('l D T e O P'));
+## 📖 Usage Examples
 
-final view = birthday.toDateTimeView();
-DateTime compare(DateTime input) => input.add(const Duration(days: 1));
-print(compare(view));
+### Creating Carbon Instances
+
+```dart
+// Current time
+final now = Carbon.now();
+final today = Carbon.today();
+final tomorrow = Carbon.tomorrow();
+
+// Parsing dates
+final parsed = Carbon.parse('2024-12-25');
+final fromFormat = Carbon.createFromFormat('d/m/Y', '25/12/2024');
+final fromTimestamp = Carbon.createFromTimestampSeconds(1735084800);
+
+// Specific date/time
+final custom = Carbon.create(2024, 12, 25, 10, 30, 0);
+final fromDateTime = Carbon(DateTime(2024, 12, 25));
+```
+
+### Date Manipulation
+
+```dart
+final date = Carbon.parse('2024-01-15');
+
+// Add/subtract time
+date.addDays(5);          // 2024-01-20
+date.subWeeks(2);         // 2024-01-01
+date.addMonths(3);        // 2024-04-15
+date.addYears(1);         // 2025-01-15
+
+// Start/end of period
+date.startOfDay();        // 2024-01-15 00:00:00
+date.endOfWeek();         // 2024-01-21 23:59:59
+date.startOfMonth();      // 2024-01-01 00:00:00
+date.endOfYear();         // 2024-12-31 23:59:59
+
+// Next/previous
+date.nextWeekday();
+date.previousSunday();
+date.nextMonday();
+```
+
+### Comparisons
+
+```dart
+final first = Carbon.parse('2024-01-15');
+final second = Carbon.parse('2024-02-20');
+
+// Comparison methods
+first.isBefore(second);        // true
+first.isAfter(second);         // false
+first.equalTo(second);         // false
+first.between(start, end);     // Check if between two dates
+
+// Boolean checks
+first.isWeekday();            // true
+first.isWeekend();            // false
+first.isToday();              // false
+first.isPast();               // true
+first.isFuture();             // false
+first.isLeapYear();           // true (2024 is leap)
+first.isMonday();             // true
+
+// Date units
+first.isSameDay(second);
+first.isSameMonth(second);
+first.isSameYear(second);
+```
+
+### Human-Readable Differences
+
+```dart
+final past = Carbon.parse('2023-01-15');
+final future = Carbon.parse('2025-12-31');
+
+print(past.diffForHumans());           // "1 year ago"
+print(future.diffForHumans());         // "1 year from now"
+print(past.diffForHumans(future));     // "2 years before"
+
+// Absolute differences
+final diff = past.diffInDays(future);   // 715
+final hours = past.diffInHours(future); // 17160
+final minutes = past.diffInMinutes();   // Minutes from now
+```
+
+### Localization
+
+```dart
+import 'package:intl/date_symbol_data_local.dart';
+
+Future<void> main() async {
+  await initializeDateFormatting('fr');
+  
+  final date = Carbon.parse('2024-12-25').locale('fr_FR');
+  
+  print(date.translatedFormat('l j F Y'));  // "mercredi 25 décembre 2024"
+  print(date.isoFormat('MMMM'));            // "décembre"
+  print(date.diffForHumans());              // "il y a 1 an"
+  
+  // Change locale
+  date.locale('es_ES');
+  print(date.translatedFormat('l j F Y'));  // "miércoles 25 diciembre 2024"
 }
 ```
 
-### ISO parsing helpers
+### Timezone Support
 
 ```dart
-final madrid = Carbon.createFromLocaleIsoFormat(
-  'YYYY MMMM D HH:mm',
-  'es_ES',
-  '2024 diciembre 05 18:30',
-).tz('Europe/Madrid');
-print(madrid.toIso8601String(keepOffset: true));
+Future<void> main() async {
+  // Initialize timezone database (required for IANA names)
+  await Carbon.configureTimeMachine(testing: true);
+  
+  // Create with timezone
+  final tokyo = Carbon.parse('2024-01-15 12:00', timeZone: 'Asia/Tokyo');
+  final ny = Carbon.parse('2024-01-15 12:00', timeZone: 'America/New_York');
+  
+  // Convert between timezones
+  final tokyoTime = ny.tz('Asia/Tokyo');
+  print(tokyoTime.format('yyyy-MM-dd HH:mm'));
+  
+  // Fixed offset
+  final offset = Carbon.now(timeZone: '+05:30');
+  
+  // Get timezone info
+  print(tokyo.timeZoneName);        // "JST"
+  print(tokyo.offsetHours);         // 9
+  print(tokyo.isDST());             // false
+}
 ```
 
-## Additional information
+### Mutable vs Immutable
 
-- Specs and change proposals live under `openspec/`.
-- PHP comparison assets live under `php_app/` and can be executed through the
-  Docker workflow above.
-- Issues and contributions should include repro steps plus any relevant PHP
-  parity notes so we can keep both implementations aligned.
+```dart
+// Mutable (modifies original instance)
+final mutable = Carbon.parse('2024-01-15');
+final modified = mutable.addDays(1);
+print(identical(mutable, modified)); // true
+print(mutable.day);                  // 16
+
+// Immutable (creates new instance)
+final immutable = CarbonImmutable.parse('2024-01-15');
+final newInstance = immutable.addDays(1);
+print(identical(immutable, newInstance)); // false
+print(immutable.day);                     // 15
+print(newInstance.day);                   // 16
+
+// Convert between types
+final toImmutable = mutable.toImmutable();
+final toMutable = immutable.toMutable();
+```
+
+### Testing Helpers
+
+```dart
+import 'package:carbon/carbon.dart';
+
+void testSomething() {
+  // Freeze time for testing
+  Carbon.setTestNow('2024-01-15 10:00:00');
+  
+  final now = Carbon.now();
+  print(now.toIso8601String()); // Always "2024-01-15T10:00:00.000Z"
+  
+  // Travel in time
+  Carbon.setTestNow(Carbon.parse('2025-06-01'));
+  
+  // Reset to real time
+  Carbon.setTestNow();
+}
+```
+
+### Formatting
+
+```dart
+final date = Carbon.parse('2024-12-25 15:30:45');
+
+// Standard formatting
+print(date.format('yyyy-MM-dd'));              // "2024-12-25"
+print(date.format('EEE, MMM d, yyyy'));        // "Wed, Dec 25, 2024"
+print(date.format('HH:mm:ss'));                // "15:30:45"
+
+// ISO formats
+print(date.toIso8601String());                 // "2024-12-25T15:30:45.000"
+print(date.toIso8601String(keepOffset: true)); // With timezone
+
+// Locale-aware formatting
+print(date.isoFormat('LLLL'));                 // "December 25, 2024"
+print(date.translatedFormat('l j F Y'));       // Localized
+```
+
+### Working with Intervals & Periods
+
+```dart
+// Create intervals
+final interval = CarbonInterval.days(5).hours(3);
+print(interval.totalHours); // 123
+
+// Date periods (ranges)
+final start = Carbon.parse('2024-01-01');
+final end = Carbon.parse('2024-01-10');
+final period = CarbonPeriod(start, end);
+
+for (final date in period) {
+  print(date.toIso8601String());
+}
+
+// Recurring intervals
+final weekly = CarbonPeriod.create(
+  start,
+  CarbonInterval.weeks(1),
+  end,
+);
+```
+
+### Macros (Custom Methods)
+
+```dart
+// Register custom methods
+Carbon.macro('addWorkDays', (CarbonInterface self, int days) {
+  var result = self as Carbon;
+  for (var i = 0; i < days; i++) {
+    result = result.addDay();
+    if (result.isWeekend()) {
+      result = result.nextWeekday();
+    }
+  }
+  return result;
+});
+
+// Use custom method
+final date = Carbon.parse('2024-01-15');
+final workDate = date.call('addWorkDays', [5]);
+```
+
+## 🧪 Testing
+
+```bash
+# Run all tests
+dart test
+
+# Run with coverage
+dart test --coverage
+
+# Run specific test file
+dart test test/carbon_test.dart
+```
+
+## 🐳 PHP Reference Sandbox
+
+This repo includes a Docker setup to verify behavior against the original PHP Carbon implementation:
+
+```bash
+# Install PHP dependencies
+docker compose run --rm phpapp composer install
+
+# Run PHP demo script
+docker compose run --rm phpapp composer start
+
+# Interactive shell for experiments
+docker compose run --rm phpapp bash
+```
+
+The workspace is mounted at `/workspace` so you can edit and test immediately.
+
+## 🤝 Contributing
+
+Contributions are welcome! Here's how you can help:
+
+### Guidelines
+
+- Include tests for new features
+- Update documentation for API changes
+- Maintain PHP Carbon parity when applicable
+- Include reproduction steps in bug reports
+- Reference PHP behavior in contributions
+
+## 📝 License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
+## 🙏 Acknowledgments
+
+- Inspired by [Carbon for PHP](https://carbon.nesbot.com/) by Brian Nesbitt
+- Built with [time_machine](https://pub.dev/packages/time_machine) for timezone support
+- Localization via [intl](https://pub.dev/packages/intl)
+
+## 🔗 Links
+
+- [Package on pub.dev](https://pub.dev/packages/carbon)
+- [Source code on GitHub](https://github.com/RoutedDart/carbon)
+- [Issue tracker](https://github.com/RoutedDart/carbon/issues)
+- [Original PHP Carbon](https://carbon.nesbot.com/)
+
+## ⭐ Show Your Support
+
+If you find Carbon helpful, please consider giving it a ⭐ on [GitHub](https://github.com/RoutedDart/carbon)!
+
+---
+
+<div align="center">
+Made with ❤️ by the Carbon Dart community
+</div>

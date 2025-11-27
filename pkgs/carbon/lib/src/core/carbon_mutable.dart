@@ -418,6 +418,7 @@ class Carbon extends CarbonBase {
     }
 
     DateTime resolved;
+    bool shouldInterpretInZone = false;
     if (input is int) {
       final isSeconds = input.abs() < 1000000000000;
       final millis = isSeconds ? input * 1000 : input;
@@ -443,7 +444,27 @@ class Carbon extends CarbonBase {
           resolved = formatter.parseUtc(input);
         } else {
           final parsed = DateTime.parse(input);
-          resolved = parsed.isUtc ? parsed : parsed.toUtc();
+          // If input doesn't have timezone info (Z or offset) and we have an explicit timezone,
+          // we should interpret the time as being in that timezone
+          final hasTimezoneInInput = input.contains('Z') || 
+              RegExp(r'[+-]\d{2}:\d{2}$').hasMatch(input) ||
+              RegExp(r'[+-]\d{4}$').hasMatch(input);
+          if (timeZone != null && !hasTimezoneInInput && !parsed.isUtc) {
+            // Keep raw components for interpretation in target timezone
+            resolved = DateTime.utc(
+              parsed.year,
+              parsed.month,
+              parsed.day,
+              parsed.hour,
+              parsed.minute,
+              parsed.second,
+              parsed.millisecond,
+              parsed.microsecond,
+            );
+            shouldInterpretInZone = true;
+          } else {
+            resolved = parsed.isUtc ? parsed : parsed.toUtc();
+          }
         }
       } on FormatException catch (error) {
         CarbonBase.setLastErrors(
@@ -475,6 +496,10 @@ class Carbon extends CarbonBase {
     }
     final instance = Carbon._internal(dateTime: resolved, locale: locale);
     if (timeZone != null) {
+      if (shouldInterpretInZone) {
+        // Interpret the raw components as being in the target timezone
+        return _assignLocalTimezone(instance, timeZone).toMutable();
+      }
       return instance.tz(timeZone).toMutable();
     }
     return instance;
@@ -1697,7 +1722,31 @@ class Carbon extends CarbonBase {
 
   static CarbonInterface _createFromPhpInput(Object input, String? timeZone) {
     if (input is String) {
-      return Carbon.parse(input, timeZone: timeZone);
+      if (timeZone != null) {
+        // Parse the string to extract raw components, then interpret in target timezone
+        // Use DateTime.parse which gives us the raw values without local conversion
+        final DateTime parsed;
+        try {
+          parsed = DateTime.parse(input);
+        } on FormatException {
+          // Fall back to regular parse if DateTime.parse can't handle it
+          return Carbon.parse(input, timeZone: timeZone);
+        }
+        // DateTime.parse without Z suffix returns local time with isUtc=false
+        // We want to treat the components as being in the target timezone
+        final utc = CarbonBase._localToUtc(
+          year: parsed.year,
+          month: parsed.month,
+          day: parsed.day,
+          hour: parsed.hour,
+          minute: parsed.minute,
+          second: parsed.second,
+          microsecond: parsed.microsecond,
+          timeZone: timeZone,
+        );
+        return _fromUtc(utc, timeZone: timeZone);
+      }
+      return Carbon.parse(input);
     }
     if (input is DateTime) {
       final result = Carbon.fromDateTime(input);

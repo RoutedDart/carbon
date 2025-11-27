@@ -1,39 +1,26 @@
 import '../examples/addition_examples.dart' as addition_examples;
-import '../examples/carbon_interval_examples.dart'
-    as carbon_interval_examples;
-import '../examples/carbon_period_examples.dart'
-    as carbon_period_examples;
-import '../examples/carbon_timezone_examples.dart'
-    as carbon_timezone_examples;
-import '../examples/common_formats_examples.dart'
-    as common_formats_examples;
-import '../examples/comparison_examples.dart'
-    as comparison_examples;
+import '../examples/carbon_interval_examples.dart' as carbon_interval_examples;
+import '../examples/carbon_period_examples.dart' as carbon_period_examples;
+import '../examples/carbon_timezone_examples.dart' as carbon_timezone_examples;
+import '../examples/common_formats_examples.dart' as common_formats_examples;
+import '../examples/comparison_examples.dart' as comparison_examples;
 import '../examples/constants_examples.dart' as constants_examples;
-import '../examples/conversion_examples.dart'
-    as conversion_examples;
-import '../examples/diff_for_humans_examples.dart'
-    as diff_for_humans_examples;
-import '../examples/difference_examples.dart'
-    as difference_examples;
-import '../examples/fluent_setters_examples.dart'
-    as fluent_setters_examples;
+import '../examples/conversion_examples.dart' as conversion_examples;
+import '../examples/diff_for_humans_examples.dart' as diff_for_humans_examples;
+import '../examples/difference_examples.dart' as difference_examples;
+import '../examples/fluent_setters_examples.dart' as fluent_setters_examples;
 import '../examples/getters_examples.dart' as getters_examples;
-import '../examples/instantiation_examples.dart'
-    as instantiation_examples;
+import '../examples/instantiation_examples.dart' as instantiation_examples;
 import '../examples/intro_example.dart' as intro_example;
-import '../examples/localization_examples.dart'
-    as localization_examples;
+import '../examples/localization_examples.dart' as localization_examples;
 import '../examples/macro_examples.dart' as macro_examples;
 import '../examples/modifiers_examples.dart' as modifiers_examples;
 import '../examples/json_examples.dart' as json_examples;
-import '../examples/serialization_examples.dart'
-    as serialization_examples;
+import '../examples/serialization_examples.dart' as serialization_examples;
 import '../examples/setters_examples.dart' as setters_examples;
 import '../examples/string_formatting_examples.dart'
     as string_formatting_examples;
-import '../examples/testing_aids_examples.dart'
-    as testing_aids_examples;
+import '../examples/testing_aids_examples.dart' as testing_aids_examples;
 import '../examples/weeks_examples.dart' as weeks_examples;
 
 import 'model.dart';
@@ -1375,4 +1362,3 @@ database.
 '''),
   ];
 }
-

@@ -10,15 +10,12 @@ import 'package:docs/examples/carbon_timezone_examples.dart'
     as carbon_timezone_examples;
 import 'package:docs/examples/common_formats_examples.dart'
     as common_formats_examples;
-import 'package:docs/examples/comparison_examples.dart'
-    as comparison_examples;
+import 'package:docs/examples/comparison_examples.dart' as comparison_examples;
 import 'package:docs/examples/constants_examples.dart' as constants_examples;
-import 'package:docs/examples/conversion_examples.dart'
-    as conversion_examples;
+import 'package:docs/examples/conversion_examples.dart' as conversion_examples;
 import 'package:docs/examples/diff_for_humans_examples.dart'
     as diff_for_humans_examples;
-import 'package:docs/examples/difference_examples.dart'
-    as difference_examples;
+import 'package:docs/examples/difference_examples.dart' as difference_examples;
 import 'package:docs/examples/fluent_setters_examples.dart'
     as fluent_setters_examples;
 import 'package:docs/examples/getters_examples.dart' as getters_examples;

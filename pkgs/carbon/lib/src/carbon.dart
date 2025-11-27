@@ -16,8 +16,9 @@ import 'package:time_machine/time_machine.dart' as tm;
 // Import internal API needed to load timezone data on web
 // ignore: implementation_imports
 import 'package:time_machine/src/timezones/tzdb_datetimezone_source.dart'
-    // ignore: invalid_use_of_internal_member
-    show ITzdbDateTimeZoneSource;
+        // ignore: invalid_use_of_internal_member
+        show
+        ITzdbDateTimeZoneSource;
 
 part 'core/carbon_macro.dart';
 part 'core/carbon_settings.dart';

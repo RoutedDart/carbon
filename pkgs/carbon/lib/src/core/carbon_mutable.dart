@@ -446,7 +446,8 @@ class Carbon extends CarbonBase {
           final parsed = DateTime.parse(input);
           // If input doesn't have timezone info (Z or offset) and we have an explicit timezone,
           // we should interpret the time as being in that timezone
-          final hasTimezoneInInput = input.contains('Z') || 
+          final hasTimezoneInInput =
+              input.contains('Z') ||
               RegExp(r'[+-]\d{2}:\d{2}$').hasMatch(input) ||
               RegExp(r'[+-]\d{4}$').hasMatch(input);
           if (timeZone != null && !hasTimezoneInInput && !parsed.isUtc) {

@@ -185,13 +185,22 @@ abstract class CarbonBase implements CarbonInterface {
   static Future<void> configureTimeMachine({
     tm.DateTimeZoneProvider? provider,
     bool testing = true,
+    String? defaultTimeZone,
   }) async {
     if (!_timeMachineInitialized) {
       // CRITICAL: On web, timezone data must be explicitly loaded
       // This flag ensures all timezone information is loaded, not just the index
       // ignore: invalid_use_of_internal_member
       ITzdbDateTimeZoneSource.loadAllTimeZoneInformation_SetFlag();
-      await tm.TimeMachine.initialize({'testing': testing});
+      // When testing, provide a default timezone to avoid failures when
+      // the local timezone cannot be determined (e.g., on some CI systems)
+      final initArgs = <String, dynamic>{'testing': testing};
+      if (testing && defaultTimeZone == null) {
+        initArgs['timeZone'] = 'UTC';
+      } else if (defaultTimeZone != null) {
+        initArgs['timeZone'] = defaultTimeZone;
+      }
+      await tm.TimeMachine.initialize(initArgs);
       _timeMachineInitialized = true;
     }
     // Always use tzdb provider as it works consistently on both VM and web

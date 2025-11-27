@@ -19,5 +19,6 @@ jobs:
         run: dart pub get
       # Here you can insert custom steps you need
       # - run: dart tool/generate-code.dart
-      - name: Publish
+      - name: Publish carbon
         run: dart pub publish --force
+        working-directory: pkgs/carbon

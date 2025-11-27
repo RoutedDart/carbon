@@ -27,9 +27,12 @@ jobs:
       - name: Install dependencies
         run: dart pub get
       
-      - run: dart format --output=none --set-exit-if-changed .
+      - name: Format check (carbon)
+        run: dart format --output=none --set-exit-if-changed pkgs/carbon
       
-      - run: dart analyze
+      - name: Analyze (carbon)
+        run: dart analyze pkgs/carbon
 
-      - name: Run tests
+      - name: Run tests (carbon)
         run: dart test
+        working-directory: pkgs/carbon

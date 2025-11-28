@@ -188,12 +188,6 @@ abstract class CarbonBase implements CarbonInterface {
     String? defaultTimeZone,
   }) async {
     if (!_timeMachineInitialized) {
-      // CRITICAL: On web, timezone data must be explicitly loaded
-      // This flag ensures all timezone information is loaded, not just the index
-      // ignore: invalid_use_of_internal_member
-      ITzdbDateTimeZoneSource.loadAllTimeZoneInformation_SetFlag();
-      // When testing, provide a default timezone to avoid failures when
-      // the local timezone cannot be determined (e.g., on some CI systems)
       final initArgs = <String, dynamic>{'testing': testing};
       if (testing && defaultTimeZone == null) {
         initArgs['timeZone'] = 'UTC';
@@ -1821,7 +1815,7 @@ abstract class CarbonBase implements CarbonInterface {
   }
 
   @override
-  int get year => _dateTime.year;
+  int get year => _localDateTimeForFormatting().year;
 
   @override
   CarbonInterface setYear(int year) =>
@@ -1844,7 +1838,7 @@ abstract class CarbonBase implements CarbonInterface {
   int get months => _dateTime.month;
 
   @override
-  int get month => _dateTime.month;
+  int get month => _localDateTimeForFormatting().month;
 
   @override
   int get monthOfYear => _dateTime.month;
@@ -1935,7 +1929,7 @@ abstract class CarbonBase implements CarbonInterface {
   }
 
   @override
-  int get day => _dateTime.day;
+  int get day => _localDateTimeForFormatting().day;
 
   @override
   int get days => day;
@@ -2137,7 +2131,7 @@ abstract class CarbonBase implements CarbonInterface {
   CarbonInterface setHours(int hour) => setHour(hour);
 
   @override
-  int get hour => _dateTime.hour;
+  int get hour => _localDateTimeForFormatting().hour;
 
   @override
   int get hours => hour;
@@ -3046,7 +3040,7 @@ abstract class CarbonBase implements CarbonInterface {
   }
 
   @override
-  int get seconds => _dateTime.second;
+  int get seconds => _localDateTimeForFormatting().second;
 
   @override
   int get second => seconds;
@@ -3095,7 +3089,7 @@ abstract class CarbonBase implements CarbonInterface {
   int get secondOfMillennium => _secondsSince(_millenniumStart(_dateTime)) + 1;
 
   @override
-  int get minute => _dateTime.minute;
+  int get minute => _localDateTimeForFormatting().minute;
 
   @override
   int get minutes => minute;

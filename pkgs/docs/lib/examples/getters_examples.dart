@@ -7,8 +7,6 @@ import 'package:carbon/carbon.dart';
 
 import 'example_runner.dart';
 
-
-
 const _componentGetterSource = r'''
 import 'package:carbon/carbon.dart';
 

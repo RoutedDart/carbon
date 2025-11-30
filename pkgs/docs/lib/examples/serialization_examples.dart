@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _serializeSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final dt = Carbon.parse('2012-12-25T20:30:00Z', timeZone: 'Europe/Moscow');
   final serialized = dt.serialize();
@@ -39,10 +38,9 @@ Future<ExampleRun> runSerializationExample() async {
 }
 
 const _customSerializeSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   Carbon.serializeUsing((date) => 'CUSTOM:' + date.toIso8601String());
 

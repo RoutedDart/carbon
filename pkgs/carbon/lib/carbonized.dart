@@ -20,7 +20,7 @@
 /// ## Quick Start
 ///
 /// ```dart
-/// import 'package:carbon/carbon.dart';
+/// import 'package:carbonized/carbonized.dart';
 ///
 /// void main() {
 ///   // Current time
@@ -143,7 +143,7 @@
 /// ```dart
 /// Future<void> main() async {
 ///   // Initialize timezone database (required for IANA names)
-///   await Carbon.configureTimeMachine(testing: true);
+///   await Carbon.configureTimeMachine();
 ///
 ///   // Create with timezone
 ///   final tokyo = Carbon.parse('2024-01-15 12:00',
@@ -270,7 +270,7 @@
 /// you must initialize the timezone database:
 ///
 /// ```dart
-/// await Carbon.configureTimeMachine(testing: true);
+/// await Carbon.configureTimeMachine();
 /// ```
 ///
 /// Fixed offset strings like `+05:00` work without configuration.

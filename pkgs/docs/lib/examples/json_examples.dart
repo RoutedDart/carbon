@@ -4,17 +4,16 @@ library;
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _jsonSource = r'''
 import 'dart:convert';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final dt = Carbon.parse('2012-12-25T20:30:00Z', timeZone: 'Europe/Moscow');
   print('json -> ${jsonEncode(dt)}');
@@ -43,9 +42,9 @@ Future<ExampleRun> runJsonExample() async {
 }
 
 const _jsonCustomSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
   final dt = Carbon.parse('2024-05-21T12:00:00Z');
   Carbon.serializeUsing((date) => 'CUSTOM:${date.toIso8601String()}');
   print('custom -> ${dt.serialize()}');

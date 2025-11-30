@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:clock/clock.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:intl/intl.dart';
@@ -13,7 +13,7 @@ void main() {
     await initializeDateFormatting('zh_CN');
     await initializeDateFormatting('es');
     await initializeDateFormatting('it');
-    await Carbon.configureTimeMachine(testing: true);
+    await Carbon.configureTimeMachine();
   });
 
   tearDownAll(() {

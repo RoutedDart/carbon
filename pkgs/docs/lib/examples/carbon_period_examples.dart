@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _periodBasicsSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final start = Carbon.parse('2024-06-01T00:00:00Z');
   final period = start.daysUntil('2024-06-07', 2);
@@ -36,10 +35,9 @@ Future<ExampleRun> runPeriodBasicsExample() async {
 }
 
 const _periodAdvancedSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final start = Carbon.parse('2024-12-23T00:00:00Z');
   final period = start.daysUntil('2025-01-05T00:00:00Z');
@@ -68,10 +66,9 @@ Future<ExampleRun> runPeriodAdvancedExample() async {
 }
 
 const _periodStringsSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   Carbon.setLocale('en');
   CarbonPeriod.setLocale('en');

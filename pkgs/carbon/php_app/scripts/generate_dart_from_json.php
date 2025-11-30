@@ -189,7 +189,7 @@ foreach ($baseLocales as $locale) {
     // Generate file content
     $fileContent = "// AUTO-GENERATED from PHP Carbon locale: $locale\n";
     $fileContent .= "// Do not edit - changes will be overwritten\n\n";
-    $fileContent .= "import 'package:carbon/carbon.dart';\n\n";
+    $fileContent .= "import 'package:carbonized/carbonized.dart';\n\n";
     
     // Generate base locale
     $fileContent .= generateDartLocaleFromJson($locale, $jsonData);
@@ -294,7 +294,7 @@ foreach ($baseLocales as $locale) {
 // Generate index file
 $indexContent = "// AUTO-GENERATED - Do not edit\n";
 $indexContent .= "// This file imports all generated locales and builds the allLocales map\n\n";
-$indexContent .= "import 'package:carbon/carbon.dart';\n\n";
+$indexContent .= "import 'package:carbonized/carbonized.dart';\n\n";
 
 foreach ($indexImports as $import) {
     $indexContent .= "import '$import';\n";

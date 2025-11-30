@@ -1,5 +1,5 @@
 import 'package:test/test.dart';
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/intl.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

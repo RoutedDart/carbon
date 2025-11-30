@@ -3,15 +3,15 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _timezoneSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+  await Carbon.configureTimeMachine();
 
   final paris = Carbon.parse('2024-06-01T12:00:00', timeZone: 'Europe/Paris');
   final toronto = paris.copy().tz('America/Toronto');

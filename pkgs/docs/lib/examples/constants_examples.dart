@@ -3,12 +3,12 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _constantsSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 Future<void> main() async {
   print('DateTime.saturday -> ${DateTime.saturday}');

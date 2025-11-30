@@ -1,11 +1,11 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
     await initializeDateFormatting('en');
-    await Carbon.configureTimeMachine(testing: true);
+    await Carbon.configureTimeMachine();
   });
 
   test('set/get helpers mirror PHP dynamic properties', () {

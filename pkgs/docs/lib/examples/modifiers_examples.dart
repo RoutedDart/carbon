@@ -3,14 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _startEndSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final dt = Carbon.parse('2012-01-31T15:32:45.654321Z');
   print('startOfMinute -> ${dt.copy().startOfMinute()}');
@@ -37,10 +37,9 @@ Future<ExampleRun> runStartEndExample() async {
 }
 
 const _navigationSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final dt = Carbon.parse('2014-05-30T00:00:00Z');
   print('next Wednesday -> ${dt.copy().next(DateTime.wednesday)}');
@@ -67,9 +66,9 @@ Future<ExampleRun> runNavigationExample() async {
 }
 
 const _roundingSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final dt = Carbon.parse('2012-01-31T15:32:45.654321Z');
   print('roundSecond -> ${dt.copy().roundSecond()}');

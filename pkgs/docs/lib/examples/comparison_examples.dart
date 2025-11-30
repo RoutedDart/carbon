@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _orderingSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final first = Carbon.parse('2012-09-05T23:26:11Z');
   final second = Carbon.parse(
@@ -49,9 +48,9 @@ Future<ExampleRun> runOrderingExample() async {
 }
 
 const _rangesSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final start = Carbon.parse('2012-09-05T01:00:00Z');
   final end = Carbon.parse('2012-09-05T05:00:00Z');
@@ -94,9 +93,9 @@ Future<ExampleRun> runRangeExample() async {
 }
 
 const _predicatesSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final reference = Carbon.parse('2024-06-05T12:00:00Z');
   final birthday = Carbon.parse('1987-04-23T00:00:00Z');
@@ -128,9 +127,9 @@ Future<ExampleRun> runPredicateExample() async {
 }
 
 const _stringMatcherSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
   final dt = Carbon.parse('2019-06-02T12:23:45Z');
 
   print("matches('2019') -> ${dt.matches('2019')}");

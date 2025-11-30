@@ -3,14 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _componentGetterSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final dt = Carbon.parse('2012-10-05T23:26:11.123789Z');
 
@@ -56,9 +56,9 @@ Future<ExampleRun> runComponentGetterExample() async {
 }
 
 const _localizedNamesSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final dt = Carbon.parse('2012-10-05T23:26:11Z');
   print('English weekday: ${dt.locale('en').isoFormat('dddd')}');
@@ -81,10 +81,9 @@ Future<ExampleRun> runLocalizedNamesExample() async {
 }
 
 const _timezoneGetterSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final toronto = Carbon.parse(
     '2022-01-24 10:45',
@@ -101,7 +100,6 @@ Future<void> main() async {
 
 /// Captures the timezone metadata exposed via `toDebugMap()`.
 Future<ExampleRun> runTimezoneGetterExample() async {
-  await Carbon.configureTimeMachine(testing: true);
   final toronto = Carbon.parse('2022-01-24 10:45', timeZone: 'America/Toronto');
   final zoneInfo = toronto.toDebugMap()['timezone'] as Map<String, Object?>;
   final buffer = StringBuffer()

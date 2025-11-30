@@ -3,14 +3,13 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'example_runner.dart';
 
 const _macroSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   Carbon.resetMacros();
 Carbon.registerMacro('businessEndOfWeek', (carbon, positionalArguments, namedArguments) {

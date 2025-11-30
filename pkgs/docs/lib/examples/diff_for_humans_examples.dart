@@ -1,12 +1,12 @@
 /// Runnable snippets for the "Difference for Humans" section.
 library;
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _humanReadableSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void main() {
   
@@ -37,7 +37,7 @@ Future<ExampleRun> runHumanReadableExample() async {
 }
 
 const _humanReadableDetailSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void main() {
   
@@ -76,7 +76,7 @@ Future<ExampleRun> runHumanReadableDetailExample() async {
 }
 
 const _localizedHumanReadableSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void main() {
   CarbonTranslator.registerLocale(
@@ -121,7 +121,7 @@ Future<ExampleRun> runLocalizedHumanReadableExample() async {
 }
 
 const _localeHintSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void main() {
   // fr_CA inherits the base fr translations

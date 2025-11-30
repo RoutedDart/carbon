@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
 
 int periodSpan(Iterable<Carbon> period) => period.length - 1;

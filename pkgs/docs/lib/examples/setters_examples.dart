@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _basicSettersSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final dt = Carbon.parse('2024-01-15T12:34:56Z');
   dt
@@ -53,9 +52,9 @@ Future<ExampleRun> runBasicSettersExample() async {
 }
 
 const _methodAliasesSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final dt = Carbon.parse('2024-01-15T12:00:00Z');
   dt.setYear(2001);
@@ -87,10 +86,9 @@ Future<ExampleRun> runMethodAliasesExample() async {
 }
 
 const _dynamicSettersSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final dt = Carbon.parse('2024-01-01T12:00:00Z');
   dt
@@ -125,9 +123,9 @@ Future<ExampleRun> runDynamicSettersExample() async {
 }
 
 const _overflowSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final dt = Carbon.parse('2024-01-31T00:00:00Z');
   dt.setMonth(2); // respects monthOverflow (default true)

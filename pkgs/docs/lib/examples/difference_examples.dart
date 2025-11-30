@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _diffUnitsSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final ottawa = Carbon.parse('2000-01-01T00:00:00', timeZone: 'America/Toronto');
   final vancouver = Carbon.parse('2000-01-01T00:00:00', timeZone: 'America/Vancouver');
@@ -67,10 +66,9 @@ Future<ExampleRun> runDiffUnitsExample() async {
 }
 
 const _diffIntervalSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final base = Carbon.parse('2012-01-15T12:00:00Z');
   final earlier = base.copy()
@@ -146,10 +144,9 @@ Future<ExampleRun> runDiffIntervalExample() async {
 }
 
 const _floatDiffSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final secondsStart = Carbon.parse('2000-01-01T06:01:23.252987Z');
   final secondsEnd = Carbon.parse('2000-01-01T06:02:34.321450Z');
@@ -237,9 +234,9 @@ Future<ExampleRun> runFloatDiffExample() async {
 }
 
 const _durationDiffSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final base = Carbon.parse('2012-01-01T00:00:00Z');
   final future = base.copy()..addYears(3)..addDays(10)..addHours(12);
@@ -268,10 +265,9 @@ Future<ExampleRun> runDurationDiffExample() async {
 }
 
 const _diffInUnitSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final base = Carbon.parse('2000-01-15T00:00:00Z');
   final target = base.copy()

@@ -1,6 +1,6 @@
 /// Internal Carbon core that stitches together the shared part files.
 ///
-/// This library exposes the implementation imported by `package:carbon/carbon.dart`.
+/// This library exposes the implementation imported by `package:carbonized/carbonized.dart`.
 library;
 
 import 'dart:convert';

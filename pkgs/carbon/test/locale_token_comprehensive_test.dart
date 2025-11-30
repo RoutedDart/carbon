@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
 
 /// Comprehensive test suite for Carbon's locale token parser
@@ -363,7 +363,7 @@ void main() {
     });
 
     test('Works with timezone-aware dates', () async {
-      await Carbon.configureTimeMachine(testing: true);
+      await Carbon.configureTimeMachine();
 
       final tokyo = Carbon.parse(
         '2025-03-15T14:30:00Z',

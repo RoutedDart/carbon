@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _incrementSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final base = Carbon.parse('2012-01-31T00:00:00Z');
   print('addYears -> ${(base.copy()..addYears(1)).toIso8601String()}');
@@ -44,10 +43,9 @@ Future<ExampleRun> runIncrementExample() async {
 }
 
 const _genericAddSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final dt = Carbon.parse('2012-02-03T00:00:00Z');
   print("add(Duration(days: 1)) -> ${(dt.copy()..add(const Duration(days: 1))).toIso8601String()}");
@@ -76,10 +74,9 @@ Future<ExampleRun> runGenericAddExample() async {
 }
 
 const _shiftTimezoneSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final base = Carbon.parse('2024-11-10T00:00:00', timeZone: 'UTC');
   final tzProjection = base.copy().tz('Asia/Tokyo');
@@ -105,10 +102,9 @@ Future<ExampleRun> runShiftTimezoneExample() async {
 }
 
 const _rawAddSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final base = Carbon.parse('2024-01-01T00:00:00Z');
   print('rawAdd -> ${(base.copy()..rawAdd(const Duration(days: 1))).toIso8601String()}');

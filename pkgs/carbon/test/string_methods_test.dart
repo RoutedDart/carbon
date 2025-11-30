@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
@@ -73,7 +73,7 @@ void main() {
     });
 
     test('toDateTimeLocalString retains precision for named zones', () async {
-      await Carbon.configureTimeMachine(testing: true);
+      await Carbon.configureTimeMachine();
       addTearDown(Carbon.resetTimeMachineSupport);
       final value = Carbon.parse(
         '1975-12-25T19:15:16.615342Z',
@@ -296,7 +296,7 @@ void main() {
     });
 
     test('RFC helpers mirror PHP formats', () async {
-      await Carbon.configureTimeMachine(testing: true);
+      await Carbon.configureTimeMachine();
       addTearDown(Carbon.resetTimeMachineSupport);
       final base = Carbon.parse('1975-12-25T14:15:16', timeZone: '-05:00');
       expect(base.toRfc822String(), 'Thu, 25 Dec 75 14:15:16 -0500');
@@ -421,7 +421,7 @@ void main() {
     });
 
     test('toDateTime/toDate honor timezone snapshots', () async {
-      await Carbon.configureTimeMachine(testing: true);
+      await Carbon.configureTimeMachine();
       addTearDown(Carbon.resetTimeMachineSupport);
       final value = Carbon.parse(
         '2019-11-02T23:10:10.888480Z',

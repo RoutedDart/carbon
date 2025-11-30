@@ -1,10 +1,9 @@
-import 'package:carbon/carbon.dart';
-import 'package:carbon/src/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
-    await Carbon.configureTimeMachine(testing: true);
+    await Carbon.configureTimeMachine();
     CarbonTranslator.resetTranslations();
   });
   test('translateNumber honors fallback locales', () {

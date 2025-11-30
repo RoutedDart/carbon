@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:clock/clock.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
@@ -105,7 +105,7 @@ void main() {
     });
 
     test('time machine backend converts zones with DST awareness', () async {
-      await Carbon.configureTimeMachine(testing: true);
+      await Carbon.configureTimeMachine();
 
       final utc = Carbon.parse('2025-03-09T06:30:00Z');
       final eastern = utc.tz('America/New_York');

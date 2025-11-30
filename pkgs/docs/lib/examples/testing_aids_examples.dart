@@ -3,15 +3,15 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _basicTestNowSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+  await Carbon.configureTimeMachine();
 
   Carbon.setTestNow(Carbon.parse('2001-05-21T12:00:00Z'));
 
@@ -47,10 +47,10 @@ Future<ExampleRun> runBasicTestNowExample() async {
 }
 
 const _withTestNowSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+  await Carbon.configureTimeMachine();
 
   Carbon.withTestNow('2010-09-15T00:00:00Z', () {
     print('inside callback: ${Carbon.now().toIso8601String()}');
@@ -74,10 +74,10 @@ Future<ExampleRun> runWithTestNowExample() async {
 }
 
 const _timezoneTestNowSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+  await Carbon.configureTimeMachine();
 
   Carbon.setTestNowAndTimezone('2022-01-24 10:45', timeZone: 'America/Toronto');
   print('now: ${Carbon.now().isoFormat('YYYY-MM-DD HH:mm zz')}');
@@ -99,7 +99,7 @@ Future<ExampleRun> runTimezoneTestNowExample() async {
 }
 
 const _seasonalProductSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 class SeasonalProduct {
   SeasonalProduct(this.price);
@@ -113,7 +113,7 @@ class SeasonalProduct {
 }
 
 Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+  await Carbon.configureTimeMachine();
 
   final product = SeasonalProduct(100);
 

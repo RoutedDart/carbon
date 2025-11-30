@@ -213,7 +213,7 @@ Dart does not use namespaces like PHP. Import the package at the top of the
 file:
 
 ```dart
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 ```
 
 All examples in these docs assume this import is present.
@@ -285,7 +285,7 @@ PHP Carbon showcases multiple constructor paths (bare constructors, `now()`,
 component factories, timestamps, and safe creation helpers). Dart Carbon mirrors
 those entry points while leaning on the Time Machine timezone database and
 Effective Dart idioms. Every example below calls
-`Carbon.configureTimeMachine(testing: true)` so IANA timezone names (like
+`Carbon.configureTimeMachine()` so IANA timezone names (like
 `America/Vancouver`) resolve the same way they do in PHP.
 
 > **⚠️ IMPORTANT:** Before using IANA timezone names (like `America/Vancouver`, `Europe/Paris`, etc.), 

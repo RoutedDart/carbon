@@ -3,14 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _snapshotSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final dt = Carbon.parse('2019-02-01T03:45:27.612584Z');
   final array = dt.toArray();
@@ -40,10 +40,9 @@ Future<ExampleRun> runConversionSnapshotExample() async {
 }
 
 const _dateTimeConversionSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final dt = Carbon.parse('2019-02-01T03:45:27Z', timeZone: 'Europe/Paris');
   final asDateTime = dt.toDateTime();
@@ -81,10 +80,9 @@ Future<ExampleRun> runDateTimeConversionExample() async {
 }
 
 const _carbonizeSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final base = Carbon.parse(
     '2019-02-01T03:45:27.612584',
@@ -130,9 +128,9 @@ Future<ExampleRun> runCarbonizeExample() async {
 }
 
 const _castSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final source = Carbon.parse('2015-01-01T00:00:00Z');
   final casted = Carbon.cast(source);

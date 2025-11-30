@@ -1,7 +1,7 @@
 // AUTO-GENERATED from PHP Carbon locale: i18n
 // Do not edit - changes will be overwritten
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 const CarbonLocaleData localeI18n = CarbonLocaleData(
   localeCode: 'i18n',

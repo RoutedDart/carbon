@@ -1,6 +1,6 @@
 import 'dart:async';
 import 'dart:js_interop';
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:html_web_components/helpers.dart';
 import 'package:html_web_components/html_web_components.dart';
 import 'package:web/web.dart' as html;

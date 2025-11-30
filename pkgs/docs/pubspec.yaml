@@ -15,7 +15,7 @@ dependencies:
   markdown: ^7.3.0
   web: ^1.1.1
   html_web_components: ^0.1.0
-  carbon: 
+  carbonized:
     path: ../carbon
 
 dev_dependencies:

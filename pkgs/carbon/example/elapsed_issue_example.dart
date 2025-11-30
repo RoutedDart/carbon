@@ -1,10 +1,10 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 /// Demonstrates how mutating helpers like `startOfDay()` change
 /// the instance they are called on, which can break elapsed math
 /// when you keep a single `now` variable around.
 Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+  await Carbon.configureTimeMachine();
 
   final capturedNow = Carbon.now();
   final originalNowIso = capturedNow.toIso8601String();

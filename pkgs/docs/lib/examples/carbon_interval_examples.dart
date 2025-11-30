@@ -3,12 +3,12 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _intervalBasicsSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -42,7 +42,7 @@ Future<ExampleRun> runIntervalBasicsExample() async {
 }
 
 const _intervalForHumansSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void main() {
   final interval = CarbonInterval.fromComponents(days: 3, hours: 5);

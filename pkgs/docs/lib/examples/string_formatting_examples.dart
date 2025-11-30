@@ -3,13 +3,13 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 import 'example_runner.dart';
 
 const _basicFormattingSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -49,7 +49,7 @@ Future<ExampleRun> runBasicFormattingExample() async {
 }
 
 const _customToStringSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -88,7 +88,7 @@ Future<ExampleRun> runCustomToStringExample() async {
 }
 
 const _isoFormatSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -118,7 +118,7 @@ Future<ExampleRun> runIsoFormatExample() async {
 }
 
 const _formatProbeSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 Future<void> main() async {
   print("hasFormatWithModifiers('21/05/1975', 'd#m#Y!') -> "

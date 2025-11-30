@@ -1,9 +1,9 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
-    await Carbon.configureTimeMachine(testing: true);
+    await Carbon.configureTimeMachine();
   });
 
   test('forHumans returns localized string', () {

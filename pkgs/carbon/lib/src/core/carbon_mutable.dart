@@ -1,6 +1,6 @@
 /// Implements the mutable [Carbon] variant and all factory constructors.
 ///
-/// Use this part when importing `package:carbon/carbon.dart`; it wires up
+/// Use this part when importing `package:carbonized/carbonized.dart`; it wires up
 /// parsing, relative strings, timezone helpers, and fluent mutation.
 part of '../carbon.dart';
 
@@ -760,8 +760,7 @@ class Carbon extends CarbonBase {
 
   static Future<void> configureTimeMachine({
     tm.DateTimeZoneProvider? provider,
-    bool testing = true,
-  }) => CarbonBase.configureTimeMachine(provider: provider, testing: testing);
+  }) => CarbonBase.configureTimeMachine(provider: provider);
 
   static void resetTimeMachineSupport() => CarbonBase.resetTimeMachine();
 

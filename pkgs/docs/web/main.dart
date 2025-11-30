@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:docs/docs/content.dart';
 import 'package:intl/date_symbol_data_local.dart';
 

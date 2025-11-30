@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _typedSettersSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final value = Carbon.parse('2001-01-01T01:01:01.200000Z');
   value
@@ -43,9 +42,9 @@ Future<ExampleRun> runTypedSettersExample() async {
 }
 
 const _groupedSettersSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final base = Carbon.parse('2001-01-01T01:01:01.200000Z');
   final setDateTime = base.copy()
@@ -82,9 +81,9 @@ Future<ExampleRun> runGroupedSettersExample() async {
 }
 
 const _copyFromSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final source = Carbon.parse('2010-05-16T22:40:10.100000Z');
   final target = Carbon.parse('2001-01-01T01:01:01.200000Z');

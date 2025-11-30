@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:clock/clock.dart';
 import 'package:test/test.dart';
 
@@ -49,7 +49,7 @@ void main() {
     test(
       'string input treats second argument as timezone when applicable',
       () async {
-        await Carbon.configureTimeMachine(testing: true);
+        await Carbon.configureTimeMachine();
         final result = Carbon.createFromDateTime(
           '2020-01-05 12:00:00',
           'America/New_York',
@@ -64,7 +64,7 @@ void main() {
     );
 
     test('explicit timezone parameter overrides month hint', () async {
-      await Carbon.configureTimeMachine(testing: true);
+      await Carbon.configureTimeMachine();
       final result = Carbon.createFromDateTime(
         2024,
         5,

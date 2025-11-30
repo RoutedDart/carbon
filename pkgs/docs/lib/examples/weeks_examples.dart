@@ -3,12 +3,12 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _localeWeekSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -49,7 +49,7 @@ Future<ExampleRun> runLocaleWeekExample() async {
 }
 
 const _weekNumbersSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -82,7 +82,7 @@ Future<ExampleRun> runWeekNumbersExample() async {
 }
 
 const _weekSetterSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -115,7 +115,7 @@ Future<ExampleRun> runWeekSetterExample() async {
 }
 
 const _weekdayAdjustSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {
@@ -141,7 +141,7 @@ Future<ExampleRun> runWeekdayAdjustExample() async {
 }
 
 const _daysFromStartSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 Future<void> main() async {

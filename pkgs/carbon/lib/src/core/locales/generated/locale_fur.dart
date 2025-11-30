@@ -1,7 +1,7 @@
 // AUTO-GENERATED from PHP Carbon locale: fur
 // Do not edit - changes will be overwritten
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 const CarbonLocaleData localeFur = CarbonLocaleData(
   localeCode: 'fur',

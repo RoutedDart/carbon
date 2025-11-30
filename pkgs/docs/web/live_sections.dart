@@ -1,6 +1,6 @@
 import 'package:web/web.dart' as html;
 import 'dart:js_interop';
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 /// Renders live updating sections for the Today page.
 class LiveSections {

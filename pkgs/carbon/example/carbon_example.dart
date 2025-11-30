@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 /// IMPORTANT: Call `Carbon.configureTimeMachine()` before using IANA timezone
 /// names like 'America/Vancouver', 'Europe/Paris', etc.

@@ -1,7 +1,7 @@
 // AUTO-GENERATED - Do not edit
 // This file imports all generated locales and builds the allLocales map
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'locale_aa.dart';
 import 'locale_af.dart';

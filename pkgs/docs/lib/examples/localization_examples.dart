@@ -3,12 +3,12 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/intl.dart';
 import 'example_runner.dart';
 
 const _localeFormattingSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:intl/intl.dart';
 
 void main() {
@@ -58,7 +58,7 @@ Future<ExampleRun> runLocaleFormattingExample() async {
 }
 
 const _localeWeekSettingsSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 String describeWeekend(List<int> days) {
   const labels = <int, String>{
@@ -133,7 +133,7 @@ String _describeWeekend(List<int> days) {
 }
 
 const _translatorSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void main() {
   CarbonTranslator.registerLocale(

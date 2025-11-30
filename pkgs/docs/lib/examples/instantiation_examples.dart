@@ -3,15 +3,14 @@ library;
 
 import 'dart:async';
 
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 import 'example_runner.dart';
 
 const _constructorsSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
   Carbon.setTestNow('2024-01-15T10:00:00Z');
 
   final implicitNow = Carbon();
@@ -35,7 +34,6 @@ Future<void> main() async {
 
 /// Demonstrates constructors plus timezone arguments from the PHP docs.
 Future<ExampleRun> runConstructorsExample() async {
-  await Carbon.configureTimeMachine(testing: true);
   Carbon.setTestNow('2024-01-15T10:00:00Z');
 
   final implicitNow = Carbon();
@@ -63,10 +61,9 @@ Future<ExampleRun> runConstructorsExample() async {
 }
 
 const _componentFactoriesSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
   Carbon.setTestNow('2024-06-15T09:30:00-05:00');
 
   final christmas = Carbon.createFromDate(null, 12, 25);
@@ -99,7 +96,6 @@ Future<void> main() async {
 
 /// Shows `create*` helpers, PHP-style factories, and the null-returning `make`.
 Future<ExampleRun> runComponentFactoriesExample() async {
-  await Carbon.configureTimeMachine(testing: true);
   Carbon.setTestNow('2024-06-15T09:30:00-05:00');
 
   final christmas = Carbon.createFromDate(null, 12, 25);
@@ -139,10 +135,9 @@ Future<ExampleRun> runComponentFactoriesExample() async {
 }
 
 const _safeCreationSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final previousStrict = Carbon.isStrictModeEnabled();
   Carbon.useStrictMode(false);
@@ -169,7 +164,6 @@ Future<void> main() async {
 
 /// Compares `create`, `createSafe`, and `createStrict`, including DST gaps.
 Future<ExampleRun> runSafeCreationExample() async {
-  await Carbon.configureTimeMachine(testing: true);
 
   final previousStrict = Carbon.isStrictModeEnabled();
   Carbon.useStrictMode(false);
@@ -210,9 +204,9 @@ Future<ExampleRun> runSafeCreationExample() async {
 }
 
 const _utcOffsetSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
+void main() {
 
   final date = Carbon.parse('2024-01-01T00:00:00Z');
   print('initial offset -> ${date.utcOffset}');
@@ -235,10 +229,9 @@ Future<ExampleRun> runUtcOffsetExample() async {
 }
 
 const _timestampSource = r'''
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
-Future<void> main() async {
-  await Carbon.configureTimeMachine(testing: true);
+void main() {
 
   final seconds = Carbon.createFromTimestamp(-1);
   final fractional = Carbon.createFromTimestamp(-1.5, timeZone: 'Europe/London');
@@ -254,7 +247,6 @@ Future<void> main() async {
 
 /// Highlights the timestamp factory family (seconds, millis, UTC, fractional).
 Future<ExampleRun> runTimestampExample() async {
-  await Carbon.configureTimeMachine(testing: true);
 
   final seconds = Carbon.createFromTimestamp(-1);
   final fractional = Carbon.createFromTimestamp(

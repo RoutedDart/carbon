@@ -183,19 +183,16 @@ abstract class CarbonBase implements CarbonInterface {
   ///
   /// Must be called before using `.tz('America/New_York')` with real zone
   /// identifiers. Pass a custom [provider] to override the TZ database.
+  ///
+  /// Not needed for:
+  /// - UTC dates: `Carbon.parse('2024-01-15T12:00:00Z')`
+  /// - Fixed offsets: `Carbon.parse('2024-01-15', timeZone: '+05:30')`
+  /// - Date arithmetic, formatting, or localization
   static Future<void> configureTimeMachine({
     tm.DateTimeZoneProvider? provider,
-    bool testing = true,
-    String? defaultTimeZone,
   }) async {
     if (!_timeMachineInitialized) {
-      final initArgs = <String, dynamic>{'testing': testing};
-      if (testing && defaultTimeZone == null) {
-        initArgs['timeZone'] = 'UTC';
-      } else if (defaultTimeZone != null) {
-        initArgs['timeZone'] = defaultTimeZone;
-      }
-      await tm.TimeMachine.initialize(initArgs);
+      await tm.TimeMachine.initialize({});
       _timeMachineInitialized = true;
     }
     // Always use tzdb provider as it works consistently on both VM and web

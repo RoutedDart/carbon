@@ -1,4 +1,4 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
 
 CarbonInterface _immutable(String iso) => CarbonImmutable.parse(iso);

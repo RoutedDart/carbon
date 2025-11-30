@@ -1,7 +1,8 @@
-name: carbon
-description: A starting point for Dart libraries or applications.
+name: carbonized
+description: A fluent date and time library for Dart - inspired by PHP Carbon. Intuitive API for date manipulation, localization (170+ locales), timezones, comparisons, and human-readable differences.
 version: 0.1.0
-# repository: https://github.com/my_org/my_repo
+homepage: https://routeddart.github.io/carbonized/
+repository: https://github.com/RoutedDart/carbonized
 resolution: workspace
 environment:
   sdk: ">=3.9.2 <4.0.0"

@@ -2,11 +2,11 @@
 
 # Carbon for Dart 🕐
 
-[![Pub Version](https://img.shields.io/pub/v/carbon?logo=dart&logoColor=white)](https://pub.dev/packages/carbon)
-[![Dart SDK Version](https://badgen.net/pub/sdk-version/carbon)](https://pub.dev/packages/carbon)
-[![License](https://img.shields.io/github/license/RoutedDart/carbon)](https://github.com/RoutedDart/carbon/blob/master/LICENSE)
-[![Build Status](https://img.shields.io/github/actions/workflow/status/RoutedDart/carbon/dart.yml?branch=master)](https://github.com/RoutedDart/carbon/actions)
-[![Coverage](https://img.shields.io/badge/coverage-check%20workflow-blue)](https://github.com/RoutedDart/carbon/actions)
+[![Pub Version](https://img.shields.io/pub/v/carbonized?logo=dart&logoColor=white)](https://pub.dev/packages/carbon)
+[![Dart SDK Version](https://badgen.net/pub/sdk-version/carbon)](https://pub.dev/packages/carbonized)
+[![License](https://img.shields.io/github/license/RoutedDart/carbonized)](https://github.com/RoutedDart/carbon/blob/master/LICENSE)
+[![Build Status](https://img.shields.io/github/actions/workflow/status/RoutedDart/carbonized/dart.yml?branch=master)](https://github.com/RoutedDart/carbon/actions)
+[![Coverage](https://img.shields.io/badge/coverage-check%20workflow-blue)](https://github.com/RoutedDart/carbonized/actions)
 
 **A fluent date and time library for Dart** - inspired by the popular PHP [Carbon](https://carbon.nesbot.com/) library.
 
@@ -18,11 +18,11 @@
 
 ## ✨ Features
 
-Carbon makes working with dates and times in Dart/Flutter intuitive and enjoyable:
+Carbonized makes working with dates and times in Dart/Flutter intuitive and enjoyable:
 
 - 🔗 **Fluent API** - Chain methods like `Carbon.now().addWeeks(2).startOfMonth()`
 - 🌍 **Timezone Support** - Full IANA timezone database support via `time_machine`
-- 🌐 **Localization** - Locale-aware formatting and human-readable differences in 100+ languages
+- 🌐 **Auto-initialized Localization** - Format dates in 170+ locales with zero setup required
 - 📅 **Smart Date Math** - Calendar operations with overflow handling and DST awareness
 - 🔄 **Mutable & Immutable** - Choose between `Carbon` and `CarbonImmutable` based on your needs
 - ⏱️ **Intervals & Periods** - Work with date ranges and recurring intervals
@@ -32,11 +32,11 @@ Carbon makes working with dates and times in Dart/Flutter intuitive and enjoyabl
 
 ## 📦 Installation
 
-Add Carbon to your `pubspec.yaml`:
+Add Carbonized to your `pubspec.yaml`:
 
 ```yaml
 dependencies:
-  carbon: ^0.1.0
+  carbonized: ^0.1.0
 ```
 
 Then run:
@@ -50,7 +50,7 @@ flutter pub get
 ## 🚀 Quick Start
 
 ```dart
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void main() {
   // Get current time
@@ -159,21 +159,24 @@ final minutes = past.diffInMinutes();   // Minutes from now
 
 ### Localization
 
-```dart
-import 'package:intl/date_symbol_data_local.dart';
+Carbon automatically handles locale initialization - no need to manually call `initializeDateFormatting()`!
 
-Future<void> main() async {
-  await initializeDateFormatting('fr');
-  
+```dart
+void main() {
+  // Works out of the box - no initialization needed!
   final date = Carbon.parse('2024-12-25').locale('fr_FR');
   
   print(date.translatedFormat('l j F Y'));  // "mercredi 25 décembre 2024"
   print(date.isoFormat('MMMM'));            // "décembre"
   print(date.diffForHumans());              // "il y a 1 an"
   
-  // Change locale
+  // Change locale on the fly
   date.locale('es_ES');
   print(date.translatedFormat('l j F Y'));  // "miércoles 25 diciembre 2024"
+  
+  // Supports 170+ locales out of the box
+  date.locale('ja');
+  print(date.isoFormat('LLLL'));            // "2024年12月25日"
 }
 ```
 
@@ -181,10 +184,10 @@ Future<void> main() async {
 
 ```dart
 Future<void> main() async {
-  // Initialize timezone database (required for IANA names)
-  await Carbon.configureTimeMachine(testing: true);
+  // Initialize timezone database (ONLY needed for IANA timezone names like 'Asia/Tokyo')
+  await Carbon.configureTimeMachine();
   
-  // Create with timezone
+  // Named timezone - requires initialization above
   final tokyo = Carbon.parse('2024-01-15 12:00', timeZone: 'Asia/Tokyo');
   final ny = Carbon.parse('2024-01-15 12:00', timeZone: 'America/New_York');
   
@@ -192,8 +195,9 @@ Future<void> main() async {
   final tokyoTime = ny.tz('Asia/Tokyo');
   print(tokyoTime.format('yyyy-MM-dd HH:mm'));
   
-  // Fixed offset
-  final offset = Carbon.now(timeZone: '+05:30');
+  // UTC and fixed offsets work without initialization
+  final utc = Carbon.parse('2024-01-15T12:00:00Z');     // No init needed
+  final offset = Carbon.now(timeZone: '+05:30');          // No init needed
   
   // Get timezone info
   print(tokyo.timeZoneName);        // "JST"
@@ -226,7 +230,7 @@ final toMutable = immutable.toMutable();
 ### Testing Helpers
 
 ```dart
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 
 void testSomething() {
   // Freeze time for testing

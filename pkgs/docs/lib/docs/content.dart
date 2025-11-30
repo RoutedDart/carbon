@@ -31,7 +31,6 @@ final Map<String, SectionBuilder> _sectionBuilders = {
   'Today': _buildToday,
   'Introduction': _buildIntroduction,
   'Instantiation': _buildInstantiation,
-  // Add other sections here as we port them
   'Localization': _buildLocalization,
   'Testing Aids': _buildTestingAids,
   'Getters': _buildGetters,
@@ -175,7 +174,7 @@ print(view.weekday); // 6 (Friday)
 Dart does not use namespaces like PHP. Import the package at the top of your file:
 
 ```dart
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 ```
 
 > **NOTE:** All examples in these docs assume this import is present.

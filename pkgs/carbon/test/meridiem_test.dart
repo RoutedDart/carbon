@@ -1,10 +1,10 @@
-import 'package:carbon/carbon.dart';
+import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
 import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   setUpAll(() async {
-    await Carbon.configureTimeMachine(testing: true);
+    await Carbon.configureTimeMachine();
     await initializeDateFormatting();
   });
 

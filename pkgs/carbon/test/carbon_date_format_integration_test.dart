@@ -1,6 +1,5 @@
 import 'package:carbonized/carbonized.dart';
 import 'package:carbonized/src/carbon.dart' as internal;
-import 'package:carbonized/src/third_party/intl_date_format.dart';
 import 'package:test/test.dart';
 
 const _testMonths = [

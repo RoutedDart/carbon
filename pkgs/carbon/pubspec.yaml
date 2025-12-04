@@ -6,11 +6,11 @@ repository: https://github.com/RoutedDart/carbonized
 resolution: workspace
 environment:
   sdk: ">=3.9.2 <4.0.0"
-
+funding:
+  - "https://buymeacoffee.com/kingwill101"
 # Add regular dependencies here.
 dependencies:
   clock: ^1.1.2
-  intl: ^0.20.2
   meta: ^1.17.0
   time_machine2: ^0.13.1
 

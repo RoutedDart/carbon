@@ -1,10 +1,9 @@
 import 'package:carbonized/carbonized.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 void main() async {
   // Initialize timezone database
   await Carbon.configureTimeMachine();
-  await initializeDateFormatting('en_US', null);
+  Carbon.ensureLocaleInitialized('en_US');
 
   // Get current time in UTC
   final now = Carbon.now();

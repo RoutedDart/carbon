@@ -1,18 +1,16 @@
 import 'package:carbonized/carbonized.dart';
 import 'package:clock/clock.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
-    await initializeDateFormatting('fr');
-    await initializeDateFormatting('de');
-    await initializeDateFormatting('cs');
-    await initializeDateFormatting('ru');
-    await initializeDateFormatting('zh_CN');
-    await initializeDateFormatting('es');
-    await initializeDateFormatting('it');
+    Carbon.ensureLocaleInitialized('fr');
+    Carbon.ensureLocaleInitialized('de');
+    Carbon.ensureLocaleInitialized('cs');
+    Carbon.ensureLocaleInitialized('ru');
+    Carbon.ensureLocaleInitialized('zh_CN');
+    Carbon.ensureLocaleInitialized('es');
+    Carbon.ensureLocaleInitialized('it');
     await Carbon.configureTimeMachine();
   });
 
@@ -195,4 +193,4 @@ void main() {
 }
 
 String _localizedDayName(CarbonInterface value, String locale) =>
-    DateFormat('EEEE', locale).format(value.toDateTime());
+    CarbonDateFormat('EEEE', locale).format(value.toDateTime());

@@ -1,12 +1,11 @@
 import 'package:carbonized/carbonized.dart';
 import 'package:clock/clock.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
     await Carbon.configureTimeMachine();
-    await initializeDateFormatting('fr');
+    Carbon.ensureLocaleInitialized('fr');
   });
 
   group('Carbon create* helpers', () {

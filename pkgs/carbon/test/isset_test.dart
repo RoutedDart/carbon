@@ -1,12 +1,10 @@
 import 'package:carbonized/carbonized.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
     await Carbon.configureTimeMachine();
-    await initializeDateFormatting('fr');
+    Carbon.ensureLocaleInitialized('fr');
   });
 
   test('PHP isset properties are available via typed getters', () {
@@ -24,9 +22,15 @@ void main() {
 
 Map<String, Object? Function()> _phpPropertyExtractors(CarbonInterface carbon) {
   String localizedDayName(String locale, {bool short = false}) =>
-      DateFormat(short ? 'EEE' : 'EEEE', locale).format(carbon.toDateTime());
+      CarbonDateFormat(
+        short ? 'EEE' : 'EEEE',
+        locale,
+      ).format(carbon.toDateTime());
   String localizedMonthName(String locale, {bool short = false}) =>
-      DateFormat(short ? 'MMM' : 'MMMM', locale).format(carbon.toDateTime());
+      CarbonDateFormat(
+        short ? 'MMM' : 'MMMM',
+        locale,
+      ).format(carbon.toDateTime());
   String offsetString() {
     final iso = carbon.toIso8601String(keepOffset: true);
     if (iso.endsWith('Z')) {

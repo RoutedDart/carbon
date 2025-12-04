@@ -2,12 +2,11 @@ import 'dart:convert';
 
 import 'package:carbonized/carbonized.dart';
 import 'package:clock/clock.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
-    await initializeDateFormatting('en');
+    Carbon.ensureLocaleInitialized('en');
   });
 
   setUp(() {

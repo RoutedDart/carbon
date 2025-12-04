@@ -7,11 +7,9 @@ import 'dart:convert';
 import 'dart:math' as math;
 
 import 'package:clock/clock.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/date_symbols.dart';
-import 'package:intl/intl.dart';
 
 import 'third_party/intl_date_format.dart';
+export 'third_party/intl_date_format.dart';
 
 // Import generated locales first
 import 'core/locales/generated/all_generated.dart';

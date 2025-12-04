@@ -428,19 +428,22 @@ class Carbon extends CarbonBase {
       resolved = input.isUtc ? input : input.toUtc();
       CarbonBase.setLastErrors();
     } else if (input is String) {
-      final relative = _parseRelativeString(
-        input,
-        locale: locale,
-        timeZone: timeZone,
-      );
-      if (relative != null) {
-        CarbonBase.setLastErrors();
-        return relative;
+      // Only try relative parsing if no explicit format is provided
+      if (format == null || format.isEmpty) {
+        final relative = _parseRelativeString(
+          input,
+          locale: locale,
+          timeZone: timeZone,
+        );
+        if (relative != null) {
+          CarbonBase.setLastErrors();
+          return relative;
+        }
       }
       final pendingWarning = CarbonBase._calendarWarningForIsoString(input);
       try {
         if (format != null && format.isNotEmpty) {
-          final formatter = _createDateFormat(format, locale);
+          final formatter = _createCarbonDateFormat(format, locale);
           resolved = formatter.parseUtc(input);
         } else {
           final parsed = DateTime.parse(input);
@@ -498,6 +501,14 @@ class Carbon extends CarbonBase {
           CarbonLastErrors(
             errorCount: 1,
             errors: <String, String>{'input': error.message},
+          ),
+        );
+        rethrow;
+      } on StateError catch (error) {
+        CarbonBase.setLastErrors(
+          CarbonLastErrors(
+            errorCount: 1,
+            errors: <String, String>{'config': error.message},
           ),
         );
         rethrow;
@@ -2113,7 +2124,10 @@ bool _localeShortMonthUsesDigits(String locale) {
   final sample = DateTime.utc(2000, 4, 1);
   for (final candidate in CarbonBase._localeCandidates(locale)) {
     try {
-      final formatted = _createDateFormat('MMM', candidate).format(sample);
+      final formatted = _createCarbonDateFormat(
+        'MMM',
+        candidate,
+      ).format(sample);
       if (_digitMatcher.hasMatch(formatted)) {
         return true;
       }

@@ -3,9 +3,9 @@ import 'package:test/test.dart';
 
 /// Comprehensive test suite for Carbon's locale token parser
 ///
-/// Tests that all locale-specific DateFormat tokens are properly intercepted
+/// Tests that all locale-specific CarbonDateFormat tokens are properly intercepted
 /// and replaced with Carbon's CarbonTranslator data, without requiring
-/// initializeDateFormatting().
+/// initializeCarbonDateFormatting().
 void main() {
   group('Locale Token Parser - Month Names', () {
     final date = Carbon.parse('2025-03-15T14:30:00Z'); // March
@@ -128,7 +128,7 @@ void main() {
 
   group('Locale Token Parser - Quarter (uses intl, not Carbon)', () {
     // Note: Quarter tokens are NOT intercepted by Carbon's token parser.
-    // They are passed through to intl's DateFormat, which handles them.
+    // They are passed through to intl's CarbonDateFormat, which handles them.
     // CarbonTranslator doesn't have quarter data, so we rely on intl for this.
 
     final q1 = Carbon.parse('2025-01-15T12:00:00Z'); // Q1
@@ -145,13 +145,13 @@ void main() {
     });
 
     test('QQQ (abbreviated quarter) - handled by intl', () {
-      // These may require initializeDateFormatting for proper localization
+      // These may require initializeCarbonDateFormatting for proper localization
       expect(q1.format('QQQ', locale: 'en'), isNotEmpty);
       expect(q2.format('QQQ', locale: 'en'), isNotEmpty);
     });
 
     test('QQQQ (full quarter name) - handled by intl', () {
-      // These may require initializeDateFormatting for proper localization
+      // These may require initializeCarbonDateFormatting for proper localization
       expect(q1.format('QQQQ', locale: 'en'), isNotEmpty);
       expect(q2.format('QQQQ', locale: 'en'), isNotEmpty);
     });
@@ -314,9 +314,9 @@ void main() {
     });
   });
 
-  group('Locale Token Parser - No initializeDateFormatting Required', () {
+  group('Locale Token Parser - No initializeCarbonDateFormatting Required', () {
     test('Works immediately without any initialization', () {
-      // This test verifies that we DON'T need to call initializeDateFormatting
+      // This test verifies that we DON'T need to call initializeCarbonDateFormatting
       // If this test passes, it proves Carbon's token parser is working
 
       final date = Carbon.parse('2025-06-21T12:00:00Z'); // June, summer

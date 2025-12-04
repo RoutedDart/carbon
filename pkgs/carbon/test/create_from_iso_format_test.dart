@@ -1,12 +1,10 @@
 import 'package:carbonized/carbonized.dart';
-import 'package:intl/date_symbol_data_local.dart';
-import 'package:intl/intl.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
-    await initializeDateFormatting('en');
-    await initializeDateFormatting('zh_TW');
+    Carbon.ensureLocaleInitialized('en');
+    Carbon.ensureLocaleInitialized('zh_TW');
   });
 
   test('createFromIsoFormat parses extended years with bang prefix', () {
@@ -27,7 +25,9 @@ void main() {
   });
 
   test('createFromLocaleIsoFormat understands localized month names', () {
-    final monthName = DateFormat.MMMM('zh_TW').format(DateTime.utc(2019, 4, 1));
+    final monthName = CarbonDateFormat.MMMM(
+      'zh_TW',
+    ).format(DateTime.utc(2019, 4, 1));
     final date = Carbon.createFromLocaleIsoFormat(
       'YYYY MMMM D HH,mm,ss',
       'zh_TW',

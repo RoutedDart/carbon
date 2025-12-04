@@ -281,7 +281,7 @@
 ///
 /// ```dart
 /// import 'package:intl/date_symbol_data_local.dart';
-/// await initializeDateFormatting('fr');
+/// Carbon.ensureLocaleInitialized('fr');
 /// ```
 ///
 /// ### Mutability
@@ -348,4 +348,5 @@ export 'src/carbon.dart'
         CarbonTranslator,
         CarbonLocaleData,
         CarbonTestSubclass,
+        CarbonDateFormat,
         allLocales;

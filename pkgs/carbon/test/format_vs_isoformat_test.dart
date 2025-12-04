@@ -1,7 +1,5 @@
 import 'package:test/test.dart';
 import 'package:carbonized/carbonized.dart';
-import 'package:intl/intl.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 /// Tests documenting the critical difference between Carbon's format() and isoFormat() methods.
 ///
@@ -9,19 +7,18 @@ import 'package:intl/date_symbol_data_local.dart';
 /// where using format('MMM DD') showed day-of-year (330, 332) instead of day-of-month (25, 27).
 ///
 /// KEY INSIGHT:
-/// - format() delegates to Dart's intl DateFormat: DD = day of year, dd = day of month
+/// - format() delegates to Dart's intl CarbonDateFormat: DD = day of year, dd = day of month
 /// - isoFormat() uses Carbon's formatter: DD = day of month, DDD = day of year
 void main() {
   setUpAll(() async {
-    await initializeDateFormatting('en_US', null);
-    Intl.defaultLocale = 'en_US';
+    Carbon.ensureLocaleInitialized('en_US');
   });
 
   group('format() vs isoFormat() - Day Token Differences', () {
-    test('format() uses Dart DateFormat where DD = day of year', () {
+    test('format() uses Dart CarbonDateFormat where DD = day of year', () {
       final nov26 = Carbon.create(year: 2024, month: 11, day: 26);
 
-      // In Dart's DateFormat (used by format()):
+      // In Dart's CarbonDateFormat (used by format()):
       // D/DD = day of year (1-366)
       // d/dd = day of month (1-31)
       expect(nov26.format('DD'), '331'); // Day 331 of the year
@@ -222,7 +219,7 @@ void main() {
       expect(
         date.format('DD'),
         '331',
-      ); // Same (no standard padding in DateFormat)
+      ); // Same (no standard padding in CarbonDateFormat)
 
       // isoFormat() method - use DDD/DDDD
       expect(date.isoFormat('DDD'), '331'); // Day of year, no padding

@@ -4,18 +4,66 @@
 
 // ignore_for_file: strict_top_level_inference
 
-import 'package:intl/date_symbols.dart';
-import 'package:intl/intl.dart' as intl;
 import 'package:meta/meta.dart';
 
+import 'date_builder.dart';
 import 'date_computation.dart' as date_computation;
+import 'string_stack.dart';
 
 part 'date_format_field.dart';
+
+// Constants from intl package
+class constants {
+  static const int asciiZeroCodeUnit = 0x30;
+}
 
 const int _asciiZeroCodeUnit = 0x30;
 final RegExp _asciiDigitMatcher = RegExp(r'^\d+');
 
-typedef CarbonDateSymbolsBuilder = DateSymbols Function(String locale);
+/// Simple date symbols data structure to replace intl's DateSymbols.
+class CarbonDateSymbols {
+  final String locale;
+  final String? zeroDigit;
+  final Map<String, String> skeletons;
+  final List<String> months;
+  final List<String> monthsShort;
+  final List<String> monthsNarrow;
+  final List<String> weekdays;
+  final List<String> weekdaysShort;
+  final List<String> weekdaysNarrow;
+
+  const CarbonDateSymbols({
+    required this.locale,
+    this.zeroDigit,
+    required this.skeletons,
+    this.months = const [],
+    this.monthsShort = const [],
+    this.monthsNarrow = const [],
+    this.weekdays = const [],
+    this.weekdaysShort = const [],
+    this.weekdaysNarrow = const [],
+  });
+
+  List<String> get ERAS => const ['BC', 'AD'];
+  List<String> get ERANAMES => const ['Before Christ', 'Anno Domini'];
+  List<String> get MONTHS => months;
+  List<String> get SHORTMONTHS => monthsShort;
+  List<String> get NARROWMONTHS => monthsNarrow;
+  List<String> get STANDALONEMONTHS => months;
+  List<String> get STANDALONESHORTMONTHS => monthsShort;
+  List<String> get STANDALONENARROWMONTHS => monthsNarrow;
+  List<String> get WEEKDAYS => weekdays;
+  List<String> get SHORTWEEKDAYS => weekdaysShort;
+  List<String> get NARROWWEEKDAYS => weekdaysNarrow;
+  List<String> get STANDALONEWEEKDAYS => weekdays;
+  List<String> get STANDALONESHORTWEEKDAYS => weekdaysShort;
+  List<String> get STANDALONENARROWWEEKDAYS => weekdaysNarrow;
+  List<String> get QUARTERS => const ['Q1', 'Q2', 'Q3', 'Q4'];
+  List<String> get SHORTQUARTERS => const ['Q1', 'Q2', 'Q3', 'Q4'];
+  List<String> get AMPMS => const ['AM', 'PM'];
+}
+
+typedef CarbonDateSymbolsBuilder = CarbonDateSymbols Function(String locale);
 typedef CarbonSkeletonBuilder = Map<String, String> Function(String locale);
 typedef CarbonLocaleExists = bool Function(String locale);
 
@@ -23,13 +71,13 @@ CarbonDateSymbolsBuilder? _carbonSymbolsBuilder;
 CarbonSkeletonBuilder? _carbonSkeletonBuilder;
 CarbonLocaleExists? _carbonLocaleExists;
 
-final Map<String, DateSymbols> _carbonSymbolsCache = {};
+final Map<String, CarbonDateSymbols> _carbonSymbolsCache = {};
 final Map<String, Map<String, String>> _carbonSkeletonCache = {};
 
-final Map<String, DateSymbols> dateTimeSymbols = _carbonSymbolsCache;
+final Map<String, CarbonDateSymbols> dateTimeSymbols = _carbonSymbolsCache;
 final Map<String, Map<String, String>> dateTimePatterns = _carbonSkeletonCache;
 String? lastDateSymbolLocale;
-DateSymbols? cachedDateSymbols;
+CarbonDateSymbols? cachedDateSymbols;
 
 void configureCarbonCarbonDateFormat({
   required CarbonDateSymbolsBuilder symbolsBuilder,
@@ -276,17 +324,32 @@ class CarbonDateFormat {
   /// If [locale] does not exist in our set of supported locales then an
   /// [ArgumentError] is thrown.
   CarbonDateFormat([String? newPattern, String? locale])
-    : _locale = intl.Intl.verifiedLocale(
-        locale,
-        localeExists,
-        onFailure: null,
-      )! {
+    : _locale = _verifiedLocale(locale) {
     // TODO(alanknight): It should be possible to specify multiple skeletons eg
     // date, time, timezone all separately. Adding many or named parameters to
     // the constructor seems awkward, especially with the possibility of
     // confusion with the locale. A 'fluent' interface with cascading on an
     // instance might work better? A list of patterns is also possible.
     addPattern(newPattern);
+  }
+
+  /// Verify and canonicalize a locale name.
+  static String _verifiedLocale(String? locale) {
+    if (locale == null) return 'en_US';
+
+    // Check if locale exists using our Carbon locale checker
+    if (localeExists(locale)) {
+      return locale;
+    }
+
+    // Try without country code (e.g., 'en' from 'en_US')
+    final languageOnly = locale.split('_').first;
+    if (languageOnly != locale && localeExists(languageOnly)) {
+      return languageOnly;
+    }
+
+    // Default to en_US
+    return 'en_US';
   }
 
   /// Return a string representing [date] formatted according to our locale
@@ -298,6 +361,70 @@ class CarbonDateFormat {
       result.write(field.format(date));
     }
     return result.toString();
+  }
+
+  /// Parse a date string and return a DateTime in UTC.
+  DateTime parseUtc(String inputString) => parse(inputString, true);
+
+  /// Parse a date string and return a DateTime.
+  DateTime parse(String inputString, [bool utc = false]) =>
+      _parse(inputString, utc: utc, strict: false);
+
+  /// Internal parse implementation (copied from intl).
+  DateTime _parse(String inputString, {bool utc = false, bool strict = false}) {
+    var dateFields = DateBuilder(locale, _dateTimeConstructor);
+    if (utc) dateFields.utc = true;
+    dateFields.dateOnly = dateOnly;
+    var stack = StringStack(inputString);
+    for (var field in _formatFields) {
+      field.parse(stack, dateFields);
+    }
+    if (strict && !stack.atEnd) {
+      throw FormatException(
+        'Characters remaining after date parsing in $inputString',
+      );
+    }
+    if (strict) dateFields.verify(inputString);
+    return dateFields.asDate();
+  }
+
+  /// Does our format only date fields, and no time fields.
+  bool get dateOnly => _dateOnly ??= _checkDateOnly;
+  bool? _dateOnly;
+  bool get _checkDateOnly => _formatFields.every((each) => each.forDate);
+
+  /// DateTime constructor used by DateBuilder.
+  static DateTime _dateTimeConstructor(
+    int year,
+    int month,
+    int day,
+    int hour24,
+    int minute,
+    int second,
+    int fractionalSecond,
+    bool utc,
+  ) {
+    return utc
+        ? DateTime.utc(
+            year,
+            month,
+            day,
+            hour24,
+            minute,
+            second,
+            fractionalSecond ~/ 1000,
+            fractionalSecond % 1000,
+          )
+        : DateTime(
+            year,
+            month,
+            day,
+            hour24,
+            minute,
+            second,
+            fractionalSecond ~/ 1000,
+            fractionalSecond % 1000,
+          );
   }
 
   /// Return the locale code in which we operate, e.g. 'en_US' or 'pt'.
@@ -602,23 +729,33 @@ class CarbonDateFormat {
     });
   }
 
-  /// Return the [DateSymbols] information for the locale.
+  /// Return the [CarbonDateSymbols] information for the locale.
   ///
   /// This can be useful to find lists like the names of weekdays or months in a
   /// locale, but the structure of this data may change, and it's generally
   /// better to go through the [format] API for user-facing output.
   ///
   /// If the locale isn't present, or is uninitialized, throws.
-  DateSymbols get dateSymbols {
+  CarbonDateSymbols get dateSymbols {
     final builder = _carbonSymbolsBuilder;
-    if (builder == null) {
-      if (_locale != lastDateSymbolLocale) {
-        lastDateSymbolLocale = _locale;
-        cachedDateSymbols = dateTimeSymbols[_locale];
-      }
-      return cachedDateSymbols!;
+    if (builder != null) {
+      return _carbonSymbolsCache.putIfAbsent(_locale, () => builder(_locale));
     }
-    return _carbonSymbolsCache.putIfAbsent(_locale, () => builder(_locale));
+
+    // Fallback to cache lookup (legacy path, should not normally be used)
+    if (_locale != lastDateSymbolLocale) {
+      lastDateSymbolLocale = _locale;
+      cachedDateSymbols = dateTimeSymbols[_locale];
+    }
+
+    if (cachedDateSymbols == null) {
+      throw StateError(
+        'CarbonDateFormat has not been configured for locale "$_locale". '
+        'Call ensureCarbonDateFormatConfigured() before using CarbonDateFormat, '
+        'or use Carbon.format() instead which handles initialization automatically.',
+      );
+    }
+    return cachedDateSymbols!;
   }
 
   static final Map<String, bool> _useNativeDigitsByDefault = {};
@@ -690,7 +827,7 @@ class CarbonDateFormat {
 
   /// For performance, keep the zero digit available.
   String get localeZero => _localeZero == null
-      ? _localeZero = useNativeDigits ? dateSymbols.ZERODIGIT ?? '0' : '0'
+      ? _localeZero = useNativeDigits ? (dateSymbols.zeroDigit ?? '0') : '0'
       : _localeZero!;
 
   // Does this use non-ASCII digits, e.g. Eastern Arabic.

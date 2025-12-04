@@ -1,11 +1,11 @@
 import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
 
-/// Tests that Carbon can work without users manually calling initializeDateFormatting
+/// Tests that Carbon can work without users manually calling initializeCarbonDateFormatting
 void main() {
   group('Intl Auto-Initialization', () {
-    test('format works without explicit initializeDateFormatting', () {
-      // No initializeDateFormatting call here - Carbon should handle it
+    test('format works without explicit initializeCarbonDateFormatting', () {
+      // No initializeCarbonDateFormatting call here - Carbon should handle it
       final date = Carbon.parse('2025-01-15T10:30:00Z');
 
       // This should work without throwing an error

@@ -13,14 +13,79 @@ abstract class _CarbonDateFormatField {
   final String pattern;
 
   /// The CarbonDateFormat that we are part of.
-  final CarbonDateFormat parent;
+  CarbonDateFormat parent;
 
-  _CarbonDateFormatField(this.pattern, this.parent);
+  /// Trimmed version of [pattern].
+  final String _trimmedPattern;
+
+  _CarbonDateFormatField(this.pattern, this.parent)
+    : _trimmedPattern = pattern.trim();
+
+  /// Does this field potentially represent part of a Date, i.e. is not
+  /// time-specific.
+  bool get forDate => true;
+
+  /// Return the width of [pattern]. Different widths represent different
+  /// formatting options. See the comment for CarbonDateFormat for details.
+  int get width => pattern.length;
 
   String fullPattern() => pattern;
 
+  @override
+  String toString() => pattern;
+
   /// Format date according to our specification and return the result.
-  String format(DateTime date) => pattern;
+  String format(DateTime date) {
+    // Default implementation in the superclass, works for both types of
+    // literal patterns, and is overridden by _CarbonDateFormatPatternField.
+    return pattern;
+  }
+
+  /// Abstract method for subclasses to implementing parsing for their format.
+  void parse(StringStack input, DateBuilder dateFields);
+
+  /// Abstract method for subclasses to implementing 'loose' parsing for
+  /// their format, accepting input case-insensitively, and allowing some
+  /// delimiters to be skipped.
+  void parseLoose(StringStack input, DateBuilder dateFields);
+
+  /// Parse a literal field. We just look for the exact input.
+  void parseLiteral(StringStack input) {
+    var found = input.read(width);
+    if (found != pattern) {
+      throwFormatException(input);
+    }
+  }
+
+  /// Parse a literal field. We accept either an exact match, or an arbitrary
+  /// amount of whitespace.
+  ///
+  /// Any whitespace which occurs before or after the literal field is trimmed
+  /// from the input stack. Any leading or trailing whitespace in the literal
+  /// field's format specification is also trimmed before matching is
+  /// attempted. Therefore, leading and trailing whitespace is optional, and
+  /// arbitrary additional whitespace may be added before/after the literal.
+  void parseLiteralLoose(StringStack input) {
+    _trimWhitespace(input);
+
+    var found = input.peek(_trimmedPattern.length);
+    if (found == _trimmedPattern) {
+      input.pop(_trimmedPattern.length);
+    }
+
+    _trimWhitespace(input);
+  }
+
+  void _trimWhitespace(StringStack input) {
+    while (!input.atEnd && input.peek().trim().isEmpty) {
+      input.pop();
+    }
+  }
+
+  /// Throw a format exception with an error message indicating the position.
+  Never throwFormatException(StringStack stack) {
+    throw FormatException('Trying to read $this from $stack');
+  }
 }
 
 /// Represents a literal field - a sequence of characters that doesn't
@@ -28,28 +93,150 @@ abstract class _CarbonDateFormatField {
 /// is extremely simple.
 class _CarbonDateFormatLiteralField extends _CarbonDateFormatField {
   _CarbonDateFormatLiteralField(super.pattern, super.parent);
+
+  @override
+  void parse(StringStack input, DateBuilder dateFields) {
+    parseLiteral(input);
+  }
+
+  @override
+  void parseLoose(StringStack input, DateBuilder dateFields) =>
+      parseLiteralLoose(input);
 }
 
-/// Represents a literal field with quoted characters in it.
+/// Represents a literal field with quoted characters in it. This is
+/// only slightly more complex than a _CarbonDateFormatLiteralField.
 class _CarbonDateFormatQuotedField extends _CarbonDateFormatField {
   final String _fullPattern;
+
+  @override
+  String fullPattern() => _fullPattern;
 
   _CarbonDateFormatQuotedField(String pattern, CarbonDateFormat parent)
     : _fullPattern = pattern,
       super(_patchQuotes(pattern), parent);
 
   @override
-  String fullPattern() => _fullPattern;
+  void parse(StringStack input, DateBuilder dateFields) {
+    parseLiteral(input);
+  }
+
+  @override
+  void parseLoose(StringStack input, DateBuilder dateFields) =>
+      parseLiteralLoose(input);
 
   static final _twoEscapedQuotes = RegExp(r"''");
 
   static String _patchQuotes(String pattern) {
     if (pattern == "''") {
       return "'";
+    } else {
+      return pattern
+          .substring(1, pattern.length - 1)
+          .replaceAll(_twoEscapedQuotes, "'");
     }
-    return pattern
-        .substring(1, pattern.length - 1)
-        .replaceAll(_twoEscapedQuotes, "'");
+  }
+}
+
+/// A field that parses 'loosely', meaning that we'll accept input that is
+/// missing delimiters, has upper/lower case mixed up, and might not strictly
+/// conform to the pattern, e.g. the pattern calls for Sep we might accept
+/// sep, september, sEPTember. Doesn't affect numeric fields.
+class _LoosePatternField extends _CarbonDateFormatPatternField {
+  _LoosePatternField(super.pattern, super.parent);
+
+  /// Parse from a list of possibilities, but case-insensitively.
+  /// Assumes that input is lower case.
+  @override
+  int parseEnumeratedString(StringStack input, List<String> possibilities) {
+    var lowercasePossibilities = possibilities
+        .map((x) => x.toLowerCase())
+        .toList();
+    try {
+      return super.parseEnumeratedString(input, lowercasePossibilities);
+    } on FormatException {
+      return -1;
+    }
+  }
+
+  /// Parse a month name, case-insensitively, and set it in [dateFields].
+  /// Assumes that [input] is lower case.
+  @override
+  void parseMonth(StringStack input, DateBuilder dateFields) {
+    if (width <= 2) {
+      handleNumericField(input, dateFields.setMonth);
+      return;
+    }
+    var possibilities = [symbols.MONTHS, symbols.SHORTMONTHS];
+    for (var monthNames in possibilities) {
+      var month = parseEnumeratedString(input, monthNames);
+      if (month != -1) {
+        dateFields.month = month + 1;
+        return;
+      }
+    }
+    throwFormatException(input);
+  }
+
+  /// Parse a standalone day name, case-insensitively.
+  /// Assumes that input is lower case. Doesn't do anything
+  @override
+  void parseStandaloneDay(StringStack input) {
+    // This is ignored, but we still have to skip over it the correct amount.
+    if (width <= 2) {
+      handleNumericField(input, (x) => x);
+      return;
+    }
+    var possibilities = [
+      symbols.STANDALONEWEEKDAYS,
+      symbols.STANDALONESHORTWEEKDAYS,
+    ];
+    for (var dayNames in possibilities) {
+      var day = parseEnumeratedString(input, dayNames);
+      if (day != -1) {
+        return;
+      }
+    }
+  }
+
+  /// Parse a standalone month name, case-insensitively, and set it in
+  /// [dateFields]. Assumes that input is lower case.
+  @override
+  void parseStandaloneMonth(StringStack input, DateBuilder dateFields) {
+    if (width <= 2) {
+      handleNumericField(input, dateFields.setMonth);
+      return;
+    }
+    var possibilities = [
+      symbols.STANDALONEMONTHS,
+      symbols.STANDALONESHORTMONTHS,
+    ];
+    for (var monthNames in possibilities) {
+      var month = parseEnumeratedString(input, monthNames);
+      if (month != -1) {
+        dateFields.month = month + 1;
+        return;
+      }
+    }
+    throwFormatException(input);
+  }
+
+  /// Parse a day of the week name, case-insensitively.
+  /// Assumes that input is lower case. Doesn't do anything
+  @override
+  void parseDayOfWeek(StringStack input) {
+    // This is IGNORED, but we still have to skip over it the correct amount.
+    if (width <= 2) {
+      handleNumericField(input, (x) => x);
+      return;
+    }
+    var possibilities = [symbols.WEEKDAYS, symbols.SHORTWEEKDAYS];
+    for (var dayNames in possibilities) {
+      var day = parseEnumeratedString(input, dayNames);
+      if (day != -1) {
+        return;
+      }
+    }
   }
 }
 
@@ -62,30 +249,150 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
   /// Format date according to our specification and return the result.
   @override
   String format(DateTime date) {
-    return switch (pattern[0]) {
-      'a' => formatAmPm(date),
-      'c' => formatStandaloneDay(date),
-      'd' => formatDayOfMonth(date),
-      'D' => formatDayOfYear(date),
-      'E' => formatDayOfWeek(date),
-      'G' => formatEra(date),
-      'h' => format1To12Hours(date),
-      'H' => format0To23Hours(date),
-      'K' => format0To11Hours(date),
-      'k' => format24Hours(date),
-      'L' => formatStandaloneMonth(date),
-      'M' => formatMonth(date),
-      'm' => formatMinutes(date),
-      'Q' => formatQuarter(date),
-      'S' => formatFractionalSeconds(date),
-      's' => formatSeconds(date),
-      'y' => formatYear(date),
-      _ => '',
-    };
+    return formatField(date);
+  }
+
+  /// Parse the date according to our specification and put the result
+  /// into the correct place in dateFields.
+  @override
+  void parse(StringStack input, DateBuilder dateFields) {
+    parseField(input, dateFields);
+  }
+
+  /// Parse the date according to our specification and put the result
+  /// into the correct place in dateFields. Allow looser parsing, accepting
+  /// case-insensitive input and skipped delimiters.
+  @override
+  void parseLoose(StringStack input, DateBuilder dateFields) {
+    _LoosePatternField(pattern, parent).parse(input, dateFields);
+  }
+
+  bool? _forDate;
+
+  /// Is this field involved in computing the date portion, as opposed to the
+  /// time.
+  ///
+  /// The [pattern] will contain one or more of a particular format character,
+  /// e.g. 'yyyy' for a four-digit year. This hard-codes all the pattern
+  /// characters that pertain to dates. The remaining characters, 'ahHkKms' are
+  /// all time-related. See e.g. [formatField]
+  @override
+  bool get forDate => _forDate ??= 'cdDEGLMQvyZz'.contains(pattern[0]);
+
+  /// Parse a field representing part of a date pattern. Note that we do not
+  /// return a value, but rather build up the result in [builder].
+  void parseField(StringStack input, DateBuilder builder) {
+    try {
+      switch (pattern[0]) {
+        case 'a':
+          parseAmPm(input, builder);
+          break;
+        case 'c':
+          parseStandaloneDay(input);
+          break;
+        case 'd':
+          handleNumericField(input, builder.setDay);
+          break; // day
+        // Day of year. Setting month=January with any day of the year works
+        case 'D':
+          handleNumericField(input, builder.setDayOfYear);
+          break; // dayofyear
+        case 'E':
+          parseDayOfWeek(input);
+          break;
+        case 'G':
+          parseEra(input);
+          break; // era
+        case 'h':
+          parse1To12Hours(input, builder);
+          break;
+        case 'H':
+          handleNumericField(input, builder.setHour);
+          break; // hour 0-23
+        case 'K':
+          handleNumericField(input, builder.setHour);
+          break; //hour 0-11
+        case 'k':
+          handleNumericField(input, builder.setHour, -1);
+          break; //hr 1-24
+        case 'L':
+          parseStandaloneMonth(input, builder);
+          break;
+        case 'M':
+          parseMonth(input, builder);
+          break;
+        case 'm':
+          handleNumericField(input, builder.setMinute);
+          break; // minutes
+        case 'Q':
+          break; // quarter
+        case 'S':
+          handleNumericField(input, builder.setFractionalSecond);
+          break;
+        case 's':
+          handleNumericField(input, builder.setSecond);
+          break;
+        case 'v':
+          break; // time zone id
+        case 'y':
+          parseYear(input, builder);
+          break;
+        case 'z':
+          break; // time zone
+        case 'Z':
+          break; // time zone RFC
+        default:
+          return;
+      }
+    } catch (e) {
+      throwFormatException(input);
+    }
+  }
+
+  /// Formatting logic if we are of type FIELD
+  String formatField(DateTime date) {
+    switch (pattern[0]) {
+      case 'a':
+        return formatAmPm(date);
+      case 'c':
+        return formatStandaloneDay(date);
+      case 'd':
+        return formatDayOfMonth(date);
+      case 'D':
+        return formatDayOfYear(date);
+      case 'E':
+        return formatDayOfWeek(date);
+      case 'G':
+        return formatEra(date);
+      case 'h':
+        return format1To12Hours(date);
+      case 'H':
+        return format0To23Hours(date);
+      case 'K':
+        return format0To11Hours(date);
+      case 'k':
+        return format24Hours(date);
+      case 'L':
+        return formatStandaloneMonth(date);
+      case 'M':
+        return formatMonth(date);
+      case 'm':
+        return formatMinutes(date);
+      case 'Q':
+        return formatQuarter(date);
+      case 'S':
+        return formatFractionalSeconds(date);
+      case 's':
+        return formatSeconds(date);
+      case 'y':
+        return formatYear(date);
+      default:
+        return '';
+    }
   }
 
   /// Return the symbols for our current locale.
-  DateSymbols get symbols => parent.dateSymbols;
+  CarbonDateSymbols get symbols => parent.dateSymbols;
 
   String formatEra(DateTime date) {
     var era = date.year > 0 ? 1 : 0;
@@ -101,6 +408,88 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     return width == 2 ? padTo(2, year % 100) : padTo(width, year);
   }
 
+  /// We are given [inputStack] as an stack from which we want to read a date. We
+  /// can't dynamically build up a date, so the caller has a list of the
+  /// constructor arguments and a position at which to set it
+  /// (year,month,day,hour,minute,second,fractionalSecond) and gives us a setter
+  /// for it.
+  ///
+  /// Then after all parsing is done we construct a date from the
+  /// arguments.
+  ///
+  /// This method handles reading any of the numeric fields. The [offset]
+  /// argument allows us to compensate for zero-based versus one-based values.
+  void handleNumericField(
+    StringStack inputStack,
+    void Function(int) setter, [
+    int offset = 0,
+  ]) {
+    var result = _nextInteger(
+      inputStack,
+      parent.digitMatcher,
+      parent.localeZeroCodeUnit,
+    );
+    setter(result + offset);
+  }
+
+  /// Read as much content as [digitMatcher] matches from the current position,
+  /// and parse the result as an integer, advancing the index.
+  ///
+  /// The regular expression [digitMatcher] is used to find the substring which
+  /// matches an integer.
+  /// The codeUnit of the local zero [zeroDigit] is used to anchor the parsing
+  /// into digits.
+  int _nextInteger(StringStack inputStack, RegExp digitMatcher, int zeroDigit) {
+    var string = digitMatcher.stringMatch(inputStack.peekAll());
+    if (string == null || string.isEmpty) {
+      return throwFormatException(inputStack);
+    }
+    inputStack.pop(string.length);
+    if (zeroDigit != constants.asciiZeroCodeUnit) {
+      // Trying to optimize this, as it might get called a lot. See the
+      // benchmark at benchmark/intl_stream_benchmark.dart
+      var codeUnits = string.codeUnits;
+      string = String.fromCharCodes(
+        List.generate(
+          codeUnits.length,
+          (index) => codeUnits[index] - zeroDigit + constants.asciiZeroCodeUnit,
+          growable: false,
+        ),
+      );
+    }
+    return int.parse(string);
+  }
+
+  /// We are given [input] as a stack from which we want to read a date. We
+  /// can't dynamically build up a date, so the caller has a list of the
+  /// constructor arguments and a position at which to set it
+  /// (year,month,day,hour,minute,second,fractionalSecond) and gives us a setter
+  /// for it.
+  ///
+  /// Then after all parsing is done we construct a date from the
+  /// arguments. This method handles reading any of string fields from an
+  /// enumerated set.
+  int parseEnumeratedString(StringStack input, List<String> possibilities) {
+    var results = [
+      for (var i = 0; i < possibilities.length; i++)
+        if (input.peek(possibilities[i].length) == possibilities[i]) i,
+    ];
+    if (results.isEmpty) throwFormatException(input);
+    var longestResult = results.first;
+    for (var result in results.skip(1)) {
+      if (possibilities[result].length >= possibilities[longestResult].length) {
+        longestResult = result;
+      }
+    }
+    input.pop(possibilities[longestResult].length);
+    return longestResult;
+  }
+
+  void parseYear(StringStack input, DateBuilder builder) {
+    handleNumericField(input, builder.setYear);
+    builder.hasAmbiguousCentury = width == 2;
+  }
+
   String formatMonth(DateTime date) {
     switch (width) {
       case 5:
@@ -114,6 +503,24 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     }
   }
 
+  void parseMonth(StringStack input, DateBuilder dateFields) {
+    List<String> possibilities;
+    switch (width) {
+      case 5:
+        possibilities = symbols.NARROWMONTHS;
+        break;
+      case 4:
+        possibilities = symbols.MONTHS;
+        break;
+      case 3:
+        possibilities = symbols.SHORTMONTHS;
+        break;
+      default:
+        return handleNumericField(input, dateFields.setMonth);
+    }
+    dateFields.month = parseEnumeratedString(input, possibilities) + 1;
+  }
+
   String format24Hours(DateTime date) {
     var hour = date.hour == 0 ? 24 : date.hour;
     return padTo(width, hour);
@@ -125,8 +532,9 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     if (width - 3 > 0) {
       var extra = padTo(width - 3, 0);
       return basic + extra;
+    } else {
+      return basic;
     }
-    return basic;
   }
 
   String formatAmPm(DateTime date) {
@@ -136,6 +544,12 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     return ampm[index];
   }
 
+  void parseAmPm(StringStack input, DateBuilder dateFields) {
+    // If we see a 'PM' note it in an extra field.
+    var ampm = parseEnumeratedString(input, symbols.AMPMS);
+    if (ampm == 1) dateFields.pm = true;
+  }
+
   String format1To12Hours(DateTime date) {
     var hours = date.hour;
     if (date.hour > 12) hours = hours - 12;
@@ -143,9 +557,18 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     return padTo(width, hours);
   }
 
-  String format0To11Hours(DateTime date) => padTo(width, date.hour % 12);
+  void parse1To12Hours(StringStack input, DateBuilder dateFields) {
+    handleNumericField(input, dateFields.setHour);
+    if (dateFields.hour == 12) dateFields.hour = 0;
+  }
 
-  String format0To23Hours(DateTime date) => padTo(width, date.hour);
+  String format0To11Hours(DateTime date) {
+    return padTo(width, date.hour % 12);
+  }
+
+  String format0To23Hours(DateTime date) {
+    return padTo(width, date.hour);
+  }
 
   String formatStandaloneDay(DateTime date) {
     switch (width) {
@@ -158,6 +581,25 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
       default:
         return padTo(1, date.day);
     }
+  }
+
+  void parseStandaloneDay(StringStack input) {
+    // This is ignored, but we still have to skip over it the correct amount.
+    List<String> possibilities;
+    switch (width) {
+      case 5:
+        possibilities = symbols.STANDALONENARROWWEEKDAYS;
+        break;
+      case 4:
+        possibilities = symbols.STANDALONEWEEKDAYS;
+        break;
+      case 3:
+        possibilities = symbols.STANDALONESHORTWEEKDAYS;
+        break;
+      default:
+        return handleNumericField(input, (x) => x);
+    }
+    parseEnumeratedString(input, possibilities);
   }
 
   String formatStandaloneMonth(DateTime date) {
@@ -173,6 +615,24 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     }
   }
 
+  void parseStandaloneMonth(StringStack input, DateBuilder dateFields) {
+    List<String> possibilities;
+    switch (width) {
+      case 5:
+        possibilities = symbols.STANDALONENARROWMONTHS;
+        break;
+      case 4:
+        possibilities = symbols.STANDALONEMONTHS;
+        break;
+      case 3:
+        possibilities = symbols.STANDALONESHORTMONTHS;
+        break;
+      default:
+        return handleNumericField(input, dateFields.setMonth);
+    }
+    dateFields.month = parseEnumeratedString(input, possibilities) + 1;
+  }
+
   String formatQuarter(DateTime date) {
     var quarter = ((date.month - 1) / 3).truncate();
     switch (width) {
@@ -185,7 +645,9 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     }
   }
 
-  String formatDayOfMonth(DateTime date) => padTo(width, date.day);
+  String formatDayOfMonth(DateTime date) {
+    return padTo(width, date.day);
+  }
 
   String formatDayOfYear(DateTime date) => padTo(
     width,
@@ -217,11 +679,24 @@ class _CarbonDateFormatPatternField extends _CarbonDateFormatField {
     }[(date.weekday) % 7];
   }
 
-  String formatMinutes(DateTime date) => padTo(width, date.minute);
+  void parseDayOfWeek(StringStack input) {
+    // This is IGNORED, but we still have to skip over it the correct amount.
+    var possibilities = width >= 4 ? symbols.WEEKDAYS : symbols.SHORTWEEKDAYS;
+    parseEnumeratedString(input, possibilities);
+  }
 
-  String formatSeconds(DateTime date) => padTo(width, date.second);
+  void parseEra(StringStack input) {
+    var possibilities = width >= 4 ? symbols.ERANAMES : symbols.ERAS;
+    parseEnumeratedString(input, possibilities);
+  }
 
-  int get width => pattern.length;
+  String formatMinutes(DateTime date) {
+    return padTo(width, date.minute);
+  }
+
+  String formatSeconds(DateTime date) {
+    return padTo(width, date.second);
+  }
 
   /// Return a string representation of the object padded to the left with
   /// zeros. Primarily useful for numbers.

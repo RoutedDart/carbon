@@ -1,12 +1,11 @@
 import 'package:carbonized/carbonized.dart';
-import 'package:intl/date_symbol_data_local.dart';
 import 'package:test/test.dart';
 
 void main() {
   setUpAll(() async {
-    await initializeDateFormatting('en');
-    await initializeDateFormatting('fr');
-    await initializeDateFormatting('es');
+    Carbon.ensureLocaleInitialized('en');
+    Carbon.ensureLocaleInitialized('fr');
+    Carbon.ensureLocaleInitialized('es');
   });
 
   test('setLocale updates default locale for new instances', () {

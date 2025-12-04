@@ -19,102 +19,25 @@ final bool _carbonDateFormatAutoInit = (() {
   return true;
 })();
 
-DateSymbols _buildCarbonDateSymbols(String locale) {
+CarbonDateSymbols _buildCarbonDateSymbols(String locale) {
   final CarbonLocaleData data = CarbonTranslator.matchLocale(locale);
-
-  final months = _normalizeList(data.months, _defaultMonths, 12);
-  final monthsShort = _normalizeList(data.monthsShort, _defaultMonthsShort, 12);
-  final standaloneMonths = _normalizeList(data.monthsStandalone, months, 12);
-  final standaloneShortMonths = _normalizeList(
-    data.monthsStandalone.isEmpty ? data.monthsShort : data.monthsStandalone,
-    monthsShort,
-    12,
-  );
-
-  final weekdaysSource = data.weekdays.isNotEmpty
-      ? data.weekdays
-      : _defaultWeekdays;
-  final weekdays = _normalizeList(weekdaysSource, _defaultWeekdays, 7);
-  final weekdaysShort = _normalizeList(
-    data.weekdaysShort,
-    _defaultWeekdaysShort,
-    7,
-  );
-  final weekdaysStandalone = weekdays;
-  final weekdaysStandaloneShort = weekdaysShort;
-  final weekdaysMin = _normalizeList(
-    data.weekdaysMin.isNotEmpty ? data.weekdaysMin : weekdaysShort,
-    _defaultWeekdaysMin,
-    7,
-  );
-  final narrowWeekdays = _toNarrowList(weekdaysMin, weekdaysShort);
-
-  final monthsStandaloneNarrow = _toNarrowList(
-    _normalizeList(data.monthsStandalone, months, 12),
-    months,
-  );
-
-  final monthsNarrow = _toNarrowList(months, months);
-
-  final ampm = data.meridiem != null
-      ? [data.meridiem!(0, 0, false), data.meridiem!(13, 0, false)]
-      : _defaultAmPm;
-
   final zeroDigit = data.numbers['0'];
-  final firstDayOfWeek = _normalizeWeekdayIndex(data.firstDayOfWeek);
-  final firstWeekCutoff = _clampInclusive(data.dayOfFirstWeekOfYear, 1, 7);
 
-  final lPattern = _convertMomentToIcu(data.formats['L']) ?? 'M/d/y';
-  final llPattern = _convertMomentToIcu(data.formats['LL']) ?? 'MMMM d, y';
-  final lllPattern =
-      _convertMomentToIcu(data.formats['LLL']) ?? 'MMM d, y h:mm a';
-  final llllPattern =
-      _convertMomentToIcu(data.formats['LLLL']) ?? 'EEEE, MMMM d, y h:mm a';
+  // Generate narrow month names from short names (first letter)
+  final monthsNarrow = data.monthsShort.isNotEmpty
+      ? data.monthsShort.map((m) => m.isNotEmpty ? m[0] : '').toList()
+      : const <String>[];
 
-  final dateFormats = [
-    _removeTimePortion(llllPattern),
-    _removeTimePortion(llPattern),
-    _removeTimePortion(lllPattern),
-    lPattern,
-  ];
-
-  final lt = _convertMomentToIcu(data.formats['LT']) ?? 'h:mm a';
-  final lts = _convertMomentToIcu(data.formats['LTS']) ?? 'h:mm:ss a';
-
-  final timeFormats = ['$lts zzzz', '$lts z', lts, lt];
-
-  return DateSymbols(
-    NAME: locale,
-    ERAS: const ['BC', 'AD'],
-    ERANAMES: const ['Before Christ', 'Anno Domini'],
-    NARROWMONTHS: monthsNarrow,
-    STANDALONENARROWMONTHS: monthsStandaloneNarrow,
-    MONTHS: months,
-    STANDALONEMONTHS: standaloneMonths,
-    SHORTMONTHS: monthsShort,
-    STANDALONESHORTMONTHS: standaloneShortMonths,
-    WEEKDAYS: weekdays,
-    STANDALONEWEEKDAYS: weekdaysStandalone,
-    SHORTWEEKDAYS: weekdaysShort,
-    STANDALONESHORTWEEKDAYS: weekdaysStandaloneShort,
-    NARROWWEEKDAYS: narrowWeekdays,
-    STANDALONENARROWWEEKDAYS: narrowWeekdays,
-    SHORTQUARTERS: const ['Q1', 'Q2', 'Q3', 'Q4'],
-    QUARTERS: const [
-      '1st quarter',
-      '2nd quarter',
-      '3rd quarter',
-      '4th quarter',
-    ],
-    AMPMS: ampm,
-    ZERODIGIT: zeroDigit != null && zeroDigit.length == 1 ? zeroDigit : null,
-    DATEFORMATS: dateFormats,
-    TIMEFORMATS: timeFormats,
-    AVAILABLEFORMATS: _buildCarbonSkeletons(locale),
-    FIRSTDAYOFWEEK: firstDayOfWeek,
-    WEEKENDRANGE: const [5, 6],
-    FIRSTWEEKCUTOFFDAY: firstWeekCutoff,
-    DATETIMEFORMATS: const ['{1} {0}', '{1} {0}', '{1} {0}', '{1} {0}'],
+  return CarbonDateSymbols(
+    locale: locale,
+    zeroDigit: zeroDigit != null && zeroDigit.length == 1 ? zeroDigit : null,
+    skeletons: _buildCarbonSkeletons(locale),
+    months: data.months,
+    monthsShort: data.monthsShort,
+    monthsNarrow: monthsNarrow,
+    weekdays: data.weekdays,
+    weekdaysShort: data.weekdaysShort,
+    weekdaysNarrow: data.weekdaysMin,
   );
 }
 
@@ -179,69 +102,21 @@ Map<String, String> _buildCarbonSkeletons(String locale) {
   return map;
 }
 
-List<String> _normalizeList(
-  List<String> source,
-  List<String> fallback,
-  int expectedLength,
-) {
-  if (source.length >= expectedLength) {
-    return source.take(expectedLength).toList();
-  }
-  if (source.isNotEmpty) {
-    return [
-      ...source,
-      ...List<String>.filled(expectedLength - source.length, ''),
-    ];
-  }
-  if (fallback.isNotEmpty) {
-    if (fallback.length >= expectedLength) {
-      return fallback.take(expectedLength).toList();
-    }
-    return [
-      ...fallback,
-      ...List<String>.filled(expectedLength - fallback.length, ''),
-    ];
-  }
-  return List<String>.filled(expectedLength, '');
-}
-
-List<String> _toNarrowList(List<String> preferred, List<String> secondary) {
-  final result = <String>[];
-  for (var i = 0; i < preferred.length; i++) {
-    final candidate = preferred[i];
-    if (candidate.isNotEmpty) {
-      result.add(_firstCharacter(candidate));
-    } else if (i < secondary.length && secondary[i].isNotEmpty) {
-      result.add(_firstCharacter(secondary[i]));
-    } else {
-      result.add('');
-    }
-  }
-  return result;
-}
-
-String _firstCharacter(String input) {
-  if (input.isEmpty) return '';
-  final iterator = input.runes.iterator;
-  return iterator.moveNext() ? String.fromCharCode(iterator.current) : '';
-}
-
-int _normalizeWeekdayIndex(int value) {
-  final normalized = ((value - 1) % 7 + 7) % 7;
-  return normalized;
-}
-
-int _clampInclusive(int value, int min, int max) {
-  if (value < min) return min;
-  if (value > max) return max;
-  return value;
-}
-
 String _removeTimePortion(String pattern) {
   return pattern
       .replaceAll(RegExp(r"[ ]*[hHkKmsSaAzZ.:']+[ ]*"), ' ')
       .replaceAll(RegExp(r'\s+'), ' ')
       .trim();
+}
+
+bool _localeExists(String locale) {
+  try {
+    CarbonTranslator.matchLocale(locale);
+  } catch (_) {
+    // Swallow errors here; the formatter will fall back to Carbon's internal
+    // locale resolution when it actually builds the symbols.
+  }
+  return true;
 }
 
 String? _convertMomentToIcu(String? pattern) {
@@ -329,68 +204,4 @@ class _TokenMapping {
   final String target;
 
   const _TokenMapping(this.source, this.target);
-}
-
-const List<String> _defaultMonths = [
-  'January',
-  'February',
-  'March',
-  'April',
-  'May',
-  'June',
-  'July',
-  'August',
-  'September',
-  'October',
-  'November',
-  'December',
-];
-
-const List<String> _defaultMonthsShort = [
-  'Jan',
-  'Feb',
-  'Mar',
-  'Apr',
-  'May',
-  'Jun',
-  'Jul',
-  'Aug',
-  'Sep',
-  'Oct',
-  'Nov',
-  'Dec',
-];
-
-const List<String> _defaultWeekdays = [
-  'Sunday',
-  'Monday',
-  'Tuesday',
-  'Wednesday',
-  'Thursday',
-  'Friday',
-  'Saturday',
-];
-
-const List<String> _defaultWeekdaysShort = [
-  'Sun',
-  'Mon',
-  'Tue',
-  'Wed',
-  'Thu',
-  'Fri',
-  'Sat',
-];
-
-const List<String> _defaultWeekdaysMin = ['S', 'M', 'T', 'W', 'T', 'F', 'S'];
-
-const List<String> _defaultAmPm = ['AM', 'PM'];
-
-bool _localeExists(String locale) {
-  try {
-    CarbonTranslator.matchLocale(locale);
-  } catch (_) {
-    // Swallow errors here; the formatter will fall back to Carbon's internal
-    // locale resolution when it actually builds the symbols.
-  }
-  return true;
 }

@@ -1,11 +1,9 @@
 import 'package:carbonized/carbonized.dart';
 import 'package:test/test.dart';
-import 'package:intl/date_symbol_data_local.dart';
 
 void main() {
   setUpAll(() async {
     await Carbon.configureTimeMachine();
-    await initializeDateFormatting();
   });
 
   group('meridiem localization', () {

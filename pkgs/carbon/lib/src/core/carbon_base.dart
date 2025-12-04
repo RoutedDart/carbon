@@ -206,7 +206,7 @@ abstract class CarbonBase implements CarbonInterface {
     _zoneCache.clear();
   }
 
-  /// Ensures the given locale is initialized for intl's DateFormat.
+  /// Ensures the given locale is initialized for intl's CarbonDateFormat.
   ///
   /// This is called internally when [_autoInitializeIntl] is true.
   /// You can also call this manually to pre-initialize specific locales.
@@ -215,10 +215,13 @@ abstract class CarbonBase implements CarbonInterface {
       return;
     }
     try {
-      await initializeDateFormatting(locale);
+      // Ensure CarbonDateFormat is configured with Carbon's locale data
+      ensureCarbonDateFormatConfigured();
+      // Load the locale data from CarbonTranslator
+      CarbonTranslator.matchLocale(locale);
       _initializedIntlLocales.add(locale);
     } catch (_) {
-      // Locale might not be available in intl, that's okay
+      // Locale might not be available, that's okay
       // Carbon will fall back to CarbonTranslator or English
     }
   }
@@ -4799,7 +4802,7 @@ abstract class CarbonBase implements CarbonInterface {
     final timezoneName = _timeZone ?? snapshot?.abbreviation ?? 'UTC';
     final abbreviation = snapshot?.abbreviation ?? timezoneName;
     final map = <String, Object?>{
-      'date': _createDateFormat(
+      'date': _createCarbonDateFormat(
         'yyyy-MM-dd HH:mm:ss.SSSSSS',
         null,
       ).format(_localDateTimeForFormatting()),
@@ -6705,33 +6708,23 @@ String _twoDigitYear(DateTime value) {
 
 String _twoDigits(int value) => value.abs().toString().padLeft(2, '0');
 
-/// Creates a simple DateFormat for non-locale-specific patterns.
+/// Creates a simple CarbonDateFormat for non-locale-specific patterns.
 /// For locale-specific formatting, use _formatWithCarbonLocale instead.
-DateFormat _createDateFormat(String pattern, [String? locale]) {
-  try {
-    // Try without locale first to avoid initialization issues
-    return DateFormat(pattern);
-  } catch (_) {
-    // If that fails and locale was provided, try with locale
-    if (locale != null) {
-      try {
-        return DateFormat(pattern, locale);
-      } catch (_) {}
-    }
-    // Last resort: basic formatter
-    try {
-      return DateFormat();
-    } catch (_) {
-      return DateFormat('yyyy-MM-dd');
-    }
+CarbonDateFormat _createCarbonDateFormat(String pattern, [String? locale]) {
+  ensureCarbonDateFormatConfigured();
+
+  // Always try with locale if provided, otherwise without
+  if (locale != null && locale.isNotEmpty) {
+    return CarbonDateFormat(pattern, locale);
   }
+  return CarbonDateFormat(pattern);
 }
 
 /// Formats a DateTime using Carbon's built-in translations for ALL locale-specific tokens.
 ///
 /// This function comprehensively intercepts ALL locale-specific pattern tokens that
-/// DateFormat supports and replaces them with Carbon's CarbonTranslator data,
-/// avoiding the need for initializeDateFormatting().
+/// CarbonDateFormat supports and replaces them with Carbon's CarbonTranslator data,
+/// avoiding the need for initializeCarbonDateFormatting().
 ///
 /// Supported locale-specific tokens:
 /// - Month names: MMMM, MMM, LLLL, LLL
@@ -6739,30 +6732,33 @@ DateFormat _createDateFormat(String pattern, [String? locale]) {
 /// - Meridiem: a (AM/PM)
 ///
 /// Note: Quarter tokens (Q, QQQ, QQQQ) are NOT intercepted and will be
-/// handled by intl's DateFormat, as CarbonTranslator doesn't have quarter data.
+/// handled by intl's CarbonDateFormat, as CarbonTranslator doesn't have quarter data.
 ///
 /// Strategy:
 /// 1. Parse pattern to identify ALL locale-specific tokens
 /// 2. Replace them with unique placeholders
 /// 3. Get localized values from CarbonTranslator
-/// 4. Format using DateFormat with placeholder pattern (structural only)
+/// 4. Format using CarbonDateFormat with placeholder pattern (structural only)
 /// 5. Substitute placeholders with Carbon's localized values
 String _formatWithCarbonLocale(
   DateTime dateTime,
   String pattern,
   String locale,
 ) {
+  // Ensure CarbonDateFormat is configured to use Carbon's locale data
+  ensureCarbonDateFormatConfigured();
+
   // Get Carbon's locale data once
   final CarbonLocaleData localeData;
   try {
     localeData = CarbonTranslator.matchLocale(locale);
   } catch (_) {
-    // If we can't get locale data, fall back to plain DateFormat
+    // If we can't get locale data, fall back to plain CarbonDateFormat
     try {
-      return DateFormat(pattern, locale).format(dateTime);
+      return CarbonDateFormat(pattern, locale).format(dateTime);
     } catch (_) {
       try {
-        return DateFormat(pattern).format(dateTime);
+        return CarbonDateFormat(pattern).format(dateTime);
       } catch (_) {
         return dateTime.toIso8601String();
       }
@@ -6855,25 +6851,25 @@ String _formatWithCarbonLocale(
   }
 
   // Note: Quarter tokens (Q, QQQ, QQQQ) are NOT replaced here.
-  // CarbonTranslator doesn't have quarter strings, so we let intl's DateFormat
+  // CarbonTranslator doesn't have quarter strings, so we let intl's CarbonDateFormat
   // handle quarter formatting with its locale-specific data.
   // This means quarter tokens will use intl's formatting (which may require
-  // initializeDateFormatting for proper localization).
+  // initializeCarbonDateFormatting for proper localization).
 
-  // Now format using DateFormat WITHOUT locale (avoids initialization issues)
+  // Now format using CarbonDateFormat WITHOUT locale (avoids initialization issues)
   String result;
   try {
-    final formatter = DateFormat(modifiedPattern);
+    final formatter = CarbonDateFormat(modifiedPattern);
     result = formatter.format(dateTime);
   } catch (e) {
     // If modified pattern is invalid, try with original pattern and locale
     try {
-      final formatter = DateFormat(pattern, locale);
+      final formatter = CarbonDateFormat(pattern, locale);
       result = formatter.format(dateTime);
     } catch (_) {
       // If that fails, try without locale
       try {
-        final formatter = DateFormat(pattern);
+        final formatter = CarbonDateFormat(pattern);
         result = formatter.format(dateTime);
       } catch (_) {
         // Last resort: return ISO format
@@ -6897,9 +6893,9 @@ String _localizedMonthShortName(String locale, int month) {
     // CarbonTranslator.matchLocale always returns a match (falls back intelligently)
     return data.monthsShort[month - 1];
   } catch (e) {
-    // Fallback: Try intl's DateFormat if CarbonTranslator fails
+    // Fallback: Try intl's CarbonDateFormat if CarbonTranslator fails
     try {
-      return _createDateFormat(
+      return _createCarbonDateFormat(
         'MMM',
         locale,
       ).format(DateTime.utc(2000, month, 1));
@@ -6935,9 +6931,9 @@ String _localizedMonthLongName(
     // CarbonTranslator.matchLocale always returns a match (falls back intelligently)
     return data.months[sample.month - 1];
   } catch (e) {
-    // Fallback: Try intl's DateFormat if CarbonTranslator fails
+    // Fallback: Try intl's CarbonDateFormat if CarbonTranslator fails
     try {
-      return _createDateFormat('MMMM', locale).format(sample);
+      return _createCarbonDateFormat('MMMM', locale).format(sample);
     } catch (_) {
       // If both Carbon and intl fail, throw a meaningful exception
       throw CarbonRuntimeException(
@@ -6956,9 +6952,9 @@ String _localizedWeekdayShortName(String locale, int weekday) {
     // CarbonTranslator.matchLocale always returns a match (falls back intelligently)
     return data.weekdaysShort[weekday % 7];
   } catch (e) {
-    // Fallback: Try intl's DateFormat if CarbonTranslator fails
+    // Fallback: Try intl's CarbonDateFormat if CarbonTranslator fails
     try {
-      return _createDateFormat(
+      return _createCarbonDateFormat(
         'EEE',
         locale,
       ).format(DateTime.utc(2000, 1, 3 + ((weekday - 1) % 7)));

@@ -1257,32 +1257,42 @@ class _LocaleNameIndex {
       // Continue with intl ingestion as fallback
     }
 
-    // Always ingest intl DateFormat symbols (requires initializeDateFormatting)
+    // Always ingest intl CarbonDateFormat symbols (requires initializeCarbonDateFormatting)
     _ingestIntlSymbols(target);
   }
 
   void _ingestIntlSymbols(String target) {
-    // Use intl's DateFormat (requires initializeDateFormatting)
+    // Use Carbon's locale data directly (no intl needed!)
     try {
-      final formatter = DateFormat.yMd(target);
-      final symbols = formatter.dateSymbols;
-      _ingestList(symbols.MONTHS, _longMonthLookup, _longMonthForms);
-      _ingestList(symbols.SHORTMONTHS, _shortMonthLookup, _shortMonthForms);
-      _ingestList(symbols.WEEKDAYS, _longWeekdayLookup, _longWeekdayForms);
-      _ingestList(
-        symbols.SHORTWEEKDAYS,
-        _shortWeekdayLookup,
-        _shortWeekdayForms,
-      );
-      final ampms = symbols.AMPMS;
-      if (ampms.isNotEmpty) {
-        _registerMeridiem(ampms[0], false);
-        if (ampms.length > 1) {
-          _registerMeridiem(ampms[1], true);
-        }
+      final data = CarbonTranslator.matchLocale(target);
+
+      // Ingest month names
+      if (data.months.isNotEmpty) {
+        _ingestList(data.months, _longMonthLookup, _longMonthForms);
+      }
+      if (data.monthsShort.isNotEmpty) {
+        _ingestList(data.monthsShort, _shortMonthLookup, _shortMonthForms);
+      }
+
+      // Ingest weekday names
+      if (data.weekdays.isNotEmpty) {
+        _ingestList(data.weekdays, _longWeekdayLookup, _longWeekdayForms);
+      }
+      if (data.weekdaysShort.isNotEmpty) {
+        _ingestList(
+          data.weekdaysShort,
+          _shortWeekdayLookup,
+          _shortWeekdayForms,
+        );
+      }
+
+      // Ingest meridiem (AM/PM)
+      if (data.meridiem != null) {
+        _registerMeridiem(data.meridiem!(0, 0, false), false); // AM
+        _registerMeridiem(data.meridiem!(13, 0, false), true); // PM
       }
     } catch (_) {
-      // intl failed; rely on existing locale data
+      // Carbon locale lookup failed; rely on existing fallback data
     }
   }
 
